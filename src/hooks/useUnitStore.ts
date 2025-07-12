@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Unit } from '../logic/logic'; // Adjust path to your Unit type
+import { Unit } from '../logic/logic';
 
 export interface UnitMap {
   [id: string]: Unit;
@@ -7,16 +7,14 @@ export interface UnitMap {
 
 interface UnitStore {
   unitMap: UnitMap;
-  selectedUnitId: string | null;
-  setSelectedUnitId: (id: string | null) => void;
   updateUnit: (id: string, newUnit: Unit) => void;
   setUnitMap: (map: UnitMap) => void;
+  duplicateUnit: (id: string) => string;
 }
+
 
 export const useUnitStore = create<UnitStore>((set) => ({
   unitMap: {},
-  selectedUnitId: null,
-  setSelectedUnitId: (id) => set({ selectedUnitId: id }),
   setUnitMap: (map) => set({ unitMap: map }),
   updateUnit: (id, newUnit) =>
     set((state) => ({
@@ -25,11 +23,32 @@ export const useUnitStore = create<UnitStore>((set) => ({
         [id]: newUnit,
       },
     })),
+  duplicateUnit: (id: string) => {
+    const unit = getUnitQuick(id);
+
+    const newId = crypto.randomUUID()
+    const newUnit = structuredClone(unit);
+    newUnit.name += ' (Copy)';
+
+    // Add it to the map
+    set((state) => ({
+      unitMap: {
+        ...state.unitMap,
+        [newId]: newUnit,
+      },
+    }));
+
+    return newId;
+  },
 }));
 
 export const updateUnit = useUnitStore.getState().updateUnit;
-export const setSelectedUnitId = useUnitStore.getState().setSelectedUnitId;
 export const getUnitMap = () => useUnitStore.getState().unitMap;
+export const useDuplicateUnit = () => {
+  // Just get the function from the store, no parameters here
+  return useUnitStore((state) => state.duplicateUnit);
+};
+
 
 export function getUnitQuick(id: string, errMessage = "Error! Unit with this id not found :("): Unit {
   const unit = useUnitStore.getState().unitMap[id];

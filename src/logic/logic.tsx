@@ -41,3 +41,50 @@ export function getEquipmentTable(unitId: string): EquipmentTable {
     return combined;
   }
 }
+
+export function addChild(
+  parent: OrgUnit,
+  childId: string,
+  count: number = 1
+): OrgUnit {
+  const existing = parent.children.find((c) => c.unitId === childId);
+
+  if (existing) {
+    return {
+      ...parent,
+      children: parent.children.map((c) =>
+        c.unitId === childId ? { ...c, count: c.count + count } : c
+      ),
+    };
+  } else {
+    return {
+      ...parent,
+      children: [...parent.children, { unitId: childId, count }],
+    };
+  }
+}
+
+
+export function removeChild(
+  parent: OrgUnit,
+  childId: string,
+  count: number = 1
+): OrgUnit {
+  const existing = parent.children.find((c) => c.unitId === childId);
+
+  if (!existing) return parent; // no child to remove
+
+  if (existing.count <= count) {
+    return {
+      ...parent,
+      children: parent.children.filter((c) => c.unitId !== childId),
+    };
+  } else {
+    return {
+      ...parent,
+      children: parent.children.map((c) =>
+        c.unitId === childId ? { ...c, count: c.count - count } : c
+      ),
+    };
+  }
+}

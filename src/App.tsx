@@ -12,10 +12,20 @@ useUnitStore.getState().setUnitMap(initialUnits);
 function App() {
   const [hoveredUnitId, setHoveredUnit] = useState(undefined);
 
-  const [selectedUnitCombine, setSelectedUnitCombine] = useState<{selectedId: string; parentId?: string; } | undefined>(undefined);
-  // const setSelectedOnly = (unitId: string) => {
-  //   setSelectedUnitCombine({selectedId: unitId, parentId: undefined});
-  // };
+  const [selectedUnitCombine, setSelectedUnitCombine] = useState < {selectedId: string; parentId?: string; } | undefined> (undefined);
+  function setSelected_NotTouchingParent(newSelectedId: string) {
+    setSelectedUnitCombine((prev) => {
+      if (prev === undefined) {
+        return { selectedId: newSelectedId }; // no parentId to preserve
+      }
+      return {
+        selectedId: newSelectedId,
+        parentId: prev.parentId,
+      };
+    });
+  }
+
+  const unitMap = useUnitStore((state) => state.unitMap);
 
   return (
     <div className="flex min-h-screen bg-slate-950 text-lime-200">
@@ -27,12 +37,23 @@ function App() {
           selectedUnitId={selectedUnitCombine?.selectedId} onNodeClick={setSelectedUnitCombine}
         />
         <HoverInspector unitId={hoveredUnitId}/>
+        {selectedUnitCombine?.selectedId + " - " + selectedUnitCombine?.parentId}
       </div>
 
       {/* Right */}
       <div className="flex ml-auto">
-        <IndividualEditor selectedUnitId={selectedUnitCombine?.selectedId}></IndividualEditor>
-        <div className="border-slate-400 border-2 p-2">Pallet (WIP)</div>
+        <IndividualEditor selectedUnitId={selectedUnitCombine?.selectedId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitCombine?.parentId}></IndividualEditor>
+        <div className="border-slate-400 border-2 border-l-0 p-2">
+          {/* Very WIP! */}
+          <h2>All Units</h2>
+          <ul>
+            {Object.entries(unitMap).map(([id, unit]) => (
+              <li key={id}>
+                {unit.name} ({id})
+              </li>
+            ))}
+          </ul>
+        </div>
         <GlobalEditor></GlobalEditor>
       </div>
     </div>

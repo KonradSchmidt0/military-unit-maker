@@ -2,14 +2,15 @@ import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
 
 interface IndividualEditorProps {
   selectedUnitId?: string;
+  setSelected_NotTouchingParent: Function;
+  selectedUnitParentId?: string
 }
 
-export default function IndividualEditor({ selectedUnitId }: IndividualEditorProps) {
-  // TODO: Divide this editor into some neet way
-  // Current implementation is messy since editor should be visible all the time, 
-  // and only it's subcomponents should apear depending on selection
-
-  const namePart = selectedUnitId ? <CommonUnitEditorSegment selectedUnitId = {selectedUnitId}></CommonUnitEditorSegment> : null;
+export default function IndividualEditor({ selectedUnitId, setSelected_NotTouchingParent, selectedUnitParentId }: IndividualEditorProps) {
+  const namePart = selectedUnitId ? 
+    <CommonUnitEditorSegment 
+      selectedUnitId = {selectedUnitId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitParentId}
+    ></CommonUnitEditorSegment> : null;
   
   return (
     <div className="border-slate-400 border-2 w-64">
