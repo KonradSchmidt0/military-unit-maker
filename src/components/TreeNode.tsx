@@ -1,4 +1,4 @@
-import { getUnitQuick, useUnitQuick } from "../hooks/useUnitStore";
+import { useUnitQuick } from "../hooks/useUnitStore";
 
 interface TreeNodeProps {
   unitId: string;
@@ -24,7 +24,7 @@ function TreeNode({ unitId, indent, onHover, parentUnitId = undefined, selectedU
       onClick={() => onClick({selectedId: unitId, parentId: parentUnitId})}
       className="cursor-pointer hover:text-orange-400"
     >
-      {unit.name}{isSelected ? " <<<" : ""}
+      {unit?.name}{isSelected ? " <<<" : ""}
     </div>
   );
 }

@@ -24,7 +24,7 @@ export const useUnitStore = create<UnitStore>((set) => ({
       },
     })),
   duplicateUnit: (id: string) => {
-    const unit = getUnitQuick(id);
+    const unit = getUnitQuick(id) as Unit;
 
     const newId = crypto.randomUUID()
     const newUnit = structuredClone(unit);
@@ -49,23 +49,17 @@ export const useDuplicateUnit = () => {
   return useUnitStore((state) => state.duplicateUnit);
 };
 
-
-export function getUnitQuick(id: string, errMessage = "Error! Unit with this id not found :("): Unit {
+// Changed so its same to use as "useUnitQuick()", check it for reason why changed
+export function getUnitQuick(id: string): Unit | undefined {
   const unit = useUnitStore.getState().unitMap[id];
-
-  if (!unit) {
-    throw new Error(`${errMessage}   (id = ${id})`);
-  }
-
   return unit
 }
 
-export function useUnitQuick(id: string, errMessage = "Error! Unit with this id not found :("): Unit {
+// The likely hood that id is not corrent is close to zero
+// This was originaly always returning Unit, and throwing an error if it was incorect, but
+// React really hates when you conditionally call hooks. So no "If was given UnitId: useUnitQuick"
+// As such, you just use this hook and then check if it gives back a undef
+export function useUnitQuick(id: string): Unit | undefined {
   const unit = useUnitStore((state) => state.unitMap[id]);
-
-  if (!unit) {
-    throw new Error(`${errMessage}   (id = ${id})`);
-  }
-
   return unit
 }

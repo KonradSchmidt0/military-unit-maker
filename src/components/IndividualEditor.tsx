@@ -1,4 +1,6 @@
+import { useUnitQuick } from "../hooks/useUnitStore";
 import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
+import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
 interface IndividualEditorProps {
   selectedUnitId?: string;
@@ -7,18 +9,27 @@ interface IndividualEditorProps {
 }
 
 export default function IndividualEditor({ selectedUnitId, setSelected_NotTouchingParent, selectedUnitParentId }: IndividualEditorProps) {
-  const namePart = selectedUnitId ? 
-    <CommonUnitEditorSegment 
+  let selectedUnit = useUnitQuick(selectedUnitId ? selectedUnitId : "");
+
+  if (!selectedUnitId)
+    return null
+
+  const namePart = <CommonUnitEditorSegment 
       selectedUnitId = {selectedUnitId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitParentId}
-    ></CommonUnitEditorSegment> : null;
+    ></CommonUnitEditorSegment>;
+
+  
+  const rawUnitPart = selectedUnit?.type === "raw" ?
+    <RawUnitEditorSegment selectedUnitId={selectedUnitId}></RawUnitEditorSegment> : null;
   
   return (
-    <div className="border-slate-400 border-2 w-64">
-      <div className="border-slate-400 border-b-2 border-dashed p-2 text-center">
+    <div className="!border-r-0 editor-box">
+      <div className="border-slate-400 border-b-2 border-dashed p-2 text-center font-bold">
         INDIVIDUAL
       </div>
       
       {namePart}
+      {rawUnitPart}
 
     </div>
   );

@@ -43,7 +43,7 @@ function App() {
       {/* Right */}
       <div className="flex ml-auto">
         <IndividualEditor selectedUnitId={selectedUnitCombine?.selectedId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitCombine?.parentId}></IndividualEditor>
-        <div className="border-slate-400 border-2 border-l-0 p-2">
+        <div className="editor-box !border-r-0">
           {/* Very WIP! */}
           <h2>All Units</h2>
           <ul>

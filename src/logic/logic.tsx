@@ -23,7 +23,11 @@ export type Unit = RawUnit | OrgUnit;
 
 
 export function getEquipmentTable(unitId: string): EquipmentTable {
-  const unit = getUnitQuick(unitId, "No unit with this ID (getEquipmentTable)")
+  const unit = getUnitQuick(unitId)
+
+  if (!unit) {
+    throw Error(`No unit with ID = ${unitId}`)
+  }
 
   if (unit.type === "raw") {
     return unit.equipment;

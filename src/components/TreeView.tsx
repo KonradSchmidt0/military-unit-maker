@@ -1,5 +1,6 @@
 import TreeNode from "./TreeNode";
 import { getUnitQuick } from "../hooks/useUnitStore";
+import { Unit } from "../logic/logic";
 
 interface TreeViewProps {
   unitId: string;
@@ -11,7 +12,11 @@ interface TreeViewProps {
 }
 
 function TreeView({unitId, indent = 0, onHover, parentUnitId = undefined, selectedUnitId = undefined, onNodeClick }: TreeViewProps) {
-  const unit = getUnitQuick(unitId)
+  const u = getUnitQuick(unitId)
+  if (!u) {
+    throw Error(`No unit with ID = ${unitId}`)
+  }
+  const unit = u as Unit
 
   return (
     <div>
