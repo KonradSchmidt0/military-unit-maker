@@ -1,4 +1,4 @@
-import { getUnitQuick } from "../hooks/useUnitStore";
+import { getUnitQuick, UnitMap } from "../hooks/useUnitStore";
 
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
@@ -91,4 +91,64 @@ export function removeChild(
       ),
     };
   }
+}
+
+export function removeAllOfAChild(
+  parent: OrgUnit,
+  childId: string,
+): OrgUnit {
+  const existing = parent.children.find((c) => c.unitId === childId);
+
+  if (!existing) return parent; // no child to remove
+
+  return {
+    ...parent,
+    children: parent.children.filter((c) => c.unitId !== childId),
+  };
+}
+
+export function createNewRawUnit(name = "New Raw Unit"): RawUnit {
+  return {
+    type: "raw",
+    name,
+    equipment: {}, // Empty by default
+  };
+}
+
+export function createNewOrgUnit(name = "New Org Unit"): OrgUnit {
+  return {
+    type: "org",
+    name,
+    children: [],
+  };
+}
+
+// CALLER RESPONSIBILITIES:
+// Update the app storage, update the parent unit in this storage (I know, messy, ill fix it later)
+export function addNewChildUnit(
+  parent: OrgUnit,
+  unitMap: UnitMap,
+  type: "raw" | "org",
+  name?: string
+): { newUnitMap: UnitMap; newUnitId: string; updatedParent: OrgUnit } {
+  const newId = crypto.randomUUID();
+
+  const newUnit: Unit =
+    type === "raw" ? createNewRawUnit(name) : createNewOrgUnit(name);
+
+  const newUnitMap: UnitMap = {
+    ...unitMap,
+    [newId]: newUnit,
+  };
+
+  const updatedParent: OrgUnit = {
+    ...parent,
+    children: [...parent.children, { unitId: newId, count: 1 }],
+  };
+
+  return {
+    newUnitMap,
+    newUnitId: newId,
+    updatedParent,
+  };
 }

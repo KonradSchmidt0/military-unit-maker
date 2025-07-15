@@ -1,11 +1,12 @@
-import { useUnitStore } from "../../hooks/useUnitStore";
+import { useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
+import { RawUnit } from "../../logic/logic";
 
 interface RawUnitEditorSegmentProps {
   selectedUnitId: string;
 }
 
 export default function RawUnitEditorSegment({ selectedUnitId }: RawUnitEditorSegmentProps) {
-  const unit = useUnitStore((s) => s.unitMap[selectedUnitId]);
+  const unit = useUnitQuick(selectedUnitId) as RawUnit
   const updateUnit = useUnitStore((s) => s.updateUnit);
 
   if (!unit || unit.type !== "raw") {
@@ -48,6 +49,7 @@ export default function RawUnitEditorSegment({ selectedUnitId }: RawUnitEditorSe
         <div key={type} className="flex items-center gap-2">
           <span className="w-24">{type}</span>
           <input
+            id={type}
             type="number"
             value={value}
             className="w-20 bg-slate-800 text-white border p-1"

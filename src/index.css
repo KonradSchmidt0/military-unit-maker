@@ -11,5 +11,5 @@
 }
 
 .editor-box {
-  @apply border-slate-400 border-2 w-64;
+  @apply border-slate-400 border-2 w-72;
 }

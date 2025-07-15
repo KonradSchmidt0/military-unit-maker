@@ -1,5 +1,6 @@
 import { useUnitQuick } from "../hooks/useUnitStore";
 import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
+import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
 interface IndividualEditorProps {
@@ -18,9 +19,11 @@ export default function IndividualEditor({ selectedUnitId, setSelected_NotTouchi
       selectedUnitId = {selectedUnitId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitParentId}
     ></CommonUnitEditorSegment>;
 
-  
   const rawUnitPart = selectedUnit?.type === "raw" ?
     <RawUnitEditorSegment selectedUnitId={selectedUnitId}></RawUnitEditorSegment> : null;
+
+  const orgUnitSegment = selectedUnit?.type === "org" ?
+    <OrgUnitEditorSegment selectedUnitId={selectedUnitId}></OrgUnitEditorSegment> : null;
   
   return (
     <div className="!border-r-0 editor-box">
@@ -30,6 +33,7 @@ export default function IndividualEditor({ selectedUnitId, setSelected_NotTouchi
       
       {namePart}
       {rawUnitPart}
+      {orgUnitSegment}
 
     </div>
   );

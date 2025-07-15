@@ -37,7 +37,6 @@ function App() {
           selectedUnitId={selectedUnitCombine?.selectedId} onNodeClick={setSelectedUnitCombine}
         />
         <HoverInspector unitId={hoveredUnitId}/>
-        {selectedUnitCombine?.selectedId + " - " + selectedUnitCombine?.parentId}
       </div>
 
       {/* Right */}
