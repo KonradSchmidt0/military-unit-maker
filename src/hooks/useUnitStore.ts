@@ -15,7 +15,6 @@ interface UnitStore {
 
 export const useUnitStore = create<UnitStore>((set) => ({
   unitMap: {},
-  setUnitMap: (map) => set({ unitMap: map }),
   updateUnit: (id, newUnit) =>
     set((state) => ({
       unitMap: {
@@ -23,6 +22,7 @@ export const useUnitStore = create<UnitStore>((set) => ({
         [id]: newUnit,
       },
     })),
+  setUnitMap: (map) => set({ unitMap: map }),
   duplicateUnit: (id: string) => {
     const unit = getUnitQuick(id) as Unit;
 

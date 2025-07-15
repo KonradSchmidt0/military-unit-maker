@@ -1,26 +1,19 @@
 import TreeNode from "./TreeNode";
-import { getUnitQuick } from "../hooks/useUnitStore";
+import { useUnitQuick } from "../hooks/useUnitStore";
 import { Unit } from "../logic/logic";
 
 interface TreeViewProps {
   unitId: string;
   indent?: number;
-  onHover: Function;
   parentUnitId?: string;
-  selectedUnitId?: string;
-  onNodeClick: Function;
 }
 
-function TreeView({unitId, indent = 0, onHover, parentUnitId = undefined, selectedUnitId = undefined, onNodeClick }: TreeViewProps) {
-  const u = getUnitQuick(unitId)
-  if (!u) {
-    throw Error(`No unit with ID = ${unitId}`)
-  }
-  const unit = u as Unit
+function TreeView({unitId, indent = 0, parentUnitId = undefined }: TreeViewProps) {
+  const unit = useUnitQuick(unitId) as Unit
 
   return (
     <div>
-      <TreeNode unitId={unitId} indent={indent} onHover={onHover} parentUnitId={parentUnitId} selectedUnitId={selectedUnitId} onClick={onNodeClick} />
+      <TreeNode unitId={unitId} indent={indent} parentUnitId={parentUnitId}/>
       {unit.type === "org" &&
         unit.children.map(({ unitId: childId, count }, i) =>
           Array.from({ length: count }).map((_, j) => (
@@ -28,10 +21,7 @@ function TreeView({unitId, indent = 0, onHover, parentUnitId = undefined, select
               key={`${i}-${j}`}
               unitId={childId}
               indent={indent + 1}
-              onHover={onHover}
               parentUnitId={unitId}
-              selectedUnitId={selectedUnitId}
-              onNodeClick={onNodeClick}
             />
           ))
         )}

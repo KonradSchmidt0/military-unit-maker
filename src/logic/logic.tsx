@@ -152,3 +152,56 @@ export function addNewChildUnit(
     updatedParent,
   };
 }
+
+// Known bug: Selecting root unit doesn't return 1
+export function HowManyOfThisTypeInParent(
+  parentId: string,
+  searchedId: string,
+  unitMap: UnitMap
+): number {
+  const parent = unitMap[parentId]
+  if (parent.type === "raw") return 0;
+
+  let total = 0
+
+  for (const childEntry of parent.children) {
+    if (childEntry.unitId === searchedId) {
+      total += childEntry.count;
+    }
+
+    const nested = unitMap[childEntry.unitId];
+    if (nested && nested.type === "org") {
+      total += HowManyOfThisTypeInParent(childEntry.unitId, searchedId, unitMap) * childEntry.count;
+    }
+  }
+
+  return total;
+}
+
+
+export function removeEquipmentTypeRecursively(
+  unit: Unit,
+  equipmentTypeToRemove: EquipmentType,
+  unitMap: UnitMap
+): Unit {
+  if (unit.type === "raw") {
+    let newEquipment = { ...unit.equipment };
+    delete newEquipment[equipmentTypeToRemove];
+    return { ...unit, equipment: newEquipment };
+  }
+
+  // If it's an OrgUnit, recursively process its children
+  const newChildren = unit.children.map((child) => {
+    const childUnit = unitMap[child.unitId];
+    if (!childUnit) return child; // Skip if child is missing
+    const updatedChild = removeEquipmentTypeRecursively(
+      childUnit,
+      equipmentTypeToRemove,
+      unitMap
+    );
+    unitMap[child.unitId] = updatedChild; // Update in place
+    return child;
+  });
+
+  return { ...unit, children: newChildren };
+}

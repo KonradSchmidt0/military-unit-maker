@@ -1,11 +1,10 @@
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
 import { RawUnit } from "../../logic/logic";
 
-interface RawUnitEditorSegmentProps {
-  selectedUnitId: string;
-}
+export default function RawUnitEditorSegment() {
+  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
 
-export default function RawUnitEditorSegment({ selectedUnitId }: RawUnitEditorSegmentProps) {
   const unit = useUnitQuick(selectedUnitId) as RawUnit
   const updateUnit = useUnitStore((s) => s.updateUnit);
 
@@ -27,11 +26,24 @@ export default function RawUnitEditorSegment({ selectedUnitId }: RawUnitEditorSe
   };
 
   const addEquipment = () => {
-    const newType = prompt("Enter new equipment type:");
-    if (!newType) return;
+    const p = "Enter new equipment type. Press double space to enter quantity (e.g. 'Rifle  30', 'Howitzer', 'MG42  6' , Stryker IFV  14 ):"
+    const newTypeInput = prompt(p);
+    if (!newTypeInput) return;
 
-    const newValue = parseInt(prompt("Enter quantity:") || "0", 10);
-    if (isNaN(newValue)) return;
+    // Try to extract with double-space and number
+    const match = newTypeInput.match(/^(.*?){2}(\d+)$/);
+
+    let newType: string;
+    let newValue: number;
+
+    if (match) {
+      newType = match[1].trim();
+      newValue = parseInt(match[2], 10);
+    } else {
+      newType = newTypeInput.trim();
+      newValue = parseInt(prompt("Enter quantity:") || "0", 10);
+      if (isNaN(newValue)) return;
+    }
 
     updateEquipment(newType, newValue);
   };

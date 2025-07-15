@@ -1,11 +1,11 @@
 import { getEquipmentTable } from "../logic/logic";
 import { useUnitQuick } from "../hooks/useUnitStore";
+import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 
-interface HoverInspectorProps {
-  unitId?: string;
-}
 
-function HoverInspector({ unitId }: HoverInspectorProps) {
+// Bugged curently. Needs to press to update. Not sure why, but happened when moved to useUnitInteractionStore
+function HoverInspector() {
+  const unitId = useUnitInteractionStore((s) => s.selectedId)
   const unit = useUnitQuick(unitId ? unitId : "")
 
   if (!unitId) return <div className=" text-gray-500">Hover over a unit to inspect</div>;

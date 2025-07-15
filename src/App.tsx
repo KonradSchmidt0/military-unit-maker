@@ -1,59 +1,57 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import TreeView from './components/TreeView';
 import HoverInspector from './components/HoverInspector';
 import GlobalEditor from './components/GlobalEditor';
 import IndividualEditor from './components/IndividualEditor';
-import { useUnitStore } from './hooks/useUnitStore';
+import { updateUnit, useUnitStore } from './hooks/useUnitStore';
 import { initialUnits } from './myUnits';
+import { OrgUnit } from './logic/logic';
+import PalletEditor from './components/PalletEditor';
+import { usePaletStore } from './hooks/usePaletStore';
+import { useUnitInteractionStore } from './hooks/useUnitInteractionsStore';
 
-const baseUnitId = "infatry_oo"
+usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
+useUnitInteractionStore.getState().setRootId("infatry_oo");
 
 function App() {
-  const [hoveredUnitId, setHoveredUnit] = useState(undefined);
-
-  const [selectedUnitCombine, setSelectedUnitCombine] = useState < {selectedId: string; parentId?: string; } | undefined> (undefined);
-  function setSelected_NotTouchingParent(newSelectedId: string) {
-    setSelectedUnitCombine((prev) => {
-      if (prev === undefined) {
-        return { selectedId: newSelectedId }; // no parentId to preserve
+  // Event Handler
+  const resetAllSelected = useUnitInteractionStore((s) => s.resetSelected);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        resetAllSelected();
       }
-      return {
-        selectedId: newSelectedId,
-        parentId: prev.parentId,
-      };
-    });
-  }
+    };
 
-  const unitMap = useUnitStore((state) => state.unitMap);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [resetAllSelected]);
+
+  // Actual Stuff
+  const rootUnitId = useUnitInteractionStore((s) => s.rootId)
+  const setRootUnitId = useUnitInteractionStore((s) => s.setRootId)
+
+  function popNewParentForRoot() {
+    const newRootId = crypto.randomUUID()
+    const newRoot: OrgUnit = { type: "org", name: "New Root Unit", children: [ { unitId: rootUnitId, count: 1 }  ] }
+    updateUnit(newRootId, newRoot)
+    setRootUnitId(newRootId)
+  }
 
   return (
     <div className="flex min-h-screen bg-slate-950 text-lime-200">
       {/* Left */}
       <div className="flex gap-4 p-4">
-        <TreeView 
-          unitId={baseUnitId}
-          onHover={setHoveredUnit} 
-          selectedUnitId={selectedUnitCombine?.selectedId} onNodeClick={setSelectedUnitCombine}
-        />
-        <HoverInspector unitId={hoveredUnitId}/>
+        <TreeView unitId={rootUnitId}/>
+        <HoverInspector/>
       </div>
 
       {/* Right */}
       <div className="flex ml-auto">
-        <IndividualEditor selectedUnitId={selectedUnitCombine?.selectedId} setSelected_NotTouchingParent={setSelected_NotTouchingParent} selectedUnitParentId={selectedUnitCombine?.parentId}></IndividualEditor>
-        <div className="editor-box !border-r-0">
-          {/* Very WIP! */}
-          <h2>All Units</h2>
-          <ul>
-            {Object.entries(unitMap).map(([id, unit]) => (
-              <li key={id}>
-                {unit.name} ({id})
-              </li>
-            ))}
-          </ul>
-        </div>
-        <GlobalEditor></GlobalEditor>
+        <IndividualEditor popNewParentForRoot={popNewParentForRoot} />
+        <PalletEditor/>
+        <GlobalEditor/>
       </div>
     </div>
     )

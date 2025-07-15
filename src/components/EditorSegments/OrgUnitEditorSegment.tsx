@@ -1,33 +1,46 @@
+import { usePaletStore } from "../../hooks/usePaletStore";
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { UnitMap, updateUnit, useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
-import { addNewChildUnit, getEquipmentTable, OrgUnit, removeAllOfAChild } from "../../logic/logic";
+import { addNewChildUnit, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../logic/logic";
 
-interface OrgUnitEditorSegmentProps {
-  selectedUnitId: string;
-}
-
-export default function OrgUnitEditorSegment({ selectedUnitId }: OrgUnitEditorSegmentProps) {
+export default function OrgUnitEditorSegment() {
+  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
   const unit = useUnitQuick(selectedUnitId) as OrgUnit
   const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId));
   // Used later
-  const unitPallet = useUnitStore((state) => state.unitMap)
-  const updateUnitPlallet = useUnitStore((state) => state.setUnitMap)
+  const unitMap = useUnitStore((state) => state.unitMap)
+  const updateUnitMap = useUnitStore((state) => state.setUnitMap)
 
   /// Children Manager
   // If given all units as a option its possible to choose yourself or other dangerous unit, and creating infinite loop
   // As such, we filter them
-  const safeChildrenOptions = getSafeChildOptions(selectedUnitId, unitPallet, unit.children)
+  const safeChildrenOptions = getSafeChildOptions(selectedUnitId, unitMap, usePaletStore(state => state.unitPalet), unit.children)
 
   const handleAddingChildren = (type: "raw" | "org") => {
     const { newUnitMap, updatedParent } = addNewChildUnit(
       unit as OrgUnit,
-      unitPallet,
+      unitMap,
       type
     );
 
     // Apply to zustand
-    updateUnitPlallet(newUnitMap);
+    updateUnitMap(newUnitMap);
     updateUnit(selectedUnitId, updatedParent);
   }
+
+  const deleteEquipmentTypeFromAllChildren = (type: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to remove all "${type}" equipment from this unit and its children? It will affect many units, and can't be undone`
+    );
+    if (!confirmed) return;
+
+    const newSelectedUnit = removeEquipmentTypeRecursively(unit, type, unitMap) as OrgUnit;
+    updateUnitMap({
+      ...unitMap,
+      [selectedUnitId]: newSelectedUnit,
+    });
+  };
+
 
   const childrenHeader = (
     <div className="flex justify-between gap-2">
@@ -40,12 +53,10 @@ export default function OrgUnitEditorSegment({ selectedUnitId }: OrgUnitEditorSe
       </button>
     </div>
   )
-  const childrenManager = unit.children.map((child, index) => 
-    {
-      /// Syntax?????? Brain worms WTH javascript
+  const childrenManager = unit.children.map((child, index) =>  {
       /// Since the safe function retuns only the not used items, its necesary to add self to it, 
       // or else it breaks UI and potentialy logic
-      const childUnit = unitPallet[child.unitId];
+      const childUnit = unitMap[child.unitId];
       const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [child.unitId]: childUnit, };
       return (
         <div key={child.unitId} className="flex flex-row items-center gap-2 mb-2">
@@ -110,6 +121,7 @@ export default function OrgUnitEditorSegment({ selectedUnitId }: OrgUnitEditorSe
         <div key={type} className="flex items-center gap-2">
           <div className="w-24">{type}</div>
           <div className="w-24 p-1 h-8">{value}</div>
+          <button onClick={() => deleteEquipmentTypeFromAllChildren(type)} className="text-red-400 hover:text-red-600">❌</button>
         </div>
       ))}
     </>
@@ -127,6 +139,7 @@ export default function OrgUnitEditorSegment({ selectedUnitId }: OrgUnitEditorSe
 function getSafeChildOptions(
   parentId: string,
   unitMap: UnitMap,
+  palet: string[],
   alreadyChosenChildren: { unitId: string; count: number }[]
 ): UnitMap {
   const existingIds = new Set(alreadyChosenChildren.map((c) => c.unitId));
@@ -145,9 +158,8 @@ function getSafeChildOptions(
   }
 
   return Object.fromEntries(
-    Object.entries(unitMap).filter(
-      ([id, unit]) => !existingIds.has(id) && !createsCycle(id)
-    )
+    palet
+      .filter((id) => !existingIds.has(id) && !createsCycle(id))
+      .map((id) => [id, unitMap[id]])
   );
 }
-
