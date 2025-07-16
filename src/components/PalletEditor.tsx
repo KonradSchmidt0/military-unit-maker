@@ -3,6 +3,7 @@ import { usePaletStore } from "../hooks/usePaletStore";
 import { useUnitStore } from "../hooks/useUnitStore";
 import { Unit } from "../logic/logic";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import TreeNode from "./TreeNode";
 
 export default function PalletEditorSegment() {
   const rootUnitId = useUnitInteractionStore((s) => s.rootId)
@@ -59,7 +60,8 @@ export default function PalletEditorSegment() {
           const inPalet = isInPalet(unitId);
           return (
             <div key={unitId} className="flex items-center gap-2">
-              <div className="w-48">{unit?.name}</div>
+              {/* <div className="w-48">{unit?.name}</div> */}
+              {<TreeNode unitId={unitId} indent={0}/>}
               {addToPalletButton(unitId, inPalet)}
               {removeFromPalletButton(unitId, inPalet)}
               {buttonToRemoveUnitFromMemory(unitId)}
