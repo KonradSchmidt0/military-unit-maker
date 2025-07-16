@@ -1,7 +1,7 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { UnitMap, updateUnit, useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
-import { addNewChildUnit, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../../logic/logic";
+import { UnitMap, useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
+import { addNewChildUnit, ChildrenList, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../../logic/logic";
 
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
@@ -10,6 +10,7 @@ export default function OrgUnitEditorSegment() {
   // Used later
   const unitMap = useUnitStore((state) => state.unitMap)
   const updateUnitMap = useUnitStore((state) => state.setUnitMap)
+  const updateUnit = useUnitStore(s => s.updateUnit)
 
   /// Children Manager
   // If given all units as a option its possible to choose yourself or other dangerous unit, and creating infinite loop
@@ -53,22 +54,24 @@ export default function OrgUnitEditorSegment() {
       </button>
     </div>
   )
-  const childrenManager = unit.children.map((child, index) =>  {
+  const childrenManager = Object.entries(unit.children).map(([childId, count], index) =>  {
       /// Since the safe function retuns only the not used items, its necesary to add self to it, 
       // or else it breaks UI and potentialy logic
-      const childUnit = unitMap[child.unitId];
-      const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [child.unitId]: childUnit, };
+      const childUnit = unitMap[childId];
+      const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
       return (
-        <div key={child.unitId} className="flex flex-row items-center gap-2 mb-2">
+        <div key={childId} className="flex flex-row items-center gap-2 mb-2">
           {/* Dropdown to change the child.unitId */}
           <select
             className="border rounded px-2 py-1 bg-slate-800 text-white w-44"
-            value={child.unitId}
-            id={child.unitId}
+            value={childId}
+            id={childId}
             onChange={(e) => {
+              let updatedChildren = unit.children;
               const newId = e.target.value;
-              let updatedChildren = [...unit.children];
-              updatedChildren[index] = { ...updatedChildren[index], unitId: newId };
+
+              delete updatedChildren[childId]
+              updatedChildren[newId] = count
               updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
             }}
           >
@@ -83,26 +86,26 @@ export default function OrgUnitEditorSegment() {
           <input
             type="number"
             className="w-12 px-2 py-1 rounded border bg-slate-800 text-white"
-            value={child.count}
+            value={count}
             onChange={(e) => {
               const newCount = parseInt(e.target.value);
 
               if (newCount === 0) {
-                updateUnit(selectedUnitId,  removeAllOfAChild(unit, child.unitId) )
+                updateUnit(selectedUnitId,  removeAllOfAChild(unit, childId) )
                 return
               }
 
-              let updatedChildren = [...unit.children];
-              updatedChildren[index] = { ...updatedChildren[index], count: newCount };
+              let updatedChildren = unit.children
+              updatedChildren[childId] = newCount
               updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
             }}
           />
 
           {/* Button to remove this child entry */}
           <button
-            className="text-red-400 hover:text-red-600"
+            className="hover:bg-white/20"
             onClick={() => {
-              const updated = removeAllOfAChild(unit, child.unitId);
+              const updated = removeAllOfAChild(unit, childId);
               updateUnit(selectedUnitId, updated);
             }}
           >
@@ -121,7 +124,7 @@ export default function OrgUnitEditorSegment() {
         <div key={type} className="flex items-center gap-2">
           <div className="w-24">{type}</div>
           <div className="w-24 p-1 h-8">{value}</div>
-          <button onClick={() => deleteEquipmentTypeFromAllChildren(type)} className="text-red-400 hover:text-red-600">❌</button>
+          <button onClick={() => deleteEquipmentTypeFromAllChildren(type)} className="hover:bg-white/20">❌</button>
         </div>
       ))}
     </>
@@ -140,9 +143,9 @@ function getSafeChildOptions(
   parentId: string,
   unitMap: UnitMap,
   palet: string[],
-  alreadyChosenChildren: { unitId: string; count: number }[]
+  alreadyChosenChildren: ChildrenList
 ): UnitMap {
-  const existingIds = new Set(alreadyChosenChildren.map((c) => c.unitId));
+  const existingIds = new Set(Object.entries(alreadyChosenChildren).map((c) => c[0]));
 
   function createsCycle(candidateId: string): boolean {
     if (candidateId === parentId) return true;
@@ -150,8 +153,8 @@ function getSafeChildOptions(
     const candidate = unitMap[candidateId];
     if (!candidate || candidate.type !== "org") return false;
 
-    for (const child of candidate.children) {
-      if (createsCycle(child.unitId)) return true;
+    for (const [childId] of Object.entries(candidate.children)) {
+      if (createsCycle(childId)) return true;
     }
 
     return false;

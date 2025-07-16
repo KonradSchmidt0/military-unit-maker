@@ -10,6 +10,10 @@
   @apply cursor-pointer transition-all duration-200 ease-in-out;
 }
 
+.btn-emoji {
+  @apply p-1 hover:bg-white/20
+}
+
 .editor-box {
   @apply border-slate-400 border-2 w-72;
 }

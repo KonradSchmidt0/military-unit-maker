@@ -1,6 +1,5 @@
 import TreeNode from "./TreeNode";
 import { useUnitQuick } from "../hooks/useUnitStore";
-import { Unit } from "../logic/logic";
 
 interface TreeViewProps {
   unitId: string;
@@ -9,13 +8,17 @@ interface TreeViewProps {
 }
 
 function TreeView({unitId, indent = 0, parentUnitId = undefined }: TreeViewProps) {
-  const unit = useUnitQuick(unitId) as Unit
+  const unit = useUnitQuick(unitId)
+
+  if (!unit)
+    return <>Unit is not a unit! ({unitId} {unit})
+    Please screenshot and send this to dev 🥺 (konrad.m.schmidt@gmail.com)</>
 
   return (
     <div>
       <TreeNode unitId={unitId} indent={indent} parentUnitId={parentUnitId}/>
       {unit.type === "org" &&
-        unit.children.map(({ unitId: childId, count }, i) =>
+        Object.entries(unit.children).map(([ childId, count ], i) =>
           Array.from({ length: count }).map((_, j) => (
             <TreeView
               key={`${i}-${j}`}

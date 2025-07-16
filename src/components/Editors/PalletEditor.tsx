@@ -41,11 +41,11 @@ export default function PalletEditorSegment() {
     
 
   const addToPalletButton = (unitId: string, inPalet: boolean) => 
-    showHidden && !inPalet && (<button onClick={() => addUnitToPalet(unitId)}> ➕🎨 </button> )
+    showHidden && !inPalet && (<button className="btn-emoji" onClick={() => addUnitToPalet(unitId)}> ➕🎨 </button> )
   const removeFromPalletButton = (unitId: string, inPalet: boolean) =>
-    inPalet && (<button onClick={() => removeUnitFromPalet(unitId)}> 🎨🚮 </button> )
+    inPalet && (<button className="btn-emoji" onClick={() => removeUnitFromPalet(unitId)}> 🎨🚮 </button> )
   const buttonToRemoveUnitFromMemory = (unitId: string) =>
-    showHidden && (<button className="!text-opacity-50" onClick={() => handleRemovingFromMemory(unitId)}> ➡️🗑️ </button> )
+    showHidden && (<button className="btn-emoji" onClick={() => handleRemovingFromMemory(unitId)}> ➡️🗑️ </button> )
 
   return (
     <div className="!border-r-0 editor-box">
@@ -53,7 +53,7 @@ export default function PalletEditorSegment() {
         PALLET
         <button
           onClick={() => setShowHidden(!showHidden)}
-          className="ml-2 hover:border-2 hover:border-red-500"
+          className="btn-emoji !ml-2"
         >
           {showHidden ? "🪖💾" : "🪖🎨"}
         </button>

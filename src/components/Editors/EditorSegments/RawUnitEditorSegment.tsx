@@ -67,7 +67,7 @@ export default function RawUnitEditorSegment() {
             className="w-20 bg-slate-800 text-white border p-1"
             onChange={(e) => updateEquipment(type, parseInt(e.target.value))}
           />
-          <button onClick={() => deleteEquipment(type)} className="text-red-400 hover:text-red-600">
+          <button onClick={() => deleteEquipment(type)} className="hover:bg-white/20">
             ❌
           </button>
         </div>

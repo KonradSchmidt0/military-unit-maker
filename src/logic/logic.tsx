@@ -4,6 +4,7 @@ export const defaultUnitColor = "#6ad8e2"
 
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
+export type ChildrenList = Record<string, number>
 
 export interface RawUnit {
   type: "raw";
@@ -20,10 +21,7 @@ export interface OrgUnit {
   color: string;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
-  children: {
-    unitId: string;
-    count: number;
-  }[];
+  children: ChildrenList // First is UnitId, second is count of how many
 }
 
 
@@ -42,7 +40,7 @@ export function getEquipmentTable(unitId: string): EquipmentTable {
   } else {
     const combined: EquipmentTable = {};
 
-    for (const { unitId: childId, count } of unit.children) {
+    for (const [childId, count] of Object.entries(unit.children)) {
       const childEq = getEquipmentTable(childId);
 
       for (const [type, qty] of Object.entries(childEq)) {
@@ -59,21 +57,12 @@ export function addChild(
   childId: string,
   count: number = 1
 ): OrgUnit {
-  const existing = parent.children.find((c) => c.unitId === childId);
+  const curCount = parent.children[childId]
 
-  if (existing) {
-    return {
-      ...parent,
-      children: parent.children.map((c) =>
-        c.unitId === childId ? { ...c, count: c.count + count } : c
-      ),
-    };
-  } else {
-    return {
-      ...parent,
-      children: [...parent.children, { unitId: childId, count }],
-    };
-  }
+  return {
+    ...parent,
+    children: {...parent.children, ...{ childId: curCount ? curCount + count : count }}
+  };
 }
 
 
@@ -82,21 +71,16 @@ export function removeChild(
   childId: string,
   count: number = 1
 ): OrgUnit {
-  const existing = parent.children.find((c) => c.unitId === childId);
+  const curCount = parent.children[childId]
 
-  if (!existing) return parent; // no child to remove
+  if (!curCount) return parent; // no child to remove
 
-  if (existing.count <= count) {
-    return {
-      ...parent,
-      children: parent.children.filter((c) => c.unitId !== childId),
-    };
+  if (curCount <= count) {
+    return removeAllOfAChild(parent, childId)
   } else {
     return {
       ...parent,
-      children: parent.children.map((c) =>
-        c.unitId === childId ? { ...c, count: c.count - count } : c
-      ),
+      children: {...parent.children, ...{ childId: curCount - count }}
     };
   }
 }
@@ -105,17 +89,14 @@ export function removeAllOfAChild(
   parent: OrgUnit,
   childId: string,
 ): OrgUnit {
-  const existing = parent.children.find((c) => c.unitId === childId);
-
-  if (!existing) return parent; // no child to remove
-
+  const { [childId]: _, ...rest } = parent.children;
   return {
     ...parent,
-    children: parent.children.filter((c) => c.unitId !== childId),
+    children: rest
   };
 }
 
-export function createNewRawUnit(name = "New Raw Unit", layers = [], color=defaultUnitColor, echelonLevel=0, eq={}): RawUnit {
+export function createNewRawUnit(name = "New Raw Unit", layers: string[] = [], echelonLevel=0, color=defaultUnitColor, eq={}): RawUnit {
   return {
     type: "raw",
     name,
@@ -126,7 +107,7 @@ export function createNewRawUnit(name = "New Raw Unit", layers = [], color=defau
   };
 }
 
-export function createNewOrgUnit(name = "New Raw Unit", layers = [], color=defaultUnitColor, echelonLevel=0, children = []): OrgUnit {
+export function createNewOrgUnit(name = "New Org Unit", layers: string[] = [], echelonLevel=0, color=defaultUnitColor, children: ChildrenList = {}): OrgUnit {
   return {
     type: "org",
     name,
@@ -148,16 +129,21 @@ export function addNewChildUnit(
   const newId = crypto.randomUUID();
 
   const newUnit: Unit =
-    type === "raw" ? createNewRawUnit(name) : createNewOrgUnit(name);
+    type === "raw" 
+      ? createNewRawUnit(name, parent.layers, Math.max(0, parent.echelonLevel - 1)) 
+      : createNewOrgUnit(name, parent.layers, Math.max(0, parent.echelonLevel - 1));
 
   const newUnitMap: UnitMap = {
     ...unitMap,
     [newId]: newUnit,
   };
 
+  // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
+  let aaa: ChildrenList = {}
+  aaa[newId] = 1
   const updatedParent: OrgUnit = {
     ...parent,
-    children: [...parent.children, { unitId: newId, count: 1 }],
+    children: {...parent.children, ...aaa},
   };
 
   return {
@@ -178,14 +164,14 @@ export function HowManyOfThisTypeInParent(
 
   let total = 0
 
-  for (const childEntry of parent.children) {
-    if (childEntry.unitId === searchedId) {
-      total += childEntry.count;
+  for (const [childId, count] of Object.entries(parent.children)) {
+    if (childId === searchedId) {
+      total += count;
     }
 
-    const nested = unitMap[childEntry.unitId];
+    const nested = unitMap[childId];
     if (nested && nested.type === "org") {
-      total += HowManyOfThisTypeInParent(childEntry.unitId, searchedId, unitMap) * childEntry.count;
+      total += HowManyOfThisTypeInParent(childId, searchedId, unitMap) * count;
     }
   }
 
@@ -205,17 +191,24 @@ export function removeEquipmentTypeRecursively(
   }
 
   // If it's an OrgUnit, recursively process its children
-  const newChildren = unit.children.map((child) => {
-    const childUnit = unitMap[child.unitId];
-    if (!childUnit) return child; // Skip if child is missing
+  const newChildren: ChildrenList = {};
+
+  for (const [childId, count] of Object.entries(unit.children)) {
+    const childUnit = unitMap[childId];
+    if (!childUnit) {
+      newChildren[childId] = count; // Keep as is
+      continue;
+    }
+
     const updatedChild = removeEquipmentTypeRecursively(
       childUnit,
       equipmentTypeToRemove,
       unitMap
     );
-    unitMap[child.unitId] = updatedChild; // Update in place
-    return child;
-  });
+
+    unitMap[childId] = updatedChild; // Update in place
+    newChildren[childId] = count; // Preserve count
+  }
 
   return { ...unit, children: newChildren };
 }

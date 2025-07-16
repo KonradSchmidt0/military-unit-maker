@@ -1,0 +1,43 @@
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { useUnitStore } from "../../../hooks/useUnitStore";
+import { OrgUnit, removeAllOfAChild } from "../../../logic/logic";
+
+export default function CountInParent() {
+  const unitMap = useUnitStore(s => s.unitMap)
+  const updateUnit = useUnitStore(s => s.updateUnit)
+  const selectedId = useUnitInteractionStore(s => s.selectedId)
+  const parentId = useUnitInteractionStore(s => s.selected_parentId)
+  const parent = unitMap[parentId as string] as OrgUnit // By definition parent is org
+
+  if (!parentId || !selectedId)
+    return null
+
+  const selfInParent = parent.children[selectedId]
+  const selfCountInParent = selfInParent ? selfInParent : 0
+
+  return (
+    <input
+      type="number"
+      className="w-12 px-2 py-1 rounded border bg-slate-800 text-white"
+      value={selfCountInParent}
+      onChange={e => {
+        const newCount = parseInt(e.target.value);
+
+        if (isNaN(newCount)) return;
+        
+        if (newCount <= 0) {
+          updateUnit(parentId, removeAllOfAChild(parent, selectedId))
+          return
+        }
+
+        let updatedChildren = parent.children
+        updatedChildren[selectedId] = newCount
+
+        updateUnit(parentId, {
+          ...parent,
+          children: updatedChildren,
+        });
+      }}
+    />
+  )
+}

@@ -13,6 +13,7 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
   const padding = `${indent * 1}rem`;
 
   const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
+  const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
 
   const unit = useUnitQuick(unitId) as Unit
 
@@ -20,15 +21,13 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
   
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
-
-  const shadowSize = "4px"
-  // WIP
-  const shadowOpacityHex = "ff"
   
-  const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${unit.color}${shadowOpacityHex}`;
-  const shadow = `hover:shadow-[0_0_${shadowSize}_${shadowSize}_theme(colors.primary)]`
-
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
+  
+  const shadowSize = "3px"
+  const shadowOpacityHex = isHovered || isSelected ? "bb" : "00"
+  const shadowColor = isSelected ? unit.color : "#bbbbbb"
+  const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${shadowColor}${shadowOpacityHex}`
 
   return (
     <div style={{marginLeft: padding}}  className="relative flex flex-col items-center">
@@ -39,7 +38,7 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
       <div
         style={{
           backgroundColor: unit.color,
-          boxShadow: isSelected ? boxShadow : undefined,
+          boxShadow: boxShadow,
         }}
         onMouseEnter={() => onHover(unitId)}
         onMouseLeave={() => onHover(undefined)}
@@ -47,7 +46,7 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
           setSelected(unitId);
           setSelectedParent(parentUnitId);
         }}
-        className={`w-12 h-8 relative cursor-pointer border-2 border-black transition-shadow ${shadow}`}
+        className={`w-12 h-8 relative cursor-pointer border-2 border-black transition-shadow`}
       >
         {unit.layers.map((src, index) => (
           <img

@@ -42,7 +42,6 @@ export const useUnitStore = create<UnitStore>((set) => ({
   },
 }));
 
-export const updateUnit = useUnitStore.getState().updateUnit;
 export const getUnitMap = () => useUnitStore.getState().unitMap;
 export const useDuplicateUnit = () => {
   // Just get the function from the store, no parameters here

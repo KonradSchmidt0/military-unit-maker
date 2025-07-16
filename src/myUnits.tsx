@@ -20,7 +20,7 @@ export const rifle_o: OrgUnit = {
   color: defaultUnitColor,
   layers: infVisual,
   echelonLevel: 1,
-  children: [{unitId: "rifle_e", count: 2}]
+  children: {"rifle_e": 2}
 }
 export const mg_o: RawUnit = {
   type: "raw",
@@ -45,12 +45,12 @@ export const infatry_oo: OrgUnit = {
   color: defaultUnitColor,
   layers: infVisual,
   echelonLevel: 2,
-  children: [
-    {unitId: "leadWithRadio_e", count: 1},
-    {unitId: "rifle_o", count: 2},
-    {unitId: "mg_o", count: 1},
-    {unitId: "rifle_e", count: 1},
-  ]
+  children: {
+    "leadWithRadio_e": 1,
+    "rifle_o": 2,
+    "mg_o": 1,
+    "rifle_e": 1,
+  }
 }
 
 export const initialUnits: UnitMap = {
