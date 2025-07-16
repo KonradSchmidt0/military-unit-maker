@@ -60,7 +60,6 @@ export default function PalletEditorSegment() {
           const inPalet = isInPalet(unitId);
           return (
             <div key={unitId} className="flex items-center gap-2">
-              {/* <div className="w-48">{unit?.name}</div> */}
               {<TreeNode unitId={unitId} indent={0}/>}
               {addToPalletButton(unitId, inPalet)}
               {removeFromPalletButton(unitId, inPalet)}
