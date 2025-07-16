@@ -21,15 +21,19 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
 
-  const boxShadow = `0 0 4px 4px ${unit.color}`
-  const shadow = isSelected ? "shadow-[0_0_4px_4px_theme(colors.attention)]" : "hover:shadow-[0_0_4px_4px_theme(colors.primary)]"
+  const shadowSize = "4px"
+  // WIP
+  const shadowOpacityHex = "ff"
+  
+  const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${unit.color}${shadowOpacityHex}`;
+  const shadow = `hover:shadow-[0_0_${shadowSize}_${shadowSize}_theme(colors.primary)]`
 
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
 
   return (
     <div style={{marginLeft: padding}}  className="relative flex flex-col items-center">
       {/* Echelon symbol above the unit */}
-      <div className=" text-white text-xs">{echelon}</div>
+      <div className=" text-primary text-xs">{echelon}</div>
 
       {/* Unit block */}
       <div

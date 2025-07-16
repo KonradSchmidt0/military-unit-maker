@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { usePaletStore } from "../hooks/usePaletStore";
-import { useUnitStore } from "../hooks/useUnitStore";
-import { Unit } from "../logic/logic";
-import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
-import TreeNode from "./TreeNode";
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
+import { usePaletStore } from "../../hooks/usePaletStore";
+import { useUnitStore } from "../../hooks/useUnitStore";
+import TreeNode from "../TreeNode";
+import { Unit } from "../../logic/logic";
 
 export default function PalletEditorSegment() {
   const rootUnitId = useUnitInteractionStore((s) => s.rootId)

@@ -9,6 +9,7 @@ module.exports = {
         primary: '#ffffff', // primary: '#d9f99d',
         attention: '#d9f99d', //#fb923c
         warning: '#ef4444',
+        bg: '#0f172a'
       },
     }
   },

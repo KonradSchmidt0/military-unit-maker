@@ -1,6 +1,6 @@
-import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
-import { useUnitQuick, useUnitStore } from "../hooks/useUnitStore";
-import { HowManyOfThisTypeInParent, Unit } from "../logic/logic";
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
+import { useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
+import { HowManyOfThisTypeInParent, Unit } from "../../logic/logic";
 import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
 import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";

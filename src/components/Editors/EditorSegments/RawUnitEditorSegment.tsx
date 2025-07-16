@@ -1,6 +1,6 @@
-import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
-import { useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
-import { RawUnit } from "../../logic/logic";
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
+import { RawUnit } from "../../../logic/logic";
 
 export default function RawUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string

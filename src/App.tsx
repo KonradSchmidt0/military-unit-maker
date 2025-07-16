@@ -1,15 +1,15 @@
 import TreeView from './components/TreeView';
 import HoverInspector from './components/HoverInspector';
-import GlobalEditor from './components/GlobalEditor';
-import IndividualEditor from './components/IndividualEditor';
 import { updateUnit, useUnitStore } from './hooks/useUnitStore';
 import { initialUnits } from './myUnits';
 import { OrgUnit } from './logic/logic';
-import PalletEditor from './components/PalletEditor';
 import { usePaletStore } from './hooks/usePaletStore';
 import { useUnitInteractionStore } from './hooks/useUnitInteractionsStore';
 import { KeyboardWatcher } from './components/KeyboardWatcher';
 import { useShortcutStore } from './hooks/shortcutStore';
+import IndividualEditor from './components/Editors/IndividualEditor';
+import PalletEditor from './components/Editors/PalletEditor';
+import GlobalEditor from './components/Editors/GlobalEditor';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -24,8 +24,8 @@ function App() {
     const oldRootUnit = unitMap[rootUnitId]
     const newRootId = crypto.randomUUID()
     const newRoot: OrgUnit = { 
-      type: "org", name: "New Root Unit", 
-      layers: oldRootUnit.layers, color: oldRootUnit.color, echelonLevel: oldRootUnit.echelonLevel,
+      ...oldRootUnit,
+      type: "org", name: "New Root Unit", echelonLevel: oldRootUnit.echelonLevel + 1,
       children: [ { unitId: rootUnitId, count: 1 }  ] 
     }
     updateUnit(newRootId, newRoot)
@@ -35,7 +35,7 @@ function App() {
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex min-h-screen bg-slate-900 text-primary ${disableSelection}`}>
+    <div className={`flex min-h-screen bg-bg text-primary ${disableSelection}`}>
       <KeyboardWatcher />
 
       {/* Left */}

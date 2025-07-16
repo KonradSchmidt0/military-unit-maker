@@ -1,7 +1,7 @@
-import { usePaletStore } from "../../hooks/usePaletStore";
-import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
-import { UnitMap, updateUnit, useUnitQuick, useUnitStore } from "../../hooks/useUnitStore";
-import { addNewChildUnit, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../logic/logic";
+import { usePaletStore } from "../../../hooks/usePaletStore";
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { UnitMap, updateUnit, useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
+import { addNewChildUnit, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../../logic/logic";
 
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string

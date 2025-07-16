@@ -1,7 +1,7 @@
-import { usePaletStore } from "../../hooks/usePaletStore";
-import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
-import { updateUnit, useDuplicateUnit, useUnitStore } from "../../hooks/useUnitStore";
-import { addChild, OrgUnit, removeAllOfAChild, removeChild } from "../../logic/logic";
+import { usePaletStore } from "../../../hooks/usePaletStore";
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { updateUnit, useDuplicateUnit, useUnitStore } from "../../../hooks/useUnitStore";
+import { addChild, OrgUnit, removeAllOfAChild, removeChild } from "../../../logic/logic";
 
 interface CommonUnitEditorSegmentProps {
   popNewParentForRoot: Function

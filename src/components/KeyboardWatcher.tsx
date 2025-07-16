@@ -4,11 +4,11 @@ import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 
 export function KeyboardWatcher() {
   // Kill me
+  // React, so you have to render handlers, cant just call
   return <>{HandleModifiers()}{HandleEscape()}</>; // It’s invisible, just for effect
 }
 
 function HandleModifiers() {
-  // I think it should work fine, but pay extra attention if any bug appear
   const setModsInStore = useShortcutStore((s) => s.setModifiers)
 
   useEffect(() => {
