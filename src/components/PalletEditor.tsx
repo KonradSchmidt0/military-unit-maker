@@ -31,16 +31,21 @@ export default function PalletEditorSegment() {
 
   const isInPalet = (unitId: string) => unitPalet.includes(unitId);
 
-  const displayedUnits = showHidden
+  const displayedList = showHidden
     ? Object.entries(unitMap) // show everything when "showHidden" is true
     : unitPalet.map((id) => [id, unitMap[id]]) as [string, Unit][]; // else show only units in palet
 
+  const displayedUnits = displayedList.sort(([, unitA], [, unitB]) =>
+    unitA.name.localeCompare(unitB.name)
+  );
+    
+
   const addToPalletButton = (unitId: string, inPalet: boolean) => 
-    showHidden && !inPalet && (<button onClick={() => addUnitToPalet(unitId)}> 🎨 </button> )
+    showHidden && !inPalet && (<button onClick={() => addUnitToPalet(unitId)}> ➕🎨 </button> )
   const removeFromPalletButton = (unitId: string, inPalet: boolean) =>
-    inPalet && (<button onClick={() => removeUnitFromPalet(unitId)}> ❌ </button> )
+    inPalet && (<button onClick={() => removeUnitFromPalet(unitId)}> 🎨🚮 </button> )
   const buttonToRemoveUnitFromMemory = (unitId: string) =>
-    showHidden && (<button className="!text-opacity-50" onClick={() => handleRemovingFromMemory(unitId)}> 🗑️ </button> )
+    showHidden && (<button className="!text-opacity-50" onClick={() => handleRemovingFromMemory(unitId)}> ➡️🗑️ </button> )
 
   return (
     <div className="!border-r-0 editor-box">
@@ -50,7 +55,7 @@ export default function PalletEditorSegment() {
           onClick={() => setShowHidden(!showHidden)}
           className="ml-2 hover:border-2 hover:border-red-500"
         >
-          {showHidden ? "💾" : "🎨"}
+          {showHidden ? "🪖💾" : "🪖🎨"}
         </button>
       </div>
 

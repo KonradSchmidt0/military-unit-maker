@@ -6,7 +6,7 @@
   @apply inline-block w-auto;
   @apply py-1 px-3 border border-slate-300 bg-slate-800 text-white;
   @apply hover:rounded-md;
-  @apply active:bg-orange-400 active:text-slate-900 active:border-slate-900 active:rounded-md;
+  @apply active:bg-attention active:text-slate-900 active:border-slate-900 active:rounded-md;
   @apply cursor-pointer transition-all duration-200 ease-in-out;
 }
 

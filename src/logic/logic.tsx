@@ -1,17 +1,25 @@
 import { getUnitQuick, UnitMap } from "../hooks/useUnitStore";
 
+export const defaultUnitColor = "#6ad8e2"
+
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
 
 export interface RawUnit {
   type: "raw";
   name: string;
+  color: string;
+  echelonLevel: number;
+  layers: string[]; // For now just a path to /public/ later will think about user custom icons
   equipment: EquipmentTable;
 }
 
 export interface OrgUnit {
   type: "org";
   name: string;
+  color: string;
+  echelonLevel: number;
+  layers: string[]; // For now just a path to /public/ later will think about user custom icons
   children: {
     unitId: string;
     count: number;
@@ -107,19 +115,25 @@ export function removeAllOfAChild(
   };
 }
 
-export function createNewRawUnit(name = "New Raw Unit"): RawUnit {
+export function createNewRawUnit(name = "New Raw Unit", layers = [], color=defaultUnitColor, echelonLevel=0, eq={}): RawUnit {
   return {
     type: "raw",
     name,
-    equipment: {}, // Empty by default
+    layers,
+    color,
+    echelonLevel,
+    equipment: eq,
   };
 }
 
-export function createNewOrgUnit(name = "New Org Unit"): OrgUnit {
+export function createNewOrgUnit(name = "New Raw Unit", layers = [], color=defaultUnitColor, echelonLevel=0, children = []): OrgUnit {
   return {
     type: "org",
     name,
-    children: [],
+    layers,
+    color,
+    echelonLevel,
+    children,
   };
 }
 

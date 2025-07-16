@@ -57,8 +57,8 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
       <div className="flex flex-row gap-2">
         {selectedUnitParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedUnitId)}>Unlink</button> : null}
         {selectedUnitParentId === undefined ? <button className="btn-editor" onClick={() => popNewParentForRoot()}>New Root</button> : null}
-        {unitPalet.includes(selectedUnitId) ? <button onClick={() => removeUnitFromPalet(selectedUnitId)}>✔️🎨</button> : null}
-        {!unitPalet.includes(selectedUnitId) ? <button onClick={() => addUnitToPalet(selectedUnitId)}>❌🎨</button> : null}
+        {unitPalet.includes(selectedUnitId) ? <button onClick={() => removeUnitFromPalet(selectedUnitId)}>🎨🚮</button> : null}
+        {!unitPalet.includes(selectedUnitId) ? <button onClick={() => addUnitToPalet(selectedUnitId)}>➕🎨</button> : null}
       </div>
       
       {/* WIP. Possibly moved to a new file in the future */}

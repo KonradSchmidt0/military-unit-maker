@@ -9,7 +9,7 @@ import PalletEditor from './components/PalletEditor';
 import { usePaletStore } from './hooks/usePaletStore';
 import { useUnitInteractionStore } from './hooks/useUnitInteractionsStore';
 import { KeyboardWatcher } from './components/KeyboardWatcher';
-import { useModifiers, useShortcutStore } from './hooks/shortcutStore';
+import { useShortcutStore } from './hooks/shortcutStore';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -18,10 +18,16 @@ useUnitInteractionStore.getState().setRootId("infatry_oo");
 function App() {
   const rootUnitId = useUnitInteractionStore((s) => s.rootId)
   const setRootUnitId = useUnitInteractionStore((s) => s.setRootId)
+  const unitMap = useUnitStore(s => s.unitMap)
 
   function popNewParentForRoot() {
+    const oldRootUnit = unitMap[rootUnitId]
     const newRootId = crypto.randomUUID()
-    const newRoot: OrgUnit = { type: "org", name: "New Root Unit", children: [ { unitId: rootUnitId, count: 1 }  ] }
+    const newRoot: OrgUnit = { 
+      type: "org", name: "New Root Unit", 
+      layers: oldRootUnit.layers, color: oldRootUnit.color, echelonLevel: oldRootUnit.echelonLevel,
+      children: [ { unitId: rootUnitId, count: 1 }  ] 
+    }
     updateUnit(newRootId, newRoot)
     setRootUnitId(newRootId)
   }
@@ -29,7 +35,7 @@ function App() {
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex min-h-screen bg-slate-950 text-lime-200 ${disableSelection}`}>
+    <div className={`flex min-h-screen bg-slate-900 text-primary ${disableSelection}`}>
       <KeyboardWatcher />
 
       {/* Left */}
