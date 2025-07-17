@@ -103,7 +103,7 @@ export default function OrgUnitEditorSegment() {
 
           {/* Button to remove this child entry */}
           <button
-            className="hover:bg-white/20"
+            className="btn-emoji !p-0"
             onClick={() => {
               const updated = removeAllOfAChild(unit, childId);
               updateUnit(selectedUnitId, updated);
@@ -124,7 +124,7 @@ export default function OrgUnitEditorSegment() {
         <div key={type} className="flex items-center gap-2">
           <div className="w-24">{type}</div>
           <div className="w-24 p-1 h-8">{value}</div>
-          <button onClick={() => deleteEquipmentTypeFromAllChildren(type)} className="hover:bg-white/20">❌</button>
+          <button onClick={() => deleteEquipmentTypeFromAllChildren(type)} className="btn-emoji !p-0">❌</button>
         </div>
       ))}
     </>

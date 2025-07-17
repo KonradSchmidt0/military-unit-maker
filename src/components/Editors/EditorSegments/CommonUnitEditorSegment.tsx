@@ -3,14 +3,16 @@ import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore
 import { useDuplicateUnit, useUnitStore } from "../../../hooks/useUnitStore";
 import { addChild, OrgUnit, removeChild } from "../../../logic/logic";
 import CountInParent from "./CountInParent";
+import { EchelonEditor } from "./EchelonEditor";
+import { VisualLayeringEditor } from "./VisualLayeringEditor";
 
 interface CommonUnitEditorSegmentProps {
   popNewParentForRoot: Function
 }
 
 export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonUnitEditorSegmentProps) {
-  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
-  const selectedUnitParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
+  const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
+  const selectedParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
   const setSelectedId = useUnitInteractionStore((s) => s.setSelectedId)
 
   // We are getting whole map since later we will need to get other unit in a conditional, and u can only use hooks at top
@@ -20,11 +22,11 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
 
-  const selectedUnit = unitMap[selectedUnitId]
+  const selected = unitMap[selectedId]
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateUnit(selectedUnitId, {
-      ...selectedUnit,
+    updateUnit(selectedId, {
+      ...selected,
       name: e.target.value,
     });
   };
@@ -32,38 +34,59 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
   const duplicateUnit = useDuplicateUnit()
 
   function handleUnlinking(id: string) {
-    if (!selectedUnitParentId)
+    if (!selectedParentId)
       return
 
     const newId = duplicateUnit(id);
-    let p = unitMap[selectedUnitParentId] as OrgUnit // By definition parent is an OrgUnit
-    p = removeChild(p, selectedUnitId)
+    let p = unitMap[selectedParentId] as OrgUnit // By definition parent is an OrgUnit
+    p = removeChild(p, selectedId)
     p = addChild(p, newId)
-    updateUnit(selectedUnitParentId, p);
+    updateUnit(selectedParentId, p);
     setSelectedId(newId)
   }
 
+  const colorPicker = 
+    (<div>
+      <input
+        id="ColorPickerInputId"
+        type="color"
+        value={selected.color}
+        onChange={(e) => {
+          updateUnit(selectedId, { ...selected, color: e.target.value });
+        }}
+        className="h-full appearance-none border-0 outline-none cursor-pointer rounded"
+      />
+    </div>)
+
   return (
-    <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
+    <><div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
       <label className="flex flex-col gap-2 w-full ">
         <span className="font-bold">Name:</span>
         <input
+          id="NameInputId"
           type="text"
-          value={selectedUnit.name}
+          value={selected.name}
           onChange={handleNameChange}
           className="p-1 border border-slate-300 bg-slate-800 text-white"
         />
       </label>
 
       <div className="flex flex-row gap-2">
-        {selectedUnitParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedUnitId)}>Unlink</button> : null}
-        {selectedUnitParentId === undefined ? <button className="btn-editor" onClick={() => popNewParentForRoot()}>New Root</button> : null}
-        {unitPalet.includes(selectedUnitId) ? <button className="btn-emoji"
-          onClick={() => removeUnitFromPalet(selectedUnitId)}>🎨🚮</button> : null}
-        {!unitPalet.includes(selectedUnitId) ? <button className="btn-emoji"
-          onClick={() => addUnitToPalet(selectedUnitId)}>➕🎨</button> : null}
-        {selectedUnitId ? <CountInParent/> : null}
+        {selectedParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
+        {selectedParentId === undefined ? <button className="btn-editor" onClick={() => popNewParentForRoot()}>New Root</button> : null}
+        {unitPalet.includes(selectedId) ? <button className="btn-emoji"
+          onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
+        {!unitPalet.includes(selectedId) ? <button className="btn-emoji"
+          onClick={() => addUnitToPalet(selectedId)}>➕🎨</button> : null}
+        {selectedId ? <CountInParent/> : null}
       </div>
-    </div> )
-      
-}
+
+      <div className="flex flex-row gap-2">
+        {<EchelonEditor/>}
+        {colorPicker}
+      </div>
+    </div>
+    <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
+      <VisualLayeringEditor/>
+    </div></>
+) }

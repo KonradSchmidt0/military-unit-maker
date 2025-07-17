@@ -59,9 +59,12 @@ export function addChild(
 ): OrgUnit {
   const curCount = parent.children[childId]
 
+  // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
+  let aaa: ChildrenList = {}
+  aaa[childId] = curCount ? curCount + count : count
   return {
     ...parent,
-    children: {...parent.children, ...{ childId: curCount ? curCount + count : count }}
+    children: {...parent.children, ...aaa}
   };
 }
 
@@ -78,9 +81,13 @@ export function removeChild(
   if (curCount <= count) {
     return removeAllOfAChild(parent, childId)
   } else {
+    // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
+    let aaa: ChildrenList = {}
+    aaa[childId] =  curCount - count
+
     return {
       ...parent,
-      children: {...parent.children, ...{ childId: curCount - count }}
+      children: {...parent.children, ...aaa}
     };
   }
 }
