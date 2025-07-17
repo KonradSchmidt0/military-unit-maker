@@ -8,7 +8,7 @@ const infHqVisual = ["/icons/c-inf.png", "/icons/hq.svg"]
 export const rifle_e: RawUnit = {
   type: "raw",
   name: "Riffle",
-  color: defaultUnitColor,
+  smartColor: "inheret",
   layers: infVisual,
   echelonLevel: 0,
   equipment: { "Warrior": 2, "Rifle": 2 }
@@ -17,7 +17,7 @@ export const rifle_e: RawUnit = {
 export const rifle_o: OrgUnit = {
   type: "org",
   name: "Rif. Squad",
-  color: defaultUnitColor,
+  smartColor: "inheret",
   layers: infVisual,
   echelonLevel: 1,
   children: {"rifle_e": 2}
@@ -25,7 +25,7 @@ export const rifle_o: OrgUnit = {
 export const mg_o: RawUnit = {
   type: "raw",
   name: "MG Squad",
-  color: defaultUnitColor,
+  smartColor: defaultUnitColor,
   layers: mgVisual,
   echelonLevel: 1,
   equipment: { "Warrior": 4, "MG": 2, "Rifle": 2}
@@ -33,7 +33,7 @@ export const mg_o: RawUnit = {
 export const leadWithRadio_e: RawUnit = {
   type: "raw",
   name: "Section Leader",
-  color: defaultUnitColor,
+  smartColor: "inheret",
   layers: infHqVisual,
   echelonLevel: 0,
   equipment: { "Warrior": 2, "Rifle": 2, "Radio": 1 }
@@ -42,7 +42,7 @@ export const leadWithRadio_e: RawUnit = {
 export const infatry_oo: OrgUnit = {
   type: "org",
   name: "Inf Section",
-  color: defaultUnitColor,
+  smartColor: "inheret",
   layers: infVisual,
   echelonLevel: 2,
   children: {

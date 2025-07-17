@@ -9,7 +9,7 @@ export type ChildrenList = Record<string, number>
 export interface RawUnit {
   type: "raw";
   name: string;
-  color: string;
+  smartColor: "inheret" | string;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   equipment: EquipmentTable;
@@ -18,7 +18,7 @@ export interface RawUnit {
 export interface OrgUnit {
   type: "org";
   name: string;
-  color: string;
+  smartColor: "inheret" | string;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   children: ChildrenList // First is UnitId, second is count of how many
@@ -108,7 +108,7 @@ export function createNewRawUnit(name = "New Raw Unit", layers: string[] = [], e
     type: "raw",
     name,
     layers,
-    color,
+    smartColor: color,
     echelonLevel,
     equipment: eq,
   };
@@ -119,7 +119,7 @@ export function createNewOrgUnit(name = "New Org Unit", layers: string[] = [], e
     type: "org",
     name,
     layers,
-    color,
+    smartColor: color,
     echelonLevel,
     children,
   };

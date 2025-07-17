@@ -19,7 +19,7 @@ export default function IndividualEditor({ popNewParentForRoot }: IndividualEdit
   if (!selectedUnitId)
     return null
 
-  const namePart = <CommonUnitEditorSegment 
+  const commonPart = <CommonUnitEditorSegment 
       popNewParentForRoot={popNewParentForRoot}
     ></CommonUnitEditorSegment>;
 
@@ -45,7 +45,7 @@ export default function IndividualEditor({ popNewParentForRoot }: IndividualEdit
         INDIVIDUAL {currentlySelectedDisplay}
       </div>
       
-      {namePart}
+      {commonPart}
       {rawUnitPart}
       {orgUnitSegment}
 

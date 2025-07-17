@@ -11,7 +11,8 @@ export const iconFiles = [
   "inf.svg",
   "k-gun.svg",
   "k-gun-alt.svg",
-  "tank.svg"
+  "tank.svg",
+  "art.svg"
 ];
 
 export function VisualLayeringEditor() {

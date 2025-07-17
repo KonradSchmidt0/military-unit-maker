@@ -1,7 +1,7 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useDuplicateUnit, useUnitStore } from "../../../hooks/useUnitStore";
-import { addChild, OrgUnit, removeChild } from "../../../logic/logic";
+import { addChild, defaultUnitColor, OrgUnit, removeChild } from "../../../logic/logic";
 import CountInParent from "./CountInParent";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
@@ -50,13 +50,23 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
       <input
         id="ColorPickerInputId"
         type="color"
-        value={selected.color}
+        value={selected.smartColor}
         onChange={(e) => {
-          updateUnit(selectedId, { ...selected, color: e.target.value });
+          updateUnit(selectedId, { ...selected, smartColor: e.target.value });
         }}
         className="h-full appearance-none border-0 outline-none cursor-pointer rounded"
       />
     </div>)
+  const inheretColor = (
+    <button className="btn-emoji" onClick={() => { updateUnit(selectedId, { ...selected, smartColor: "inheret"}) }}>Inheret ⬆️🖌️</button>
+  )
+  const uninheretColor = (
+    <button className="btn-emoji" onClick={() => { 
+      const color = selectedParentId 
+        ? unitMap[selectedParentId].smartColor 
+        : defaultUnitColor; updateUnit(selectedId, { ...selected, smartColor: color}) }
+      }>Uninheret ❌🖌️</button>
+  )
 
   return (
     <><div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
@@ -83,7 +93,8 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
 
       <div className="flex flex-row gap-2">
         {<EchelonEditor/>}
-        {colorPicker}
+        {selected.smartColor !== "inheret" ? colorPicker : null}
+        {selected.smartColor === "inheret" ? uninheretColor : inheretColor}
       </div>
     </div>
     <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">

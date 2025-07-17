@@ -17,6 +17,7 @@ export default function CountInParent() {
 
   return (
     <input
+      id="count-in-parent"
       type="number"
       className="w-12 px-2 py-1 rounded border bg-slate-800 text-white"
       value={selfCountInParent}

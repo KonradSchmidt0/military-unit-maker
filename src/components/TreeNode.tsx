@@ -1,34 +1,47 @@
+import { useShortcutStore } from "../hooks/shortcutStore";
 import { useEchelonStore } from "../hooks/useEchelonStore";
+import { usePaletStore } from "../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
-import { useUnitQuick } from "../hooks/useUnitStore";
-import { Unit } from "../logic/logic";
+import { useUnitStore } from "../hooks/useUnitStore";
+import { defaultUnitColor, OrgUnit, removeChild, Unit } from "../logic/logic";
 
 interface TreeNodeProps {
   unitId: string;
   indent: number;
   parentUnitId?: string;
+  // Problem: If our color is 'inheret' and parents color is 'inheret' we would need extra hard way to search up the chain
+  //   Also, node can appear without parent outside of a tree, or as a root. We have to handle those cases
+  // Solution: Parent tree view calculates actual color, and sends it lower 
+  calculatedParentColor?: string; 
 }
 
-function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
-  const padding = `${indent * 1}rem`;
-
-  const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
-  const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
-
-  const unit = useUnitQuick(unitId) as Unit
-
+function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentColor = undefined }: TreeNodeProps) {
   const onHover = useUnitInteractionStore((s) => s.setHoveredId)
-  
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
   
+  const isShiftHeld = useShortcutStore(s => s.isShiftHeld)
+
+  const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
+  
+  const unitMap = useUnitStore(s => s.unitMap)
+  const updateUnitMap = useUnitStore(s => s.updateUnit)
+
+  const unit = unitMap[unitId] as Unit
+  
+  const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
+  const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
+  
+  const padding = `${indent * 1}rem`;
+
+  const color = unit.smartColor === "inheret" ? (calculatedParentColor ? calculatedParentColor : defaultUnitColor) : unit.smartColor
   
   const shadowSize = "3px"
   const shadowOpacityHex = isHovered || isSelected ? "bb" : "00"
-  const shadowColor = isSelected ? unit.color : "#bbbbbb"
+  const shadowColor = isSelected ? color : "#bbbbbb"
   const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${shadowColor}${shadowOpacityHex}`
-
+  
   return (
     <div style={{marginLeft: padding}}  className="relative flex flex-col items-center">
       {/* Echelon symbol above the unit */}
@@ -37,12 +50,24 @@ function TreeNode({ unitId, indent, parentUnitId = undefined }: TreeNodeProps) {
       {/* Unit block */}
       <div
         style={{
-          backgroundColor: unit.color,
+          backgroundColor: color,
           boxShadow: boxShadow,
         }}
         onMouseEnter={() => onHover(unitId)}
         onMouseLeave={() => onHover(undefined)}
         onClick={() => {
+          if (isShiftHeld) {
+            if (parentUnitId) {
+              const parent = unitMap[parentUnitId] as OrgUnit
+              const newParent = removeChild(parent, unitId)
+              updateUnitMap(parentUnitId, newParent)
+              return
+            }
+
+            removeFromUnitPalet(unitId)
+            return
+          }
+
           setSelected(unitId);
           setSelectedParent(parentUnitId);
         }}
