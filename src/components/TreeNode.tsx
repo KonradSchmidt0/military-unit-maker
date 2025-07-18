@@ -3,7 +3,7 @@ import { useEchelonStore } from "../hooks/useEchelonStore";
 import { usePaletStore } from "../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../hooks/useUnitStore";
-import { addChild, defaultUnitColor, OrgUnit, removeChild, Unit } from "../logic/logic";
+import { defaultUnitColor, Unit } from "../logic/logic";
 
 interface TreeNodeProps {
   unitId: string;
@@ -20,17 +20,16 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
   
-  const shift = useShortcutStore((s) => s.isShiftHeld);
-  const ctrl = useShortcutStore((s) => s.isCtrlHeld);
-
-  const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
+  const [shift, ctrl] = [useShortcutStore((s) => s.isShiftHeld), useShortcutStore((s) => s.isCtrlHeld)]
+  
   const addToUnitPalet = usePaletStore(s => s.addUnitToPalet)
+  const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
   
   const unitMap = useUnitStore(s => s.unitMap)
-  const updateUnitMap = useUnitStore(s => s.updateUnit)
+  const duplicateUnit = useUnitStore(s => s.duplicateUnit)
+  const addChild = useUnitStore(s => s.addOrSubtractChild)
 
   const unit = unitMap[unitId] as Unit
-  const parent = unitMap[parentUnitId as string]
 
   const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
   const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
@@ -59,15 +58,25 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
         onMouseEnter={() => onHover(unitId)}
         onMouseLeave={() => onHover(undefined)}
         onClick={() => {
-          if (shift || ctrl) {
-            const childAction = () => shift ? removeChild(parent as OrgUnit, unitId) : addChild(parent as OrgUnit, unitId)
-            const paletAction = () => shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
+          if (shift && ctrl) {
+            const dupId = duplicateUnit(unitId)
 
             if (parentUnitId) {
-              const newParent = childAction()
-              updateUnitMap(parentUnitId, newParent)
+              addChild(parentUnitId, dupId, 1)
               return
             }
+
+            addToUnitPalet(dupId)
+            return
+          }
+
+          if (shift || ctrl) {
+            if (parentUnitId) {
+              addChild(parentUnitId, unitId, shift ? -1 : 1)
+              return
+            }
+
+            const paletAction = () => shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
             paletAction()
             return
           }

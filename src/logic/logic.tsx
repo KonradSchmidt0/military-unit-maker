@@ -52,114 +52,53 @@ export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTa
   }
 }
 
-export function addChild(
-  parent: OrgUnit,
-  childId: string,
-  count: number = 1
-): OrgUnit {
-  const curCount = parent.children[childId]
-
-  // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-  let aaa: ChildrenList = {}
-  aaa[childId] = curCount ? curCount + count : count
-  return {
-    ...parent,
-    children: {...parent.children, ...aaa}
-  };
-}
-
-
-export function removeChild(
-  parent: OrgUnit,
-  childId: string,
-  count: number = 1
-): OrgUnit {
-  const curCount = parent.children[childId]
-
-  if (!curCount) return parent; // no child to remove
-
-  if (curCount <= count) {
-    return removeAllOfAChild(parent, childId)
-  } else {
-    // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-    let aaa: ChildrenList = {}
-    aaa[childId] =  curCount - count
-
-    return {
-      ...parent,
-      children: {...parent.children, ...aaa}
-    };
-  }
-}
-
-export function removeAllOfAChild(
-  parent: OrgUnit,
-  childId: string,
-): OrgUnit {
-  const { [childId]: _, ...rest } = parent.children;
-  return {
-    ...parent,
-    children: rest
-  };
-}
-
-export function createNewRawUnit(name = "New Raw Unit", layers: string[] = [], echelonLevel=0, color=defaultUnitColor, eq={}): RawUnit {
+export function createNewRawUnit({
+  name = "New Raw Unit",
+  layers = [],
+  echelonLevel = 0,
+  smartColor = "inheret",
+  eq = {},
+}: {
+  name?: string;
+  layers?: string[];
+  echelonLevel?: number;
+  smartColor?: string;
+  eq?: EquipmentTable;
+} = {}): RawUnit {
   return {
     type: "raw",
     name,
     layers,
-    smartColor: color,
+    smartColor,
     echelonLevel,
     equipment: eq,
   };
 }
 
-export function createNewOrgUnit(name = "New Org Unit", layers: string[] = [], echelonLevel=0, color=defaultUnitColor, children: ChildrenList = {}): OrgUnit {
+
+export function createNewOrgUnit({
+  name = "New Org Unit",
+  layers = [],
+  echelonLevel = 0,
+  smartColor = "inheret",
+  children = {},
+}: {
+  name?: string;
+  layers?: string[];
+  echelonLevel?: number;
+  smartColor?: string;
+  children?: ChildrenList;
+} = {}): OrgUnit {
   return {
     type: "org",
     name,
     layers,
-    smartColor: color,
+    smartColor,
     echelonLevel,
-    children,
+    children
   };
 }
 
-// CALLER RESPONSIBILITIES:
-// Update the app storage, update the parent unit in this storage (I know its a bit messy, but not sure is there a better way
-// Teoretically you can pass in update function, but not sure how i feel about it)
-export function addNewChildUnit(
-  parent: OrgUnit,
-  unitMap: UnitMap,
-  type: "raw" | "org",
-  name?: string
-): { newUnitMap: UnitMap; newUnitId: string; updatedParent: OrgUnit } {
-  const newId = crypto.randomUUID();
-
-  const newUnit: Unit =
-    type === "raw" 
-      ? createNewRawUnit(name, parent.layers, Math.max(0, parent.echelonLevel - 1)) 
-      : createNewOrgUnit(name, parent.layers, Math.max(0, parent.echelonLevel - 1));
-
-  const newUnitMap: UnitMap = {
-    ...unitMap,
-    [newId]: newUnit,
-  };
-
-  // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-  let aaa: ChildrenList = {}
-  aaa[newId] = 1
-  const updatedParent: OrgUnit = {
-    ...parent,
-    children: {...parent.children, ...aaa},
-  };
-
-  return {
-    newUnitMap,
-    newUnitId: newId,
-    updatedParent,
-  };
-}
 
 export function HowManyOfThisTypeInParent(
   parentId: string,

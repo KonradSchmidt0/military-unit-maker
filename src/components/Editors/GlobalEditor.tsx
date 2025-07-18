@@ -13,7 +13,7 @@ export default function GlobalEditor() {
       <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
         <div className="flex flex-row gap-2 items-center">
           Folding Level:
-          <EchelonEditor echelonLevel={foldingLevel} onChange={setFoldingLevel}></EchelonEditor>
+          <EchelonEditor echelonLevel={foldingLevel} onChange={setFoldingLevel} additionalStartingOption={-1}></EchelonEditor>
         </div>
       </div>
     </div>

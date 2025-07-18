@@ -1,15 +1,22 @@
+import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
-import { addNewChildUnit, ChildrenList, getEquipmentTable, OrgUnit, removeAllOfAChild, removeEquipmentTypeRecursively } from "../../../logic/logic";
+import { removeAllOfAChild } from "../../../logic/childManaging";
+import { ChildrenList, getEquipmentTable, OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
 
 export default function OrgUnitEditorSegment() {
-  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
+  const selectedUnitId = useUnitInteractionStore(s => s.selectedId) as string
   const unit = useUnitQuick(selectedUnitId) as OrgUnit
+  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
+  const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
   // Used later
-  const unitMap = useUnitStore((state) => state.unitMap)
-  const updateUnitMap = useUnitStore((state) => state.setUnitMap)
+  const unitMap = useUnitStore(s => s.unitMap)
+  const updateUnitMap = useUnitStore(s => s.setUnitMap)
   const updateUnit = useUnitStore(s => s.updateUnit)
+  const addChild = useUnitStore(s => s.creatNewChild)
+
+  const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]
   
   const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId, unitMap));
 
@@ -17,18 +24,6 @@ export default function OrgUnitEditorSegment() {
   // If given all units as a option its possible to choose yourself or other dangerous unit, and creating infinite loop
   // As such, we filter them
   const safeChildrenOptions = getSafeChildOptions(selectedUnitId, unitMap, usePaletStore(state => state.unitPalet), unit.children)
-
-  const handleAddingChildren = (type: "raw" | "org") => {
-    const { newUnitMap, updatedParent } = addNewChildUnit(
-      unit as OrgUnit,
-      unitMap,
-      type
-    );
-
-    // Apply to zustand
-    updateUnitMap(newUnitMap);
-    updateUnit(selectedUnitId, updatedParent);
-  }
 
   const deleteEquipmentTypeFromAllChildren = (type: string) => {
     const confirmed = window.confirm(
@@ -47,10 +42,10 @@ export default function OrgUnitEditorSegment() {
   const childrenHeader = (
     <div className="flex justify-between gap-2">
       <span className="text-lg font-bold">Children</span>
-      <button onClick={() => handleAddingChildren("org")} className="btn-editor">
+      <button onClick={() => {const c = addChild(selectedUnitId, "org"); if (ctrl) {setParent(selectedUnitId); setSelected(c); }}} className="btn-editor">
         + Org
       </button>
-      <button onClick={() => handleAddingChildren("raw")} className="btn-editor">
+      <button onClick={() => {const c = addChild(selectedUnitId, "raw"); if (ctrl) {setParent(selectedUnitId); setSelected(c); }}} className="btn-editor">
         + Raw
       </button>
     </div>
@@ -99,6 +94,11 @@ export default function OrgUnitEditorSegment() {
               let updatedChildren = unit.children
               updatedChildren[childId] = newCount
               updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
+
+              if (ctrl) {
+                setParent(selectedUnitId)
+                setSelected(childId)
+              }
             }}
           />
 

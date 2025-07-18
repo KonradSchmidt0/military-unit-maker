@@ -13,7 +13,7 @@ interface UnitInteractionStore {
 
   rootId: string;
   setRootId: (newRootId: string) => void;
-  popNewRoot: (unitMap: UnitMap, updateMap: Function) => void;
+  popNewRoot: (unitMap: UnitMap, updateMap: Function, setNewRootAsParent?: boolean) => void;
 }
 
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
@@ -31,7 +31,7 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   rootId: "",
   setRootId: (newRootId) => set({ rootId: newRootId }),
 
-  popNewRoot: (map, update) => {
+  popNewRoot: (map, update, setNewRootAsParent) => {
     const oldRootId = get().rootId
     const oldRoot = map[oldRootId]
     const newRootId = crypto.randomUUID()
@@ -44,8 +44,13 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
       children: c
     }
     
-    get().setSelectedId(newRootId)
+    if (!setNewRootAsParent)
+      get().setSelectedId(newRootId)
+    else
+      get().setSelected_parentId(newRootId)
     update(newRootId, newRoot)
     get().setRootId(newRootId)
+
+
   }
 }));

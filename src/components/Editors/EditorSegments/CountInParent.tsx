@@ -1,12 +1,20 @@
+import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit, removeAllOfAChild } from "../../../logic/logic";
+import { removeAllOfAChild } from "../../../logic/childManaging";
+import { OrgUnit } from "../../../logic/logic";
 
 export default function CountInParent() {
   const unitMap = useUnitStore(s => s.unitMap)
   const updateUnit = useUnitStore(s => s.updateUnit)
+
   const selectedId = useUnitInteractionStore(s => s.selectedId)
   const parentId = useUnitInteractionStore(s => s.selected_parentId)
+  const setSelectedId = useUnitInteractionStore(s => s.setSelectedId)
+  const setParentId = useUnitInteractionStore(s => s.setSelected_parentId)
+
+  const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]
+
   const parent = unitMap[parentId as string] as OrgUnit // By definition parent is org
 
   if (!parentId || !selectedId)
@@ -38,6 +46,11 @@ export default function CountInParent() {
           ...parent,
           children: updatedChildren,
         });
+
+        if (ctrl) {
+          setParentId(undefined)
+          setSelectedId(parentId)
+        }
       }}
     />
   )
