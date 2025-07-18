@@ -17,13 +17,3 @@ export const useShortcutStore = create<ShortcutStore>((set) => ({
 
   setModifiers: (mods) => set(mods),
 }));
-
-// For easy access
-export const useModifiers = () => {
-  return useShortcutStore((s) => ({
-    shift: s.isShiftHeld,
-    ctrl: s.isCtrlHeld,
-    alt: s.isAltHeld,
-    meta: s.isMetaHeld,
-  }));
-};

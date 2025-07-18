@@ -1,5 +1,5 @@
 import { getEquipmentTable } from "../logic/logic";
-import { useUnitQuick } from "../hooks/useUnitStore";
+import { useUnitQuick, useUnitStore } from "../hooks/useUnitStore";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 
 
@@ -7,10 +7,11 @@ import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 function HoverInspector() {
   const unitId = useUnitInteractionStore((s) => s.selectedId)
   const unit = useUnitQuick(unitId ? unitId : "")
+  const unitMap = useUnitStore(s => s.unitMap)
 
   if (!unitId) return <div className=" text-gray-500">Hover over a unit to inspect</div>;
 
-  const equipment = getEquipmentTable(unitId);
+  const equipment = getEquipmentTable(unitId, unitMap);
 
   return (
     <div className="border rounded bg-slate-900 p-4">

@@ -42,7 +42,7 @@ export const leadWithRadio_e: RawUnit = {
 export const infatry_oo: OrgUnit = {
   type: "org",
   name: "Inf Section",
-  smartColor: "inheret",
+  smartColor: defaultUnitColor,
   layers: infVisual,
   echelonLevel: 2,
   children: {

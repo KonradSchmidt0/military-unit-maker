@@ -3,7 +3,7 @@ import { useEchelonStore } from "../hooks/useEchelonStore";
 import { usePaletStore } from "../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../hooks/useUnitStore";
-import { defaultUnitColor, OrgUnit, removeChild, Unit } from "../logic/logic";
+import { addChild, defaultUnitColor, OrgUnit, removeChild, Unit } from "../logic/logic";
 
 interface TreeNodeProps {
   unitId: string;
@@ -20,15 +20,18 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
   
-  const isShiftHeld = useShortcutStore(s => s.isShiftHeld)
+  const shift = useShortcutStore((s) => s.isShiftHeld);
+  const ctrl = useShortcutStore((s) => s.isCtrlHeld);
 
   const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
+  const addToUnitPalet = usePaletStore(s => s.addUnitToPalet)
   
   const unitMap = useUnitStore(s => s.unitMap)
   const updateUnitMap = useUnitStore(s => s.updateUnit)
 
   const unit = unitMap[unitId] as Unit
-  
+  const parent = unitMap[parentUnitId as string]
+
   const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
   const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
@@ -56,15 +59,16 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
         onMouseEnter={() => onHover(unitId)}
         onMouseLeave={() => onHover(undefined)}
         onClick={() => {
-          if (isShiftHeld) {
+          if (shift || ctrl) {
+            const childAction = () => shift ? removeChild(parent as OrgUnit, unitId) : addChild(parent as OrgUnit, unitId)
+            const paletAction = () => shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
+
             if (parentUnitId) {
-              const parent = unitMap[parentUnitId] as OrgUnit
-              const newParent = removeChild(parent, unitId)
+              const newParent = childAction()
               updateUnitMap(parentUnitId, newParent)
               return
             }
-
-            removeFromUnitPalet(unitId)
+            paletAction()
             return
           }
 

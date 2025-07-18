@@ -5,11 +5,7 @@ import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
 import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
-interface IndividualEditorProps {
-  popNewParentForRoot: Function
-}
-
-export default function IndividualEditor({ popNewParentForRoot }: IndividualEditorProps) {
+export default function IndividualEditor() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId)
   const rootUnitId = useUnitInteractionStore((s) => s.rootId)
 
@@ -19,9 +15,7 @@ export default function IndividualEditor({ popNewParentForRoot }: IndividualEdit
   if (!selectedUnitId)
     return null
 
-  const commonPart = <CommonUnitEditorSegment 
-      popNewParentForRoot={popNewParentForRoot}
-    ></CommonUnitEditorSegment>;
+  const commonPart = <CommonUnitEditorSegment/>;
 
   const rawUnitPart = selectedUnit?.type === "raw" ?
     <RawUnitEditorSegment/> : null;
@@ -29,7 +23,9 @@ export default function IndividualEditor({ popNewParentForRoot }: IndividualEdit
   const orgUnitSegment = selectedUnit?.type === "org" ?
     <OrgUnitEditorSegment/> : null;
 
-  const currentlySelectedCount = HowManyOfThisTypeInParent(rootUnitId, selectedUnitId, unitMap)
+  const currentlySelectedCount = rootUnitId !== selectedUnitId 
+    ? HowManyOfThisTypeInParent(rootUnitId, selectedUnitId, unitMap)
+    : 1
   const currentlySelectedDisplay = ( <>
       (cur. selected:{" "}
       <span className={currentlySelectedCount > 2 ? "text-warning" : ""}>

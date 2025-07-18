@@ -6,11 +6,12 @@ import { addNewChildUnit, ChildrenList, getEquipmentTable, OrgUnit, removeAllOfA
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
   const unit = useUnitQuick(selectedUnitId) as OrgUnit
-  const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId));
   // Used later
   const unitMap = useUnitStore((state) => state.unitMap)
   const updateUnitMap = useUnitStore((state) => state.setUnitMap)
   const updateUnit = useUnitStore(s => s.updateUnit)
+  
+  const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId, unitMap));
 
   /// Children Manager
   // If given all units as a option its possible to choose yourself or other dangerous unit, and creating infinite loop

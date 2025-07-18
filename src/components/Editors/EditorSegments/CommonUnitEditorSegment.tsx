@@ -6,21 +6,18 @@ import CountInParent from "./CountInParent";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 
-interface CommonUnitEditorSegmentProps {
-  popNewParentForRoot: Function
-}
-
-export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonUnitEditorSegmentProps) {
-  const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
-  const selectedParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
-  const setSelectedId = useUnitInteractionStore((s) => s.setSelectedId)
-
+export default function CommonUnitEditorSegment() {
   // We are getting whole map since later we will need to get other unit in a conditional, and u can only use hooks at top
   const unitMap = useUnitStore((state) => state.unitMap);
   const updateUnit = useUnitStore(s => s.updateUnit)
   const unitPalet = usePaletStore((state) => state.unitPalet)
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
+  
+  const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
+  const selectedParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
+  const setSelectedId = useUnitInteractionStore((s) => s.setSelectedId)
+  const popNewRoot = useUnitInteractionStore(s => s.popNewRoot)
 
   const selected = unitMap[selectedId]
 
@@ -43,6 +40,10 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
     p = addChild(p, newId)
     updateUnit(selectedParentId, p);
     setSelectedId(newId)
+  }
+
+  function handleEchelonChange(newEchelonLevel: number) {
+    updateUnit(selectedId, {...selected, echelonLevel: newEchelonLevel})
   }
 
   const colorPicker = 
@@ -70,7 +71,7 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
 
   return (
     <><div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
-      <label className="flex flex-col gap-2 w-full ">
+      <label className="flex flex-row gap-2 w-full items-center">
         <span className="font-bold">Name:</span>
         <input
           id="NameInputId"
@@ -83,7 +84,7 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
 
       <div className="flex flex-row gap-2">
         {selectedParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
-        {selectedParentId === undefined ? <button className="btn-editor" onClick={() => popNewParentForRoot()}>New Root</button> : null}
+        {selectedParentId === undefined ? <button className="btn-editor" onClick={() => popNewRoot(unitMap, updateUnit)}>New Root</button> : null}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"
@@ -92,7 +93,7 @@ export default function CommonUnitEditorSegment({ popNewParentForRoot }: CommonU
       </div>
 
       <div className="flex flex-row gap-2">
-        {<EchelonEditor/>}
+        <EchelonEditor echelonLevel={selected.echelonLevel} onChange={handleEchelonChange}/>
         {selected.smartColor !== "inheret" ? colorPicker : null}
         {selected.smartColor === "inheret" ? uninheretColor : inheretColor}
       </div>

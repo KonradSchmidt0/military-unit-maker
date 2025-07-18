@@ -1,6 +1,7 @@
 import TreeNode from "./TreeNode";
 import { useUnitQuick } from "../hooks/useUnitStore";
 import { defaultUnitColor } from "../logic/logic";
+import { useGlobalStore } from "../hooks/useGlobalStore";
 
 interface TreeViewProps {
   unitId: string;
@@ -11,6 +12,7 @@ interface TreeViewProps {
 
 function TreeView({unitId, indent = 0, parentUnitId = undefined, calculatedParentColor = defaultUnitColor }: TreeViewProps) {
   const unit = useUnitQuick(unitId)
+  const echelonFoldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
 
   if (!unit)
     return <>Unit is not a unit! ({unitId} {unit})
@@ -21,7 +23,7 @@ function TreeView({unitId, indent = 0, parentUnitId = undefined, calculatedParen
   return (
     <div>
       <TreeNode unitId={unitId} indent={indent} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
-      {unit.type === "org" &&
+      {unit.type === "org" && echelonFoldingLevel < unit.echelonLevel &&
         Object.entries(unit.children).map(([ childId, count ], i) =>
           Array.from({ length: count }).map((_, j) => (
             <TreeView

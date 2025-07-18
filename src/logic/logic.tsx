@@ -1,4 +1,4 @@
-import { getUnitQuick, UnitMap } from "../hooks/useUnitStore";
+import { UnitMap } from "../hooks/useUnitStore";
 
 export const defaultUnitColor = "#6ad8e2"
 
@@ -28,8 +28,8 @@ export interface OrgUnit {
 export type Unit = RawUnit | OrgUnit;
 
 
-export function getEquipmentTable(unitId: string): EquipmentTable {
-  const unit = getUnitQuick(unitId)
+export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTable {
+  const unit = unitMap[unitId]
 
   if (!unit) {
     throw Error(`No unit with ID = ${unitId}`)
@@ -41,7 +41,7 @@ export function getEquipmentTable(unitId: string): EquipmentTable {
     const combined: EquipmentTable = {};
 
     for (const [childId, count] of Object.entries(unit.children)) {
-      const childEq = getEquipmentTable(childId);
+      const childEq = getEquipmentTable(childId, unitMap);
 
       for (const [type, qty] of Object.entries(childEq)) {
         combined[type] = (combined[type] || 0) + qty * count;
@@ -126,7 +126,8 @@ export function createNewOrgUnit(name = "New Org Unit", layers: string[] = [], e
 }
 
 // CALLER RESPONSIBILITIES:
-// Update the app storage, update the parent unit in this storage (I know, messy, ill fix it later)
+// Update the app storage, update the parent unit in this storage (I know its a bit messy, but not sure is there a better way
+// Teoretically you can pass in update function, but not sure how i feel about it)
 export function addNewChildUnit(
   parent: OrgUnit,
   unitMap: UnitMap,
@@ -160,7 +161,6 @@ export function addNewChildUnit(
   };
 }
 
-// Known bug: Selecting root unit doesn't return 1
 export function HowManyOfThisTypeInParent(
   parentId: string,
   searchedId: string,
@@ -202,10 +202,6 @@ export function removeEquipmentTypeRecursively(
 
   for (const [childId, count] of Object.entries(unit.children)) {
     const childUnit = unitMap[childId];
-    if (!childUnit) {
-      newChildren[childId] = count; // Keep as is
-      continue;
-    }
 
     const updatedChild = removeEquipmentTypeRecursively(
       childUnit,
