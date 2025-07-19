@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { usePaletStore } from "../../hooks/usePaletStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import TreeNode from "../TreeNode";
 import { Unit } from "../../logic/logic";
 
 export default function PalletEditorSegment() {
-  const rootUnitId = useUnitInteractionStore((s) => s.rootId)
+  const rootUnitId = useUnitStore((s) => s.rootId)
   
   const [showHidden, setShowHidden] = useState<boolean>(false);
 
@@ -33,11 +32,7 @@ export default function PalletEditorSegment() {
 
   const displayedList = showHidden
     ? Object.entries(unitMap) // show everything when "showHidden" is true
-    : unitPalet.map((id) => [id, unitMap[id]]) as [string, Unit][]; // else show only units in palet
-
-  const displayedUnits = displayedList.sort(([, unitA], [, unitB]) =>
-    unitA.name.localeCompare(unitB.name)
-  );
+    : unitPalet.map((id) => [id, unitMap[id]]) as [string, Unit | undefined][]; // else show only units in palet
     
 
   const addToPalletButton = (unitId: string, inPalet: boolean) => 
@@ -60,8 +55,8 @@ export default function PalletEditorSegment() {
       </div>
 
       <div className="editor-segment">
-        {displayedUnits.length === 0 && <div className="text-primary/50">No units to display</div>}
-        {displayedUnits.map(([unitId, unit]) => {
+        {displayedList.length === 0 && <div className="text-primary/50">No units to display</div>}
+        {displayedList.map(([unitId, unit]) => {
           const inPalet = isInPalet(unitId);
           return (
             <div key={unitId} className="editor-segment-row">

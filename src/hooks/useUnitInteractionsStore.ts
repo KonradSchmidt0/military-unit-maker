@@ -1,19 +1,16 @@
 import { create } from 'zustand';
-import { UnitMap } from './useUnitStore';
-import { ChildrenList, OrgUnit } from '../logic/logic';
 
-interface UnitInteractionStore {
-  hoveredId: string | undefined;
-  setHoveredId: (newHoveredId: string | undefined) => void;
+export interface SelectUnitBundle {
   selectedId: string | undefined;
   setSelectedId: (newSelectedId: string | undefined) => void;
   selected_parentId: string | undefined;
   setSelected_parentId: (newSelected_parentId: string | undefined) => void;
-  resetSelected: () => void;
+}
 
-  rootId: string;
-  setRootId: (newRootId: string) => void;
-  popNewRoot: (unitMap: UnitMap, updateMap: Function, setNewRootAsParent?: boolean) => void;
+type UnitInteractionStore = SelectUnitBundle & {
+  hoveredId: string | undefined;
+  setHoveredId: (newHoveredId: string | undefined) => void;
+  resetSelected: () => void;
 }
 
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
@@ -27,28 +24,8 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   setSelected_parentId: (newSelected_parentId) => set({ selected_parentId: newSelected_parentId }),
 
   resetSelected: () => set({ selectedId: undefined, selected_parentId: undefined }),
-
-  rootId: "",
-  setRootId: (newRootId) => set({ rootId: newRootId }),
-
-  popNewRoot: (map, update, setNewRootAsParent) => {
-    const oldRootId = get().rootId
-    const oldRoot = map[oldRootId]
-    const newRootId = crypto.randomUUID()
-    // No idea why, but when i do it as children: {rootUnitId : 1} it reads rootUnitId as a string of value "rootUnitId"
-    let c: ChildrenList = { }; c[oldRootId] = 1;
-    const newRoot: OrgUnit = { 
-      ...oldRoot,
-      type: "org", name: "New Root Unit", echelonLevel: oldRoot.echelonLevel + 1,
-      children: c
-    }
-    
-    if (!setNewRootAsParent)
-      get().setSelectedId(newRootId)
-    else
-      get().setSelected_parentId(newRootId)
-    update(newRootId, newRoot)
-    get().setRootId(newRootId)
-
-  }
 }));
+
+export const useSelectUnitBundle = () => {
+  return useUnitInteractionStore(s => s);
+}

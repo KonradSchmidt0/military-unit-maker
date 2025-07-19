@@ -13,7 +13,7 @@ interface EchelonStore {
 const defaultSymbols: EchelonSymbolMap = {
   0: "ø",            
   1: "o",            // Squad
-  2: "oo",           // 
+  2: "oo",           // Section
   3: "ooo",          // Platoon
   4: "I",            // Company
   5: "II",            // Battalion

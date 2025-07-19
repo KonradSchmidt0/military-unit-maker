@@ -10,7 +10,7 @@ export default function GlobalEditor() {
   const foldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
   const setFoldingLevel = useGlobalStore(s => s.setEchelonFoldingLevel)
 
-  const setRootUnitId = useUnitInteractionStore(s => s.setRootId)
+  const setRootUnitId = useUnitStore(s => s.setRootId)
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore(s => s.setSelected_parentId)
 

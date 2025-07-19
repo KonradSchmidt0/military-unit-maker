@@ -19,10 +19,11 @@ export default function CommonUnitEditorSegment() {
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
   
   const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
+  const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const selectedParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
-  const rootId = useUnitInteractionStore(s => s.rootId)
-  const setSelectedId = useUnitInteractionStore((s) => s.setSelectedId)
-  const popNewRoot = useUnitInteractionStore(s => s.popNewRoot)
+  const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
+  const rootId = useUnitStore(s => s.rootId)
+  const popNewRoot = useUnitStore(s => s.popNewRoot)
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
 
@@ -43,7 +44,7 @@ export default function CommonUnitEditorSegment() {
     addChild(selectedParentId, selectedId, -1)
     addChild(selectedParentId, newId, 1)
     if (!alt)
-      setSelectedId(newId)
+      setSelected(newId)
   }
 
   function handleEchelonChange(newEchelonLevel: number) {
@@ -88,7 +89,7 @@ export default function CommonUnitEditorSegment() {
 
       <div className="editor-segment-row">
         {selectedParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
-        {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(unitMap, updateUnit, !ctrl)}>New Root</button> : null}
+        {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(setSelected, setSelectedParent, !ctrl)}>New Root</button> : null}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"

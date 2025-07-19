@@ -7,7 +7,7 @@ import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
 export default function IndividualEditor() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId)
-  const rootUnitId = useUnitInteractionStore((s) => s.rootId)
+  const rootUnitId = useUnitStore(s => s.rootId)
 
   const selectedUnit = useUnitQuick(selectedUnitId ? selectedUnitId : "") as Unit;
   const unitMap = useUnitStore((state) => state.unitMap)

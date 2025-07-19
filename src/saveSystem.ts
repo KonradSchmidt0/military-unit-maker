@@ -1,5 +1,4 @@
 import { usePaletStore } from "./hooks/usePaletStore";
-import { useUnitInteractionStore } from "./hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitStore } from "./hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
@@ -14,8 +13,8 @@ interface SaveFile {
 
 export function saveToFile() {
   const unitMap = useUnitStore.getState().unitMap;
+  const rootUnitId = useUnitStore.getState().rootId;
   const unitPalet = usePaletStore.getState().unitPalet;
-  const rootUnitId = useUnitInteractionStore.getState().rootId;
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -53,8 +52,9 @@ export function handleLoadFile(
       }
 
       // Potentially in the future: handle migrations based on version here
-      setUnitMap(json.unitMap)
       setUnitPalet(json.unitPalet)
+      // Bundle these two babies up so when ctrl z they are rolled back together, insted of sepparate
+      setUnitMap(json.unitMap)
       setRootId(json.rootUnitId)
     } catch (err) {
       alert("Failed to load file: " + (err as Error).message);

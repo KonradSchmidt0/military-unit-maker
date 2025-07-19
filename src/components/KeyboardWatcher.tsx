@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import { useShortcutStore } from "../hooks/shortcutStore";
-import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { SelectUnitBundle, useSelectUnitBundle, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 export function KeyboardWatcher() {
+  const selectBundle = useSelectUnitBundle()
+  const unitMap = useUnitStore(s => s.unitMap)
+
   // Kill me
   // React, so you have to render handlers, cant just call
-  return <>{HandleModifiers()}{HandleEscape()}</>; // It’s invisible, just for effect
+  return <>{HandleModifiers()}{HandleEscape()}{HandleCtrlZ(selectBundle, unitMap)}</>; // It’s invisible, just for effect
 }
 
 function HandleModifiers() {
@@ -61,5 +65,36 @@ function HandleEscape() {
   }, [resetAllSelected]);
 
   return null
+}
+
+function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isCtrl = e.ctrlKey || e.metaKey; // metaKey for Mac
+      const isShift = e.shiftKey;
+      const key = e.key.toLowerCase();
+  
+      const { undo, redo } = useUnitStore.temporal.getState();
+  
+      if (isCtrl && key === 'z') {
+        e.preventDefault();
+        isShift ? redo() : undo();
+      } else if (isCtrl && key === 'y') {
+        e.preventDefault();
+        redo();
+      } else {
+        return
+      }
+
+      if (!unitMap[selectBundle.selectedId ? selectBundle.selectedId : ""])
+        selectBundle.setSelectedId(undefined)
+      if (!unitMap[selectBundle.selected_parentId ? selectBundle.selected_parentId : ""])
+        selectBundle.setSelected_parentId(undefined)
+    };
+  
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [unitMap, selectBundle]);
+  
 }
 
