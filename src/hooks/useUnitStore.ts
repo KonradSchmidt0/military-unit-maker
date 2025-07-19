@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { createNewOrgUnit, createNewRawUnit, Unit } from '../logic/logic';
+import { createNewOrgUnit, createNewRawUnit, SmartColor, Unit } from '../logic/logic';
 import { addChild, removeChild } from '../logic/childManaging';
 
 export interface UnitMap {
@@ -70,7 +70,7 @@ export const useUnitStore = create<UnitStore>((set, get) => ({
   creatNewChild: (parentId, type) => {
     const parent = get().unitMap[parentId]
 
-    const childInput = {layers: parent.layers, echelonLevel: Math.max(0, parent.echelonLevel - 1), smartColor: "inheret"}
+    const childInput = {layers: parent.layers, echelonLevel: Math.max(0, parent.echelonLevel - 1), smartColor: "inheret" as SmartColor}
     const child = type === "org" ? createNewOrgUnit(childInput) : createNewRawUnit(childInput)
     const childId = crypto.randomUUID()
     get().updateUnit(childId, child)

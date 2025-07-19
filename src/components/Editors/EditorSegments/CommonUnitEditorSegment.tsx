@@ -51,17 +51,15 @@ export default function CommonUnitEditorSegment() {
   }
 
   const colorPicker = 
-    (<div>
-      <input
-        id="ColorPickerInputId"
-        type="color"
-        value={selected.smartColor}
-        onChange={(e) => {
-          updateUnit(selectedId, { ...selected, smartColor: e.target.value });
-        }}
-        className="h-full appearance-none border-0 outline-none cursor-pointer rounded"
-      />
-    </div>)
+    (<input
+      id="ColorPickerInputId"
+      type="color"
+      value={selected.smartColor}
+      onChange={(e) => {
+        updateUnit(selectedId, { ...selected, smartColor: e.target.value as `#${string}` });
+      }}
+      className="editor-element !p-0 !h-8"
+    />)
   const inheretColor = (
     <button className="btn-emoji" onClick={() => { updateUnit(selectedId, { ...selected, smartColor: "inheret"}) }}>Inheret ⬆️🖌️</button>
   )
@@ -76,19 +74,19 @@ export default function CommonUnitEditorSegment() {
   )
 
   return (
-    <><div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
-      <label className="flex flex-row gap-2 w-full items-center">
+    <><div className="editor-segment-flex">
+      <label className="editor-segment-row">
         <span className="font-bold">Name:</span>
         <input
           id="NameInputId"
           type="text"
           value={selected.name}
           onChange={handleNameChange}
-          className="p-1 border border-slate-300 bg-slate-800 text-white"
+          className="editor-element"
         />
       </label>
 
-      <div className="flex flex-row gap-2">
+      <div className="editor-segment-row">
         {selectedParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
         {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(unitMap, updateUnit, !ctrl)}>New Root</button> : null}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
@@ -98,13 +96,11 @@ export default function CommonUnitEditorSegment() {
         {selectedId ? <CountInParent/> : null}
       </div>
 
-      <div className="flex flex-row gap-2">
-        <EchelonEditor echelonLevel={selected.echelonLevel} onChange={handleEchelonChange}/>
+      <div className="editor-segment-row">
+        <EchelonEditor echelonLevel={selected.echelonLevel} onChange={handleEchelonChange} id="select-echelon-editor"/>
         {selected.smartColor !== "inheret" ? colorPicker : null}
         {selected.smartColor === "inheret" ? uninheretColor : inheretColor}
       </div>
     </div>
-    <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
-      <VisualLayeringEditor/>
-    </div></>
+    <VisualLayeringEditor/></>
 ) }

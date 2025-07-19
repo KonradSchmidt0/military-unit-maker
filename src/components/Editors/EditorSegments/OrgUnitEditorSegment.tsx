@@ -40,7 +40,7 @@ export default function OrgUnitEditorSegment() {
 
 
   const childrenHeader = (
-    <div className="flex justify-between gap-2">
+    <div className="editor-segment-row">
       <span className="text-lg font-bold">Children</span>
       <button onClick={() => {const c = addChild(selectedUnitId, "org"); if (ctrl) {setParent(selectedUnitId); setSelected(c); }}} className="btn-editor">
         + Org
@@ -51,71 +51,70 @@ export default function OrgUnitEditorSegment() {
     </div>
   )
   const childrenManager = Object.entries(unit.children).map(([childId, count], index) =>  {
-      /// Since the safe function retuns only the not used items, its necesary to add self to it, 
-      // or else it breaks UI and potentialy logic
-      const childUnit = unitMap[childId];
-      const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
-      return (
-        <div key={childId} className="flex flex-row items-center gap-2 mb-2">
-          {/* Dropdown to change the child.unitId */}
-          <select
-            className="border rounded px-2 py-1 bg-slate-800 text-white w-44"
-            value={childId}
-            id={childId}
-            onChange={(e) => {
-              let updatedChildren = unit.children;
-              const newId = e.target.value;
+    /// Since the safe function retuns only the not used items, its necesary to add self to it, 
+    // or else it breaks UI and potentialy logic
+    const childUnit = unitMap[childId];
+    const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
+    return (
+      <div key={childId} className="editor-segment-row">
+        {/* Dropdown to change the child.unitId */}
+        <select
+          className="editor-element !w-36"
+          value={childId}
+          id={childId}
+          onChange={(e) => {
+            let updatedChildren = unit.children;
+            const newId = e.target.value;
 
-              delete updatedChildren[childId]
-              updatedChildren[newId] = count
-              updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
-            }}
-          >
-            {Object.entries(safeUnitsPlusMyself).map(([id, u]) => (
-              <option key={id} value={id}>
-                {u.name}
-              </option>
-            ))}
-          </select>
+            delete updatedChildren[childId]
+            updatedChildren[newId] = count
+            updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
+          }}
+        >
+          {Object.entries(safeUnitsPlusMyself).map(([id, u]) => (
+            <option key={id} value={id}>
+              {u.name}
+            </option>
+          ))}
+        </select>
 
-          {/* Input to change count */}
-          <input
-            type="number"
-            className="w-12 px-2 py-1 rounded border bg-slate-800 text-white"
-            value={count}
-            onChange={(e) => {
-              const newCount = parseInt(e.target.value);
+        {/* Input to change count */}
+        <input
+          type="number"
+          className="editor-element !w-16"
+          value={count}
+          onChange={(e) => {
+            const newCount = parseInt(e.target.value);
 
-              if (newCount === 0) {
-                updateUnit(selectedUnitId,  removeAllOfAChild(unit, childId) )
-                return
-              }
+            if (newCount === 0) {
+              updateUnit(selectedUnitId,  removeAllOfAChild(unit, childId) )
+              return
+            }
 
-              let updatedChildren = unit.children
-              updatedChildren[childId] = newCount
-              updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
+            let updatedChildren = unit.children
+            updatedChildren[childId] = newCount
+            updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
 
-              if (ctrl) {
-                setParent(selectedUnitId)
-                setSelected(childId)
-              }
-            }}
-          />
+            if (ctrl) {
+              setParent(selectedUnitId)
+              setSelected(childId)
+            }
+          }}
+        />
 
-          {/* Button to remove this child entry */}
-          <button
-            className="btn-emoji !p-0"
-            onClick={() => {
-              const updated = removeAllOfAChild(unit, childId);
-              updateUnit(selectedUnitId, updated);
-            }}
-          >
-            ❌
-          </button>
-        </div>
-      );
-    }
-  );
+        {/* Button to remove this child entry */}
+        <button
+          className="btn-emoji !p-0"
+          onClick={() => {
+            const updated = removeAllOfAChild(unit, childId);
+            updateUnit(selectedUnitId, updated);
+          }}
+        >
+          ❌
+        </button>
+      </div> 
+    ); 
+  } );
 
   /// EQ list
   const eqList = 
@@ -131,7 +130,7 @@ export default function OrgUnitEditorSegment() {
     </>
   
   return (
-    <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
+    <div className="editor-segment-flex">
       {childrenHeader}
       {childrenManager}
       {eqList}

@@ -13,7 +13,11 @@ export const iconFiles = [
   "k-gun-alt.svg",
   "tank.svg",
   "art.svg",
-  "logi.svg"
+  "logi.svg",
+  "towed.svg",
+  "motorized.svg",
+  "wheeled-cc.svg",
+  "wheeled-rb.svg",
 ];
 
 export function VisualLayeringEditor() {
@@ -42,19 +46,19 @@ export function VisualLayeringEditor() {
   };
 
   return (
-    <div className="flex flex-col gap-2 items-center">
-      <div className="flex items-center gap-2">
-        <h2 className="font-bold mb-2">Visual Layers</h2>
-        <button onClick={() => addLayer()} className="btn-editor">+ Layer</button>
+    <div className="editor-segment-flex">
+      <div className="editor-segment-row">
+        <h2 className="font-bold">Visual Layers</h2>
+        <button onClick={() => addLayer()} className="btn-emoji !pr-2.5">➕Layer</button>
       </div>
       <div className="flex flex-col items-center gap-2 mb-2">
         {unit.layers.map((layerSrc, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <span className="text-sm w-12">Layer {index + 1}:</span>
+          <div key={index} className="editor-segment-row">
+            <span className="">Layer {index + 1}:</span>
             <select
               value={layerSrc.replace("/icons/", "")}
               onChange={(e) => updateLayer(index, e.target.value)}
-              className="border rounded px-2 py-1 bg-slate-800 text-white"
+              className="editor-element"
             >
               {iconFiles.map((filename) => (
                 <option key={filename} value={filename}>

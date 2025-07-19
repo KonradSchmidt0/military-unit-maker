@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .editor-element {
-  @apply inline-block w-auto;
   @apply py-1 px-3 border border-slate-300 bg-slate-800 text-white;
   @apply hover:rounded-md;
   @apply cursor-pointer transition-all duration-200 ease-in-out;
@@ -15,9 +14,21 @@
 }
 
 .btn-emoji {
-  @apply p-1 hover:bg-white/20 active:bg-white/30 transition-colors duration-200 ease-in-out
+  @apply p-1 hover:bg-white/20 active:bg-white/30 transition-all duration-200 ease-in-out rounded-sm hover:rounded-md
 }
 
 .editor-box {
   @apply border-slate-400 border-2 w-72;
+}
+
+.editor-segment {
+  @apply border-slate-400 border-b-2 border-dashed p-2 text-center items-center;
+}
+
+.editor-segment-flex {
+  @apply editor-segment flex flex-col gap-2;
+}
+
+.editor-segment-row {
+  @apply flex flex-row gap-2 items-center
 }

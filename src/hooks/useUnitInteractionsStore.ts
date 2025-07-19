@@ -37,7 +37,6 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
     const newRootId = crypto.randomUUID()
     // No idea why, but when i do it as children: {rootUnitId : 1} it reads rootUnitId as a string of value "rootUnitId"
     let c: ChildrenList = { }; c[oldRootId] = 1;
-
     const newRoot: OrgUnit = { 
       ...oldRoot,
       type: "org", name: "New Root Unit", echelonLevel: oldRoot.echelonLevel + 1,
@@ -50,7 +49,6 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
       get().setSelected_parentId(newRootId)
     update(newRootId, newRoot)
     get().setRootId(newRootId)
-
 
   }
 }));

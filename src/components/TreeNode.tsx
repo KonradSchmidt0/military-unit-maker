@@ -35,7 +35,7 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
   const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
   
-  const padding = `${indent * 1}rem`;
+  const padding = `${indent * 3}rem`;
 
   const color = unit.smartColor === "inheret" ? (calculatedParentColor ? calculatedParentColor : defaultUnitColor) : unit.smartColor
   

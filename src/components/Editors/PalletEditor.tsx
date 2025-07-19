@@ -49,22 +49,22 @@ export default function PalletEditorSegment() {
 
   return (
     <div className="!border-r-0 editor-box">
-      <div className="border-slate-400 border-b-2 border-dashed p-2 text-center font-bold">
+      <div className="editor-segment !font-bold">
         PALLET
         <button
           onClick={() => setShowHidden(!showHidden)}
-          className="btn-emoji !ml-2"
+          className="btn-emoji !ml-2 !py-0"
         >
           {showHidden ? "🪖💾" : "🪖🎨"}
         </button>
       </div>
 
-      <div className=" border-slate-400 border-b-2 border-dashed p-2">
+      <div className="editor-segment">
         {displayedUnits.length === 0 && <div className="text-primary/50">No units to display</div>}
         {displayedUnits.map(([unitId, unit]) => {
           const inPalet = isInPalet(unitId);
           return (
-            <div key={unitId} className="flex items-center gap-2">
+            <div key={unitId} className="editor-segment-row">
               {<TreeNode unitId={unitId} indent={0}/>}
               {addToPalletButton(unitId, inPalet)}
               {removeFromPalletButton(unitId, inPalet)}

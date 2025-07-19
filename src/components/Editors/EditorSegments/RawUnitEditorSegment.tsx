@@ -49,8 +49,8 @@ export default function RawUnitEditorSegment() {
   };
 
   return (
-    <div className="border-slate-400 border-b-2 border-dashed p-2 flex flex-col gap-2 items-center">
-      <div className="flex justify-between gap-2">
+    <div className="editor-segment-flex">
+      <div className="editor-segment-row">
         <span className="text-lg font-bold">Equipment</span>
         <button onClick={addEquipment} className="btn-editor">
           + Add
@@ -58,13 +58,13 @@ export default function RawUnitEditorSegment() {
       </div>
 
       {equipmentEntries.map(([type, value]) => (
-        <div key={type} className="flex items-center gap-2">
+        <div key={type} className="editor-segment-row">
           <span className="w-24">{type}</span>
           <input
             id={type}
             type="number"
             value={value}
-            className="w-20 bg-slate-800 text-white border p-1"
+            className="editor-element !w-24"
             onChange={(e) => updateEquipment(type, parseInt(e.target.value))}
           />
           <button onClick={() => deleteEquipment(type)} className="btn-emoji !p-0">

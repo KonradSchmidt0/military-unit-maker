@@ -37,7 +37,7 @@ export default function IndividualEditor() {
   
   return (
     <div className="!border-r-0 editor-box">
-      <div className="border-slate-400 border-b-2 border-dashed p-2 text-center font-bold">
+      <div className="editor-segment font-bold">
         INDIVIDUAL {currentlySelectedDisplay}
       </div>
       

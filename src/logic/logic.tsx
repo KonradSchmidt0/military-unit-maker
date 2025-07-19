@@ -5,11 +5,12 @@ export const defaultUnitColor = "#6ad8e2"
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
 export type ChildrenList = Record<string, number>
+export type SmartColor = "inheret" | `#${string}`;
 
 export interface RawUnit {
   type: "raw";
   name: string;
-  smartColor: "inheret" | string;
+  smartColor: SmartColor;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   equipment: EquipmentTable;
@@ -18,7 +19,7 @@ export interface RawUnit {
 export interface OrgUnit {
   type: "org";
   name: string;
-  smartColor: "inheret" | string;
+  smartColor: SmartColor;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   children: ChildrenList // First is UnitId, second is count of how many
@@ -62,7 +63,7 @@ export function createNewRawUnit({
   name?: string;
   layers?: string[];
   echelonLevel?: number;
-  smartColor?: string;
+  smartColor?: SmartColor;
   eq?: EquipmentTable;
 } = {}): RawUnit {
   return {
@@ -86,7 +87,7 @@ export function createNewOrgUnit({
   name?: string;
   layers?: string[];
   echelonLevel?: number;
-  smartColor?: string;
+  smartColor?: SmartColor;
   children?: ChildrenList;
 } = {}): OrgUnit {
   return {

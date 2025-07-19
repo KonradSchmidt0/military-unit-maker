@@ -27,7 +27,7 @@ export default function CountInParent() {
     <input
       id="count-in-parent"
       type="number"
-      className="w-12 px-2 py-1 rounded border bg-slate-800 text-white"
+      className="w-16 editor-element"
       value={selfCountInParent}
       onChange={e => {
         const newCount = parseInt(e.target.value);
