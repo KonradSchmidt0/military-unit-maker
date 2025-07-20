@@ -1,3 +1,4 @@
+import Color from "color";
 import { useShortcutStore } from "../hooks/shortcutStore";
 import { useEchelonStore } from "../hooks/useEchelonStore";
 import { usePaletStore } from "../hooks/usePaletStore";
@@ -35,6 +36,55 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
   const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
   const echelon = useEchelonStore().intToSymbol[unit.echelonLevel];
   
+  const handleClick = () => {
+    if (shift && ctrl) {
+      const dupId = duplicateUnit(unitId)
+
+      if (parentUnitId) {
+        addChild(parentUnitId, dupId, 1)
+        return
+      }
+
+      addToUnitPalet(dupId)
+      return
+    }
+
+    if (shift || ctrl) {
+      if (parentUnitId) {
+        addChild(parentUnitId, unitId, shift ? -1 : 1)
+        return
+      }
+
+      shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
+      return
+    }
+
+    setSelected(unitId);
+    setSelectedParent(parentUnitId);
+  }
+
+  const layer = (index: number, src: string, c: string) => { 
+    const hsv = Color(c).hsv()
+
+    //console.log(hsv.hue() + ` ` + hsv.saturationl() + ` ` + hsv.value())
+
+    const s = {
+      filter: `
+        hue-rotate(${hsv.hue()}deg)
+        saturate(${hsv.saturationl()}%)
+        brightness(${hsv.value()}%)
+      `
+    }
+
+    return <img
+      key={index}
+      src={src}
+      alt=""
+      className="absolute inset-0 w-full h-full"
+      style={s}
+    />
+  }
+ 
   const padding = `${indent * 3}rem`;
 
   const color = unit.smartColor === "inheret" ? (calculatedParentColor ? calculatedParentColor : defaultUnitColor) : unit.smartColor
@@ -43,58 +93,27 @@ function TreeNode({ unitId, indent, parentUnitId = undefined, calculatedParentCo
   const shadowOpacityHex = isHovered || isSelected ? "bb" : "00"
   const shadowColor = isSelected ? color : "#bbbbbb"
   const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${shadowColor}${shadowOpacityHex}`
-  
+ 
   return (
-    <div style={{marginLeft: padding}}  className="relative flex flex-col items-center">
+    <div style={{marginLeft: padding}}  className="relative flex flex-col items-center select-none">
       {/* Echelon symbol above the unit */}
       <div className=" text-primary text-xs">{echelon}</div>
 
       {/* Unit block */}
-      <div
-        style={{
-          backgroundColor: color,
-          boxShadow: boxShadow,
-        }}
-        onMouseEnter={() => onHover(unitId)}
-        onMouseLeave={() => onHover(undefined)}
-        onClick={() => {
-          if (shift && ctrl) {
-            const dupId = duplicateUnit(unitId)
-
-            if (parentUnitId) {
-              addChild(parentUnitId, dupId, 1)
-              return
-            }
-
-            addToUnitPalet(dupId)
-            return
-          }
-
-          if (shift || ctrl) {
-            if (parentUnitId) {
-              addChild(parentUnitId, unitId, shift ? -1 : 1)
-              return
-            }
-
-            const paletAction = () => shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
-            paletAction()
-            return
-          }
-
-          setSelected(unitId);
-          setSelectedParent(parentUnitId);
-        }}
-        className={`w-12 h-8 relative cursor-pointer border-2 border-black transition-shadow`}
-      >
-        {unit.layers.map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt=""
-            className="absolute top-0 left-0 w-full h-full object-fill"
-          />
-        ))}
+      <div className="">
+        <div
+          onMouseEnter={() => onHover(unitId)}
+          onMouseLeave={() => onHover(undefined)}
+          onClick={handleClick}
+          style={{ backgroundColor: color, boxShadow: boxShadow }}
+          className="relative w-14 aspect-[243/166] cursor-pointer transition-shadow"
+        >
+          {[...unit.layers, "/icons/b-frame.svg"].map((src, index) => (
+            layer(index, src, color)
+          ))}
+        </div>
       </div>
+
     </div>
   );
 }

@@ -1,13 +1,12 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { UnitMap, useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
+import { UnitMap, useUnitStore } from "../../../hooks/useUnitStore";
 import { removeAllOfAChild } from "../../../logic/childManaging";
 import { ChildrenList, getEquipmentTable, OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
 
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore(s => s.selectedId) as string
-  const unit = useUnitQuick(selectedUnitId) as OrgUnit
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
   const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
   // Used later
@@ -15,8 +14,12 @@ export default function OrgUnitEditorSegment() {
   const updateUnitMap = useUnitStore(s => s.setUnitMap)
   const updateUnit = useUnitStore(s => s.updateUnit)
   const addChild = useUnitStore(s => s.creatNewChild)
+  
+  const unit = unitMap[selectedUnitId] as OrgUnit
 
-  const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]
+  const addToPalet = usePaletStore(s => s.addUnitToPalet)
+
+  const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
   
   const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId, unitMap));
 
@@ -38,14 +41,24 @@ export default function OrgUnitEditorSegment() {
     });
   };
 
+  const handleAddingChild = (type: "org" | "raw") => {
+    const c = addChild(selectedUnitId, type); 
+    if (ctrl) { 
+      setParent(selectedUnitId); 
+      setSelected(c);
+    }
+    if (alt) {
+      addToPalet(c)
+    }
+  }
 
   const childrenHeader = (
     <div className="editor-segment-row">
       <span className="text-lg font-bold">Children</span>
-      <button onClick={() => {const c = addChild(selectedUnitId, "org"); if (ctrl) {setParent(selectedUnitId); setSelected(c); }}} className="btn-editor">
+      <button onClick={() => handleAddingChild("org")} className="btn-editor">
         + Org
       </button>
-      <button onClick={() => {const c = addChild(selectedUnitId, "raw"); if (ctrl) {setParent(selectedUnitId); setSelected(c); }}} className="btn-editor">
+      <button onClick={() => handleAddingChild("raw")} className="btn-editor">
         + Raw
       </button>
     </div>

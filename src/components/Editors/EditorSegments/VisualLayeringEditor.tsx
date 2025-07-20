@@ -4,20 +4,17 @@ import { Unit } from "../../../logic/logic";
 
 // WIP!!
 export const iconFiles = [
+  "b-art.svg",
+  "b-gun.svg",
+  "b-hq.svg",
+  "b-inf.svg",
+  "b-tank.svg",
+  "b-towed.svg",
+  "k-gun-alt.svg",
   "c-inf.png",
   "c-mg.svg",
   "c-tank.png",
-  "hq.svg",
-  "inf.svg",
-  "k-gun.svg",
-  "k-gun-alt.svg",
-  "tank.svg",
-  "art.svg",
-  "logi.svg",
-  "towed.svg",
-  "motorized.svg",
-  "wheeled-cc.svg",
-  "wheeled-rb.svg",
+  "x-bad-apple!.gif"
 ];
 
 export function VisualLayeringEditor() {
