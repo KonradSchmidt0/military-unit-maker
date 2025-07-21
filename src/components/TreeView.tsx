@@ -5,12 +5,12 @@ import { useGlobalStore } from "../hooks/useGlobalStore";
 
 interface TreeViewProps {
   unitId: string;
-  indent?: number;
   parentUnitId?: string;
-  calculatedParentColor?: string;
+  calculatedParentColor?: `#${string}`;
+  leftDisplayDepth: number;
 }
 
-function TreeView({unitId, indent = 0, parentUnitId = undefined, calculatedParentColor = defaultUnitColor }: TreeViewProps) {
+function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = defaultUnitColor, leftDisplayDepth }: TreeViewProps) {
   const unit = useUnitQuick(unitId)
   const echelonFoldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
 
@@ -20,21 +20,29 @@ function TreeView({unitId, indent = 0, parentUnitId = undefined, calculatedParen
 
   const myColor = unit.smartColor === "inheret" ? calculatedParentColor : unit.smartColor
 
+  const echelonDif = unit.echelonLevel - echelonFoldingLevel
+  const isFolded = leftDisplayDepth <= 0 || echelonDif <= 0
+  const willChildBeFolded = leftDisplayDepth === 1 || echelonDif === 1
+
   return (
-    <div>
-      <TreeNode unitId={unitId} indent={indent} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
-      {unit.type === "org" && echelonFoldingLevel < unit.echelonLevel &&
-        Object.entries(unit.children).map(([ childId, count ], i) =>
-          Array.from({ length: count }).map((_, j) => (
-            <TreeView
-              key={`${i}-${j}`}
-              unitId={childId}
-              indent={indent + 1}
-              parentUnitId={unitId}
-              calculatedParentColor={myColor}
-            />
-          ))
+    <div className="mx-3 my-3">
+      <TreeNode unitId={unitId} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
+
+      <div className={`flex ${willChildBeFolded ? "flex-col gap-0" : "flex-row gap-2"}`}>
+        {unit.type === "org" && !isFolded &&
+          Object.entries(unit.children).map(([ childId, count ], i) =>
+            Array.from({ length: count }).map((_, j) => (
+              <TreeView
+                key={`${i}-${j}`}
+                unitId={childId}
+                parentUnitId={unitId}
+                calculatedParentColor={myColor}
+                leftDisplayDepth={leftDisplayDepth - 1}
+              />
+            )
+          )
         )}
+      </div>
     </div>
   );
 }

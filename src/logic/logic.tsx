@@ -1,6 +1,6 @@
 import { UnitMap } from "../hooks/useUnitStore";
 
-export const defaultUnitColor = "#6ad8e2"
+export const defaultUnitColor: `#${string}` = "#6ad8e2"
 
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;

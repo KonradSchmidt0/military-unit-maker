@@ -9,6 +9,8 @@ import { EchelonEditor } from "./EditorSegments/EchelonEditor";
 export default function GlobalEditor() {
   const foldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
   const setFoldingLevel = useGlobalStore(s => s.setEchelonFoldingLevel)
+  const foldingDepth = useGlobalStore(s => s.foldingDepth)
+  const setFoldingDepth = useGlobalStore(s => s.setFoldingDepth)
 
   const setRootUnitId = useUnitStore(s => s.setRootId)
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
@@ -32,6 +34,7 @@ export default function GlobalEditor() {
         <div className="editor-segment-row">
           Folding Level:
           <EchelonEditor echelonLevel={foldingLevel} onChange={setFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"></EchelonEditor>
+          <input className="editor-element !w-16" type="number" value={foldingDepth} onChange={(e) => setFoldingDepth(parseInt(e.target.value))}/>
         </div>
         <div className="editor-segment-row">
           <button className="btn-emoji" onClick={() => saveToFile()}>Save ⬆️💾</button>

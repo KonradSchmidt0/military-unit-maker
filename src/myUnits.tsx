@@ -3,7 +3,7 @@ import { RawUnit, OrgUnit, defaultUnitColor } from "./logic/logic";
 
 const infVisual = ["/icons/b-inf.svg"]
 const mgVisual = ["/icons/b-inf.svg", "/icons/b-gun.svg"]
-const infHqVisual = ["/icons/b-inf.svg", "/icons/b-hq.svg"]
+const infHqVisual = ["/icons/b-inf.svg", "/icons/b-hq.png"]
 
 export const rifle_e: RawUnit = {
   type: "raw",

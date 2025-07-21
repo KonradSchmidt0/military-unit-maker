@@ -7,6 +7,8 @@ import { useShortcutStore } from './hooks/shortcutStore';
 import IndividualEditor from './components/Editors/IndividualEditor';
 import PalletEditor from './components/Editors/PalletEditor';
 import GlobalEditor from './components/Editors/GlobalEditor';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import { useGlobalStore } from './hooks/useGlobalStore';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -15,21 +17,23 @@ useUnitStore.temporal.getState().clear()
 
 function App() {
   const rootUnitId = useUnitStore(s => s.rootId)
+  const displayDepth = useGlobalStore(s => s.foldingDepth)
 
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex min-h-screen bg-bg text-primary ${disableSelection}`}>
+    <div className={`flex bg-bg text-primary ${disableSelection}`}>
       <KeyboardWatcher />
 
       {/* Left */}
-      <div className="flex gap-4 p-4">
-        <TreeView unitId={rootUnitId}/>
-        {/* <HoverInspector/> */}
-      </div>
+      <TransformWrapper minScale={0.1}>
+        <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
+          <TreeView unitId={rootUnitId} leftDisplayDepth={displayDepth}/>
+        </TransformComponent>
+      </TransformWrapper>
 
       {/* Right */}
-      <div className="flex ml-auto">
+      <div className="flex">
         <IndividualEditor/>
         <PalletEditor/>
         <GlobalEditor/>
