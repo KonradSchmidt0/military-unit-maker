@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/military-unit-maker/static/css/main.ae131d98.css",
-    "main.js": "/military-unit-maker/static/js/main.640549ca.js",
+    "main.js": "/military-unit-maker/static/js/main.b412ddc4.js",
     "index.html": "/military-unit-maker/index.html",
     "main.ae131d98.css.map": "/military-unit-maker/static/css/main.ae131d98.css.map",
-    "main.640549ca.js.map": "/military-unit-maker/static/js/main.640549ca.js.map"
+    "main.b412ddc4.js.map": "/military-unit-maker/static/js/main.b412ddc4.js.map"
   },
   "entrypoints": [
     "static/css/main.ae131d98.css",
-    "static/js/main.640549ca.js"
+    "static/js/main.b412ddc4.js"
   ]
 }
