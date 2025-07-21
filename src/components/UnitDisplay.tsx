@@ -20,7 +20,7 @@ export function UnitDisplay({ unitId, color, style }: UnitDisplayProps) {
   }
   
   return (
-    <div className="relative flex flex-col items-center select-none">
+    <div className="relative flex flex-col items-center select-none w-fit">
       {/* Echelon symbol above the unit */}
       <div className=" text-primary text-xs">{echelon}</div>
 
@@ -30,7 +30,7 @@ export function UnitDisplay({ unitId, color, style }: UnitDisplayProps) {
           style={style}
           className="relative w-14 aspect-[243/166] cursor-pointer transition-shadow"
         >
-          {[...unit.layers, "/icons/b-frame.svg"].map((src, index) => (
+          {[...unit.layers, `${process.env.PUBLIC_URL}/icons/b-frame.svg`].map((src, index) => (
             makeLayer(index, src, color as `#${string}`)
           ))}
         </div>

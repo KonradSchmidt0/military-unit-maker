@@ -68,10 +68,10 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
   const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${shadowColor}${shadowOpacityHex}`
  
   return (
-    <div 
-      onMouseEnter={() => onHover(unitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}
-    >
-      <UnitDisplay unitId={unitId} color={color} style={{ backgroundColor: color, boxShadow: boxShadow }}/>
+    <div className="flex justify-center">
+      <div onMouseEnter={() => onHover(unitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
+        <UnitDisplay unitId={unitId} color={color} style={{ backgroundColor: color, boxShadow: boxShadow }}/>
+      </div>
     </div>
   );
 }

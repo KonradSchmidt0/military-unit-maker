@@ -48,12 +48,12 @@ export function VisualLayeringEditor() {
 
   const updateLayer = (index: number, newFilename: string) => {
     const newLayers = [...unit.layers];
-    newLayers[index] = `/icons/${newFilename}`;
+    newLayers[index] = `${process.env.PUBLIC_URL}/icons/${newFilename}`;
     updateLayers(newLayers);
   };
 
   const addLayer = () => {
-    const newLayers = [...unit.layers, `/icons/${iconFiles[0]}`]; // Default to first icon
+    const newLayers = [...unit.layers, `${process.env.PUBLIC_URL}/icons/${iconFiles[0]}`]; // Default to first icon
     updateLayers(newLayers);
   };
 
@@ -73,7 +73,7 @@ export function VisualLayeringEditor() {
           <div key={index} className="editor-segment-row">
             <span className="">Layer {index + 1}:</span>
             <select
-              value={layerSrc.replace("/icons/", "")}
+              value={layerSrc.replace(`${process.env.PUBLIC_URL}/icons/`, "")}
               onChange={(e) => updateLayer(index, e.target.value)}
               className="editor-element"
             >

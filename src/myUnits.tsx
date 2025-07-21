@@ -1,9 +1,9 @@
 import { UnitMap } from "./hooks/useUnitStore";
 import { RawUnit, OrgUnit, defaultUnitColor } from "./logic/logic"; 
 
-const infVisual = ["/icons/b-inf.svg"]
-const mgVisual = ["/icons/b-inf.svg", "/icons/b-gun.svg"]
-const infHqVisual = ["/icons/b-inf.svg", "/icons/b-hq.png"]
+const infVisual = [`${process.env.PUBLIC_URL}/icons/b-inf.svg`]
+const mgVisual = [`${process.env.PUBLIC_URL}/icons/b-inf.svg`, `${process.env.PUBLIC_URL}/icons/b-gun.svg`]
+const infHqVisual = [`${process.env.PUBLIC_URL}/icons/b-inf.svg`, `${process.env.PUBLIC_URL}/icons/b-hq.svg`]
 
 export const rifle_e: RawUnit = {
   type: "raw",

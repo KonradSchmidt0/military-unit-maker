@@ -2,7 +2,7 @@ import { usePaletStore } from "./hooks/usePaletStore";
 import { UnitMap, useUnitStore } from "./hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-const SAVE_SYSTEM_VERSION = 2;
+const SAVE_SYSTEM_VERSION = 3;
 
 interface SaveFile {
   version: number;
@@ -51,10 +51,15 @@ export function handleLoadFile(
         return;
       }
 
+      let unitMap = {...json.unitMap}
+      if (json.version <= 2) {
+        unitMap = swapLayerSubstrings(unitMap, "/icons/", `${process.env.PUBLIC_URL}/icons/`)
+      }
+
       // Potentially in the future: handle migrations based on version here
       setUnitPalet(json.unitPalet)
       // Bundle these two babies up so when ctrl z they are rolled back together, insted of sepparate
-      setUnitMap(json.unitMap)
+      setUnitMap(unitMap)
       setRootId(json.rootUnitId)
     } catch (err) {
       alert("Failed to load file: " + (err as Error).message);
@@ -62,4 +67,20 @@ export function handleLoadFile(
   };
 
   reader.readAsText(file);
+}
+
+function swapLayerSubstrings(unitMap: UnitMap, a: string, b: string): UnitMap {
+  const updatedMap: UnitMap = {};
+
+  for (const [unitId, unit] of Object.entries(unitMap)) {
+    const newLayers = unit.layers.map(layer => layer.replaceAll(a, b));
+
+    // Copy the rest of the unit data and overwrite layers
+    updatedMap[unitId] = {
+      ...unit,
+      layers: newLayers,
+    };
+  }
+
+  return updatedMap;
 }
