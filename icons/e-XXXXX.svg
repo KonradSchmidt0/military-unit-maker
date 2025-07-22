@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg data-bbox="0 0.62 81 72.95" viewBox="0 0 81 73.57" xmlns="http://www.w3.org/2000/svg" data-type="ugc">
+    <g>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M19.05 14.52 7.93.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M7.93 14.52 19.05.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M32.6 14.52 21.48.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M21.48 14.52 32.6.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M46.11 14.52 34.99.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M34.99 14.52 46.11.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M59.49 14.52 48.37.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M48.37 14.52 59.49.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M73.07 14.52 61.95.62"/>
+        <path fill="#5baa5b" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M61.95 14.52 73.07.62"/>
+        <path d="M78 21.24v49.33H3V21.24h75m3-3H0v55.33h81V18.24Z"/>
+    </g>
+</svg>
