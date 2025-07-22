@@ -14,7 +14,7 @@ interface ChildRowProps {
 
 export function ChildRow(p: ChildRowProps) {
   return (
-    <div key={p.childId} className="editor-segment-row">
+    <div className="editor-segment-row">
       {p.upDownButton && <button className="btn-emoji !p-0" onClick={p.onUpPressed}>⬆️</button>}
       {p.upDownButton && <button className="btn-emoji !p-0" onClick={p.onDownPressed}>⬇️</button>}
       {/* Dropdown to change the child.unitId */}

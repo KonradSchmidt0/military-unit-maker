@@ -7,9 +7,10 @@ interface UnitDisplayProps {
   unitId: string;
   color: `#${string}`
   style?: {}
+  className?: string
 }
 
-export function UnitDisplay({ unitId, color, style }: UnitDisplayProps) {
+export function UnitDisplay({ unitId, color, style, className }: UnitDisplayProps) {
   const unit = useUnitQuick(unitId)
 
   const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
@@ -29,8 +30,8 @@ export function UnitDisplay({ unitId, color, style }: UnitDisplayProps) {
     <div className="relative">
       {/* Unit block */}
       <div
-        style={style}
-        className="relative w-14 aspect-[243/166] cursor-pointer transition-shadow"
+        style={{backgroundColor: color, ...style}}
+        className={"relative w-14 aspect-[243/166] cursor-pointer transition-shadow " + className}
       >
         {unit.layers.map((src, index) => (
           makeLayer(index, src, color as `#${string}`)

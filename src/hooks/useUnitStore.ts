@@ -10,8 +10,8 @@ export interface UnitMap {
 
 interface UnitStore {
   unitMap: UnitMap;
-  updateUnit: (id: string, newUnit: Unit) => void;
   setUnitMap: (map: UnitMap) => void;
+  updateUnit: (id: string, newUnit: Unit) => void;
   duplicateUnit: (id: string) => string;
   addOrSubtractChild: (parentId: string, childId: string, count: number) => void;
   creatNewChild: (parentId: string, type: "raw" | "org") => string;
@@ -20,6 +20,7 @@ interface UnitStore {
   changeChildId: (parentId: string, oldId: string, newId: string) => void;
   moveChildPos: (parentId: string, childId: string, destination: "top" | "bottom") => void,
   splitRawUnit: (parentId: string, childCount: number) => string,
+  addNewChild: (parentId: string, childId: string) => void
 
   rootId: string;
   setRootId: (newRootId: string) => void;
@@ -174,6 +175,13 @@ export const useUnitStore = create<UnitStore>()(
 
       // Return baby id
       return babyId
+    },
+
+
+    addNewChild: (parentId, childId) => {
+      const parent = get().unitMap[parentId] as OrgUnit
+      const newChildren = {...parent.children, [childId]: 1}
+      get().updateUnit(parentId, {...parent, children: newChildren});
     },
 
     

@@ -70,7 +70,7 @@ export default function CommonUnitEditorSegment() {
       className="editor-element !p-0 !h-8"
     />)
   const inheretColor = (
-    <button className="btn-emoji" onClick={() => { updateUnit(selectedId, { ...selected, smartColor: "inheret"}) }}>Inheret ⬆️🖌️</button>
+    <button className="btn-emoji" onClick={() => { updateUnit(selectedId, { ...selected, smartColor: "inheret"}) }}>⬆️🖌️</button>
   )
   const uninheretColor = (
     <button className="btn-emoji" onClick={() => { 
@@ -79,7 +79,7 @@ export default function CommonUnitEditorSegment() {
         : defaultUnitColor; 
       color = color === "inheret" ? defaultUnitColor : color
       updateUnit(selectedId, { ...selected, smartColor: color}) }
-      }>Uninheret ❌🖌️</button>
+      }>🦋🖌️</button>
   )
 
   return (

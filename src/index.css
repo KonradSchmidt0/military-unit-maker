@@ -29,6 +29,19 @@
   @apply editor-segment flex flex-col gap-2;
 }
 
+.editor-segment-header {
+  @apply editor-segment flex flex-row items-center justify-between font-bold relative;
+}
+
 .editor-segment-row {
   @apply flex flex-row gap-2 items-center
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b66 #00000000;  /* thumb color and track color */
+}
+
+a {
+  @apply text-blue-400 underline hover:text-blue-600 transition-colors
 }

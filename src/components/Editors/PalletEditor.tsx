@@ -3,18 +3,22 @@ import { usePaletStore } from "../../hooks/usePaletStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import TreeNode from "../TreeNode";
 import { Unit } from "../../logic/logic";
+import { useGlobalStore } from "../../hooks/useGlobalStore";
 
 export default function PalletEditorSegment() {
   const rootUnitId = useUnitStore((s) => s.rootId)
   
   const [showHidden, setShowHidden] = useState<boolean>(false);
 
-  const unitPalet = usePaletStore((state) => state.unitPalet);
   const unitMap = useUnitStore((state) => state.unitMap);
   const setUnitMap = useUnitStore((state) => state.setUnitMap);
-
+  
+  const unitPalet = usePaletStore((state) => state.unitPalet);
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
+
+  const setPalletMini = useGlobalStore(s => s.setIsPalletMini)
+
   const handleRemovingFromMemory = (unitId: string) => {
     if (rootUnitId === unitId) { window.alert("Can't delete root unit"); return; }
     if (!window.confirm(`Are you sure you want to remove ${unitMap[unitId].name} from memory? It can't be undone`)) { return; }
@@ -44,14 +48,17 @@ export default function PalletEditorSegment() {
 
   return (
     <div className="!border-r-0 editor-box">
-      <div className="editor-segment !font-bold">
-        PALLET
-        <button
-          onClick={() => setShowHidden(!showHidden)}
-          className="btn-emoji !ml-2 !py-0"
-        >
-          {showHidden ? "🪖💾" : "🪖🎨"}
-        </button>
+      <div className="editor-segment-header">
+        <div className="absolute left-1/2 -translate-x-1/2">
+          PALLET
+          <button
+            onClick={() => setShowHidden(!showHidden)}
+            className="btn-emoji !ml-2 !py-0"
+          >
+            {showHidden ? "🪖💾" : "🪖🎨"}
+          </button>
+        </div>
+        <button className="btn-emoji !p-0 ml-auto" onClick={() => setPalletMini(true)}>❌</button>
       </div>
 
       <div className="editor-segment flex flex-col gap-4 mt-2.5">

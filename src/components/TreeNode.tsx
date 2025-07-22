@@ -70,7 +70,7 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
   return (
     <div className="flex justify-center">
       <div onMouseEnter={() => onHover(unitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
-        <UnitDisplay unitId={unitId} color={color} style={{ backgroundColor: color, boxShadow: boxShadow }}/>
+        <UnitDisplay unitId={unitId} color={color} style={{ boxShadow: boxShadow }}/>
       </div>
     </div>
   );

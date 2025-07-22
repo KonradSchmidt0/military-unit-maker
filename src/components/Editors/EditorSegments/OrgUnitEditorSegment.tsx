@@ -13,11 +13,12 @@ export default function OrgUnitEditorSegment() {
   // Used later
   const unitMap = useUnitStore(s => s.unitMap)
   const updateUnitMap = useUnitStore(s => s.setUnitMap)
-  const addChild = useUnitStore(s => s.creatNewChild)
+  const createChild = useUnitStore(s => s.creatNewChild)
   const setChildCount = useUnitStore(s => s.changeChildCount)
   const setChildId = useUnitStore(s => s.changeChildId)
   const removeChildFully = useUnitStore(s => s.removeChildType)
   const moveChild = useUnitStore(s => s.moveChildPos)
+  const addChild = useUnitStore(s => s.addNewChild)
   
   const unit = unitMap[selectedUnitId] as OrgUnit
 
@@ -45,8 +46,15 @@ export default function OrgUnitEditorSegment() {
     });
   };
 
-  const handleAddingChild = (type: "org" | "raw") => {
-    const c = addChild(selectedUnitId, type); 
+  const handleAddingChild = (type: "org" | "raw" | "existing") => {
+    let c;
+    if (type === "existing") {
+      console.log(Object.entries(safeChildrenOptions))
+      c = Object.entries(safeChildrenOptions)[0][0]
+      addChild(selectedUnitId, c)
+    } else {
+      c = createChild(selectedUnitId, type); 
+    }
     if (ctrl) { 
       setParent(selectedUnitId); 
       setSelected(c);
@@ -59,12 +67,17 @@ export default function OrgUnitEditorSegment() {
   const childrenHeader = (
     <div className="editor-segment-row">
       <span className="text-lg font-bold">Children</span>
-      <button onClick={() => handleAddingChild("org")} className="btn-editor">
-        + Org
+      <button onClick={() => handleAddingChild("org")} className="btn-emoji">
+        ➕Org
       </button>
-      <button onClick={() => handleAddingChild("raw")} className="btn-editor">
-        + Raw
+      <button onClick={() => handleAddingChild("raw")} className="btn-emoji">
+        ➕Raw
       </button>
+      {Object.entries(safeChildrenOptions).length > 0 ? 
+        <button onClick={() => handleAddingChild("existing")} className="btn-emoji">
+          ➕
+        </button> : null
+      }
     </div>
   )
   const childEdittingList = Object.entries(unit.children).map(([childId, count], index) =>  {
@@ -73,7 +86,7 @@ export default function OrgUnitEditorSegment() {
     const childUnit = unitMap[childId];
     const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
     return (
-      <ChildRow
+      <ChildRow key={childId + "childEdittingList"}
         childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
         onChildChange={(n) => setChildId(selectedUnitId, childId, n)}
         onCountChange={(n) => {

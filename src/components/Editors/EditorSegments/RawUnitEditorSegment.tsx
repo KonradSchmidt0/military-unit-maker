@@ -68,7 +68,7 @@ export default function RawUnitEditorSegment() {
       <div className="editor-segment-row">
         <span className="text-lg font-bold">Equipment</span>
         <button onClick={addEquipment} className="btn-editor">
-          + Add
+          ➕Add
         </button>
         <button onClick={handleSpliting} className="btn-emoji">
           ➗Split

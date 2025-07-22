@@ -13,6 +13,8 @@ export default function GlobalEditor() {
   const setFoldingDepth = useGlobalStore(s => s.setFoldingDepth)
   const displayParentBox = useGlobalStore(s => s.displayParentBox)
   const setDisplayParentBox = useGlobalStore(s => s.setDisplayParentBox)
+  const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
+  const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
 
   const setRootUnitId = useUnitStore(s => s.setRootId)
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
@@ -29,8 +31,11 @@ export default function GlobalEditor() {
 
   return (
     <div className="editor-box">
-      <div className="editor-segment !font-bold">
-        GLOBAL SETTINGS
+      <div className="editor-segment-header">
+        <div className="w-56 absolute left-1/2 -translate-x-1/2">
+          GLOBAL SETTINGS ⚙️
+        </div>
+        <button className="btn-emoji !p-0 ml-auto" onClick={() => setGlobalMini(true)}>❌</button>
       </div>
 
       <div className="editor-segment-flex">
@@ -55,7 +60,15 @@ export default function GlobalEditor() {
           {!displayParentBox ? <button className="btn-emoji" onClick={() => setDisplayParentBox(true)}>➕🪟</button> : null}
           {displayParentBox ? <button className="btn-emoji" onClick={() => setDisplayParentBox(false)}>❌🪟</button> : null}
         </div>
+      </div>
 
+      <div className="editor-segment-flex">
+        <div className="editor-segment-row">
+          <button className="btn-emoji" onClick={() => setChangeLogMini(false)}>📣🛠️</button>
+          <a href="https://github.com/KonradSchmidt0/military-unit-maker" target="_blank">Project Github</a>
+        </div>
+        <div>Project by <a href="https://github.com/KonradSchmidt0" target="_blank">Konrad Schmidt</a></div>
+        <div>Most icons by one and only <a href="https://www.battleorder.org/" target="_blank">BattleOrder</a></div>
       </div>
     </div>
   )

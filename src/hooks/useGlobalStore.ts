@@ -7,6 +7,12 @@ interface GlobalStore {
   setFoldingDepth: (n: number) => void;
   displayParentBox: boolean;
   setDisplayParentBox: (b: boolean) => void;
+  isGlobalMini: boolean;
+  setIsGlobalMini: (b: boolean) => void;
+  isPalletMini: boolean;
+  setIsPalletMini: (b: boolean) => void;
+  isChangeLogMini: boolean;
+  setIsChangeLogMini: (b: boolean) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>((set) => ({
@@ -16,4 +22,10 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   setFoldingDepth: (n) => set({foldingDepth: n}),
   displayParentBox: false,
   setDisplayParentBox: (b) => set({displayParentBox: b}),
+  isGlobalMini: true,
+  setIsGlobalMini: (b) => set({isGlobalMini: b}),
+  isPalletMini: true,
+  setIsPalletMini: (b) => set({isPalletMini: b}),
+  isChangeLogMini: true,
+  setIsChangeLogMini: (b) => set({isChangeLogMini: b}),
 }));

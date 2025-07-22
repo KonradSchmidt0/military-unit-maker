@@ -1,6 +1,7 @@
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
-import { Unit } from "../../../logic/logic";
+import { defaultUnitColor, Unit } from "../../../logic/logic";
+import { UnitDisplay } from "../../UnitDisplay";
 
 // WIP!!
 export const iconFiles = [
@@ -68,16 +69,23 @@ export function VisualLayeringEditor() {
     updateLayers(newLayers);
   };
 
-  return (
+  return (<>
+    <div className="editor-segment-flex !pt-7">
+      <UnitDisplay 
+        unitId={unitId} 
+        color={unit.smartColor === "inheret" ? defaultUnitColor : unit.smartColor}
+        className="!w-24"
+      />
+    </div>
     <div className="editor-segment-flex">
       <div className="editor-segment-row">
         <h2 className="font-bold">Visual Layers</h2>
-        <button onClick={() => addLayer()} className="btn-emoji !pr-2.5">➕Layer</button>
+        <button onClick={() => addLayer()} className="btn-emoji !pr-2.5">➕🗃️</button>
       </div>
       <div className="flex flex-col items-center gap-2 mb-2">
         {unit.layers.map((layerSrc, index) => (
           <div key={index} className="editor-segment-row">
-            <span className="">Layer {index + 1}:</span>
+            <span className="">L{index + 1}:</span>
             <select
               value={layerSrc.replace(`${process.env.PUBLIC_URL}/icons/`, "")}
               onChange={(e) => updateLayer(index, e.target.value)}
@@ -94,6 +102,6 @@ export function VisualLayeringEditor() {
         ))}
       </div>
     </div>
-  );
+  </>);
 }
 
