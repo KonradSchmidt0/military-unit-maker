@@ -2,8 +2,9 @@ import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitStore } from "../../../hooks/useUnitStore";
-import { removeAllOfAChild } from "../../../logic/childManaging";
-import { ChildrenList, getEquipmentTable, OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
+import { getEquipmentTable, OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
+import { ChildRow } from "./ChildRow";
+import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
 
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore(s => s.selectedId) as string
@@ -12,14 +13,17 @@ export default function OrgUnitEditorSegment() {
   // Used later
   const unitMap = useUnitStore(s => s.unitMap)
   const updateUnitMap = useUnitStore(s => s.setUnitMap)
-  const updateUnit = useUnitStore(s => s.updateUnit)
   const addChild = useUnitStore(s => s.creatNewChild)
+  const setChildCount = useUnitStore(s => s.changeChildCount)
+  const setChildId = useUnitStore(s => s.changeChildId)
+  const removeChildFully = useUnitStore(s => s.removeChildType)
+  const moveChild = useUnitStore(s => s.moveChildPos)
   
   const unit = unitMap[selectedUnitId] as OrgUnit
 
   const addToPalet = usePaletStore(s => s.addUnitToPalet)
 
-  const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
+  const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld), useShortcutStore(s => s.isShiftHeld)]
   
   const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId, unitMap));
 
@@ -63,69 +67,27 @@ export default function OrgUnitEditorSegment() {
       </button>
     </div>
   )
-  const childrenManager = Object.entries(unit.children).map(([childId, count], index) =>  {
+  const childEdittingList = Object.entries(unit.children).map(([childId, count], index) =>  {
     /// Since the safe function retuns only the not used items, its necesary to add self to it, 
     // or else it breaks UI and potentialy logic
     const childUnit = unitMap[childId];
     const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
     return (
-      <div key={childId} className="editor-segment-row">
-        {/* Dropdown to change the child.unitId */}
-        <select
-          className="editor-element !w-36"
-          value={childId}
-          id={childId}
-          onChange={(e) => {
-            let updatedChildren = unit.children;
-            const newId = e.target.value;
-
-            delete updatedChildren[childId]
-            updatedChildren[newId] = count
-            updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
-          }}
-        >
-          {Object.entries(safeUnitsPlusMyself).map(([id, u]) => (
-            <option key={id} value={id}>
-              {u.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Input to change count */}
-        <input
-          type="number"
-          className="editor-element !w-16"
-          value={count}
-          onChange={(e) => {
-            const newCount = parseInt(e.target.value);
-
-            if (newCount === 0) {
-              updateUnit(selectedUnitId,  removeAllOfAChild(unit, childId) )
-              return
-            }
-
-            let updatedChildren = unit.children
-            updatedChildren[childId] = newCount
-            updateUnit(selectedUnitId, { ...unit, children: updatedChildren });
-
-            if (ctrl) {
-              setParent(selectedUnitId)
-              setSelected(childId)
-            }
-          }}
-        />
-
-        {/* Button to remove this child entry */}
-        <button
-          className="btn-emoji !p-0"
-          onClick={() => {
-            const updated = removeAllOfAChild(unit, childId);
-            updateUnit(selectedUnitId, updated);
-          }}
-        >
-          ❌
-        </button>
-      </div> 
+      <ChildRow
+        childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
+        onChildChange={(n) => setChildId(selectedUnitId, childId, n)}
+        onCountChange={(n) => {
+          setChildCount(selectedUnitId, childId, n)
+          if (ctrl) {
+            setParent(selectedUnitId)
+            setSelected(childId)
+          }
+        }}
+        onRemoveButtonPressed={() => removeChildFully(selectedUnitId, childId)}
+        upDownButton={true}
+        onUpPressed={() => moveChild(selectedUnitId, childId, "top")}
+        onDownPressed={() => moveChild(selectedUnitId, childId, "bottom")}
+      />
     ); 
   } );
 
@@ -145,37 +107,9 @@ export default function OrgUnitEditorSegment() {
   return (
     <div className="editor-segment-flex">
       {childrenHeader}
-      {childrenManager}
+      {childEdittingList}
       {eqList}
     </div>
   )
   
-}
-
-function getSafeChildOptions(
-  parentId: string,
-  unitMap: UnitMap,
-  palet: string[],
-  alreadyChosenChildren: ChildrenList
-): UnitMap {
-  const existingIds = new Set(Object.entries(alreadyChosenChildren).map((c) => c[0]));
-
-  function createsCycle(candidateId: string): boolean {
-    if (candidateId === parentId) return true;
-
-    const candidate = unitMap[candidateId];
-    if (!candidate || candidate.type !== "org") return false;
-
-    for (const [childId] of Object.entries(candidate.children)) {
-      if (createsCycle(childId)) return true;
-    }
-
-    return false;
-  }
-
-  return Object.fromEntries(
-    palet
-      .filter((id) => !existingIds.has(id) && !createsCycle(id))
-      .map((id) => [id, unitMap[id]])
-  );
 }

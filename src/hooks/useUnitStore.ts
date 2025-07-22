@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/logic';
-import { addChild, removeChild } from '../logic/childManaging';
+import { addChild, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
 import { temporal } from 'zundo'
 
 export interface UnitMap {
@@ -14,6 +14,10 @@ interface UnitStore {
   duplicateUnit: (id: string) => string;
   addOrSubtractChild: (parentId: string, childId: string, count: number) => void;
   creatNewChild: (parentId: string, type: "raw" | "org") => string;
+  removeChildType: (parentId: string, childId: string) => void;
+  changeChildCount: (parentId: string, childId: string, newCount: number) => void;
+  changeChildId: (parentId: string, oldId: string, newId: string) => void;
+  moveChildPos: (parentId: string, childId: string, destination: "top" | "bottom") => void,
 
   rootId: string;
   setRootId: (newRootId: string) => void;
@@ -82,6 +86,60 @@ export const useUnitStore = create<UnitStore>()(
       get().updateUnit(childId, child)
       get().addOrSubtractChild(parentId, childId, 1)
       return childId
+    },
+
+    removeChildType: (parentId, childId) => {
+      const unitMap = get().unitMap;
+      const parent = unitMap[parentId]
+      if (!parent) {
+        console.warn(`No unit of id = ${parentId} fount`); return;
+      }
+      if (parent.type === "raw") {
+        console.warn(`Cant add child to rawUnit ${parentId}`); return;
+      }
+      const parentUpdated = removeAllOfAChild(parent, childId)
+      get().updateUnit(parentId, parentUpdated)
+    },
+
+    changeChildCount: (parentId, childId, newCount) => {
+      const unitMap = get().unitMap;
+      const parent = unitMap[parentId]
+      if (!parent) {
+        console.warn(`No unit of id = ${parentId} found`); return;
+      }
+      if (parent.type === "raw") {
+        console.warn(`Cant add child to rawUnit ${parentId}`); return;
+      }
+      const parentUpdated = setChildCount(parent, childId, newCount)
+      get().updateUnit(parentId, parentUpdated)
+    },
+
+    changeChildId(parentId, oldId, newId) {
+      const unitMap = get().unitMap;
+      const parent = unitMap[parentId]
+      if (!parent) {
+        console.warn(`No unit of id = ${parentId} found`); return;
+      }
+      if (parent.type === "raw") {
+        console.warn(`Cant add child to rawUnit ${parentId}`); return;
+      }
+
+      const parentUpdated = setChildId(parent, oldId, newId)
+      get().updateUnit(parentId, parentUpdated)
+    },
+
+    moveChildPos: (parentId, childId, destination) => {
+      const unitMap = get().unitMap;
+      const parent = unitMap[parentId]
+      if (!parent) {
+        console.warn(`No unit of id = ${parentId} found`); return;
+      }
+      if (parent.type === "raw") {
+        console.warn(`Cant add child to rawUnit ${parentId}`); return;
+      }
+
+      const np = moveChild(parent, childId, destination)
+      get().updateUnit(parentId, np)
     },
     
     rootId: "",

@@ -18,7 +18,7 @@
 }
 
 .editor-box {
-  @apply border-slate-400 border-2 w-72;
+  @apply border-slate-400 border-2 w-72 max-h-screen overflow-y-auto;
 }
 
 .editor-segment {

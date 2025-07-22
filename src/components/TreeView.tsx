@@ -13,6 +13,7 @@ interface TreeViewProps {
 function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = defaultUnitColor, leftDisplayDepth }: TreeViewProps) {
   const unit = useUnitQuick(unitId)
   const echelonFoldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
+  const parentBoxSetting = useGlobalStore(s => s.displayParentBox)
 
   if (!unit)
     return <>Unit is not a unit! ({unitId} {unit})
@@ -23,9 +24,12 @@ function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = def
   const echelonDif = unit.echelonLevel - echelonFoldingLevel
   const isFolded = leftDisplayDepth <= 0 || echelonDif <= 0
   const willChildBeFolded = leftDisplayDepth === 1 || echelonDif === 1
+  
+  const displayParentBox = leftDisplayDepth >= 2 && unit.type === "org" && parentBoxSetting
+  const wrapperClass = (isFolded ? "my-3 " : "px-2 mx-1 py-1 my-2 ") + (displayParentBox ? "border-slate-400 border-2 border-dashed" : "")
 
   return (
-    <div className="mx-3 my-3">
+    <div className={wrapperClass}>
       <TreeNode unitId={unitId} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
 
       <div className={`flex ${willChildBeFolded ? "flex-col gap-0" : "flex-row gap-2"}`}>

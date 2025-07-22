@@ -2,8 +2,9 @@ import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { defaultUnitColor } from "../../../logic/logic";
-import CountInParent from "./CountInParent";
+import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
+import { defaultUnitColor, OrgUnit } from "../../../logic/logic";
+import { ChildRow } from "./ChildRow";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 
@@ -13,6 +14,10 @@ export default function CommonUnitEditorSegment() {
   const updateUnit = useUnitStore(s => s.updateUnit)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
+  const setChildCount = useUnitStore(s => s.changeChildCount)
+  const setChildId = useUnitStore(s => s.changeChildId)
+  const removeChildFully = useUnitStore(s => s.removeChildType)
+  const moveChild = useUnitStore(s => s.moveChildPos)
 
   const unitPalet = usePaletStore((state) => state.unitPalet)
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
@@ -20,14 +25,15 @@ export default function CommonUnitEditorSegment() {
   
   const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
-  const selectedParentId = useUnitInteractionStore((s) => s.selected_parentId) as string
-  const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
+  const parentId = useUnitInteractionStore((s) => s.selected_parentId)
+  const setParent = useUnitInteractionStore((s) => s.setSelected_parentId)
   const rootId = useUnitStore(s => s.rootId)
   const popNewRoot = useUnitStore(s => s.popNewRoot)
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
 
   const selected = unitMap[selectedId]
+  const parent = unitMap[parentId ? parentId : ""]
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateUnit(selectedId, {
@@ -37,12 +43,12 @@ export default function CommonUnitEditorSegment() {
   };
 
   function handleUnlinking(id: string) {
-    if (!selectedParentId)
+    if (!parentId)
       return
 
     const newId = duplicateUnit(id);
-    addChild(selectedParentId, selectedId, -1)
-    addChild(selectedParentId, newId, 1)
+    addChild(parentId, selectedId, -1)
+    addChild(parentId, newId, 1)
     if (!alt)
       setSelected(newId)
   }
@@ -50,6 +56,8 @@ export default function CommonUnitEditorSegment() {
   function handleEchelonChange(newEchelonLevel: number) {
     updateUnit(selectedId, {...selected, echelonLevel: newEchelonLevel})
   }
+
+  const selectParent = () => { setSelected(parentId); setParent(undefined) }
 
   const colorPicker = 
     (<input
@@ -66,8 +74,8 @@ export default function CommonUnitEditorSegment() {
   )
   const uninheretColor = (
     <button className="btn-emoji" onClick={() => { 
-      let color = selectedParentId 
-        ? unitMap[selectedParentId].smartColor 
+      let color = parentId 
+        ? unitMap[parentId].smartColor 
         : defaultUnitColor; 
       color = color === "inheret" ? defaultUnitColor : color
       updateUnit(selectedId, { ...selected, smartColor: color}) }
@@ -88,14 +96,32 @@ export default function CommonUnitEditorSegment() {
       </label>
 
       <div className="editor-segment-row">
-        {selectedParentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
-        {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(setSelected, setSelectedParent, !ctrl)}>New Root</button> : null}
+        {parentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
+        {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(setSelected, setParent, !ctrl)}>New Root</button> : null}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => addUnitToPalet(selectedId)}>➕🎨</button> : null}
-        {selectedId ? <CountInParent/> : null}
       </div>
+
+      {parentId && <ChildRow
+        childId={selectedId}
+        count={(parent as OrgUnit).children[selectedId]}
+        childrenChoices={{[selectedId]: selected, ...getSafeChildOptions(parentId, unitMap, unitPalet, (parent as OrgUnit).children)}}
+        onChildChange={(n) => {
+          setChildId(parentId, selectedId, n);
+          ctrl ? selectParent() : setSelected(n)
+        }}
+        onCountChange={(n) => { setChildCount(parentId, selectedId, n); if (ctrl) selectParent();}}
+        onRemoveButtonPressed={ () => {
+          removeChildFully(parentId, selectedId); 
+          ctrl ? selectParent() : (() => {setSelected(undefined); setParent(undefined);})()
+        } }
+        
+        upDownButton={true}
+        onUpPressed={() => {moveChild(parentId, selectedId, "top"); if (ctrl) selectParent();}}
+        onDownPressed={() => {moveChild(parentId, selectedId, "bottom"); if (ctrl) selectParent();}}
+      />}
 
       <div className="editor-segment-row">
         <EchelonEditor echelonLevel={selected.echelonLevel} onChange={handleEchelonChange} id="select-echelon-editor"/>
