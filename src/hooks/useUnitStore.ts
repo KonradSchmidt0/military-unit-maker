@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/logic';
 import { addChild, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
 import { temporal } from 'zundo'
+import { createRawUnitWithFractionOfEquipment } from '../logic/unitConversion';
 
 export interface UnitMap {
   [id: string]: Unit;
@@ -18,6 +19,7 @@ interface UnitStore {
   changeChildCount: (parentId: string, childId: string, newCount: number) => void;
   changeChildId: (parentId: string, oldId: string, newId: string) => void;
   moveChildPos: (parentId: string, childId: string, destination: "top" | "bottom") => void,
+  splitRawUnit: (parentId: string, childCount: number) => string,
 
   rootId: string;
   setRootId: (newRootId: string) => void;
@@ -141,6 +143,39 @@ export const useUnitStore = create<UnitStore>()(
       const np = moveChild(parent, childId, destination)
       get().updateUnit(parentId, np)
     },
+
+
+    splitRawUnit: (newMadeParentId, childCount) => {
+      const unitMap = get().unitMap;
+      const parent = unitMap[newMadeParentId]
+      if (!parent) {
+        console.warn(`No unit of id = ${newMadeParentId} found`); return "-1";
+      }
+      if (parent.type !== "raw") {
+        console.warn(`Cant split allready splited unit ${newMadeParentId}`); return "-1";
+      }
+
+      // Create new unit (the baby)
+      const eq = parent.equipment;
+      const baby = createRawUnitWithFractionOfEquipment(parent, eq, childCount);
+      const babyId = crypto.randomUUID()
+      get().updateUnit(babyId, baby)
+
+      // Swap parent
+      const updatedParent: OrgUnit = {
+        type: "org",
+        name: parent.name,
+        smartColor: parent.smartColor,
+        echelonLevel: parent.echelonLevel,
+        layers: [...parent.layers],
+        children: { [babyId]: childCount }
+      };
+      get().updateUnit(newMadeParentId, updatedParent);
+
+      // Return baby id
+      return babyId
+    },
+
     
     rootId: "",
     setRootId: (newRootId) => set({ rootId: newRootId }),

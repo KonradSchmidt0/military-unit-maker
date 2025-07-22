@@ -12,30 +12,33 @@ interface UnitDisplayProps {
 export function UnitDisplay({ unitId, color, style }: UnitDisplayProps) {
   const unit = useUnitQuick(unitId)
 
-  const echelon = useEchelonStore().intToSymbol[unit ? unit.echelonLevel : 0];
-
+  const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
+  
   if (!unit) {
     console.error(`No unit with id = ` + unitId)
     return <>{`No unit with id = ` + unitId}</>
   }
   
-  return (
-    <div className="relative flex flex-col items-center select-none w-fit">
-      {/* Echelon symbol above the unit */}
-      <div className=" text-primary text-xs">{echelon}</div>
+  const echelonLevel = unit.echelonLevel  
+  const echelonIcon = echelonIconEndings[echelonLevel]
+  const echelonElement = echelonIcon ? 
+    <img src={process.env.PUBLIC_URL + "/icons/" + echelonIcon} className="absolute bottom-0 invert"/> : 
+    null
 
+  return (
+    <div className="relative">
       {/* Unit block */}
-      <div className="">
-        <div
-          style={style}
-          className="relative w-14 aspect-[243/166] cursor-pointer transition-shadow"
-        >
-          {[...unit.layers, `${process.env.PUBLIC_URL}/icons/b-frame.svg`].map((src, index) => (
-            makeLayer(index, src, color as `#${string}`)
-          ))}
-        </div>
+      <div
+        style={style}
+        className="relative w-14 aspect-[243/166] cursor-pointer transition-shadow"
+      >
+        {unit.layers.map((src, index) => (
+          makeLayer(index, src, color as `#${string}`)
+        ))}
       </div>
 
+      {echelonElement}
+      <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0"/>
     </div>
   );
 }

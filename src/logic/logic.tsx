@@ -125,7 +125,7 @@ export function HowManyOfThisTypeInParent(
   return total;
 }
 
-
+// TODO: move to child managing
 export function removeEquipmentTypeRecursively(
   unit: Unit,
   equipmentTypeToRemove: EquipmentType,

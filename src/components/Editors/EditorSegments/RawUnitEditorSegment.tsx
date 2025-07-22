@@ -7,6 +7,7 @@ export default function RawUnitEditorSegment() {
 
   const unit = useUnitQuick(selectedUnitId) as RawUnit
   const updateUnit = useUnitStore((s) => s.updateUnit);
+  const splitUnit = useUnitStore(s => s.splitRawUnit)
 
   if (!unit || unit.type !== "raw") {
     throw Error(`Unit ID or type wrong ID = ${selectedUnitId}, type = ${unit?.type}`)
@@ -48,12 +49,29 @@ export default function RawUnitEditorSegment() {
     updateEquipment(newType, newValue);
   };
 
+  const handleSpliting = () => {
+    const p = "Split unit into how many children? (enter not a number to cancel) : "
+    const userInput = prompt(p)
+    if (!userInput)
+      return
+
+    const childCount = parseInt(userInput, 10)
+    if (isNaN(childCount)) {
+      return
+    }
+
+    splitUnit(selectedUnitId, childCount)
+  }
+
   return (
     <div className="editor-segment-flex">
       <div className="editor-segment-row">
         <span className="text-lg font-bold">Equipment</span>
         <button onClick={addEquipment} className="btn-editor">
           + Add
+        </button>
+        <button onClick={handleSpliting} className="btn-emoji">
+          ➗Split
         </button>
       </div>
 

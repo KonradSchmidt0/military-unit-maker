@@ -54,7 +54,7 @@ export default function PalletEditorSegment() {
         </button>
       </div>
 
-      <div className="editor-segment">
+      <div className="editor-segment flex flex-col gap-4 mt-2.5">
         {displayedList.length === 0 && <div className="text-primary/50">No units to display</div>}
         {displayedList.map(([unitId, unit]) => {
           const inPalet = isInPalet(unitId);
