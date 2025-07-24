@@ -86,10 +86,10 @@ function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap) {
         return
       }
 
-      if (!unitMap[selectBundle.selectedId ? selectBundle.selectedId : ""])
-        selectBundle.setSelectedId(undefined)
-      if (!unitMap[selectBundle.selected_parentId ? selectBundle.selected_parentId : ""])
-        selectBundle.setSelected_parentId(undefined)
+      if (!unitMap[selectBundle.selectedId ?? ""])
+        selectBundle.resetSelected()
+      else if (!unitMap[selectBundle.selected_parentId ?? ""])
+        selectBundle.setOnlySelectedId(selectBundle.selectedId as string)
     };
   
     window.addEventListener('keydown', handleKeyDown);

@@ -3,21 +3,18 @@ import { usePaletStore } from "../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../hooks/useUnitStore";
 import { defaultUnitColor, Unit } from "../logic/logic";
+import { GetRealColorRecusivelly, getUnitIdAtPath } from "../logic/unitPath";
 import { UnitDisplay } from "./UnitDisplay"
 
 interface TreeNodeProps {
-  unitId: string;
-  parentUnitId?: string;
-  // Problem: If our color is 'inheret' and parents color is 'inheret' we would need extra hard way to search up the chain
-  //   Also, node can appear without parent outside of a tree, or as a root. We have to handle those cases
-  // Solution: Parent tree view calculates actual color, and sends it lower 
-  calculatedParentColor?: `#${string}`; 
+  providedUnitId?: string;
+  myPath?: number[];
 }
 
-function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = undefined }: TreeNodeProps) {
+function TreeNode({ providedUnitId, myPath }: TreeNodeProps) {
   const onHover = useUnitInteractionStore((s) => s.setHoveredId)
-  const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
-  const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
+  const setOnlySelected = useUnitInteractionStore((s) => s.setOnlySelectedId)
+  const setSelectedPath = useUnitInteractionStore((s) => s.setSelectedPath)
   
   const [shift, ctrl] = [useShortcutStore((s) => s.isShiftHeld), useShortcutStore((s) => s.isCtrlHeld)]
   
@@ -27,18 +24,29 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
   const unitMap = useUnitStore(s => s.unitMap)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const actingRootId = useUnitStore(s => s.actingRootId)
+  const curRootId = useUnitStore(s => s.getCurrentRootId(trueRootId, actingRootId))
 
-  const unit = unitMap[unitId] as Unit
+  const isHovered = providedUnitId === useUnitInteractionStore(s => s.hoveredId)
+  const isUnitSelected = providedUnitId === useUnitInteractionStore((s) => s.selectedId)
+  const isNodeSelected = myPath === useUnitInteractionStore((s) => s.selectedPath)
 
-  const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
-  const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
+  if (!providedUnitId && !myPath) {
+    return <>No unitId AND no path!</>
+  }
+
+  const curUnitId = (myPath ? getUnitIdAtPath(curRootId, myPath, unitMap) : providedUnitId) as string
+  const unit = unitMap[curUnitId] as Unit
+  const acting_ParentId = (myPath ? getUnitIdAtPath(curRootId, myPath.slice(0, -1), unitMap) : undefined)
+
   
   const handleClick = () => {
     if (shift && ctrl) {
-      const dupId = duplicateUnit(unitId)
+      const dupId = duplicateUnit(curUnitId)
 
-      if (parentUnitId) {
-        addChild(parentUnitId, dupId, 1)
+      if (acting_ParentId) {
+        addChild(acting_ParentId, dupId, 1)
         return
       }
 
@@ -47,30 +55,32 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
     }
 
     if (shift || ctrl) {
-      if (parentUnitId) {
-        addChild(parentUnitId, unitId, shift ? -1 : 1)
+      if (acting_ParentId) {
+        addChild(acting_ParentId, curUnitId, shift ? -1 : 1)
         return
       }
 
-      shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
+      shift ? removeFromUnitPalet(curUnitId) : addToUnitPalet(curUnitId)
       return
     }
 
-    setSelected(unitId);
-    setSelectedParent(parentUnitId);
+    myPath ? setSelectedPath(myPath, curRootId, unitMap) : setOnlySelected(curUnitId);
   }
  
-  const color = unit.smartColor === "inheret" ? (calculatedParentColor ? calculatedParentColor : defaultUnitColor) : unit.smartColor
+  const color = myPath ? 
+    GetRealColorRecusivelly(curRootId, myPath, unitMap) 
+    : 
+    (unit.smartColor === "inheret" ? defaultUnitColor : unit.smartColor )
   
   const shadowSize = "3px"
-  const shadowOpacityHex = isHovered || isSelected ? "bb" : "00"
-  const shadowColor = isSelected ? color : "#bbbbbb"
+  const shadowOpacityHex = isHovered || isUnitSelected ? "bb" : "00"
+  const shadowColor = isUnitSelected ? color : "#bbbbbb"
   const boxShadow = `0 0 ${shadowSize} ${shadowSize} ${shadowColor}${shadowOpacityHex}`
  
   return (
     <div className="flex justify-center">
-      <div onMouseEnter={() => onHover(unitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
-        <UnitDisplay unitId={unitId} color={color} style={{ boxShadow: boxShadow }}/>
+      <div onMouseEnter={() => onHover(providedUnitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
+        <UnitDisplay unitId={curUnitId} color={color} style={{ boxShadow: boxShadow }}/>
       </div>
     </div>
   );

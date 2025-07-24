@@ -10,7 +10,7 @@ export default function CountInParent() {
 
   const selectedId = useUnitInteractionStore(s => s.selectedId)
   const parentId = useUnitInteractionStore(s => s.selected_parentId)
-  const setSelectedId = useUnitInteractionStore(s => s.setSelectedId)
+  const setSelectedId = useUnitInteractionStore(s => s.setOnlySelectedId)
   const setParentId = useUnitInteractionStore(s => s.setSelected_parentId)
 
   const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]

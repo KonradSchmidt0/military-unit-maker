@@ -39,7 +39,7 @@ function App() {
       {/* Left */}
       <TransformWrapper minScale={0.1}>
         <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
-          <TreeView unitId={rootUnitId} leftDisplayDepth={displayDepth}/>
+          <TreeView leftDisplayDepth={displayDepth}/>
         </TransformComponent>
       </TransformWrapper>
 

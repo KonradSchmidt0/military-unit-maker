@@ -24,7 +24,7 @@ export default function CommonUnitEditorSegment() {
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
   
   const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
-  const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
+  const setSelected = useUnitInteractionStore((s) => s.setOnlySelectedId)
   const parentId = useUnitInteractionStore((s) => s.selected_parentId)
   const setParent = useUnitInteractionStore((s) => s.setSelected_parentId)
   const {getCurrentRootId, trueRootId, actingRootId, setActingRootId, popNewTrueRoot} = useUnitStore(s => s)

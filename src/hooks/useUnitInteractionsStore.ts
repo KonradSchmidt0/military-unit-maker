@@ -1,16 +1,19 @@
 import { create } from 'zustand';
+import { UnitMap } from './useUnitStore';
+import { getUnitIdAtPath } from '../logic/unitPath';
 
 export interface SelectUnitBundle {
   selectedId: string | undefined;
-  setSelectedId: (newSelectedId: string | undefined) => void;
+  selectedPath: number[] | undefined;
   selected_parentId: string | undefined;
-  setSelected_parentId: (newSelected_parentId: string | undefined) => void;
+  setOnlySelectedId: (newId: string) => void;
+  setSelectedPath: (newPath: number[], currentRootId: string, unitMap: UnitMap) => void;
+  resetSelected: () => void;
 }
 
 type UnitInteractionStore = SelectUnitBundle & {
   hoveredId: string | undefined;
   setHoveredId: (newHoveredId: string | undefined) => void;
-  resetSelected: () => void;
 }
 
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
@@ -18,12 +21,16 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   setHoveredId: (newHoveredId) => set({ hoveredId: newHoveredId }),
 
   selectedId: undefined,
-  setSelectedId: (newSelectedId) => set({ selectedId: newSelectedId }),
-
+  selectedPath: undefined,
   selected_parentId: undefined,
-  setSelected_parentId: (newSelected_parentId) => set({ selected_parentId: newSelected_parentId }),
+  setOnlySelectedId: (newId) => set({ selectedId: newId, selectedPath: undefined, selected_parentId: undefined }),
+  setSelectedPath: (newPath, currentRootId, unitMap) => {
+    const id = getUnitIdAtPath(currentRootId, newPath, unitMap)
+    const parentId = newPath.length === 0 ? getUnitIdAtPath(currentRootId, newPath.slice(0, -1), unitMap) : undefined
+    set( { selectedId: id, selected_parentId: parentId, selectedPath: newPath } )
+  },
 
-  resetSelected: () => set({ selectedId: undefined, selected_parentId: undefined }),
+  resetSelected: () => set({ selectedId: undefined, selectedPath: undefined, selected_parentId: undefined }),
 }));
 
 export const useSelectUnitBundle = () => {

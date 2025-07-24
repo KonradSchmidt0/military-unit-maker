@@ -8,7 +8,7 @@ import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
 
 export default function OrgUnitEditorSegment() {
   const selectedUnitId = useUnitInteractionStore(s => s.selectedId) as string
-  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
+  const setSelected = useUnitInteractionStore(s => s.setOnlySelectedId)
   const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
   // Used later
   const unitMap = useUnitStore(s => s.unitMap)

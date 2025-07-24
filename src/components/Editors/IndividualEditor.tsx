@@ -7,8 +7,7 @@ import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
 export default function IndividualEditor() {
   const selectedUnitId = useUnitInteractionStore((s) => s.selectedId)
-  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
-  const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
+  const resetSelected = useUnitInteractionStore(s => s.resetSelected)
 
   const rootUnitId = useUnitStore(s => s.trueRootId)
 
@@ -45,7 +44,7 @@ export default function IndividualEditor() {
     <div className="!border-r-0 editor-box">
       <div className="editor-segment font-bold">
         INDIVIDUAL {currentlySelectedDisplay}
-        <button className="btn-emoji !p-0 !ml-2" onClick={() => {setSelected(undefined); setParent(undefined);}}>❌</button>
+        <button className="btn-emoji !p-0 !ml-2" onClick={() => {resetSelected();}}>❌</button>
       </div>
       
       {commonPart}
