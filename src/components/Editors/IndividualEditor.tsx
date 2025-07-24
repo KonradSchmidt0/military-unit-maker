@@ -10,7 +10,7 @@ export default function IndividualEditor() {
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
   const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
 
-  const rootUnitId = useUnitStore(s => s.rootId)
+  const rootUnitId = useUnitStore(s => s.trueRootId)
 
   const unitMap = useUnitStore((state) => state.unitMap)
 

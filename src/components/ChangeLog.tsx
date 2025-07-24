@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useGlobalStore } from '../hooks/useGlobalStore';
 
 export default function ChangelogOverlay() {
@@ -22,9 +21,9 @@ export default function ChangelogOverlay() {
         <div className="space-y-4 text-sm">
           <b className='text-base'>Editor Boxes minimizing (25 july 23)</b><br/>
            - Added Editor minimaiziziziataion<br/>
-           - Added changelog
-           - Abillity to add allready existing children from the pallet
-           - Added preview of current unit visual
+           - Added changelog<br/>
+           - Abillity to add allready existing children from the pallet<br/>
+           - Added preview of current unit visual<br/>
           <br/>
 
           <b className='text-base'>Echelon visualization reworked (25 july 22)</b><br/>

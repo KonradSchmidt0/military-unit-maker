@@ -27,8 +27,8 @@ export default function CommonUnitEditorSegment() {
   const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
   const parentId = useUnitInteractionStore((s) => s.selected_parentId)
   const setParent = useUnitInteractionStore((s) => s.setSelected_parentId)
-  const rootId = useUnitStore(s => s.rootId)
-  const popNewRoot = useUnitStore(s => s.popNewRoot)
+  const {getCurrentRootId, trueRootId, actingRootId, setActingRootId, popNewTrueRoot} = useUnitStore(s => s)
+  const curRootId = getCurrentRootId(trueRootId, actingRootId)
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
 
@@ -55,6 +55,13 @@ export default function CommonUnitEditorSegment() {
 
   function handleEchelonChange(newEchelonLevel: number) {
     updateUnit(selectedId, {...selected, echelonLevel: newEchelonLevel})
+  }
+
+  function handleSelectingUnselectingActingRoot(n: string | undefined) {
+    setActingRootId(n)
+    if (ctrl && !n) {
+      setSelected(trueRootId)
+    }
   }
 
   const selectParent = () => { setSelected(parentId); setParent(undefined) }
@@ -97,7 +104,12 @@ export default function CommonUnitEditorSegment() {
 
       <div className="editor-segment-row">
         {parentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
-        {rootId === selectedId ? <button className="btn-editor" onClick={() => popNewRoot(setSelected, setParent, !ctrl)}>New Root</button> : null}
+        {trueRootId === selectedId && 
+          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, setParent, !ctrl)}>⬆️➕🫚</button>}
+        {curRootId !== selectedId &&
+          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(selectedId)}>📌🫚</button>}
+        {curRootId === selectedId && trueRootId !== selectedId &&
+          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(undefined)}>🦒🫚</button>}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"

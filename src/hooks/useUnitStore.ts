@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/logic';
+import { ChildrenList, createNewOrgUnit, createNewRawUnit, getEquipmentTable, OrgUnit, SmartColor, Unit } from '../logic/logic';
 import { addChild, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
 import { temporal } from 'zundo'
 import { createRawUnitWithFractionOfEquipment } from '../logic/unitConversion';
@@ -20,11 +20,15 @@ interface UnitStore {
   changeChildId: (parentId: string, oldId: string, newId: string) => void;
   moveChildPos: (parentId: string, childId: string, destination: "top" | "bottom") => void,
   splitRawUnit: (parentId: string, childCount: number) => string,
-  addNewChild: (parentId: string, childId: string) => void
+  addNewChild: (parentId: string, childId: string) => void,
+  consolidateOrgUnit: (id: string) => void,
 
-  rootId: string;
-  setRootId: (newRootId: string) => void;
-  popNewRoot: (setSelected: Function, setParent: Function, setNewRootAsParent?: boolean) => void;
+  getCurrentRootId: (trueId: string, actingId: string | undefined) => string;
+  trueRootId: string;
+  setTrueRootId: (newRootId: string) => void;
+  actingRootId: string | undefined;
+  setActingRootId: (n: string | undefined) => void;
+  popNewTrueRoot: (setSelected: Function, setParent: Function, setNewRootAsParent?: boolean) => void;
 }
 
 
@@ -184,12 +188,29 @@ export const useUnitStore = create<UnitStore>()(
       get().updateUnit(parentId, {...parent, children: newChildren});
     },
 
-    
-    rootId: "",
-    setRootId: (newRootId) => set({ rootId: newRootId }),
+
+    consolidateOrgUnit: (id: string) => {
+      const um = get().unitMap
+      const unit = um[id] as OrgUnit
+      const eq = getEquipmentTable(id, um)
+      get().updateUnit(id, {...unit, type: "raw", equipment: eq})
+    },
+
+
+
+    trueRootId: "infatry_oo",
+    actingRootId: undefined,
   
-    popNewRoot: (setSelected, setParent, setNewRootAsParent) => {
-      const oldRootId = get().rootId
+    getCurrentRootId(trueId, actingId ) {
+      console.log("get => " + actingId + " - " + trueId)
+      return actingId ?? trueId;
+    },
+  
+    setTrueRootId: (n) => {set({ trueRootId: n }); console.log("set => " + n)},
+    setActingRootId: (n) => set({ actingRootId: n }),
+  
+    popNewTrueRoot: (setSelected, setParent, setNewRootAsParent) => {
+      const oldRootId = get().trueRootId
       const oldRoot = get().unitMap[oldRootId]
       const newRootId = crypto.randomUUID()
       // No idea why, but when i do it as children: {rootUnitId : 1} it reads rootUnitId as a string of value "rootUnitId"
@@ -204,8 +225,11 @@ export const useUnitStore = create<UnitStore>()(
         setSelected(newRootId)
       else
         setParent(newRootId)
+      
       get().updateUnit(newRootId, newRoot)
-      get().setRootId(newRootId)
+      get().setTrueRootId(newRootId)
+
+      console.log("pop => " + newRootId)
   
     },
   }))

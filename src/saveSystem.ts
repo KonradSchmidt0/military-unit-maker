@@ -13,7 +13,7 @@ interface SaveFile {
 
 export function saveToFile() {
   const unitMap = useUnitStore.getState().unitMap;
-  const rootUnitId = useUnitStore.getState().rootId;
+  const rootUnitId = useUnitStore.getState().trueRootId;
   const unitPalet = usePaletStore.getState().unitPalet;
 
   const saveData: SaveFile = {

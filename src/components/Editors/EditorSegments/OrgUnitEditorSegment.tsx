@@ -19,6 +19,7 @@ export default function OrgUnitEditorSegment() {
   const removeChildFully = useUnitStore(s => s.removeChildType)
   const moveChild = useUnitStore(s => s.moveChildPos)
   const addChild = useUnitStore(s => s.addNewChild)
+  const consolidateUnit = useUnitStore(s => s.consolidateOrgUnit)
   
   const unit = unitMap[selectedUnitId] as OrgUnit
 
@@ -64,7 +65,7 @@ export default function OrgUnitEditorSegment() {
     }
   }
 
-  const childrenHeader = (
+  const childrenHeader = (<>
     <div className="editor-segment-row">
       <span className="text-lg font-bold">Children</span>
       <button onClick={() => handleAddingChild("org")} className="btn-emoji">
@@ -79,7 +80,10 @@ export default function OrgUnitEditorSegment() {
         </button> : null
       }
     </div>
-  )
+    <div className="editor-segment-row">
+      <button onClick={() => consolidateUnit(selectedUnitId)} className="btn-emoji">🟰Consolidate</button>
+    </div>
+  </>)
   const childEdittingList = Object.entries(unit.children).map(([childId, count], index) =>  {
     /// Since the safe function retuns only the not used items, its necesary to add self to it, 
     // or else it breaks UI and potentialy logic

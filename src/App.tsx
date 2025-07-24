@@ -11,14 +11,16 @@ import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { useGlobalStore } from './hooks/useGlobalStore';
 import EditorBoxSwitch from './components/Editors/EditorBoxSwitch';
 import ChangelogOverlay from './components/ChangeLog';
+import ShortcutBox from './components/ShortcutBox';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
-useUnitStore.getState().setRootId("infatry_oo");
+useUnitStore.getState().setTrueRootId("infatry_oo");
 useUnitStore.temporal.getState().clear()
 
 function App() {
-  const rootUnitId = useUnitStore(s => s.rootId)
+  const { trueRootId, actingRootId } = useUnitStore(s => s)
+  const rootUnitId = useUnitStore(s => s.getCurrentRootId)(trueRootId, actingRootId)
 
   const displayDepth = useGlobalStore(s => s.foldingDepth)
   const isPalletMini = useGlobalStore(s => s.isPalletMini)
@@ -32,6 +34,7 @@ function App() {
     <div className={`flex bg-bg text-primary ${disableSelection}`}>
       <KeyboardWatcher />
       <ChangelogOverlay/>
+      <ShortcutBox/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

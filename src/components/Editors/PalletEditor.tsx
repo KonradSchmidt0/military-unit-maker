@@ -6,7 +6,7 @@ import { Unit } from "../../logic/logic";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
 
 export default function PalletEditorSegment() {
-  const rootUnitId = useUnitStore((s) => s.rootId)
+  const rootUnitId = useUnitStore((s) => s.trueRootId)
   
   const [showHidden, setShowHidden] = useState<boolean>(false);
 

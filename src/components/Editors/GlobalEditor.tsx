@@ -16,7 +16,7 @@ export default function GlobalEditor() {
   const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
   const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
 
-  const setRootUnitId = useUnitStore(s => s.setRootId)
+  const setRootUnitId = useUnitStore(s => s.setTrueRootId)
   const setSelected = useUnitInteractionStore(s => s.setSelectedId)
   const setSelectedParent = useUnitInteractionStore(s => s.setSelected_parentId)
 
@@ -64,7 +64,7 @@ export default function GlobalEditor() {
 
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
-          <button className="btn-emoji" onClick={() => setChangeLogMini(false)}>📣🛠️</button>
+          <button className="btn-emoji" onClick={() => setChangeLogMini(false)}>Changelog📣🛠️</button>
           <a href="https://github.com/KonradSchmidt0/military-unit-maker" target="_blank">Project Github</a>
         </div>
         <div>Project by <a href="https://github.com/KonradSchmidt0" target="_blank">Konrad Schmidt</a></div>
