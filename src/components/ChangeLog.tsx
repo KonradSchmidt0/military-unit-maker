@@ -19,6 +19,12 @@ export default function ChangelogOverlay() {
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
 
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Temporary Roots (25 july 24)</b><br/>
+           - Added ActingRoot (temporary, for when you want to focus only on smaller unit)<br/>
+           - Added shortcut highlight<br/>
+           - Added org unit consolidation<br/>
+          <br/>
+
           <b className='text-base'>Editor Boxes minimizing (25 july 23)</b><br/>
            - Added Editor minimaiziziziataion<br/>
            - Added changelog<br/>
