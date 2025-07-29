@@ -50,7 +50,6 @@ export default function OrgUnitEditorSegment() {
   const handleAddingChild = (type: "org" | "raw" | "existing") => {
     let c;
     if (type === "existing") {
-      console.log(Object.entries(safeChildrenOptions))
       c = Object.entries(safeChildrenOptions)[0][0]
       addChild(selectedUnitId, c)
     } else {

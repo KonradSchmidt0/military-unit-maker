@@ -202,11 +202,10 @@ export const useUnitStore = create<UnitStore>()(
     actingRootId: undefined,
   
     getCurrentRootId(trueId, actingId ) {
-      console.log("get => " + actingId + " - " + trueId)
       return actingId ?? trueId;
     },
   
-    setTrueRootId: (n) => {set({ trueRootId: n }); console.log("set => " + n)},
+    setTrueRootId: (n) => {set({ trueRootId: n });},
     setActingRootId: (n) => set({ actingRootId: n }),
   
     popNewTrueRoot: (setSelected, setParent, setNewRootAsParent) => {
@@ -228,8 +227,6 @@ export const useUnitStore = create<UnitStore>()(
       
       get().updateUnit(newRootId, newRoot)
       get().setTrueRootId(newRootId)
-
-      console.log("pop => " + newRootId)
   
     },
   }))

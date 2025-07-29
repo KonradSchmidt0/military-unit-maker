@@ -3,8 +3,9 @@ import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
-import { defaultUnitColor, OrgUnit } from "../../../logic/logic";
+import { OrgUnit } from "../../../logic/logic";
 import { ChildRow } from "./ChildRow";
+import { UnitColorOptions } from "./UnitColorOptions";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 
@@ -66,29 +67,6 @@ export default function CommonUnitEditorSegment() {
 
   const selectParent = () => { setSelected(parentId); setParent(undefined) }
 
-  const colorPicker = 
-    (<input
-      id="ColorPickerInputId"
-      type="color"
-      value={selected.smartColor}
-      onChange={(e) => {
-        updateUnit(selectedId, { ...selected, smartColor: e.target.value as `#${string}` });
-      }}
-      className="editor-element !p-0 !h-8"
-    />)
-  const inheretColor = (
-    <button className="btn-emoji" onClick={() => { updateUnit(selectedId, { ...selected, smartColor: "inheret"}) }}>⬆️🖌️</button>
-  )
-  const uninheretColor = (
-    <button className="btn-emoji" onClick={() => { 
-      let color = parentId 
-        ? unitMap[parentId].smartColor 
-        : defaultUnitColor; 
-      color = color === "inheret" ? defaultUnitColor : color
-      updateUnit(selectedId, { ...selected, smartColor: color}) }
-      }>🦋🖌️</button>
-  )
-
   return (
     <><div className="editor-segment-flex">
       <label className="editor-segment-row">
@@ -137,8 +115,7 @@ export default function CommonUnitEditorSegment() {
 
       <div className="editor-segment-row">
         <EchelonEditor echelonLevel={selected.echelonLevel} onChange={handleEchelonChange} id="select-echelon-editor"/>
-        {selected.smartColor !== "inheret" ? colorPicker : null}
-        {selected.smartColor === "inheret" ? uninheretColor : inheretColor}
+        <UnitColorOptions/>
       </div>
     </div>
     <VisualLayeringEditor/></>

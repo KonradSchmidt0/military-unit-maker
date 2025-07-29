@@ -7,7 +7,6 @@ export function KeyboardWatcher() {
   const selectBundle = useSelectUnitBundle()
   const unitMap = useUnitStore(s => s.unitMap)
 
-  // Kill me
   // React, so you have to render handlers, cant just call
   return <>{HandleModifiers()}{HandleEscape()}{HandleCtrlZ(selectBundle, unitMap)}</>; // It’s invisible, just for effect
 }

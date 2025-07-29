@@ -27,5 +27,5 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   isPalletMini: true,
   setIsPalletMini: (b) => set({isPalletMini: b}),
   isChangeLogMini: true,
-  setIsChangeLogMini: (b) => set({isChangeLogMini: b}),
+  setIsChangeLogMini: (b) => set({isChangeLogMini: b})
 }));

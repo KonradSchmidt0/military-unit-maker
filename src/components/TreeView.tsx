@@ -13,7 +13,7 @@ interface TreeViewProps {
 function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = defaultUnitColor, leftDisplayDepth }: TreeViewProps) {
   const unit = useUnitQuick(unitId)
   // const echelonFoldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
-  const parentBoxSetting = useGlobalStore(s => s.displayParentBox)
+  const parentBoxOn = useGlobalStore(s => s.displayParentBox)
 
   if (!unit)
     return <>Unit is not a unit! ({unitId} {unit})
@@ -27,8 +27,8 @@ function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = def
   const willChildBeFolded = (leftDisplayDepth === 1) && !isFolded
   
   // This definitlly needs a rework
-  const displayParentBox = leftDisplayDepth >= 2 && unit.type === "org" && parentBoxSetting
-  const wrapperClass = leftDisplayDepth + " border-2" + " " +
+  const displayParentBox = leftDisplayDepth >= 2 && unit.type === "org" && parentBoxOn
+  const wrapperClass = leftDisplayDepth.toString() + " border-2 " + " " +
   (willChildBeFolded ? "" : "") + " " + 
   (isFolded ? "" : "p-2 pt-6 my-2") + " " + 
   (displayParentBox ? "border-slate-400 border-dashed" : "border-transparent") //"border-red-500 border-2 border-dashed")
@@ -38,6 +38,7 @@ function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = def
       <TreeNode unitId={unitId} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
 
       <div className={`flex ${willChildBeFolded ? "flex-col gap-3.5 pt-8" : "flex-row gap-2"}`}>
+
         {unit.type === "org" && !isFolded &&
           Object.entries(unit.children).map(([ childId, count ], i) =>
             Array.from({ length: count }).map((_, j) => (
@@ -47,10 +48,11 @@ function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = def
                 parentUnitId={unitId}
                 calculatedParentColor={myColor}
                 leftDisplayDepth={leftDisplayDepth - 1}
-              /> : <TreeNode unitId={childId} parentUnitId={unitId} calculatedParentColor={myColor}/>
+              /> : null
             )
           )
         )}
+        
       </div>
     </div>
   );

@@ -6,18 +6,17 @@ import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
 export default function IndividualEditor() {
-  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId)
-  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
-  const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
+  const selectedId = useUnitInteractionStore((s) => s.selectedId)
+  const resetSelected = useUnitInteractionStore(s => s.resetSelected)
 
   const rootUnitId = useUnitStore(s => s.trueRootId)
 
   const unitMap = useUnitStore((state) => state.unitMap)
 
-  if (!selectedUnitId)
+  if (!selectedId)
     return null
 
-  const selectedUnit = unitMap[selectedUnitId]
+  const selectedUnit = unitMap[selectedId]
   if (!selectedUnit)
     return null
 
@@ -29,8 +28,8 @@ export default function IndividualEditor() {
   const orgUnitSegment = selectedUnit?.type === "org" ?
     <OrgUnitEditorSegment/> : null;
 
-  const currentlySelectedCount = rootUnitId !== selectedUnitId 
-    ? HowManyOfThisTypeInParent(rootUnitId, selectedUnitId, unitMap)
+  const currentlySelectedCount = rootUnitId !== selectedId 
+    ? HowManyOfThisTypeInParent(rootUnitId, selectedId, unitMap)
     : 1
   const currentlySelectedDisplay = ( <>
       (cur. selected:{" "}
@@ -42,16 +41,17 @@ export default function IndividualEditor() {
 
   
   return (
-    <div className="!border-r-0 editor-box">
+    <div className="editor-box">
       <div className="editor-segment font-bold">
         INDIVIDUAL {currentlySelectedDisplay}
-        <button className="btn-emoji !p-0 !ml-2" onClick={() => {setSelected(undefined); setParent(undefined);}}>❌</button>
+        <button className="btn-emoji !p-0 !ml-2" onClick={resetSelected}>❌</button>
       </div>
       
-      {commonPart}
-      {rawUnitPart}
-      {orgUnitSegment}
-
+      <div className="overflow-y-auto max-h-fit">
+        {commonPart}
+        {rawUnitPart}
+        {orgUnitSegment}
+      </div>
     </div>
   );
 }

@@ -1,53 +1,15 @@
+import { useIconsStore } from "../../../hooks/useIcons";
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor, Unit } from "../../../logic/logic";
 import { UnitDisplay } from "../../UnitDisplay";
 
-// WIP!!
-export const iconFiles = [
-  "b-aa.svg",
-  "b-art.svg",
-  "b-at.svg",
-  "b-engi.svg",
-  "b-hq.png",
-  "b-hq.svg",
-  "b-inf.svg",
-  "b-maintenance.svg",
-  "b-med.svg",
-  "b-rec.svg",
-  "b-rotary.svg",
-  "b-signal.svg",
-  "b-supply.svg",
-  "b-tank.svg",
-  "b-gun.svg",
-  "b-armored.svg",
-  "b-missile.svg",
-  "b-motorized.svg",
-  "b-unmanned.svg",
-  "b-wheeled-cc.svg",
-  "b-wheeled-rb.svg",
-  "b-towed.svg",
-  "b-towed-trck.svg",
-  "b-light.svg",
-  "b-heavy.svg",
-  "b-hq-I.svg",
-  "b-hq-II.svg",
-  "b-supports-I.svg",
-  "b-supports-II.svg",
-  "k-gun-alt.svg",
-  "c-inf.png",
-  "c-mg.svg",
-  "c-tank.png",
-  "x-bad-apple!.gif",
-  "x-test.svg",
-  "x-test.png",
-  "x-test-sqr.png",
-];
-
 export function VisualLayeringEditor() {
   const unitId = useUnitInteractionStore((s) => s.selectedId) as string;
   const unit = useUnitQuick(unitId) as Unit;
   const updateUnit = useUnitStore((s) => s.updateUnit);
+
+  const setDropdown_onChosen = useIconsStore(s => s.callDropDown)
 
   const updateLayers = (newLayers: string[]) => {
     updateUnit(unitId, { ...unit, layers: newLayers });
@@ -59,8 +21,8 @@ export function VisualLayeringEditor() {
     updateLayers(newLayers);
   };
 
-  const addLayer = () => {
-    const newLayers = [...unit.layers, `${process.env.PUBLIC_URL}/icons/${iconFiles[0]}`]; // Default to first icon
+  const addLayer = (newIconFile: string) => {
+    const newLayers = [...unit.layers, `${process.env.PUBLIC_URL}/icons/${newIconFile}`];
     updateLayers(newLayers);
   };
 
@@ -69,37 +31,38 @@ export function VisualLayeringEditor() {
     updateLayers(newLayers);
   };
 
+
+  const handleClickOnDisp = (e: any) => {
+    if (unit.layers.length === 0)
+      setDropdown_onChosen((n:string) => addLayer(n), {top: e.clientY + 10, left: e.clientX})
+    else  
+      setDropdown_onChosen((n:string) => updateLayer(0, n), {top: e.clientY + 10, left: e.clientX})
+  }
+
+
   return (<>
-    <div className="editor-segment-flex !pt-7">
-      <UnitDisplay 
-        unitId={unitId} 
-        color={unit.smartColor === "inheret" ? defaultUnitColor : unit.smartColor}
-        className="!w-24"
-      />
-    </div>
-    <div className="editor-segment-flex">
+    <div className="editor-segment-flex min-h-40">
       <div className="editor-segment-row">
         <h2 className="font-bold">Visual Layers</h2>
-        <button onClick={() => addLayer()} className="btn-emoji !pr-2.5">➕🗃️</button>
+        <button onClick={(e) => setDropdown_onChosen((n:string) => addLayer(n), {top: e.clientY + 10, left: e.clientX})} className="btn-emoji !pr-2.5">➕🗃️</button>
       </div>
-      <div className="flex flex-col items-center gap-2 mb-2">
-        {unit.layers.map((layerSrc, index) => (
-          <div key={index} className="editor-segment-row">
-            <span className="">L{index + 1}:</span>
-            <select
-              value={layerSrc.replace(`${process.env.PUBLIC_URL}/icons/`, "")}
-              onChange={(e) => updateLayer(index, e.target.value)}
-              className="editor-element"
-            >
-              {iconFiles.map((filename) => (
-                <option key={filename} value={filename}>
-                  {filename}
-                </option>
-              ))}
-            </select>
-            <button onClick={() => removeLayer(index)} className="btn-emoji !p-0">❌</button>
-          </div>
-        ))}
+      <div className="flex flex-row gap-2 mb-2 relative">
+        <UnitDisplay 
+          unitId={unitId} 
+          color={unit.smartColor === "inheret" ? defaultUnitColor : unit.smartColor}
+          className="!w-28 translate-y-4"
+          onClick={handleClickOnDisp}
+        />
+        <div className="flex flex-col items-center gap-2 mb-2 pt-4">
+          {unit.layers.map((layerSrc, index) => (
+            <div key={index} className="editor-segment-row">
+              <img src={layerSrc} className="editor-element !p-0 !bg-defaultUnitIcon w-14 aspect-[243/166]"
+                  onClick={(e) => setDropdown_onChosen((n: string) => updateLayer(index, n), {top: e.clientY + 10, left: e.clientX})}
+              ></img>
+              <button onClick={() => removeLayer(index)} className="btn-emoji !p-0">❌</button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </>);

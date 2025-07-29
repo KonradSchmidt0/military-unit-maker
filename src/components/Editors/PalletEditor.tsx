@@ -47,7 +47,7 @@ export default function PalletEditorSegment() {
     showHidden && (<button className="btn-emoji" onClick={() => handleRemovingFromMemory(unitId)}> ➡️🗑️ </button> )
 
   return (
-    <div className="!border-r-0 editor-box">
+    <div className="editor-box">
       <div className="editor-segment-header">
         <div className="absolute left-1/2 -translate-x-1/2">
           PALLET
@@ -61,19 +61,21 @@ export default function PalletEditorSegment() {
         <button className="btn-emoji !p-0 ml-auto" onClick={() => setPalletMini(true)}>❌</button>
       </div>
 
-      <div className="editor-segment flex flex-col gap-4 mt-2.5">
-        {displayedList.length === 0 && <div className="text-primary/50">No units to display</div>}
-        {displayedList.map(([unitId, unit]) => {
-          const inPalet = isInPalet(unitId);
-          return (
-            <div key={unitId} className="editor-segment-row">
-              {<TreeNode unitId={unitId}/>}
-              {addToPalletButton(unitId, inPalet)}
-              {removeFromPalletButton(unitId, inPalet)}
-              {buttonToRemoveUnitFromMemory(unitId)}
-            </div>
-          );
-        })}
+      <div className="overflow-auto">
+        <div className="editor-segment flex flex-col gap-4 mt-2.5">
+          {displayedList.length === 0 && <div className="text-primary/50">No units to display</div>}
+          {displayedList.map(([unitId, unit]) => {
+            const inPalet = isInPalet(unitId);
+            return (
+              <div key={unitId} className="editor-segment-row">
+                {<TreeNode unitId={unitId}/>}
+                {addToPalletButton(unitId, inPalet)}
+                {removeFromPalletButton(unitId, inPalet)}
+                {buttonToRemoveUnitFromMemory(unitId)}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -3,14 +3,9 @@
 @tailwind utilities;
 
 .editor-element {
-  @apply py-1 px-3 border border-slate-300 bg-slate-800 text-white;
+  @apply py-1 px-3 border border-slate-300 bg-bg_alt text-white;
   @apply hover:rounded-md;
   @apply cursor-pointer transition-all duration-200 ease-in-out;
-}
-
-.btn-editor {
-  @apply editor-element;
-  @apply active:bg-attention active:text-slate-900 active:border-slate-900 active:rounded-md;
 }
 
 .btn-emoji {
@@ -18,7 +13,7 @@
 }
 
 .editor-box {
-  @apply border-slate-400 border-2 w-72 max-h-screen overflow-y-auto;
+  @apply border-slate-400 border-2 w-72 max-h-screen border-r-0 flex flex-col;
 }
 
 .editor-segment {
@@ -35,6 +30,10 @@
 
 .editor-segment-row {
   @apply flex flex-row gap-2 items-center
+}
+
+.icon {
+  @apply aspect-[243/166]
 }
 
 * {

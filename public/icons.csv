@@ -1,0 +1,40 @@
+filename,tags
+b-inf.svg,infantry rifle foot
+b-art.svg,artillery indirect howitzer HE
+b-tank.svg,tank armor armored vehicle apc ifv fighting
+b-fixed-wing.svg,aviation fixed wing plane aircraft airship
+b-rotary.svg,rotary helicopter aviation gunship
+b-aa.svg,anti air aa air to air
+b-at.svg,anti-tank at air to ground
+b-engi.svg,engineer support
+b-flame.svg,flamethrower engineer
+b-hq.png,headquarters hq command leader
+b-hq.svg,headquarters hq command leader
+b-maintenance.svg,maintenance repair support
+b-med.svg,medic medical health support  
+b-mortar.svg,artillery indirect mortart HE
+b-mortar-alt.svg,artillery indirect mortart HE alternative
+b-rec.svg,recon reconnaissance scout support
+b-signal.svg,signal communication comms support
+b-supply.svg,supply logistics support
+b-gun.svg,gun direct fire HE
+b-armored.svg,armor armored vehicle apc ifv fighting
+b-missile.svg,missile launcher
+b-motorized.svg,motorized truck transport
+b-unmanned.svg,unmanned drone uav
+b-wheeled-cc.svg,wheeled cc cross country
+b-wheeled-rb.svg,wheeled rb road bound
+b-towed.svg,towed trailer truck
+b-towed-trck.svg,towed trailer tractor half track
+b-light.svg,light
+b-heavy.svg,heavy
+b-mountain.svg,mountain alpine
+b-hq-I.svg,headquarters hq command leader company I
+b-hq-II.svg,headquarters hq command leader battalion II
+b-supports-I.svg,supports auxiliary company I
+b-supports-II.svg,supports auxiliary battalion II
+k-gun-alt.svg,gun HE direct fire support fire
+c-inf.png, infantry rifle artistic
+c-mg.svg, mg machinegun automatic artistic
+c-tank.png,tank armor armored artistic
+x-bad-apple!.gif, bad apple

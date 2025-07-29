@@ -5,7 +5,7 @@ interface EditorBoxSwitchProps {
 
 export default function EditorBoxSwitch(p: EditorBoxSwitchProps) {
   return (
-    <div className="editor-segment !border-2">
+    <div className="editor-segment">
       <button className="btn-emoji" onClick={p.onClick}>{p.children}</button>
     </div>
   )

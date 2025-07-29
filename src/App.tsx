@@ -4,14 +4,15 @@ import { initialUnits } from './myUnits';
 import { usePaletStore } from './hooks/usePaletStore';
 import { KeyboardWatcher } from './components/KeyboardWatcher';
 import { useShortcutStore } from './hooks/shortcutStore';
-import IndividualEditor from './components/Editors/IndividualEditor';
-import PalletEditor from './components/Editors/PalletEditor';
-import GlobalEditor from './components/Editors/GlobalEditor';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { useGlobalStore } from './hooks/useGlobalStore';
-import EditorBoxSwitch from './components/Editors/EditorBoxSwitch';
 import ChangelogOverlay from './components/ChangeLog';
 import ShortcutBox from './components/ShortcutBox';
+import { EditorPanel } from './components/Editors/EditorPanel';
+import { useEffect } from 'react';
+import { IconEntry, useIconsStore } from './hooks/useIcons';
+import Papa from 'papaparse';
+import IconDropdown from './components/IconDropdown';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -23,18 +24,36 @@ function App() {
   const rootUnitId = useUnitStore(s => s.getCurrentRootId)(trueRootId, actingRootId)
 
   const displayDepth = useGlobalStore(s => s.foldingDepth)
-  const isPalletMini = useGlobalStore(s => s.isPalletMini)
-  const setPalletMini = useGlobalStore(s => s.setIsPalletMini)
-  const isGlobalMini = useGlobalStore(s => s.isGlobalMini)
-  const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
+
+  const setIcons = useIconsStore(s => s.setIcons);
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/icons.csv`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch CSV');
+        }
+        const txt = response.text() 
+        console.log(txt)
+        return txt;
+      })
+      .then((csvText) => {
+        const result = Papa.parse<IconEntry>(csvText, { header: true });
+        setIcons(result.data);
+      })
+      .catch((error) => {
+        console.error('Error loading CSV:', error);
+      });
+  }, []);
 
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
     <div className={`flex bg-bg text-primary ${disableSelection}`}>
+      {/* Systems */}
       <KeyboardWatcher />
       <ChangelogOverlay/>
       <ShortcutBox/>
+      <IconDropdown/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>
@@ -44,15 +63,7 @@ function App() {
       </TransformWrapper>
 
       {/* Right */}
-      <div className="flex">
-        <IndividualEditor/>
-        {!isPalletMini && <PalletEditor/>}
-        {!isGlobalMini && <GlobalEditor/>}
-        <div className='flex flex-col'>
-          {isPalletMini && <EditorBoxSwitch onClick={() => setPalletMini(false)}>🎨</EditorBoxSwitch>}
-          {isGlobalMini && <EditorBoxSwitch onClick={() => setGlobalMini(false)}>⚙️</EditorBoxSwitch>}
-        </div>
-      </div>
+      <EditorPanel/>
     </div>
     )
 }

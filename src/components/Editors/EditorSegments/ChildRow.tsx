@@ -19,7 +19,7 @@ export function ChildRow(p: ChildRowProps) {
       {p.upDownButton && <button className="btn-emoji !p-0" onClick={p.onDownPressed}>⬇️</button>}
       {/* Dropdown to change the child.unitId */}
       <select
-        className="editor-element !w-full !w-min-full"
+        className="editor-element !w-[5.5rem]"
         value={p.childId}
         id={p.childId}
         onChange={(e) => p.onChildChange(e.target.value)}
