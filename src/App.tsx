@@ -20,8 +20,7 @@ useUnitStore.getState().setTrueRootId("infatry_oo");
 useUnitStore.temporal.getState().clear()
 
 function App() {
-  const { trueRootId, actingRootId } = useUnitStore(s => s)
-  const rootUnitId = useUnitStore(s => s.getCurrentRootId)(trueRootId, actingRootId)
+  const { actingRootPath } = useUnitStore(s => s)
 
   const displayDepth = useGlobalStore(s => s.foldingDepth)
 
@@ -33,7 +32,6 @@ function App() {
           throw new Error('Failed to fetch CSV');
         }
         const txt = response.text() 
-        console.log(txt)
         return txt;
       })
       .then((csvText) => {
@@ -58,7 +56,7 @@ function App() {
       {/* Left */}
       <TransformWrapper minScale={0.1}>
         <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
-          <TreeView unitId={rootUnitId} leftDisplayDepth={displayDepth}/>
+          <TreeView path={actingRootPath} leftDisplayDepth={displayDepth}/>
         </TransformComponent>
       </TransformWrapper>
 

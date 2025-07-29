@@ -26,7 +26,7 @@ export default function IconDropdown() {
   );
 
   return (
-    <div className="editor-box !absolute !z-10 !bg-bg !border-r-2 rounded-lg" style={{ top: pos.top, left: pos.left - 288 }}>
+    <div className="editor-box !absolute !z-10 !bg-bg !border-r-2 rounded-lg" style={{ top: pos.top, left: pos.left }}>
       <div className="flex flex-row px-2 gap-2">
         <input
           type="text"

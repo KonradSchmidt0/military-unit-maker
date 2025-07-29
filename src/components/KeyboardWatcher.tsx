@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useShortcutStore } from "../hooks/shortcutStore";
-import { SelectUnitBundle, useSelectUnitBundle, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { processSelect, SelectUnitBundle, useSelectUnitBundle, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 export function KeyboardWatcher() {
   const selectBundle = useSelectUnitBundle()
   const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+
+  const resetAllSelected = useUnitInteractionStore((s) => s.resetSelected);
 
   // React, so you have to render handlers, cant just call
-  return <>{HandleModifiers()}{HandleEscape()}{HandleCtrlZ(selectBundle, unitMap)}</>; // It’s invisible, just for effect
+  return <>{HandleModifiers()}{HandleEscape(resetAllSelected)}{HandleCtrlZ(selectBundle, unitMap, trueRootId)}</>; // It’s invisible, just for effect
 }
 
 function HandleModifiers() {
@@ -50,8 +53,7 @@ function HandleModifiers() {
   return null
 }
 
-function HandleEscape() {
-  const resetAllSelected = useUnitInteractionStore((s) => s.resetSelected);
+function HandleEscape(resetAllSelected: Function) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -66,7 +68,7 @@ function HandleEscape() {
   return null
 }
 
-function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap) {
+function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap, trueRootId: string) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrl = e.ctrlKey || e.metaKey; // metaKey for Mac
@@ -85,15 +87,16 @@ function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap) {
         return
       }
 
-      if (!unitMap[selectBundle.selectedId ? selectBundle.selectedId : ""])
-        selectBundle.setSelectedId(undefined)
-      if (!unitMap[selectBundle.selected_parentId ? selectBundle.selected_parentId : ""])
-        selectBundle.setSelected_parentId(undefined)
+      const selectedId = processSelect(selectBundle.select, unitMap, trueRootId)
+      if (!selectedId)
+        selectBundle.setSelect(undefined)
+      else if (!unitMap[selectedId])
+        selectBundle.setSelect(undefined)
     };
   
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [unitMap, selectBundle]);
+  }, [unitMap, selectBundle, trueRootId]);
   
 }
 

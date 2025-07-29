@@ -1,17 +1,19 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitStore } from "../../../hooks/useUnitStore";
 import { getEquipmentTable, OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
 import { ChildRow } from "./ChildRow";
 import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
+import { GetFlatIndexFromId } from "../../../logic/childManaging";
 
 export default function OrgUnitEditorSegment() {
-  const selectedUnitId = useUnitInteractionStore(s => s.selectedId) as string
-  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
-  const setParent = useUnitInteractionStore(s => s.setSelected_parentId)
-  // Used later
   const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  
+  const selectChild = useUnitInteractionStore(s => s.selectChild)
+
   const updateUnitMap = useUnitStore(s => s.setUnitMap)
   const createChild = useUnitStore(s => s.creatNewChild)
   const setChildCount = useUnitStore(s => s.changeChildCount)
@@ -21,18 +23,18 @@ export default function OrgUnitEditorSegment() {
   const addChild = useUnitStore(s => s.addNewChild)
   const consolidateUnit = useUnitStore(s => s.consolidateOrgUnit)
   
-  const unit = unitMap[selectedUnitId] as OrgUnit
+  const unit = unitMap[selectedId] as OrgUnit
 
   const addToPalet = usePaletStore(s => s.addUnitToPalet)
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld), useShortcutStore(s => s.isShiftHeld)]
   
-  const equipmentEntries = Object.entries(getEquipmentTable(selectedUnitId, unitMap));
+  const equipmentEntries = Object.entries(getEquipmentTable(selectedId, unitMap));
 
   /// Children Manager
   // If given all units as a option its possible to choose yourself or other dangerous unit, and creating infinite loop
   // As such, we filter them
-  const safeChildrenOptions = getSafeChildOptions(selectedUnitId, unitMap, usePaletStore(state => state.unitPalet), unit.children)
+  const safeChildrenOptions = getSafeChildOptions(selectedId, unitMap, usePaletStore(state => state.unitPalet), unit.children)
 
   const deleteEquipmentTypeFromAllChildren = (type: string) => {
     const confirmed = window.confirm(
@@ -43,7 +45,7 @@ export default function OrgUnitEditorSegment() {
     const newSelectedUnit = removeEquipmentTypeRecursively(unit, type, unitMap) as OrgUnit;
     updateUnitMap({
       ...unitMap,
-      [selectedUnitId]: newSelectedUnit,
+      [selectedId]: newSelectedUnit,
     });
   };
 
@@ -51,13 +53,12 @@ export default function OrgUnitEditorSegment() {
     let c;
     if (type === "existing") {
       c = Object.entries(safeChildrenOptions)[0][0]
-      addChild(selectedUnitId, c)
+      addChild(selectedId, c)
     } else {
-      c = createChild(selectedUnitId, type); 
+      c = createChild(selectedId, type); 
     }
     if (ctrl) { 
-      setParent(selectedUnitId); 
-      setSelected(c);
+      selectChild(GetFlatIndexFromId(unit.children, c))
     }
     if (alt) {
       addToPalet(c)
@@ -80,7 +81,7 @@ export default function OrgUnitEditorSegment() {
       }
     </div>
     <div className="editor-segment-row">
-      <button onClick={() => consolidateUnit(selectedUnitId)} className="btn-emoji">🟰Consolidate</button>
+      <button onClick={() => consolidateUnit(selectedId)} className="btn-emoji">🟰Consolidate</button>
     </div>
   </>)
   const childEdittingList = Object.entries(unit.children).map(([childId, count], index) =>  {
@@ -91,18 +92,17 @@ export default function OrgUnitEditorSegment() {
     return (
       <ChildRow key={childId + "childEdittingList"}
         childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
-        onChildChange={(n) => setChildId(selectedUnitId, childId, n)}
+        onChildChange={(n) => setChildId(selectedId, childId, n)}
         onCountChange={(n) => {
-          setChildCount(selectedUnitId, childId, n)
+          setChildCount(selectedId, childId, n)
           if (ctrl) {
-            setParent(selectedUnitId)
-            setSelected(childId)
+            selectChild(GetFlatIndexFromId(unit.children, childId))
           }
         }}
-        onRemoveButtonPressed={() => removeChildFully(selectedUnitId, childId)}
+        onRemoveButtonPressed={() => removeChildFully(selectedId, childId)}
         upDownButton={true}
-        onUpPressed={() => moveChild(selectedUnitId, childId, "top")}
-        onDownPressed={() => moveChild(selectedUnitId, childId, "bottom")}
+        onUpPressed={() => moveChild(selectedId, childId, "top")}
+        onDownPressed={() => moveChild(selectedId, childId, "bottom")}
       />
     ); 
   } );

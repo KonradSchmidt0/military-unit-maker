@@ -1,6 +1,6 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
 import { OrgUnit } from "../../../logic/logic";
@@ -10,8 +10,17 @@ import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 
 export default function CommonUnitEditorSegment() {
-  // We are getting whole map since later we will need to get other unit in a conditional, and u can only use hooks at top
-  const unitMap = useUnitStore(s => s.unitMap);
+  // Man, if propdrilling is one extrem, then this is the opposite one
+  const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
+  const selectPath = useUnitInteractionStore(s => s.select) as number[]
+  
+  const setSelected = useUnitInteractionStore(s => s.setSelect)
+  const selectParent = useUnitInteractionStore(s => s.selectParent)
+  const offsetSelect = useUnitInteractionStore(s => s.offsetSelect)
+
   const updateUnit = useUnitStore(s => s.updateUnit)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
@@ -24,17 +33,16 @@ export default function CommonUnitEditorSegment() {
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
   const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
   
-  const selectedId = useUnitInteractionStore((s) => s.selectedId) as string
-  const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
-  const parentId = useUnitInteractionStore((s) => s.selected_parentId)
-  const setParent = useUnitInteractionStore((s) => s.setSelected_parentId)
-  const {getCurrentRootId, trueRootId, actingRootId, setActingRootId, popNewTrueRoot} = useUnitStore(s => s)
-  const curRootId = getCurrentRootId(trueRootId, actingRootId)
+  const {getCurrentRootId, actingRootPath, setActingRootPath, popNewTrueRoot} = useUnitStore(s => s)
+  const curRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
 
+  if (!selectedId)
+    return null
+    
   const selected = unitMap[selectedId]
-  const parent = unitMap[parentId ? parentId : ""]
+  const parent = unitMap[parentId ? parentId : ""] as OrgUnit
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateUnit(selectedId, {
@@ -48,24 +56,23 @@ export default function CommonUnitEditorSegment() {
       return
 
     const newId = duplicateUnit(id);
-    addChild(parentId, selectedId, -1)
+    addChild(parentId, selectedId as string, -1)
     addChild(parentId, newId, 1)
     if (!alt)
       setSelected(newId)
   }
 
   function handleEchelonChange(newEchelonLevel: number) {
-    updateUnit(selectedId, {...selected, echelonLevel: newEchelonLevel})
+    updateUnit(selectedId as string, {...selected, echelonLevel: newEchelonLevel})
   }
 
-  function handleSelectingUnselectingActingRoot(n: string | undefined) {
-    setActingRootId(n)
-    if (ctrl && !n) {
-      setSelected(trueRootId)
+  function handleSelectingUnselectingActingRoot(b: boolean) {
+    if (!b) {
+      setActingRootPath([])
+      return
     }
+    setActingRootPath(selectPath)
   }
-
-  const selectParent = () => { setSelected(parentId); setParent(undefined) }
 
   return (
     <><div className="editor-segment-flex">
@@ -74,7 +81,7 @@ export default function CommonUnitEditorSegment() {
         <input
           id="NameInputId"
           type="text"
-          value={selected.name}
+          value={selected?.name}
           onChange={handleNameChange}
           className="editor-element"
         />
@@ -83,11 +90,13 @@ export default function CommonUnitEditorSegment() {
       <div className="editor-segment-row">
         {parentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
         {trueRootId === selectedId && 
-          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, setParent, !ctrl)}>⬆️➕🫚</button>}
-        {curRootId !== selectedId &&
-          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(selectedId)}>📌🫚</button>}
+          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕🫚</button>}
+        {curRootId !== selectedId && parentId &&
+          <button className="btn-emoji" 
+                  onClick={() => handleSelectingUnselectingActingRoot(true)}
+                >📌🫚</button>}
         {curRootId === selectedId && trueRootId !== selectedId &&
-          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(undefined)}>🦒🫚</button>}
+          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(false)}>🦒🫚</button>}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"
@@ -105,7 +114,7 @@ export default function CommonUnitEditorSegment() {
         onCountChange={(n) => { setChildCount(parentId, selectedId, n); if (ctrl) selectParent();}}
         onRemoveButtonPressed={ () => {
           removeChildFully(parentId, selectedId); 
-          ctrl ? selectParent() : (() => {setSelected(undefined); setParent(undefined);})()
+          ctrl ? selectParent() : setSelected(undefined)
         } }
         
         upDownButton={true}

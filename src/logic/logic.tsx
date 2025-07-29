@@ -14,6 +14,7 @@ export interface RawUnit {
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   equipment: EquipmentTable;
+  desc?: string;
 }
 
 export interface OrgUnit {
@@ -23,6 +24,7 @@ export interface OrgUnit {
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
   children: ChildrenList // First is UnitId, second is count of how many
+  desc?: string;
 }
 
 

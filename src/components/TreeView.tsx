@@ -1,17 +1,21 @@
 import TreeNode from "./TreeNode";
-import { useUnitQuick } from "../hooks/useUnitStore";
+import { useUnitStore } from "../hooks/useUnitStore";
 import { defaultUnitColor } from "../logic/logic";
 import { useGlobalStore } from "../hooks/useGlobalStore";
+import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { GetFlatIds } from "../logic/childManaging";
 
 interface TreeViewProps {
-  unitId: string;
-  parentUnitId?: string;
+  path: number[];
   calculatedParentColor?: `#${string}`;
   leftDisplayDepth: number;
 }
 
-function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = defaultUnitColor, leftDisplayDepth }: TreeViewProps) {
-  const unit = useUnitQuick(unitId)
+function TreeView({path, calculatedParentColor = defaultUnitColor, leftDisplayDepth }: TreeViewProps) {
+  const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const unitId = useUnitInteractionStore((s) => s.getIdFromPath)(unitMap, trueRootId, path) as string
+  const unit = unitMap[unitId]
   // const echelonFoldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
   const parentBoxOn = useGlobalStore(s => s.displayParentBox)
 
@@ -35,21 +39,18 @@ function TreeView({unitId, parentUnitId = undefined, calculatedParentColor = def
 
   return (
     <div className={wrapperClass}>
-      <TreeNode unitId={unitId} parentUnitId={parentUnitId} calculatedParentColor={myColor}/>
+      <TreeNode unitId={unitId} path={path} calculatedParentColor={myColor}/>
 
       <div className={`flex ${willChildBeFolded ? "flex-col gap-3.5 pt-8" : "flex-row gap-2"}`}>
 
         {unit.type === "org" && !isFolded &&
-          Object.entries(unit.children).map(([ childId, count ], i) =>
-            Array.from({ length: count }).map((_, j) => (
-              leftDisplayDepth >= 1 ? <TreeView
-                key={`${i}-${j}`}
-                unitId={childId}
-                parentUnitId={unitId}
-                calculatedParentColor={myColor}
-                leftDisplayDepth={leftDisplayDepth - 1}
-              /> : null
-            )
+          GetFlatIds(unit.children).map((_childId, i) => (
+            leftDisplayDepth >= 1 ? <TreeView
+              key={`${i}-${i}`}
+              path={[...path, i]}
+              calculatedParentColor={myColor}
+              leftDisplayDepth={leftDisplayDepth - 1}
+            /> : null
           )
         )}
         

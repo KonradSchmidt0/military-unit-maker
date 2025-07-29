@@ -31,7 +31,7 @@ export function UnitDisplay({ unitId, color, style, className, onClick }: UnitDi
     null
 
   return (
-    <div className="relative">
+    <div className="relative text-white/50 text-unit">
       {/* Unit block */}
       <div
         style={{backgroundColor: color, ...style}}
@@ -43,6 +43,8 @@ export function UnitDisplay({ unitId, color, style, className, onClick }: UnitDi
         ))}
         {echelonElement}
         <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0" alt="unit icon frame"/>
+        <div className="absolute top-0 left-full p-[1px] w-7">{unit.name}</div>
+        <div className="absolute bottom-0 left-full p-[1px] w-full">{unit.desc}</div>
       </div>
     </div>
   );

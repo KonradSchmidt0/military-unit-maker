@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor, SmartColor, Unit } from "../../../logic/logic";
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { GetTrueColorRecursively } from "../../../logic/childManaging";
 
 
 export function UnitColorOptions() {
-  const selectedId = useUnitInteractionStore(s => s.selectedId) as string
-  const selected_ParentId = useUnitInteractionStore(s => s.selected_parentId)
-
   const unitMap = useUnitStore(s => s.unitMap)
-  const unit = unitMap[selectedId] as Unit
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const selected = useUnitInteractionStore(s => s.select)
+  const path = Array.isArray(selected) ? selected : undefined
+  const unit = unitMap[selectedId];
+
   const updateUnit = useUnitStore(s => s.updateUnit)
 
   const [color, setColor] = useState<SmartColor>(unit?.smartColor === "inheret" ? defaultUnitColor : unit?.smartColor)
@@ -41,10 +44,7 @@ export function UnitColorOptions() {
   )
   const uninheretColor = (
     <button className="btn-emoji" onClick={() => { 
-      let c = selected_ParentId 
-        ? unitMap[selected_ParentId].smartColor 
-        : defaultUnitColor; 
-      c = c === "inheret" ? defaultUnitColor : c
+      let c = path ? GetTrueColorRecursively(trueRootId, path, unitMap) : defaultUnitColor
       updateUnit(selectedId, { ...unit, smartColor: c}) }
       }>🦋🖌️</button>
   )

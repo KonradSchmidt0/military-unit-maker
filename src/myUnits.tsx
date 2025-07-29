@@ -36,7 +36,8 @@ export const leadWithRadio_e: RawUnit = {
   smartColor: "inheret",
   layers: infHqVisual,
   echelonLevel: 0,
-  equipment: { "Warrior": 2, "Rifle": 2, "Radio": 1 }
+  equipment: { "Warrior": 2, "Rifle": 2, "Radio": 1 },
+  desc: "Commander + Radio Man"
 }
 
 export const infatry_oo: OrgUnit = {
@@ -50,7 +51,8 @@ export const infatry_oo: OrgUnit = {
     "rifle_o": 2,
     "mg_o": 1,
     "rifle_e": 1,
-  }
+  },
+  desc: "16 + 1R"
 }
 
 export const initialUnits: UnitMap = {

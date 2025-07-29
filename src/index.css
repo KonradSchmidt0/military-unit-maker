@@ -44,3 +44,8 @@
 a {
   @apply text-blue-400 underline hover:text-blue-600 transition-colors
 }
+
+.text-unit {
+  font-size: 6px;
+  line-height: 7px;
+}

@@ -1,24 +1,26 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore";
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { removeAllOfAChild } from "../../../logic/childManaging";
 import { OrgUnit } from "../../../logic/logic";
 
 export default function CountInParent() {
   const unitMap = useUnitStore(s => s.unitMap)
-  const updateUnit = useUnitStore(s => s.updateUnit)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
+  
+  const selectParent = useUnitInteractionStore(s => s.selectParent)
 
-  const selectedId = useUnitInteractionStore(s => s.selectedId)
-  const parentId = useUnitInteractionStore(s => s.selected_parentId)
-  const setSelectedId = useUnitInteractionStore(s => s.setSelectedId)
-  const setParentId = useUnitInteractionStore(s => s.setSelected_parentId)
+  const updateUnit = useUnitStore(s => s.updateUnit)
 
   const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]
 
-  const parent = unitMap[parentId as string] as OrgUnit // By definition parent is org
-
+  
   if (!parentId || !selectedId)
     return null
+  
+  const parent = unitMap[parentId] as OrgUnit // By definition parent is org
 
   const selfInParent = parent.children[selectedId]
   const selfCountInParent = selfInParent ? selfInParent : 0
@@ -48,8 +50,7 @@ export default function CountInParent() {
         });
 
         if (ctrl) {
-          setParentId(undefined)
-          setSelectedId(parentId)
+          selectParent()
         }
       }}
     />

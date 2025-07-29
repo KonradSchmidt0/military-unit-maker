@@ -23,6 +23,9 @@ export default function ChangelogOverlay() {
           <b className='text-base'>Better Layer Picker (25 ??? ???)</b><br/>
            - Added new dropdown for layers, which gives a preview and allows to search based on tags<br/>
            - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons</a><br/>
+           - Finished infrastracture for staff comments and arrow navigation
+           - Started working on unit comments and names
+          Still alive and kicking ;)<br/>
           <br/>
 
           <b className='text-base'>Temporary Roots (25 july 24)</b><br/>

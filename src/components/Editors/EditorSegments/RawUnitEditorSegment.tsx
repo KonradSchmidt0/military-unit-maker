@@ -1,29 +1,31 @@
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
 import { RawUnit } from "../../../logic/logic";
 
 export default function RawUnitEditorSegment() {
-  const selectedUnitId = useUnitInteractionStore((s) => s.selectedId) as string
+  const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
 
-  const unit = useUnitQuick(selectedUnitId) as RawUnit
+  const unit = useUnitQuick(selectedId) as RawUnit
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const splitUnit = useUnitStore(s => s.splitRawUnit)
 
   if (!unit || unit.type !== "raw") {
-    throw Error(`Unit ID or type wrong ID = ${selectedUnitId}, type = ${unit?.type}`)
+    throw Error(`Unit ID or type wrong ID = ${selectedId}, type = ${unit?.type}`)
   }
 
   const equipmentEntries = Object.entries(unit.equipment);
 
   const updateEquipment = (type: string, value: number) => {
     const newEquipment = { ...unit.equipment, [type]: value };
-    updateUnit(selectedUnitId, { ...unit, equipment: newEquipment });
+    updateUnit(selectedId, { ...unit, equipment: newEquipment });
   };
 
   const deleteEquipment = (type: string) => {
     const newEquipment = { ...unit.equipment };
     delete newEquipment[type];
-    updateUnit(selectedUnitId, { ...unit, equipment: newEquipment });
+    updateUnit(selectedId, { ...unit, equipment: newEquipment });
   };
 
   const addEquipment = () => {
@@ -60,7 +62,7 @@ export default function RawUnitEditorSegment() {
       return
     }
 
-    splitUnit(selectedUnitId, childCount)
+    splitUnit(selectedId, childCount)
   }
 
   return (

@@ -1,10 +1,17 @@
 import { create } from 'zustand';
+import { UnitMap } from './useUnitStore';
+import { GetChildIdFromPath } from '../logic/childManaging';
 
 export interface SelectUnitBundle {
-  selectedId: string | undefined;
-  setSelectedId: (newSelectedId: string | undefined) => void;
-  selected_parentId: string | undefined;
-  setSelected_parentId: (newSelected_parentId: string | undefined) => void;
+  select: string | number[] | undefined
+  setSelect: (newSelect: string | number[] | undefined) => void;
+  getSelectedParent: (map: UnitMap, trueRootId: string) => string | undefined
+  // TODO: Remove
+  path: number[] | undefined // Causes bugs because stupind react rerenders
+  selectChild: (newElement: number) => void
+  selectParent: () => void
+  offsetSelect: () => void
+  getIdFromPath: (map: UnitMap, trueRootId: string, path: number[]) => string
 }
 
 type UnitInteractionStore = SelectUnitBundle & {
@@ -16,16 +23,71 @@ type UnitInteractionStore = SelectUnitBundle & {
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
   hoveredId: undefined,
   setHoveredId: (newHoveredId) => set({ hoveredId: newHoveredId }),
+  
+  select: [],
+  setSelect: (newSelect) => {set({select: newSelect})},
+  getSelectedParent(map, trueRootId) {
+    const s = get().select
+    if (!Array.isArray(s))
+      return undefined
+    if (s.length === 0)
+      return undefined
+    return GetChildIdFromPath(trueRootId, s.slice(0, -1), map)
+  },
 
-  selectedId: undefined,
-  setSelectedId: (newSelectedId) => set({ selectedId: newSelectedId }),
+  get path() {
+    const s = get().select
+    if (Array.isArray(s)) {
+      return s
+    }
+    return undefined
+  },
 
-  selected_parentId: undefined,
-  setSelected_parentId: (newSelected_parentId) => set({ selected_parentId: newSelected_parentId }),
+  selectChild: (n) => {
+    const s = get().select
+    if (!Array.isArray(s)) {
+      console.warn("s is not a path!")
+      return
+    }
+    set({select: [...s, n]})
+  },
 
-  resetSelected: () => set({ selectedId: undefined, selected_parentId: undefined }),
+  selectParent: () => {
+    const s = get().select
+    if (!Array.isArray(s)) {
+      console.warn("s is not a path!")
+      return
+    }
+
+    set({select: s.slice(0, -1)})
+  },
+
+  offsetSelect: () => {
+    const s = get().select
+    if (!Array.isArray(s)) {
+      console.warn("s is not a path!")
+      return
+    }
+
+    set({select: [0, ...s]})
+  },
+
+  getIdFromPath: (map, trueRootId, path) => {
+    return GetChildIdFromPath(trueRootId, path, map)
+  },
+
+  resetSelected: () => set({ select: undefined}),
 }));
 
 export const useSelectUnitBundle = () => {
   return useUnitInteractionStore(s => s);
+}
+
+export function processSelect(select: string | number[] | undefined, map: UnitMap, trueRootId: string) {
+  if (!select)
+    return undefined
+  if (Array.isArray(select)) {
+    return GetChildIdFromPath(trueRootId, select, map)
+  }
+  return select
 }

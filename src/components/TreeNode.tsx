@@ -1,23 +1,21 @@
 import { useShortcutStore } from "../hooks/shortcutStore";
 import { usePaletStore } from "../hooks/usePaletStore";
-import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../hooks/useUnitStore";
+import { GetChildIdFromPath } from "../logic/childManaging";
 import { defaultUnitColor, Unit } from "../logic/logic";
 import { UnitDisplay } from "./UnitDisplay"
 
 interface TreeNodeProps {
-  unitId: string;
-  parentUnitId?: string;
+  unitId?: string;
+  path?: number[];
   // Problem: If our color is 'inheret' and parents color is 'inheret' we would need extra hard way to search up the chain
   //   Also, node can appear without parent outside of a tree, or as a root. We have to handle those cases
   // Solution: Parent tree view calculates actual color, and sends it lower 
   calculatedParentColor?: `#${string}`; 
 }
 
-function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = undefined }: TreeNodeProps) {
-  const onHover = useUnitInteractionStore((s) => s.setHoveredId)
-  const setSelected = useUnitInteractionStore((s) => s.setSelectedId)
-  const setSelectedParent = useUnitInteractionStore((s) => s.setSelected_parentId)
+function TreeNode({ unitId = undefined, path = undefined, calculatedParentColor = undefined }: TreeNodeProps) {
   
   const [shift, ctrl] = [useShortcutStore((s) => s.isShiftHeld), useShortcutStore((s) => s.isCtrlHeld)]
   
@@ -25,20 +23,34 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
   const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
   
   const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
+  
+  const onHover = useUnitInteractionStore((s) => s.setHoveredId)
+  const setSelected = useUnitInteractionStore((s) => s.setSelect)
+  const parentId = useUnitInteractionStore(s => s.getSelectedParent)(unitMap, trueRootId)
 
-  const unit = unitMap[unitId] as Unit
-
-  const isSelected = unitId === useUnitInteractionStore((s) => s.selectedId)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId)
+  
+  const isSelected = unitId === selectedId
   const isHovered = unitId === useUnitInteractionStore(s => s.hoveredId)
   
+  if (!unitId && !path) {
+    console.warn("No path or id assigned!")
+    return <>No path or id assigned!</>
+  }
+
+  const id = path ? GetChildIdFromPath(trueRootId, path, unitMap) : unitId as string
+
+  const unit = unitMap[id] as Unit
+
   const handleClick = () => {
     if (shift && ctrl) {
-      const dupId = duplicateUnit(unitId)
+      const dupId = duplicateUnit(id)
 
-      if (parentUnitId) {
-        addChild(parentUnitId, dupId, 1)
+      if (parentId) {
+        addChild(parentId, dupId, 1)
         return
       }
 
@@ -47,17 +59,16 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
     }
 
     if (shift || ctrl) {
-      if (parentUnitId) {
-        addChild(parentUnitId, unitId, shift ? -1 : 1)
+      if (parentId) {
+        addChild(parentId, id, shift ? -1 : 1)
         return
       }
 
-      shift ? removeFromUnitPalet(unitId) : addToUnitPalet(unitId)
+      shift ? removeFromUnitPalet(id) : addToUnitPalet(id)
       return
     }
 
-    setSelected(unitId);
-    setSelectedParent(parentUnitId);
+    setSelected(path ?? id);
   }
  
   const color = unit.smartColor === "inheret" ? (calculatedParentColor ? calculatedParentColor : defaultUnitColor) : unit.smartColor
@@ -70,7 +81,7 @@ function TreeNode({ unitId, parentUnitId = undefined, calculatedParentColor = un
   return (
     <div className="flex justify-center">
       <div onMouseEnter={() => onHover(unitId)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
-        <UnitDisplay unitId={unitId} color={color} style={{ boxShadow: boxShadow }}/>
+        <UnitDisplay unitId={id} color={color} style={{ boxShadow: boxShadow }}/>
       </div>
     </div>
   );

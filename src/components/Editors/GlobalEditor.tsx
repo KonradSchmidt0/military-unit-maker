@@ -17,16 +17,14 @@ export default function GlobalEditor() {
   const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
 
   const setRootUnitId = useUnitStore(s => s.setTrueRootId)
-  const setSelected = useUnitInteractionStore(s => s.setSelectedId)
-  const setSelectedParent = useUnitInteractionStore(s => s.setSelected_parentId)
+  const resetSelect = useUnitInteractionStore(s => s.resetSelected)
 
   const setUnitMap = useUnitStore(s => s.setUnitMap)
   const setUnitPalet = usePaletStore(s => s.setUnitPalet)
 
   const handleLoading = (e: ChangeEvent<HTMLInputElement>) => { 
     handleLoadFile(e, setUnitMap, setUnitPalet, setRootUnitId); 
-    setSelected(undefined); 
-    setSelectedParent(undefined)
+    resetSelect()
   }
 
   return (

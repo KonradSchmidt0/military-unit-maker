@@ -1,12 +1,14 @@
 import { useIconsStore } from "../../../hooks/useIcons";
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
-import { defaultUnitColor, Unit } from "../../../logic/logic";
+import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
+import { useUnitStore } from "../../../hooks/useUnitStore";
+import { defaultUnitColor } from "../../../logic/logic";
 import { UnitDisplay } from "../../UnitDisplay";
 
 export function VisualLayeringEditor() {
-  const unitId = useUnitInteractionStore((s) => s.selectedId) as string;
-  const unit = useUnitQuick(unitId) as Unit;
+  const unitMap = useUnitStore(s => s.unitMap)
+  const trueRootId = useUnitStore(s => s.trueRootId)
+  const unitId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const unit = unitMap[unitId];
   const updateUnit = useUnitStore((s) => s.updateUnit);
 
   const setDropdown_onChosen = useIconsStore(s => s.callDropDown)

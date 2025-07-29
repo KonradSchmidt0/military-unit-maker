@@ -1,4 +1,5 @@
-import { ChildrenList, OrgUnit } from "./logic";
+import { UnitMap } from "../hooks/useUnitStore";
+import { ChildrenList, defaultUnitColor, OrgUnit } from "./logic";
 
 export function addChild(
   parent: OrgUnit,
@@ -107,4 +108,60 @@ export function moveChild(
   }
 
   return {...parent, children: newChildren}
+}
+
+
+
+export function GetFlatIds(children: ChildrenList) {
+  const o: string[] = [];
+
+  for (const [childType, count] of Object.entries(children)) {
+    for (let i = 0; i < count; i++) {
+      o.push(childType);
+    }
+  }
+
+  return o;
+}
+
+export function GetIdFromFlatIndex(children: ChildrenList, index: number) {
+  return GetFlatIds(children)[index]
+}
+
+export function GetFlatIndexFromId(children: ChildrenList, id: string) {
+  let o = 0;
+
+  for (const [childId, count] of Object.entries(children)) {
+    if (childId === id) {
+      return o
+    }
+    o += count
+  }
+
+  return o;
+}
+
+export function GetChildIdFromPath(rootId: string, path: number[], unitMap: UnitMap): string {
+  if (path.length === 0) {
+    return rootId
+  }
+  const parent = unitMap[rootId] as OrgUnit
+  const nextId = GetIdFromFlatIndex(parent.children, path[0])
+  if (path.length === 1) {
+    return nextId
+  }
+  const np = path.slice(1)
+  return GetChildIdFromPath(nextId, np, unitMap)
+}
+
+export function GetTrueColorRecursively(rootId: string, path: number[], unitMap: UnitMap): `#${string}` {
+  if (path.length <= 0) {
+    const root = unitMap[rootId] 
+    return (root.smartColor !== "inheret" ? root.smartColor : defaultUnitColor)
+  }
+  const unit = unitMap[path[path.length - 1]]
+  if (unit.smartColor !== "inheret") {
+    return unit.smartColor
+  }
+  return GetTrueColorRecursively(rootId, path.slice(0, -1), unitMap)
 }

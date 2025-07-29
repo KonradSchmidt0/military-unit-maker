@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { ChildrenList, createNewOrgUnit, createNewRawUnit, getEquipmentTable, OrgUnit, SmartColor, Unit } from '../logic/logic';
-import { addChild, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
+import { addChild, GetChildIdFromPath, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
 import { temporal } from 'zundo'
 import { createRawUnitWithFractionOfEquipment } from '../logic/unitConversion';
 
@@ -23,12 +23,12 @@ interface UnitStore {
   addNewChild: (parentId: string, childId: string) => void,
   consolidateOrgUnit: (id: string) => void,
 
-  getCurrentRootId: (trueId: string, actingId: string | undefined) => string;
+  getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap) => string;
   trueRootId: string;
   setTrueRootId: (newRootId: string) => void;
-  actingRootId: string | undefined;
-  setActingRootId: (n: string | undefined) => void;
-  popNewTrueRoot: (setSelected: Function, setParent: Function, setNewRootAsParent?: boolean) => void;
+  actingRootPath: number[];
+  setActingRootPath: (n: number[]) => void;
+  popNewTrueRoot: (setSelect: Function, offsetSelect: Function, setNewRootAsParent?: boolean) => void;
 }
 
 
@@ -199,16 +199,16 @@ export const useUnitStore = create<UnitStore>()(
 
 
     trueRootId: "infatry_oo",
-    actingRootId: undefined,
+    actingRootPath: [],
   
-    getCurrentRootId(trueId, actingId ) {
-      return actingId ?? trueId;
+    getCurrentRootId(trueId, actingPath, map) {
+      return GetChildIdFromPath(trueId, actingPath, map);
     },
   
     setTrueRootId: (n) => {set({ trueRootId: n });},
-    setActingRootId: (n) => set({ actingRootId: n }),
+    setActingRootPath: (n) => set({ actingRootPath: n }),
   
-    popNewTrueRoot: (setSelected, setParent, setNewRootAsParent) => {
+    popNewTrueRoot: (setSelect, offsetSelect, setNewRootAsParent) => {
       const oldRootId = get().trueRootId
       const oldRoot = get().unitMap[oldRootId]
       const newRootId = crypto.randomUUID()
@@ -221,9 +221,9 @@ export const useUnitStore = create<UnitStore>()(
       }
       
       if (!setNewRootAsParent)
-        setSelected(newRootId)
+        setSelect([])
       else
-        setParent(newRootId)
+        offsetSelect()
       
       get().updateUnit(newRootId, newRoot)
       get().setTrueRootId(newRootId)
