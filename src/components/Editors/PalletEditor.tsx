@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { usePaletStore } from "../../hooks/usePaletStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
-import TreeNode from "../TreeNode";
+import TreeNode from "../UnitDisplaying/TreeNode";
 import { Unit } from "../../logic/logic";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
 

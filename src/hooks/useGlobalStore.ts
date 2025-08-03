@@ -1,5 +1,9 @@
 import { create } from 'zustand';
 
+export interface StaffComment {
+  path: number[], comment: string
+}
+
 interface GlobalStore {
   echelonFoldingLevel: number;
   setEchelonFoldingLevel: (n: number) => void;
@@ -13,9 +17,15 @@ interface GlobalStore {
   setIsPalletMini: (b: boolean) => void;
   isChangeLogMini: boolean;
   setIsChangeLogMini: (b: boolean) => void;
+
+  staffComments: StaffComment[];
+  setStaffComments: (n: StaffComment[]) => void
+  setStaffComment: (path: number[], comment: string) => void;
+  removeStaffComment: (path: number[]) => void;
+  getStaffComment: (path: number[]) => string;
 }
 
-export const useGlobalStore = create<GlobalStore>((set) => ({
+export const useGlobalStore = create<GlobalStore>((set, get) => ({
   echelonFoldingLevel: 0,
   setEchelonFoldingLevel: (n) => set({echelonFoldingLevel: n }),
   foldingDepth: 3,
@@ -27,5 +37,30 @@ export const useGlobalStore = create<GlobalStore>((set) => ({
   isPalletMini: true,
   setIsPalletMini: (b) => set({isPalletMini: b}),
   isChangeLogMini: true,
-  setIsChangeLogMini: (b) => set({isChangeLogMini: b})
+  setIsChangeLogMini: (b) => set({isChangeLogMini: b}),
+
+
+
+  staffComments: [],
+
+  setStaffComments: (n) =>
+    set({staffComments: n}),
+
+  setStaffComment: (path, comment) =>
+    set((state) => ({
+      staffComments: [
+        ...state.staffComments.filter((entry) => entry.path.toString() !== path.toString()),
+        { path, comment },
+      ],
+    })),
+
+  removeStaffComment: (path) =>
+    set((state) => ({
+      staffComments: state.staffComments.filter((entry) => entry.path.toString() !== path.toString()),
+    })),
+
+  getStaffComment: (path: number[]) =>
+    get().staffComments.find((entry) => entry.path.toString() === path.toString())?.comment ?? ''
+    
+
 }));

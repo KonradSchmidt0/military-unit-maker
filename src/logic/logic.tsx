@@ -13,7 +13,10 @@ export interface RawUnit {
   smartColor: SmartColor;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
+
   equipment: EquipmentTable;
+
+  shortName?: string | "ą-InheretName"
   desc?: string;
 }
 
@@ -23,8 +26,13 @@ export interface OrgUnit {
   smartColor: SmartColor;
   echelonLevel: number;
   layers: string[]; // For now just a path to /public/ later will think about user custom icons
+
   children: ChildrenList // First is UnitId, second is count of how many
+
+  shortName?: string | "ą-InheretName"
   desc?: string;
+  flatCallSigns?: Record<number, string>
+  flatDescriptions?: Record<number, string>
 }
 
 

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { UnitMap } from './useUnitStore';
-import { GetChildIdFromPath } from '../logic/childManaging';
+import { GetChildIdFromPath, GetFlatIds } from '../logic/childManaging';
+import { ChildrenList } from '../logic/logic';
 
 export interface SelectUnitBundle {
   select: string | number[] | undefined
@@ -11,7 +12,9 @@ export interface SelectUnitBundle {
   selectChild: (newElement: number) => void
   selectParent: () => void
   offsetSelect: () => void
+  changeSelectedChild: (newPos: "top" | "bottom", parentChildren: ChildrenList) => void
   getIdFromPath: (map: UnitMap, trueRootId: string, path: number[]) => string
+  selectSibling: (siblingFlatIndex: number) => void
 }
 
 type UnitInteractionStore = SelectUnitBundle & {
@@ -24,7 +27,7 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   hoveredId: undefined,
   setHoveredId: (newHoveredId) => set({ hoveredId: newHoveredId }),
   
-  select: [],
+  select: undefined,
   setSelect: (newSelect) => {set({select: newSelect})},
   getSelectedParent(map, trueRootId) {
     const s = get().select
@@ -70,6 +73,27 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
     }
 
     set({select: [0, ...s]})
+  },
+
+  changeSelectedChild: (newPos, parentChildren) => {
+    const s = get().select
+    if (!Array.isArray(s)) {
+      console.warn("s is not a path!")
+      return
+    }
+
+    const flat = GetFlatIds(parentChildren)
+
+    set({select: [...s.slice(0, -1), newPos === 'top' ? 0 : flat.length - 1]})
+  },
+
+  selectSibling: (siblingFlatIndex) => {
+    const s = get().select
+    if (!Array.isArray(s)) {
+      console.warn("s is not a path!")
+      return
+    }
+    set({select: [...s.slice(0, -1), siblingFlatIndex]})
   },
 
   getIdFromPath: (map, trueRootId, path) => {

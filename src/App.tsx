@@ -1,4 +1,4 @@
-import TreeView from './components/TreeView';
+import TreeView from './components/UnitDisplaying/TreeView';
 import { useUnitStore } from './hooks/useUnitStore';
 import { initialUnits } from './myUnits';
 import { usePaletStore } from './hooks/usePaletStore';
@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { IconEntry, useIconsStore } from './hooks/useIcons';
 import Papa from 'papaparse';
 import IconDropdown from './components/IconDropdown';
+import ArrowNavigation from './components/ArrowNavigation';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -21,7 +22,6 @@ useUnitStore.temporal.getState().clear()
 
 function App() {
   const { actingRootPath } = useUnitStore(s => s)
-
   const displayDepth = useGlobalStore(s => s.foldingDepth)
 
   const setIcons = useIconsStore(s => s.setIcons);
@@ -42,21 +42,25 @@ function App() {
         console.error('Error loading CSV:', error);
       });
   }, []);
+  
 
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex bg-bg text-primary ${disableSelection}`}>
+    <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>
       {/* Systems */}
       <KeyboardWatcher />
       <ChangelogOverlay/>
       <ShortcutBox/>
       <IconDropdown/>
+      <ArrowNavigation/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>
         <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
-          <TreeView path={actingRootPath} leftDisplayDepth={displayDepth}/>
+          <div className='pb-2 pt-8 px-6'>
+            <TreeView path={actingRootPath} leftDisplayDepth={displayDepth}/>
+          </div>
         </TransformComponent>
       </TransformWrapper>
 

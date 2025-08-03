@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 .editor-element {
-  @apply py-1 px-3 border border-slate-300 bg-bg_alt text-white;
+  @apply py-1 px-3 border dark:border-primary dark:bg-bg_alt border-bg bg-primary;
   @apply hover:rounded-md;
   @apply cursor-pointer transition-all duration-200 ease-in-out;
 }
 
 .btn-emoji {
-  @apply p-1 hover:bg-white/20 active:bg-white/30 transition-all duration-200 ease-in-out rounded-sm hover:rounded-md
+  @apply p-1 hover:rounded-md;
+  @apply bg-transparent dark:hover:bg-white/20 hover:bg-black/20 dark:active:bg-white/30 active:bg-black/30;
+  @apply transition-all duration-200 ease-in-out rounded-sm;
 }
 
 .editor-box {
-  @apply border-slate-400 border-2 w-72 max-h-screen border-r-0 flex flex-col;
+  @apply dark:border-bg_alt border-primary_alt border-2 w-72 max-h-screen border-r-0 flex flex-col;
 }
 
 .editor-segment {
-  @apply border-slate-400 border-b-2 border-dashed p-2 text-center items-center;
+  @apply dark:border-bg_alt border-primary_alt border-b-2 border-dashed p-2 text-center items-center;
 }
 
 .editor-segment-flex {
@@ -42,10 +44,32 @@
 }
 
 a {
-  @apply text-blue-400 underline hover:text-blue-600 transition-colors
+  @apply dark:text-blue-400 text-blue-500 underline hover:!text-blue-600 transition-colors
 }
 
 .text-unit {
+  @apply text-black/90 dark:text-white/70 transition-colors;
   font-size: 6px;
   line-height: 7px;
+}
+
+.text-unit-s {
+  font-size: 4.5px;
+  line-height: 5px;
+}
+
+.tree {
+  @apply p-3 flex
+}
+
+.tree-a {
+  @apply tree flex-row gap-14 my-8
+}
+
+.tree-b {
+  @apply tree flex-col my-8 translate-x-0 !px-0 transition-transform duration-500 ease-in-out
+}
+
+.tree-c {
+  @apply tree gap-0
 }

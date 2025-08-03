@@ -2,7 +2,7 @@ import { useIconsStore } from "../../../hooks/useIcons";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor } from "../../../logic/logic";
-import { UnitDisplay } from "../../UnitDisplay";
+import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay";
 
 export function VisualLayeringEditor() {
   const unitMap = useUnitStore(s => s.unitMap)
@@ -54,6 +54,7 @@ export function VisualLayeringEditor() {
           color={unit.smartColor === "inheret" ? defaultUnitColor : unit.smartColor}
           className="!w-28 translate-y-4"
           onClick={handleClickOnDisp}
+          showText={false}
         />
         <div className="flex flex-col items-center gap-2 mb-2 pt-4">
           {unit.layers.map((layerSrc, index) => (

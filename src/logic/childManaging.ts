@@ -159,7 +159,7 @@ export function GetTrueColorRecursively(rootId: string, path: number[], unitMap:
     const root = unitMap[rootId] 
     return (root.smartColor !== "inheret" ? root.smartColor : defaultUnitColor)
   }
-  const unit = unitMap[path[path.length - 1]]
+  const unit = unitMap[GetChildIdFromPath(rootId, path, unitMap)]
   if (unit.smartColor !== "inheret") {
     return unit.smartColor
   }

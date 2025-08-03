@@ -5,6 +5,8 @@ import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { handleLoadFile, saveToFile } from "../../saveSystem";
 import { EchelonEditor } from "./EditorSegments/EchelonEditor";
+import { DebugSegment } from "./EditorSegments/DebugSegment";
+import ThemeToggle from "./EditorSegments/ThemeToggle";
 
 export default function GlobalEditor() {
   const foldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
@@ -15,6 +17,7 @@ export default function GlobalEditor() {
   const setDisplayParentBox = useGlobalStore(s => s.setDisplayParentBox)
   const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
   const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
+  const setStaffComments = useGlobalStore(s => s.setStaffComments)
 
   const setRootUnitId = useUnitStore(s => s.setTrueRootId)
   const resetSelect = useUnitInteractionStore(s => s.resetSelected)
@@ -23,7 +26,7 @@ export default function GlobalEditor() {
   const setUnitPalet = usePaletStore(s => s.setUnitPalet)
 
   const handleLoading = (e: ChangeEvent<HTMLInputElement>) => { 
-    handleLoadFile(e, setUnitMap, setUnitPalet, setRootUnitId); 
+    handleLoadFile(e, setUnitMap, setUnitPalet, setRootUnitId, setStaffComments); 
     resetSelect()
   }
 
@@ -67,7 +70,10 @@ export default function GlobalEditor() {
         </div>
         <div>Project by <a href="https://github.com/KonradSchmidt0" target="_blank">Konrad Schmidt</a></div>
         <div>Most icons by one and only <a href="https://www.battleorder.org/" target="_blank">BattleOrder</a></div>
+        <ThemeToggle/>
       </div>
+
+      <DebugSegment></DebugSegment>
     </div>
   )
 }

@@ -8,18 +8,21 @@ import { ChildRow } from "./ChildRow";
 import { UnitColorOptions } from "./UnitColorOptions";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
+import { CommentsEditorSegment } from "./CommentsEditorSegment";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extrem, then this is the opposite one
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const slctd = useUnitInteractionStore(s => s.select)
+  const selectedId = processSelect(slctd, unitMap, trueRootId) as string
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
-  const selectPath = useUnitInteractionStore(s => s.select) as number[]
+  const selectPath = slctd as number[]
   
   const setSelected = useUnitInteractionStore(s => s.setSelect)
   const selectParent = useUnitInteractionStore(s => s.selectParent)
   const offsetSelect = useUnitInteractionStore(s => s.offsetSelect)
+  const selectSister = useUnitInteractionStore(s => s.changeSelectedChild)
 
   const updateUnit = useUnitStore(s => s.updateUnit)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
@@ -38,7 +41,7 @@ export default function CommonUnitEditorSegment() {
 
   const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
 
-  if (!selectedId)
+  if (!slctd)
     return null
     
   const selected = unitMap[selectedId]
@@ -118,8 +121,8 @@ export default function CommonUnitEditorSegment() {
         } }
         
         upDownButton={true}
-        onUpPressed={() => {moveChild(parentId, selectedId, "top"); if (ctrl) selectParent();}}
-        onDownPressed={() => {moveChild(parentId, selectedId, "bottom"); if (ctrl) selectParent();}}
+        onUpPressed={() => {moveChild(parentId, selectedId, "top"); if (ctrl) selectParent(); else selectSister("top", parent.children)}}
+        onDownPressed={() => {moveChild(parentId, selectedId, "bottom"); if (ctrl) selectParent(); else selectSister("bottom", parent.children)}}
       />}
 
       <div className="editor-segment-row">
@@ -127,5 +130,7 @@ export default function CommonUnitEditorSegment() {
         <UnitColorOptions/>
       </div>
     </div>
-    <VisualLayeringEditor/></>
+    <VisualLayeringEditor/>
+    <CommentsEditorSegment slct={slctd}/>
+  </>
 ) }

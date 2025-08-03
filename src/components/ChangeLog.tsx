@@ -8,7 +8,7 @@ export default function ChangelogOverlay() {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-bg w-full max-w-2xl max-h-[80vh] rounded-xl shadow-lg p-6 relative overflow-y-auto">
+      <div className="dark:bg-bg bg-primary w-full max-w-2xl max-h-[80vh] rounded-xl shadow-lg p-6 relative overflow-y-auto">
         <button
           className="absolute top-4 right-4 btn-emoji"
           onClick={() => setMini(true)}
@@ -23,8 +23,8 @@ export default function ChangelogOverlay() {
           <b className='text-base'>Better Layer Picker (25 ??? ???)</b><br/>
            - Added new dropdown for layers, which gives a preview and allows to search based on tags<br/>
            - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons</a><br/>
-           - Finished infrastracture for staff comments and arrow navigation
-           - Started working on unit comments and names
+           - Finished infrastracture for staff comments and arrow navigation<br/>
+           - Started working on unit comments and names<br/>
           Still alive and kicking ;)<br/>
           <br/>
 
