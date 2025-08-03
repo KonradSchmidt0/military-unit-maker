@@ -16,7 +16,7 @@ export interface RawUnit {
 
   equipment: EquipmentTable;
 
-  shortName?: string | "ą-InheretName"
+  shortName?: string
   desc?: string;
 }
 
@@ -29,7 +29,7 @@ export interface OrgUnit {
 
   children: ChildrenList // First is UnitId, second is count of how many
 
-  shortName?: string | "ą-InheretName"
+  shortName?: string
   desc?: string;
   flatCallSigns?: Record<number, string>
   flatDescriptions?: Record<number, string>

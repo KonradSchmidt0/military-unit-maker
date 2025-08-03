@@ -19,15 +19,21 @@ export default function ChangelogOverlay() {
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
 
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Temporary Roots (25 7 24)</b><br/>
+           - Added unit type names and descriptions<br/>
+           - Added visual diffrence for when selecting a unit and a node<br/>
+           - <a href='https://www.battleorder.org/icons' target='_blank'>Added amphibious and costal modifire icons</a><br/>
+          <br/>
+
           <b className='text-base'>Better Layer Picker (25 8 03)</b><br/>
            - Added new dropdown for layers, which gives a preview and allows to search based on tags<br/>
-           - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons (some even original)</a><br/>
-           - Added staff comments
-           - Added arrow navigation
-           - Added light mode
-           - Added infrastructure for future parent comments, unit descriptions and parent given codenames
-           - Readded folding by echelon
-           - Tree display should be better now
+           - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons</a> (some even original)<br/>
+           - Added staff comments<br/>
+           - Added arrow navigation<br/>
+           - Added light mode<br/>
+           - Added infrastructure for future parent comments, unit descriptions and parent given codenames<br/>
+           - Readded folding by echelon<br/>
+           - Tree display should be better now<br/>
           Still alive and kicking ;)<br/>
           <br/>
 

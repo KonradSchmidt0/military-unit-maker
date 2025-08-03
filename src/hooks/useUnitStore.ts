@@ -22,6 +22,7 @@ interface UnitStore {
   splitRawUnit: (parentId: string, childCount: number) => string,
   addNewChild: (parentId: string, childId: string) => void,
   consolidateOrgUnit: (id: string) => void,
+  setInnerTexts: (id: string, shortName?: string, desc?: string) => void,
 
   getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap) => string;
   trueRootId: string;
@@ -194,6 +195,12 @@ export const useUnitStore = create<UnitStore>()(
       const unit = um[id] as OrgUnit
       const eq = getEquipmentTable(id, um)
       get().updateUnit(id, {...unit, type: "raw", equipment: eq})
+    },
+
+    setInnerTexts: (id, shortName, desc) => {
+      const um = get().unitMap
+      const unit = um[id]
+      get().updateUnit(id, {...unit, shortName: shortName ?? unit.shortName, desc: desc ?? unit.desc})
     },
 
 

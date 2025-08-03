@@ -46,13 +46,13 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
   setStaffComments: (n) =>
     set({staffComments: n}),
 
-  setStaffComment: (path, comment) =>
+  setStaffComment: (path, comment) =>{
     set((state) => ({
       staffComments: [
         ...state.staffComments.filter((entry) => entry.path.toString() !== path.toString()),
         { path, comment },
       ],
-    })),
+    }))},
 
   removeStaffComment: (path) =>
     set((state) => ({

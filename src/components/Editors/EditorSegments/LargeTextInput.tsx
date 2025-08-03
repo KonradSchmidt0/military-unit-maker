@@ -5,7 +5,7 @@ interface LargeTextInputProps {
 }
 
 export function LargeTextInput( {topText, value, onChange} : LargeTextInputProps) {
-  return <div className="editor-segment-flex">
+  return <div className="editor-segment-flex !border-0">
     {topText && <div className="editor-segment-row">
       <label className="font-bold" htmlFor="lti">{topText}</label>
     </div>}

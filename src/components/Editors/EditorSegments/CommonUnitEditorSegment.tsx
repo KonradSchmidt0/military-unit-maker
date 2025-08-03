@@ -8,7 +8,6 @@ import { ChildRow } from "./ChildRow";
 import { UnitColorOptions } from "./UnitColorOptions";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
-import { CommentsEditorSegment } from "./CommentsEditorSegment";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extrem, then this is the opposite one
@@ -131,6 +130,5 @@ export default function CommonUnitEditorSegment() {
       </div>
     </div>
     <VisualLayeringEditor/>
-    <CommentsEditorSegment slct={slctd}/>
   </>
 ) }

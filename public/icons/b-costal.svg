@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg data-bbox="0 0 81 55.33" viewBox="0 0 81 55.33" xmlns="http://www.w3.org/2000/svg" data-type="ugc">
+    <g style="isolation:isolate">
+        <path d="M78 3v49.33H3V3h75m3-3H0v55.33h81V0Z"/>
+        <path style="mix-blend-mode:soft-light" fill="#ffffff" d="M78 40.32H58.92l.01 6.71H22.08v-6.71H3.01L3 52.33h75V40.32z" opacity=".4"/>
+        <path fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M78 40.32H58.92l.01 6.71H22.08v-6.71H3.01"/>
+    </g>
+</svg>

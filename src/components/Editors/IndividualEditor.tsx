@@ -1,7 +1,9 @@
 import { processSelect, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { HowManyOfThisTypeInParent } from "../../logic/logic";
+import { CommentsEditorSegment } from "./EditorSegments/CommentsEditorSegment";
 import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
+import { EQListAndRemover } from "./EditorSegments/EQListAndRemover";
 import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 
@@ -51,6 +53,8 @@ export default function IndividualEditor() {
         {commonPart}
         {rawUnitPart}
         {orgUnitSegment}
+        <CommentsEditorSegment/>
+        {selectedUnit.type === "org" && <EQListAndRemover/>}
       </div>
     </div>
   );
