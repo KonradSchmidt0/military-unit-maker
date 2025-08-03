@@ -19,29 +19,32 @@ export default function ChangelogOverlay() {
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
 
         <div className="space-y-4 text-sm">
-          {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-          <b className='text-base'>Better Layer Picker (25 ??? ???)</b><br/>
+          <b className='text-base'>Better Layer Picker (25 8 03)</b><br/>
            - Added new dropdown for layers, which gives a preview and allows to search based on tags<br/>
-           - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons</a><br/>
-           - Finished infrastracture for staff comments and arrow navigation<br/>
-           - Started working on unit comments and names<br/>
+           - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons (some even original)</a><br/>
+           - Added staff comments
+           - Added arrow navigation
+           - Added light mode
+           - Added infrastructure for future parent comments, unit descriptions and parent given codenames
+           - Readded folding by echelon
+           - Tree display should be better now
           Still alive and kicking ;)<br/>
           <br/>
 
-          <b className='text-base'>Temporary Roots (25 july 24)</b><br/>
+          <b className='text-base'>Temporary Roots (25 7 24)</b><br/>
            - Added ActingRoot (temporary, for when you want to focus only on smaller unit)<br/>
            - Added shortcut highlight<br/>
            - Added org unit consolidation<br/>
           <br/>
 
-          <b className='text-base'>Editor Boxes minimizing (25 july 23)</b><br/>
+          <b className='text-base'>Editor Boxes minimizing (25 7 23)</b><br/>
            - Added Editor minimaiziziziataion<br/>
            - Added changelog<br/>
            - Abillity to add allready existing children from the pallet<br/>
            - Added preview of current unit visual<br/>
           <br/>
 
-          <b className='text-base'>Echelon visualization reworked (25 july 22)</b><br/>
+          <b className='text-base'>Echelon visualization reworked (25 7 22)</b><br/>
 
            - Echelons are finally not an text, but actuall <a href='https://www.battleorder.org/icons' target='_blank'>icons</a><br/>
            - Lack of echelons dosent affect styling anymore!<br/>
