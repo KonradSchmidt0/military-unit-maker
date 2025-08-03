@@ -5,7 +5,7 @@
    data-type="ugc"
    version="1.1"
    id="svg3"
-   sodipodi:docname="k-gun-alt.svg"
+   sodipodi:docname="k-gun.svg"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -41,7 +41,7 @@
        stroke="#000000"
        stroke-miterlimit="10"
        stroke-width="2"
-       d="M 14,27.5 H 67"
+       d="M 0,27.5 H 81"
        id="path3"
        sodipodi:nodetypes="cc" />
   </g>
