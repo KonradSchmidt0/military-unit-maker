@@ -3,7 +3,7 @@ import { UnitMap } from './useUnitStore';
 import { GetChildIdFromPath, GetFlatIds } from '../logic/childManaging';
 import { ChildrenList } from '../logic/logic';
 
-export interface SelectUnitBundle {
+export interface UnitInteractionStore {
   select: string | number[] | undefined
   setSelect: (newSelect: string | number[] | undefined) => void;
   getSelectedParent: (map: UnitMap, trueRootId: string) => string | undefined
@@ -15,18 +15,10 @@ export interface SelectUnitBundle {
   changeSelectedChild: (newPos: "top" | "bottom", parentChildren: ChildrenList) => void
   getIdFromPath: (map: UnitMap, trueRootId: string, path: number[]) => string
   selectSibling: (siblingFlatIndex: number) => void
-}
-
-type UnitInteractionStore = SelectUnitBundle & {
-  hoveredId: string | undefined;
-  setHoveredId: (newHoveredId: string | undefined) => void;
   resetSelected: () => void;
 }
 
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
-  hoveredId: undefined,
-  setHoveredId: (newHoveredId) => set({ hoveredId: newHoveredId }),
-  
   select: undefined,
   setSelect: (newSelect) => {set({select: newSelect})},
   getSelectedParent(map, trueRootId) {
@@ -102,10 +94,6 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
 
   resetSelected: () => set({ select: undefined}),
 }));
-
-export const useSelectUnitBundle = () => {
-  return useUnitInteractionStore(s => s);
-}
 
 export function processSelect(select: string | number[] | undefined, map: UnitMap, trueRootId: string) {
   if (!select)

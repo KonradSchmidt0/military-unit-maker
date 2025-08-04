@@ -89,12 +89,12 @@ const makeUnitTexts = (name?: string, designation?: string, desc?: string, paren
 
   return (
     <>
-      <div className="absolute right-full flex flex-col h-full px-[1px] w-[30px] justify-between">
+      <div className="absolute right-full flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none">
         <div className={`flex-1 text-right ${red}`}>{name ?? ""}</div>
         <div className={`flex-1 text-right flex flex-col justify-end ${pink}`}>{designation ?? ""}</div>
       </div>
 
-      <div className="absolute left-full flex flex-col h-full px-[1px] w-[30px] justify-between">
+      <div className="absolute left-full flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal">
         <div className={`text-unit-s flex-1 ${yellow}`}>{staffComment ?? ""}</div>
         <div className={`text-unit-s flex-1 flex flex-col justify-center ${blue}`}>{parentDesc ?? ""}</div>
         <div className={`text-unit-s flex-1 flex flex-col justify-end ${green}`}>{desc ?? ""}</div>

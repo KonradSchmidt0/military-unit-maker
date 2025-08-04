@@ -1,32 +1,47 @@
 import { getEquipmentTable } from "../logic/logic";
 import { useUnitStore } from "../hooks/useUnitStore";
-import { processSelect, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { useHoverStore } from "../hooks/useHoverStore";
+import { useEffect, useState } from "react";
 
-
-// Bugged curently. Needs to press to update. Not sure why, but happened when moved to useUnitInteractionStore
-function HoverInspector() {
+export function HoverInspector() {
   const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const unitId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId)
+  const {id, pos} = useHoverStore(s => s)
+  const [show, setShow] = useState(false);
+  const [delayTimer, setDelayTimer] = useState<NodeJS.Timeout | null>(null);
 
-  
-  if (!unitId) return <div className=" text-gray-500">Hover over a unit to inspect</div>;
-  
-  const unit = unitMap[unitId]
-  const equipment = getEquipmentTable(unitId, unitMap);
-  
+  useEffect(() => {
+    if (id) {
+      const timer = setTimeout(() => {
+        setShow(true);
+      }, 500);
+      setDelayTimer(timer);
+    } else {
+      setShow(false);
+      if (delayTimer) clearTimeout(delayTimer);
+    }
+
+    return () => {
+      if (delayTimer) clearTimeout(delayTimer);
+    };
+  }, [id]);
+
+  if ('ontouchstart' in window) return null;
+
   return (
-    <div className="border rounded bg-slate-900 p-4">
-      <h2 className="font-bold mb-2">{unit?.name}</h2>
-      <ul className="list-disc pl-4">
-        {Object.entries(equipment).map(([type, count]) => (
-          <li key={type}>
-            {type}: {count}
-          </li>
-        ))}
-      </ul>
+    <div 
+      className={`editor-box pointer-events-none !w-fit !absolute !z-10 dark:!bg-bg !bg-white !border-r-2 rounded-lg duration-300 ${ show ? 'opacity-100 transition-opacity' : 'opacity-0'}`} 
+      style={{ top: pos.top, left: pos.left }}>
+      <div className="flex flex-col px-2 gap-2">
+        <h2 className="font-bold mb-2 text-center">{unitMap[id ?? ""]?.name}</h2>
+        <h2 className="font mb-2">{unitMap[id ?? ""]?.desc}</h2>
+        <ul className="list-disc pl-4">
+          {id && Object.entries(getEquipmentTable(id, unitMap)).map(([type, count]) => (
+            <li key={type}>
+              {type}: {count}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
+  )
 }
-
-export default HoverInspector;

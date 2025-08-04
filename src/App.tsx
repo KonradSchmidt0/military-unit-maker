@@ -14,6 +14,7 @@ import { IconEntry, useIconsStore } from './hooks/useIcons';
 import Papa from 'papaparse';
 import IconDropdown from './components/IconDropdown';
 import ArrowNavigation from './components/ArrowNavigation';
+import { HoverInspector } from './components/HoverInspector';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -47,18 +48,19 @@ function App() {
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>
+    <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors overflow-hidden`}>
       {/* Systems */}
       <KeyboardWatcher />
       <ChangelogOverlay/>
       <ShortcutBox/>
       <IconDropdown/>
       <ArrowNavigation/>
+      <HoverInspector/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>
         <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
-          <div className='pb-2 pt-8 px-6'>
+          <div className='pb-2 pt-8 px-40'>
             <TreeView path={actingRootPath} leftDisplayDepth={displayDepth}/>
           </div>
         </TransformComponent>

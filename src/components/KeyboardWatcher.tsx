@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useShortcutStore } from "../hooks/shortcutStore";
-import { processSelect, SelectUnitBundle, useSelectUnitBundle, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
+import { processSelect, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
+import { hoverStore, useHoverStore } from "../hooks/useHoverStore";
 
 export function KeyboardWatcher() {
-  const selectBundle = useSelectUnitBundle()
+  const selectBundle: hoverStore = useHoverStore(s => s)
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
 
@@ -68,7 +69,7 @@ function HandleEscape(resetAllSelected: Function) {
   return null
 }
 
-function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap, trueRootId: string) {
+function HandleCtrlZ(selectBundle: hoverStore, unitMap: UnitMap, trueRootId: string) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrl = e.ctrlKey || e.metaKey; // metaKey for Mac
@@ -87,11 +88,11 @@ function HandleCtrlZ(selectBundle: SelectUnitBundle, unitMap: UnitMap, trueRootI
         return
       }
 
-      const selectedId = processSelect(selectBundle.select, unitMap, trueRootId)
+      const selectedId = processSelect(selectBundle.id, unitMap, trueRootId)
       if (!selectedId)
-        selectBundle.setSelect(undefined)
+        selectBundle.call(undefined)
       else if (!unitMap[selectedId])
-        selectBundle.setSelect(undefined)
+        selectBundle.call(undefined)
     };
   
     window.addEventListener('keydown', handleKeyDown);

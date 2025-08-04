@@ -1,5 +1,6 @@
 import { useShortcutStore } from "../../hooks/shortcutStore";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
+import { useHoverStore } from "../../hooks/useHoverStore";
 import { usePaletStore } from "../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
@@ -24,13 +25,12 @@ function TreeNode(p: TreeNodeProps) {
   const trueRootId = useUnitStore(s => s.trueRootId)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
-  
-  const onHover = useUnitInteractionStore((s) => s.setHoveredId)
+
   const setSelected = useUnitInteractionStore((s) => s.setSelect)
   
   const slct = useUnitInteractionStore(s => s.select)
   const selectedId = processSelect(slct, unitMap, trueRootId)
-  const curHovered = useUnitInteractionStore(s => s.hoveredId)
+  const {id: curHovered, call: onHover} = useHoverStore(s => s)
   
   const staffComments = useGlobalStore(s => s.staffComments)
   
@@ -85,7 +85,7 @@ function TreeNode(p: TreeNodeProps) {
  
   return (
     <div className="flex justify-center">
-      <div onMouseEnter={() => onHover(id)} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
+      <div onMouseEnter={(e) => onHover(id, {left: e.clientX, top: e.clientY})} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
         <UnitDisplay unitId={id} color={color} style={{boxShadow: boxShadow}} className="transition-colors ring-white" designationPack={dp}/>
       </div>
     </div>
