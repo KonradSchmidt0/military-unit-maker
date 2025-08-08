@@ -24,12 +24,15 @@ b-supply.svg,supply logistics support
 b-armored.svg,armor armored vehicle apc ifv fighting
 b-air-assault.svg, air assault
 b-air-mobile.svg, air assault
-b-gun.svg,gun direct fire HE
+b-gun.svg,gun direct fire HE assult
 b-missile.svg,missile launcher
 b-motorized.svg,motorized truck transport
-b-unmanned.svg,unmanned drone uav robot usv
+b-unmanned.svg,unmanned drone uav robot autonomus
+b-robotic.svg,unmanned drone robot usv autonomus
+b-robot-alt.svg,unmanned drone robot usv autonomus alternative
 b-amph.svg,amphibious see water marine naval
-b-amph-alt.svg,amphibious see water marine naval
+b-amph-alt.svg,amphibious see water marine naval alternative
+b-horse.svg,horse cavalery animal mounted
 b-wheeled-cc.svg,wheeled cc cross country motorized
 b-wheeled-rb.svg,wheeled rb road bound motorized
 b-tracked.svg,tracked mechanized
@@ -43,8 +46,8 @@ b-hq-I.svg,headquarters hq command leader company I
 b-hq-II.svg,headquarters hq command leader battalion II
 b-supports-I.svg,supports auxiliary company I
 b-supports-II.svg,supports auxiliary battalion II
-k-gun.svg,gun HE direct fire support fire
-k-gun-alt.svg,gun HE direct fire support fire
+k-gun.svg,gun HE direct fire support fire assult
+k-gun-alt.svg,gun HE direct fire support fire assult alternative
 c-inf.png, infantry rifle foot artistic
 c-mg.svg, mg machinegun automatic artistic
 c-tank.png,tank armor armored artistic
