@@ -3,6 +3,7 @@ import { RecoloredImage } from "../RecoloredPicture";
 import { useEchelonStore } from "../../hooks/useEchelonStore";
 import { useUnitQuick } from "../../hooks/useUnitStore";
 import { DesignationPack } from "../../logic/designationPack";
+import { UnitStackShadow } from "./UnitStackShadow";
 
 interface UnitDisplayProps {
   unitId: string;
@@ -12,9 +13,10 @@ interface UnitDisplayProps {
   onClick?: (e: any) => void
   showText?: boolean
   designationPack?: DesignationPack
+  countInParent?: number
 }
 
-export function UnitDisplay({ unitId, color, style, className, onClick, showText = true, designationPack: dp }: UnitDisplayProps) {
+export function UnitDisplay({ unitId, color, style, className, onClick, showText = true, designationPack: dp, countInParent }: UnitDisplayProps) {
   const unit = useUnitQuick(unitId)
 
   const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
@@ -29,7 +31,7 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
   const echelonIcon = echelonIconEndings[echelonLevel]
   const echelonElement = echelonIcon ? 
     <img src={process.env.PUBLIC_URL + "/icons/" + echelonIcon} className="absolute bottom-0 dark:invert"
-    alt={echelonSymbols[echelonLevel]}
+    alt={echelonSymbols[echelonLevel]} key="echelon"
     /> : 
     null
 
@@ -46,13 +48,16 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
         ))}
         {echelonElement}
 
-        {showText && makeUnitTexts(unit.shortName, dp?.callSignFromParent, unit.desc, dp?.descFromParent, dp?.staffComment, false)}
+        {showText && makeUnitTexts(unit.shortName, dp?.callSignFromParent, unit.desc, dp?.descFromParent, dp?.staffComment, false, (countInParent ?? 1) - 1 )}
 
-        <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0" alt="unit icon frame"/>
+        <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0 z-[5]" alt="unit icon frame"/>
+        {countInParent && <UnitStackShadow stack={countInParent - 1} color={color} style={style ?? {}}/>}
       </div>
     </div>
   );
 }
+
+// {countInParent && <UnitStackShadow stack={countInParent - 1} color={color} style={style ?? {}}/>}
 
 const makeLayer = (index: number, src: string, c: string) => { 
   const cn ="absolute bottom-0 w-full h-full"
@@ -72,7 +77,7 @@ const makeLayer = (index: number, src: string, c: string) => {
   }
 
   return <img
-    key={index}
+    key={index + "layer"}
     src={src}
     alt=""
     className={cn}
@@ -80,7 +85,7 @@ const makeLayer = (index: number, src: string, c: string) => {
   />
 }
 
-const makeUnitTexts = (name?: string, designation?: string, desc?: string, parentDesc?: string, staffComment?: string, debug: boolean = false) => {
+const makeUnitTexts = (name?: string, designation?: string, desc?: string, parentDesc?: string, staffComment?: string, debug: boolean = false, rightOffset: number = 0) => {
   const red = debug ? "bg-red-500/80" : "bg-transparent";
   const pink = debug ? "bg-pink-500/80" : "bg-transparent";
   const yellow = debug ? "bg-yellow-500/80" : "bg-transparent";
@@ -94,7 +99,7 @@ const makeUnitTexts = (name?: string, designation?: string, desc?: string, paren
         <div className={`flex-1 text-right flex flex-col justify-end ${pink}`}>{designation ?? ""}</div>
       </div>
 
-      <div className="absolute left-full flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal">
+      <div style={{left: `calc(100% + ${rightOffset * 6}px)`,top: `calc(0% + ${rightOffset * 6}px)`}} className="absolute flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal">
         <div className={`text-unit-s flex-1 ${yellow}`}>{staffComment ?? ""}</div>
         <div className={`text-unit-s flex-1 flex flex-col justify-center ${blue}`}>{parentDesc ?? ""}</div>
         <div className={`text-unit-s flex-1 flex flex-col justify-end ${green}`}>{desc ?? ""}</div>

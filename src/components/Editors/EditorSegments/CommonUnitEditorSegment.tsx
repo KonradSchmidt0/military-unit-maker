@@ -8,6 +8,7 @@ import { ChildRow } from "./ChildRow";
 import { UnitColorOptions } from "./UnitColorOptions";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
+import { GetFlatIds } from "../../../logic/childManaging";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extrem, then this is the opposite one
@@ -61,7 +62,7 @@ export default function CommonUnitEditorSegment() {
     addChild(parentId, selectedId as string, -1)
     addChild(parentId, newId, 1)
     if (!alt)
-      setSelected(newId)
+      setSelected([...selectPath.slice(0, -1), GetFlatIds(parent.children).length - 1])
   }
 
   function handleEchelonChange(newEchelonLevel: number) {

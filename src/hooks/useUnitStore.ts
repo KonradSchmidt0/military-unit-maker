@@ -174,7 +174,9 @@ export const useUnitStore = create<UnitStore>()(
         smartColor: parent.smartColor,
         echelonLevel: parent.echelonLevel,
         layers: [...parent.layers],
-        children: { [babyId]: childCount }
+        children: { [babyId]: childCount },
+        flatCallSigns: {},
+        flatDescriptions: {}
       };
       get().updateUnit(newMadeParentId, updatedParent);
 
@@ -224,7 +226,11 @@ export const useUnitStore = create<UnitStore>()(
       const newRoot: OrgUnit = { 
         ...oldRoot,
         type: "org", name: "New Root Unit", echelonLevel: oldRoot.echelonLevel + 1,
-        children: c
+        children: c,
+        flatCallSigns: {},
+        flatDescriptions: {},
+        desc: "",
+        shortName: ""
       }
       
       if (!setNewRootAsParent)

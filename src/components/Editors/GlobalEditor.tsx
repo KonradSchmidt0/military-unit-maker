@@ -9,8 +9,7 @@ import { DebugSegment } from "./EditorSegments/DebugSegment";
 import ThemeToggle from "./EditorSegments/ThemeToggle";
 
 export default function GlobalEditor() {
-  const foldingLevel = useGlobalStore(s => s.echelonFoldingLevel)
-  const setFoldingLevel = useGlobalStore(s => s.setEchelonFoldingLevel)
+  const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
   const foldingDepth = useGlobalStore(s => s.foldingDepth)
   const setFoldingDepth = useGlobalStore(s => s.setFoldingDepth)
   const displayParentBox = useGlobalStore(s => s.displayParentBox)
@@ -18,6 +17,7 @@ export default function GlobalEditor() {
   const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
   const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
   const setStaffComments = useGlobalStore(s => s.setStaffComments)
+  const { stacking, setStacking } = useGlobalStore(s => s)
 
   const setRootUnitId = useUnitStore(s => s.setTrueRootId)
   const resetSelect = useUnitInteractionStore(s => s.resetSelected)
@@ -42,8 +42,12 @@ export default function GlobalEditor() {
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
           Folding Level:
-          <EchelonEditor echelonLevel={foldingLevel} onChange={setFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"></EchelonEditor>
+          <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"></EchelonEditor>
           <input className="editor-element !w-16" type="number" value={foldingDepth} onChange={(e) => setFoldingDepth(parseInt(e.target.value))}/>
+        </div>
+
+        <div className="editor-segment-row">
+          <button className="btn-emoji" onClick={() => setStacking(!stacking)}>Stacking➡️{stacking ? "❌" : "✅"}</button>
         </div>
 
         <div className="editor-segment-row">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
-import { useUnitStore } from "../../../hooks/useUnitStore"
 
 export function DebugSegment() {
   const [dbg, setDbg] = useState(false)
@@ -21,7 +20,6 @@ export function DebugSegment() {
   }, [alt]);
 
   const select = useUnitInteractionStore(s => s.select)
-  const trueRootId = useUnitStore(s => s.trueRootId)
 
   if (!dbg)
     return null

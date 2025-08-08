@@ -16,7 +16,7 @@ export function RecoloredImage(pr: RecoloredImageProps) {
     img.src = pr.src;
 
     img.onload = () => {
-      const result = recolorWhitePixels(img, pr.color);
+      const result = recolorPixels(img, pr.color);
       setRecoloredSrc(result);
     };
   }, [pr.src, pr.color]);
@@ -27,7 +27,7 @@ export function RecoloredImage(pr: RecoloredImageProps) {
 }
 
 
-function recolorWhitePixels(image: any, color: string) {
+function recolorPixels(image: any, color: string) {
   const canvas = document.createElement("canvas") as any;
   canvas.width = image.width;
   canvas.height = image.height;
@@ -46,13 +46,9 @@ function recolorWhitePixels(image: any, color: string) {
   for (let i = 0; i < data.length; i += 4) {
     const [r, g, b, a] = [data[i], data[i + 1], data[i + 2], data[i + 3]];
 
-    const isWhite = r === 255 && g === 255 && b === 255 && a === 255;
-    if (isWhite) {
-      data[i] = rC;
-      data[i + 1] = gC;
-      data[i + 2] = bC;
-      // leave alpha alone
-    }
+    data[i] = (r / 255) * rC;
+    data[i + 1] = (g / 255) * gC;
+    data[i + 2] = (b / 255) * bC;
   }
 
   ctx.putImageData(imageData, 0, 0);

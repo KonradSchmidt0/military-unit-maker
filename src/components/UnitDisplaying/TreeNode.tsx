@@ -6,7 +6,7 @@ import { processSelect, useUnitInteractionStore } from "../../hooks/useUnitInter
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetChildIdFromPath, GetTrueColorRecursively } from "../../logic/childManaging";
 import { getDesignationPack } from "../../logic/designationPack";
-import { defaultUnitColor } from "../../logic/logic";
+import { defaultUnitColor, OrgUnit } from "../../logic/logic";
 import { UnitDisplay } from "./UnitDisplay"
 
 interface TreeNodeProps {
@@ -32,7 +32,7 @@ function TreeNode(p: TreeNodeProps) {
   const selectedId = processSelect(slct, unitMap, trueRootId)
   const {id: curHovered, call: onHover} = useHoverStore(s => s)
   
-  const staffComments = useGlobalStore(s => s.staffComments)
+  const {staffComments, stacking} = useGlobalStore(s => s)
   
   if (!p.unitId && !p.path) {
     console.warn("No path or id assigned!")
@@ -71,8 +71,16 @@ function TreeNode(p: TreeNodeProps) {
 
     setSelected(p.path ?? id);
   }
+  
+  let amIStacked = false
+  let countInParent = undefined
+  if (myParentId && stacking) {
+    countInParent = (unitMap[myParentId] as OrgUnit).children[id]
+    const multipleInParent = countInParent > 1
+    amIStacked = multipleInParent ? true : false
+  }
 
-  const dp = p.path ? getDesignationPack(p.path, unitMap, trueRootId, staffComments) : {}
+  let dp = p.path && !amIStacked ? getDesignationPack(p.path, unitMap, trueRootId, staffComments) : {}
  
   const smartColor = unitMap[id].smartColor
   const color = p.path ? GetTrueColorRecursively(trueRootId, p.path, unitMap) : (smartColor === "inheret" ? defaultUnitColor : smartColor)
@@ -86,7 +94,11 @@ function TreeNode(p: TreeNodeProps) {
   return (
     <div className="flex justify-center">
       <div onMouseEnter={(e) => onHover(id, {left: e.clientX, top: e.clientY})} onMouseLeave={() => onHover(undefined)} onClick={handleClick}>
-        <UnitDisplay unitId={id} color={color} style={{boxShadow: boxShadow}} className="transition-colors ring-white" designationPack={dp}/>
+        <UnitDisplay 
+          unitId={id} color={color} 
+          style={{boxShadow: boxShadow}} className="transition-colors ring-white" 
+          designationPack={dp} countInParent={countInParent}
+        />
       </div>
     </div>
   );

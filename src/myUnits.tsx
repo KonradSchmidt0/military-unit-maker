@@ -20,7 +20,9 @@ export const rifle_o: OrgUnit = {
   smartColor: "inheret",
   layers: infVisual,
   echelonLevel: 1,
-  children: {"rifle_e": 2}
+  children: {"rifle_e": 2},
+  flatCallSigns: {},
+  flatDescriptions: {}
 }
 export const mg_o: RawUnit = {
   type: "raw",
@@ -37,7 +39,7 @@ export const leadWithRadio_e: RawUnit = {
   layers: infHqVisual,
   echelonLevel: 0,
   equipment: { "Warrior": 2, "Rifle": 2, "Radio": 1 },
-  desc: undefined //"Commander + Radio Man"
+  desc: "Commander + Radio Man"
 }
 
 export const infatry_oo: OrgUnit = {
@@ -52,7 +54,19 @@ export const infatry_oo: OrgUnit = {
     "mg_o": 1,
     "rifle_e": 1,
   },
-  desc: undefined //"16 + 1R"
+  desc: "16 + 1R",
+  flatCallSigns: {
+    0: "H",
+    1: "a",
+    2: "b",
+    3: "c",
+    4: "z",
+  },
+  flatDescriptions: {
+    1: "1st maneuver element",
+    2: "2nd maneuver element",
+    4: "reserve / runners",
+  }
 }
 
 export const initialUnits: UnitMap = {

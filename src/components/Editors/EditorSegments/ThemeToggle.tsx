@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useThemeStore } from '../../../hooks/useThemeStore';
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const {isDark, setDark} = useThemeStore();
 
   useEffect(() => {
     const html = document.documentElement;
@@ -15,7 +16,7 @@ export default function ThemeToggle() {
   return (
     <button
       className="btn-emoji"
-      onClick={() => setIsDark(!isDark)}
+      onClick={() => setDark(!isDark)}
     >
       {isDark ? '☀️📺' : '🌒📺'}
     </button>

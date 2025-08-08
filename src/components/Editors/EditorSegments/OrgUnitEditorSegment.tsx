@@ -10,7 +10,8 @@ import { GetFlatIndexFromId } from "../../../logic/childManaging";
 export default function OrgUnitEditorSegment() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const select = useUnitInteractionStore(s => s.select) as string | number[]
+  const selectedId = processSelect(select, unitMap, trueRootId) as string
   
   const selectChild = useUnitInteractionStore(s => s.selectChild)
 
@@ -73,7 +74,7 @@ export default function OrgUnitEditorSegment() {
     // or else it breaks UI and potentialy logic
     const childUnit = unitMap[childId];
     const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
-    return (
+    return (<div className="" key={"" + childId + "" + count + "" + index}>
       <ChildRow key={childId + "childEdittingList"}
         childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
         onChildChange={(n) => setChildId(selectedId, childId, n)}
@@ -88,7 +89,7 @@ export default function OrgUnitEditorSegment() {
         onUpPressed={() => moveChild(selectedId, childId, "top")}
         onDownPressed={() => moveChild(selectedId, childId, "bottom")}
       />
-    ); 
+    </div>); 
   } );
   return (
     <div className="editor-segment-flex">

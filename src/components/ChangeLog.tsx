@@ -19,7 +19,18 @@ export default function ChangelogOverlay() {
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
 
         <div className="space-y-4 text-sm">
-          <b className='text-base'>Temporary Roots (25 7 24)</b><br/>
+          <b className='text-base'>Parent Comments (25 8 08)</b><br/>
+           - Added abillity for parents to assign descriptions and callsigns to subunits<br/>
+           - Fixed and reworked color changing for HQ icon<br/>
+           - Added stacking<br/>
+           - <a href='https://www.battleorder.org/icons' target='_blank'>Added few more icons</a><br/>
+           - Unlinking now selects tree node, not just unit type<br/>
+           - Added abillity to add multiple items in one promp by using commas<br/>
+           - Fixed bug with entering item names ending with number<br/>
+           - Fixed dark mode automatically turning on when opening global editor<br/>
+          <br/>
+
+          <b className='text-base'>Unit type texts (25 8 04)</b><br/>
            - Added unit type names and descriptions<br/>
            - Added visual diffrence for when selecting a unit and a node<br/>
            - <a href='https://www.battleorder.org/icons' target='_blank'>Added amphibious and costal modifire icons</a><br/>

@@ -17,6 +17,8 @@ interface GlobalStore {
   setIsPalletMini: (b: boolean) => void;
   isChangeLogMini: boolean;
   setIsChangeLogMini: (b: boolean) => void;
+  stacking: boolean;
+  setStacking: (b: boolean) => void;
 
   staffComments: StaffComment[];
   setStaffComments: (n: StaffComment[]) => void
@@ -38,6 +40,8 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
   setIsPalletMini: (b) => set({isPalletMini: b}),
   isChangeLogMini: true,
   setIsChangeLogMini: (b) => set({isChangeLogMini: b}),
+  stacking: false,
+  setStacking: (b) => set({stacking: b}),
 
 
 

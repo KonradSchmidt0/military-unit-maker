@@ -12,7 +12,7 @@ export interface RawUnit {
   name: string;
   smartColor: SmartColor;
   echelonLevel: number;
-  layers: string[]; // For now just a path to /public/ later will think about user custom icons
+  layers: string[];
 
   equipment: EquipmentTable;
 
@@ -25,14 +25,14 @@ export interface OrgUnit {
   name: string;
   smartColor: SmartColor;
   echelonLevel: number;
-  layers: string[]; // For now just a path to /public/ later will think about user custom icons
+  layers: string[];
 
   children: ChildrenList // First is UnitId, second is count of how many
 
   shortName?: string
   desc?: string;
-  flatCallSigns?: Record<number, string>
-  flatDescriptions?: Record<number, string>
+  flatCallSigns: Record<number, string>
+  flatDescriptions: Record<number, string>
 }
 
 
@@ -106,7 +106,9 @@ export function createNewOrgUnit({
     layers,
     smartColor,
     echelonLevel,
-    children
+    children,
+    flatCallSigns: {},
+    flatDescriptions: {}
   };
 }
 

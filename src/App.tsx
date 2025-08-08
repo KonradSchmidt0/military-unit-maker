@@ -48,7 +48,7 @@ function App() {
   const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
 
   return (
-    <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors overflow-hidden`}>
+    <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>
       {/* Systems */}
       <KeyboardWatcher />
       <ChangelogOverlay/>

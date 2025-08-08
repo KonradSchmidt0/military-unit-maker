@@ -1,6 +1,6 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
-import { RawUnit } from "../../../logic/logic";
+import { EquipmentTable, RawUnit } from "../../../logic/logic";
 
 export default function RawUnitEditorSegment() {
   const unitMap = useUnitStore(s => s.unitMap)
@@ -17,8 +17,8 @@ export default function RawUnitEditorSegment() {
 
   const equipmentEntries = Object.entries(unit.equipment);
 
-  const updateEquipment = (type: string, value: number) => {
-    const newEquipment = { ...unit.equipment, [type]: value };
+  const changeEquipment = (additionalEq: EquipmentTable) => {
+    const newEquipment = { ...unit.equipment, ...additionalEq};
     updateUnit(selectedId, { ...unit, equipment: newEquipment });
   };
 
@@ -28,27 +28,28 @@ export default function RawUnitEditorSegment() {
     updateUnit(selectedId, { ...unit, equipment: newEquipment });
   };
 
-  const addEquipment = () => {
-    const p = "Enter new equipment type. Press double space to enter quantity (e.g. 'Rifle  30', 'Howitzer', 'MG42  6' , Stryker IFV  14 ):"
-    const newTypeInput = prompt(p);
-    if (!newTypeInput) return;
+  const handleAdding = () => {
+    const p = "Enter new equipment type. Press double space to enter quantity (e.g. 'Rifle  30', 'Howitzer', 'MG42  6' , Stryker IFV  14 ). Enter commas (,) to add new type:"
+    const inp = prompt(p);
+    if (!inp) return;
 
-    // Try to extract with double-space and number
-    const match = newTypeInput.match(/^(.*?){2}(\d+)$/);
-
-    let newType: string;
-    let newValue: number;
-
-    if (match) {
-      newType = match[1].trim();
-      newValue = parseInt(match[2], 10);
-    } else {
-      newType = newTypeInput.trim();
-      newValue = parseInt(prompt("Enter quantity:") || "0", 10);
-      if (isNaN(newValue)) return;
+    let eq: EquipmentTable = {}
+    const pairs = inp.split(/\s*,\s*/) // Splits if theres comma between
+    for (const pair of pairs) {
+      const [left, right] = pair.split(/ {2,}/); // ✅ split by double space or more
+      const qty = parseInt(right, 10);
+  
+      if (!isNaN(qty)) {
+        eq[left] = qty;
+      } else {
+        const qtyPrompt = prompt(`Enter quantity for "${left}":`);
+        if (qtyPrompt && !isNaN(parseInt(qtyPrompt, 10))) {
+          eq[left] = parseInt(qtyPrompt, 10);
+        }
+      }
     }
 
-    updateEquipment(newType, newValue);
+    changeEquipment(eq)
   };
 
   const handleSpliting = () => {
@@ -69,7 +70,7 @@ export default function RawUnitEditorSegment() {
     <div className="editor-segment-flex">
       <div className="editor-segment-row">
         <span className="text-lg font-bold">Equipment</span>
-        <button onClick={addEquipment} className="btn-editor">
+        <button onClick={handleAdding} className="btn-editor">
           ➕Add
         </button>
         <button onClick={handleSpliting} className="btn-emoji">
@@ -85,7 +86,7 @@ export default function RawUnitEditorSegment() {
             type="number"
             value={value}
             className="editor-element !w-24"
-            onChange={(e) => updateEquipment(type, parseInt(e.target.value))}
+            onChange={(e) => changeEquipment({[type]: parseInt(e.target.value)})}
           />
           <button onClick={() => deleteEquipment(type)} className="btn-emoji !p-0">
             ❌
