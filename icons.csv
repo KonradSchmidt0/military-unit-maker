@@ -1,29 +1,30 @@
 filename,tags
 b-inf.svg,infantry rifle foot
-b-art.svg,artillery indirect howitzer HE
-b-tank.svg,tank armor armored vehicle apc ifv fighting
+b-art.svg,artillery indirect howitzer HE gun
+b-tank.svg,tank armor armored vehicle apc ifv fighting assult gun afv
 b-fixed-wing.svg,aviation fixed wing plane aircraft airship air
 b-rotary.svg,rotary helicopter aviation gunship air
 b-aa.svg,anti air aa air to air
 b-at.svg,anti-tank at air to ground
-b-at.svg,anti air aa air to air gun konrad
-k-at.svg,anti-tank at air to ground gun konrad
+b-at.svg,anti air aa air to air gun konrad niehorster
+k-at.svg,anti-tank at air to ground gun konrad niehorster
 k-aa-missile.svg,anti air aa air to air missile konrad
 k-at-missile.svg,anti-tank at air to ground missile konrad
 b-engi.svg,engineer support
 b-flame.svg,flamethrower engineer
-b-hq.png,headquarters hq command leader
 b-hq.svg,headquarters hq command leader
-b-maintenance.svg,maintenance repair support
-b-med.svg,medic medical health support  
+b-hq.png,headquarters hq command leader alt
+b-maintenance.svg,maintenance repair support shot
+b-med.svg,medic medical health support
+b-hospital.svg,medical health support field hospital
 b-mortar.svg,artillery indirect mortart HE
 b-mortar-alt.svg,artillery indirect mortart HE alternative
-b-rec.svg,recon reconnaissance scout support
-b-signal.svg,signal communication comms support
-b-supply.svg,supply logistics support
-b-armored.svg,armor armored vehicle apc ifv fighting
+b-rec.svg,recon reconnaissance scout support cavalery hussars
+b-signal.svg,signal communication comms support radio
+b-supply.svg,supply logistics support storage
+b-armored.svg,armor armored vehicle apc ifv fighting protected
 b-air-assault.svg, air assault
-b-air-mobile.svg, air assault
+b-air-mobile.svg, air mobile
 b-gun.svg,gun direct fire HE assult
 b-missile.svg,missile launcher
 b-motorized.svg,motorized truck transport
@@ -32,7 +33,7 @@ b-robotic.svg,unmanned drone robot usv autonomus
 b-robot-alt.svg,unmanned drone robot usv autonomus alternative
 b-amph.svg,amphibious see water marine naval
 b-amph-alt.svg,amphibious see water marine naval alternative
-b-horse.svg,horse cavalery animal mounted
+b-horse.svg,horse cavalery animal mounted hussars
 b-wheeled-cc.svg,wheeled cc cross country motorized
 b-wheeled-rb.svg,wheeled rb road bound motorized
 b-tracked.svg,tracked mechanized
@@ -46,8 +47,8 @@ b-hq-I.svg,headquarters hq command leader company I
 b-hq-II.svg,headquarters hq command leader battalion II
 b-supports-I.svg,supports auxiliary company I
 b-supports-II.svg,supports auxiliary battalion II
-k-gun.svg,gun HE direct fire support fire assult
-k-gun-alt.svg,gun HE direct fire support fire assult alternative
+k-gun.svg,gun HE direct fire support fire assult konrad niehorster
+k-gun-alt.svg,gun HE direct fire support fire assult alternative konrad niehorster
 c-inf.png, infantry rifle foot artistic
 c-mg.svg, mg machinegun automatic artistic
 c-tank.png,tank armor armored artistic
