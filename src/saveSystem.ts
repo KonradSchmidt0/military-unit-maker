@@ -1,4 +1,4 @@
-import { StaffComment, useGlobalStore } from "./hooks/useGlobalStore";
+import { StaffText, useGlobalStore } from "./hooks/useGlobalStore";
 import { usePaletStore } from "./hooks/usePaletStore";
 import { UnitMap, useUnitStore } from "./hooks/useUnitStore";
 
@@ -10,7 +10,7 @@ interface SaveFile {
   unitMap: UnitMap;
   unitPalet: string[];
   rootUnitId: string;
-  staffComments: StaffComment[];
+  staffComments: StaffText[];
 }
 
 export function saveToFile() {
@@ -59,7 +59,7 @@ export function handleLoadFile(
       if (json.version <= 2) {
         unitMap = swapLayerSubstrings(unitMap, "/icons/", `${process.env.PUBLIC_URL}/icons/`)
       }
-      let staffComments: StaffComment[] = []
+      let staffComments: StaffText[] = []
       if (json.version > 3) {
         staffComments = [...json.staffComments]
       }

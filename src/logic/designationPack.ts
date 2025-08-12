@@ -1,20 +1,28 @@
-import { StaffComment } from "../hooks/useGlobalStore";
+import { StaffText } from "../hooks/useGlobalStore";
 import { UnitMap } from "../hooks/useUnitStore";
 import { GetChildIdFromPath } from "./childManaging";
 import { OrgUnit } from "./logic";
 
 export interface DesignationPack {
   callSignFromParent?: string;
+  staffName?: string;
   descFromParent?: string;
   staffComment?: string;
 }
 
 // WIP
-export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId: string, staffComments: StaffComment[]) : DesignationPack {
+export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
   let comment = undefined
   for (const sc of staffComments) {
     if (sc.path.toString() === path.toString()) {
       comment = sc.comment
+      break
+    }
+  }
+  let name = undefined
+  for (const sn of staffNames) {
+    if (sn.path.toString() === path.toString()) {
+      name = sn.comment
       break
     }
   }
@@ -29,7 +37,7 @@ export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId:
     desc = parent.flatDescriptions[path[path.length - 1]]
   }
 
-  return {callSignFromParent: cs, descFromParent: desc, staffComment: comment}
+  return {callSignFromParent: cs, staffName: name, descFromParent: desc, staffComment: comment}
 }
 
 export function changeTextInParent(path: number[], unitMap: UnitMap, trueRootId: string, callSign?: string, desc?: string): OrgUnit {

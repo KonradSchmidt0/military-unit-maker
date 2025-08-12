@@ -36,7 +36,7 @@ export default function RawUnitEditorSegment() {
     let eq: EquipmentTable = {}
     const pairs = inp.split(/\s*,\s*/) // Splits if theres comma between
     for (const pair of pairs) {
-      const [left, right] = pair.split(/ {2,}/); // ✅ split by double space or more
+      const [left, right] = pair.split(/ {2,}/); // Split by double space or more
       const qty = parseInt(right, 10);
   
       if (!isNaN(qty)) {
@@ -70,7 +70,7 @@ export default function RawUnitEditorSegment() {
     <div className="editor-segment-flex">
       <div className="editor-segment-row">
         <span className="text-lg font-bold">Equipment</span>
-        <button onClick={handleAdding} className="btn-editor">
+        <button onClick={handleAdding} className="btn-emoji">
           ➕Add
         </button>
         <button onClick={handleSpliting} className="btn-emoji">

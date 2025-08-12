@@ -10,7 +10,7 @@ export default function IconDropdown() {
   const [search, setSearch] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (onChosen && inputRef.current) {
+    if (onChosen && inputRef.current && !('ontouchstart' in window)) {
       inputRef.current.focus();
     }
   }, [onChosen]);

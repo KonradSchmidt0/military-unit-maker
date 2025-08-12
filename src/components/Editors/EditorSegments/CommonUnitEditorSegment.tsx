@@ -11,7 +11,7 @@ import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { GetFlatIds } from "../../../logic/childManaging";
 
 export default function CommonUnitEditorSegment() {
-  // Man, if propdrilling is one extrem, then this is the opposite one
+  // Man, if propdrilling is one extreme, then this is the opposite one
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
   const slctd = useUnitInteractionStore(s => s.select)

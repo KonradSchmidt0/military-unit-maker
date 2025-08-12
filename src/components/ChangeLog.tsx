@@ -19,7 +19,16 @@ export default function ChangelogOverlay() {
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
 
         <div className="space-y-4 text-sm">
-          <b className='text-base'>Parent Comments (25 8 08)</b><br/>
+          <b className='text-base'>Parent Comments (2025 8 12)</b><br/>
+          - Added Staff Names. Very usefull if youre naming named units, not just a alpha numeric designation from the parent<br/>
+          - UX upgrades for mobile<br/>
+          - Fixed bug with setting child count to not a number<br/>
+          - UX upgrades for handling children in Editor window<br/>
+          - Better UI for handling unit texts<br/>
+          - Unit Text now truncates on display if too long<br/>
+          <br/>
+
+          <b className='text-base'>Parent Comments (2025 8 08)</b><br/>
            - Added abillity for parents to assign descriptions and callsigns to subunits<br/>
            - Fixed and reworked color changing for HQ icon<br/>
            - Added stacking<br/>
@@ -30,13 +39,13 @@ export default function ChangelogOverlay() {
            - Fixed dark mode automatically turning on when opening global editor<br/>
           <br/>
 
-          <b className='text-base'>Unit type texts (25 8 04)</b><br/>
+          <b className='text-base'>Unit type texts (2025 8 04)</b><br/>
            - Added unit type names and descriptions<br/>
            - Added visual diffrence for when selecting a unit and a node<br/>
            - <a href='https://www.battleorder.org/icons' target='_blank'>Added amphibious and costal modifire icons</a><br/>
           <br/>
 
-          <b className='text-base'>Better Layer Picker (25 8 03)</b><br/>
+          <b className='text-base'>Better Layer Picker (2025 8 03)</b><br/>
            - Added new dropdown for layers, which gives a preview and allows to search based on tags<br/>
            - <a href='https://www.youtube.com/channel/UCn6_Kza6erL9GCAhOpQLfBg' target='_blank'>Added few new icons</a> (some even original)<br/>
            - Added staff comments<br/>
@@ -48,20 +57,20 @@ export default function ChangelogOverlay() {
           Still alive and kicking ;)<br/>
           <br/>
 
-          <b className='text-base'>Temporary Roots (25 7 24)</b><br/>
+          <b className='text-base'>Temporary Roots (2025 7 24)</b><br/>
            - Added ActingRoot (temporary, for when you want to focus only on smaller unit)<br/>
            - Added shortcut highlight<br/>
            - Added org unit consolidation<br/>
           <br/>
 
-          <b className='text-base'>Editor Boxes minimizing (25 7 23)</b><br/>
+          <b className='text-base'>Editor Boxes minimizing (2025 7 23)</b><br/>
            - Added Editor minimaiziziziataion<br/>
            - Added changelog<br/>
            - Abillity to add allready existing children from the pallet<br/>
            - Added preview of current unit visual<br/>
           <br/>
 
-          <b className='text-base'>Echelon visualization reworked (25 7 22)</b><br/>
+          <b className='text-base'>Echelon visualization reworked (2025 7 22)</b><br/>
 
            - Echelons are finally not an text, but actuall <a href='https://www.battleorder.org/icons' target='_blank'>icons</a><br/>
            - Lack of echelons dosent affect styling anymore!<br/>

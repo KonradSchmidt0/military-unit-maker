@@ -48,7 +48,7 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
         ))}
         {echelonElement}
 
-        {showText && makeUnitTexts(unit.shortName, dp?.callSignFromParent, unit.desc, dp?.descFromParent, dp?.staffComment, false, (countInParent ?? 1) - 1 )}
+        {showText && makeUnitTexts(unit.name, dp?.callSignFromParent, dp?.staffName, unit.desc, dp?.descFromParent, dp?.staffComment, false, (countInParent ?? 1) - 1 )}
 
         <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0 z-[5]" alt="unit icon frame"/>
         {countInParent && <UnitStackShadow stack={countInParent - 1} color={color} style={style ?? {}}/>}
@@ -56,8 +56,6 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
     </div>
   );
 }
-
-// {countInParent && <UnitStackShadow stack={countInParent - 1} color={color} style={style ?? {}}/>}
 
 const makeLayer = (index: number, src: string, c: string) => { 
   const cn ="absolute bottom-0 w-full h-full"
@@ -85,7 +83,7 @@ const makeLayer = (index: number, src: string, c: string) => {
   />
 }
 
-const makeUnitTexts = (name?: string, designation?: string, desc?: string, parentDesc?: string, staffComment?: string, debug: boolean = false, rightOffset: number = 0) => {
+const makeUnitTexts = (name?: string, designation?: string, staffName?: string, desc?: string, parentDesc?: string, staffComment?: string, debug: boolean = false, rightOffset: number = 0) => {
   const red = debug ? "bg-red-500/80" : "bg-transparent";
   const pink = debug ? "bg-pink-500/80" : "bg-transparent";
   const yellow = debug ? "bg-yellow-500/80" : "bg-transparent";
@@ -95,15 +93,30 @@ const makeUnitTexts = (name?: string, designation?: string, desc?: string, paren
   return (
     <>
       <div className="absolute right-full flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none">
-        <div className={`flex-1 text-right ${red}`}>{name ?? ""}</div>
-        <div className={`flex-1 text-right flex flex-col justify-end ${pink}`}>{designation ?? ""}</div>
+        <div className={`flex-1 text-right ${red}`}>{TruncateName(name)}</div>
+        <div className={`flex-1 text-right flex flex-col justify-end ${pink}`}>{TruncateName(staffName ?? designation)}</div>
       </div>
 
       <div style={{left: `calc(100% + ${rightOffset * 6}px)`,top: `calc(0% + ${rightOffset * 6}px)`}} className="absolute flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal">
-        <div className={`text-unit-s flex-1 ${yellow}`}>{staffComment ?? ""}</div>
-        <div className={`text-unit-s flex-1 flex flex-col justify-center ${blue}`}>{parentDesc ?? ""}</div>
-        <div className={`text-unit-s flex-1 flex flex-col justify-end ${green}`}>{desc ?? ""}</div>
+        <div className={`text-unit-s flex-1 ${yellow}`}>{TruncateDesc(staffComment)}</div>
+        <div className={`text-unit-s flex-1 flex flex-col justify-center ${blue}`}>{TruncateDesc(parentDesc)}</div>
+        <div className={`text-unit-s flex-1 flex flex-col justify-end ${green}`}>{TruncateDesc(desc)}</div>
       </div>
     </>
   );
+}
+
+function Truncate(t: string, length: number) {
+  if (t.length <= length)
+    return t;
+
+  return t.slice(0, length) + "..."
+}
+
+function TruncateDesc(t?: string): string {
+  return Truncate(t ?? "", 35)
+}
+
+function TruncateName(t?: string): string {
+  return Truncate(t ?? "", 17)
 }

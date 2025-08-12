@@ -58,7 +58,6 @@ export default function ArrowNavigation() {
         let o = path[path.length - 1] + d
         o = (flatChildrenLenght * 2 + o) % flatChildrenLenght
         selectSibling(o)
-        console.log(path)
       }
 
       switch (e.key) {

@@ -202,7 +202,7 @@ export const useUnitStore = create<UnitStore>()(
     setInnerTexts: (id, shortName, desc) => {
       const um = get().unitMap
       const unit = um[id]
-      get().updateUnit(id, {...unit, shortName: shortName ?? unit.shortName, desc: desc ?? unit.desc})
+      get().updateUnit(id, {...unit, name: shortName ?? unit.name, desc: desc ?? unit.desc})
     },
 
 
@@ -229,8 +229,7 @@ export const useUnitStore = create<UnitStore>()(
         children: c,
         flatCallSigns: {},
         flatDescriptions: {},
-        desc: "",
-        shortName: ""
+        desc: ""
       }
       
       if (!setNewRootAsParent)

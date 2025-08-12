@@ -47,7 +47,7 @@ export default function GlobalEditor() {
         </div>
 
         <div className="editor-segment-row">
-          <button className="btn-emoji" onClick={() => setStacking(!stacking)}>Stacking➡️{stacking ? "❌" : "✅"}</button>
+          <button className="btn-emoji" onClick={() => setStacking(!stacking)}>Stacking{stacking ? "✅" : "❌"}</button>
         </div>
 
         <div className="editor-segment-row">

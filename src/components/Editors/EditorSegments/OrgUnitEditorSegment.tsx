@@ -6,6 +6,7 @@ import { OrgUnit } from "../../../logic/logic";
 import { ChildRow } from "./ChildRow";
 import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
 import { GetFlatIndexFromId } from "../../../logic/childManaging";
+import { FlatChildrenEditor } from "./FlatChildrenEditor";
 
 export default function OrgUnitEditorSegment() {
   const unitMap = useUnitStore(s => s.unitMap)
@@ -74,7 +75,10 @@ export default function OrgUnitEditorSegment() {
     // or else it breaks UI and potentialy logic
     const childUnit = unitMap[childId];
     const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
-    return (<div className="" key={"" + childId + "" + count + "" + index}>
+
+    // 
+    const key = select + "" + childId + "" + index
+    return (<div className="" key={key}>
       <ChildRow key={childId + "childEdittingList"}
         childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
         onChildChange={(n) => setChildId(selectedId, childId, n)}
@@ -95,6 +99,7 @@ export default function OrgUnitEditorSegment() {
     <div className="editor-segment-flex">
       {childrenHeader}
       {childEdittingList}
+      <FlatChildrenEditor/>
     </div>
   )
   

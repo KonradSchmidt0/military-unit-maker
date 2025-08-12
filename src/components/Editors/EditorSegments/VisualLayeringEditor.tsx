@@ -43,9 +43,9 @@ export function VisualLayeringEditor() {
 
 
   return (<>
-    <div className="editor-segment-flex min-h-40">
+    <div className="editor-segment-flex min-h-40 ">
       <div className="editor-segment-row">
-        <h2 className="font-bold">Visual Layers</h2>
+        <h2 className="font-bold text-lg">Visual Layers</h2>
         <button onClick={(e) => setDropdown_onChosen((n:string) => addLayer(n), {top: e.clientY + 10, left: e.clientX})} className="btn-emoji !pr-2.5">➕🗃️</button>
       </div>
       <div className="flex flex-row gap-2 mb-2 relative">

@@ -24,5 +24,5 @@ export function FlatChildrenEditor(p: props) {
     return <ChildTextElement key={childId + "" + index} parentSignature={select} childFlatIndex={index}/>; 
   } );
 
-  return (<div>{childEdittingList}</div>)
+  return (<div className="flex flex-col gap-1.5">{childEdittingList}</div>)
 }

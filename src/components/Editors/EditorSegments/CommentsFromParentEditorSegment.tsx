@@ -27,15 +27,27 @@ export function CommentsFromParentEditorSegment(p: props) {
   }
 
   return <>
-    {slct.length > 0 ? <LargeTextInput 
-      topText="Name from parent:" 
-      value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""} 
-      onChange={(e) => handleTextsInParent(e.target.value, undefined)}
-    /> : ""}
-    {slct.length > 0 ? <LargeTextInput 
-      topText="Desc. from parent:" 
-      value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""} 
-      onChange={(e) => handleTextsInParent(undefined, e.target.value)}
-    /> : ""}
+    {slct.length > 0 && <label className="editor-segment-row">
+      <span className="font-bold">CS:</span>
+      <input
+        id="CallSignInputId"
+        type="text"
+        value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""}
+        onChange={(e) => handleTextsInParent(e.target.value, undefined)}
+        className="editor-element"
+        alt="Name given by parent (callsign)"
+      />
+    </label>}
+    {slct.length > 0 && <label className="editor-segment-row">
+      <span className="font-bold">DfP:</span>
+      <input
+        id="CallSignInputId"
+        type="text"
+        value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
+        onChange={(e) => handleTextsInParent(undefined, e.target.value)}
+        className="editor-element"
+        alt="Description given by parent"
+      />
+    </label>}
   </>
 }
