@@ -12,8 +12,7 @@ import { GetFlatIds } from "../../../logic/childManaging";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extreme, then this is the opposite one
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
+  const { unitMap, trueRootId } = useUnitStore(s => s)
   const slctd = useUnitInteractionStore(s => s.select)
   const selectedId = processSelect(slctd, unitMap, trueRootId) as string
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))

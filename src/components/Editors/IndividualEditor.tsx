@@ -6,11 +6,13 @@ import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
 import { EQListAndRemover } from "./EditorSegments/EQListAndRemover";
 import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
+import { SelectParent } from "./EditorSegments/SelectParent";
 
 export default function IndividualEditor() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId)
+  const selected = useUnitInteractionStore(s => s.select)
+  const selectedId = processSelect(selected, unitMap, trueRootId)
   const resetSelected = useUnitInteractionStore(s => s.resetSelected)
 
   const rootUnitId = useUnitStore(s => s.trueRootId)
@@ -45,7 +47,8 @@ export default function IndividualEditor() {
   return (
     <div className="editor-box">
       <div className="editor-segment font-bold">
-        INDIVIDUAL {currentlySelectedDisplay}
+        INDIV {currentlySelectedDisplay}
+        {Array.isArray(selected) && selected.length > 0 && <SelectParent myPath={selected}/>}
         <button className="btn-emoji !p-0 !ml-2" onClick={resetSelected}>❌</button>
       </div>
       

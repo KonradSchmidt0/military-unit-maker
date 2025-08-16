@@ -1,8 +1,7 @@
-import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath, GetTrueColorRecursively } from "../../../logic/childManaging"
 import { OrgUnit } from "../../../logic/logic"
-import { UnitClickable } from "../../UnitClickable"
+import { UnitClickable } from "../../UnitDisplaying/UnitClickable"
 import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay"
 
 interface props {
@@ -28,7 +27,7 @@ export function ChildTextElement(p: props) {
   }
 
   const color = 
-    Array.isArray(p.parentSignature) ? GetTrueColorRecursively(trueRootId, p.parentSignature, unitMap) 
+    Array.isArray(p.parentSignature) ? GetTrueColorRecursively(trueRootId, [...p.parentSignature, p.childFlatIndex], unitMap) 
     :
     GetTrueColorRecursively(parentId, [p.childFlatIndex], unitMap)
 

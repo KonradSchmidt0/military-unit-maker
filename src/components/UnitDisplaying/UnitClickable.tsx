@@ -1,8 +1,8 @@
-import { useShortcutStore } from "../hooks/shortcutStore"
-import { usePaletStore } from "../hooks/usePaletStore"
-import { useUnitInteractionStore } from "../hooks/useUnitInteractionsStore"
-import { useUnitStore } from "../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../logic/childManaging"
+import { useShortcutStore } from "../../hooks/shortcutStore"
+import { usePaletStore } from "../../hooks/usePaletStore"
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore"
+import { useUnitStore } from "../../hooks/useUnitStore"
+import { GetChildIdFromPath } from "../../logic/childManaging"
 
 interface props {
   signature: string | number[]

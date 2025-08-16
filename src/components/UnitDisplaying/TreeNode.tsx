@@ -5,7 +5,7 @@ import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetChildIdFromPath, GetTrueColorRecursively } from "../../logic/childManaging";
 import { getDesignationPack } from "../../logic/designationPack";
 import { defaultUnitColor, OrgUnit } from "../../logic/logic";
-import { UnitClickable } from "../UnitClickable";
+import { UnitClickable } from "./UnitClickable";
 import { UnitDisplay } from "./UnitDisplay"
 
 interface TreeNodeProps {

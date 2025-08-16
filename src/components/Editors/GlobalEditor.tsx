@@ -7,6 +7,9 @@ import { handleLoadFile, saveToFile } from "../../saveSystem";
 import { EchelonEditor } from "./EditorSegments/EchelonEditor";
 import { DebugSegment } from "./EditorSegments/DebugSegment";
 import ThemeToggle from "./EditorSegments/ThemeToggle";
+import { EchelonSettingChanger } from "./EditorSegments/EchelonSettingChanger";
+import { ExtrnlLink } from "../ExtrnlLink";
+import { UnitTextsDisplaySwitches } from "./EditorSegments/UnitTextsDisplaySwitches";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
@@ -48,6 +51,11 @@ export default function GlobalEditor() {
 
         <div className="editor-segment-row">
           <button className="btn-emoji" onClick={() => setStacking(!stacking)}>Stacking{stacking ? "✅" : "❌"}</button>
+          <EchelonSettingChanger/>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <UnitTextsDisplaySwitches/>
         </div>
 
         <div className="editor-segment-row">
@@ -70,10 +78,10 @@ export default function GlobalEditor() {
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
           <button className="btn-emoji" onClick={() => setChangeLogMini(false)}>Changelog📣🛠️</button>
-          <a href="https://github.com/KonradSchmidt0/military-unit-maker" target="_blank">Project Github</a>
+          <ExtrnlLink href="https://github.com/KonradSchmidt0/military-unit-maker">Project Github</ExtrnlLink>
         </div>
-        <div>Project by <a href="https://github.com/KonradSchmidt0" target="_blank">Konrad Schmidt</a></div>
-        <div>Most icons by one and only <a href="https://www.battleorder.org/" target="_blank">BattleOrder</a></div>
+        <div>Project by <ExtrnlLink href="https://github.com/KonradSchmidt0">Konrad Schmidt</ExtrnlLink></div>
+        <div>Most icons by one and only <ExtrnlLink href="https://www.battleorder.org/">BattleOrder</ExtrnlLink></div>
         <ThemeToggle/>
       </div>
 

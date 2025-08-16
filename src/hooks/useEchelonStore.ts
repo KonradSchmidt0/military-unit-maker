@@ -6,11 +6,14 @@ type EchelonSymbolMap = {
 
 interface EchelonStore {
   intToSymbol: EchelonSymbolMap;
-  setSymbol: (level: number, symbol: string) => void;
+  setSymbols: (entries: [level: number, symbol: string][]) => void;
+
   intToIconPathEndings: string[];
-  setIcon: (level: number, newIconPathEnding: string) => void;
+  setIcons: (entries: [level: number, newIconPathEnding: string][]) => void;
+
   reset: () => void;
 }
+
   
 const defaultSymbols: EchelonSymbolMap = {
   0: "ø",            
@@ -52,19 +55,26 @@ const defaultIcons: string[] = [
 
 export const useEchelonStore = create<EchelonStore>((set) => ({
   intToSymbol: { ...defaultSymbols },
-  
-  setSymbol: (level, symbol) =>
-    set((state) => ({
-      intToSymbol: {
-        ...state.intToSymbol,
-        [level]: symbol,
-      },
-    })),
-
   intToIconPathEndings: defaultIcons,
 
-  setIcon: (level, newIconPath) => set((state) => ({intToIconPathEndings: {...state.intToIconPathEndings, [level]: newIconPath}})),
+  setSymbols: (entries) =>
+    set((state) => {
+      const updated = { ...state.intToSymbol };
+      for (const [level, symbol] of entries) {
+        updated[level] = symbol;
+      }
+      return { intToSymbol: updated };
+    }),
 
-  reset: () => set({ intToSymbol: { ...defaultSymbols } }),
+  setIcons: (entries) =>
+    set((state) => {
+      const updated = [...state.intToIconPathEndings];
+      for (const [level, newIcon] of entries) {
+        updated[level] = newIcon;
+      }
+      return { intToIconPathEndings: updated };
+    }),
+
+  reset: () => set({ intToSymbol: { ...defaultSymbols }, intToIconPathEndings: { ...defaultIcons } }),
 })
 );
