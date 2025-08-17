@@ -14,10 +14,10 @@ interface UnitDisplayProps {
   onClick?: (e: any) => void
   showText?: boolean
   designationPack?: DesignationPack
-  countInParent?: number
+  stack?: number
 }
 
-export function UnitDisplay({ unitId, color, style, className, onClick, showText = true, designationPack: dp, countInParent }: UnitDisplayProps) {
+export function UnitDisplay({ unitId, color, style, className, onClick, showText = true, designationPack: dp, stack }: UnitDisplayProps) {
   const unit = useUnitQuick(unitId)
 
   const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
@@ -52,10 +52,10 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
         ))}
         {echelonElement}
 
-        {showText && <UnitDisplayTexts name={unit.name} desc={unit.desc} designationPack={dp} rightOffset={(countInParent ?? 1) - 1 }/>}
+        {showText && <UnitDisplayTexts name={unit.name} desc={unit.desc} designationPack={dp} rightOffset={(stack ?? 1) - 1 }/>}
 
         <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0 z-[5]" alt="unit icon frame"/>
-        {countInParent && <UnitStackShadow stack={countInParent - 1} color={color} style={style ?? {}}/>}
+        {stack && stack > 1 && <UnitStackShadow stack={stack - 1} color={color} style={style ?? {}}/>}
       </div>
     </div>
   );
@@ -71,7 +71,7 @@ const makeLayer = (index: number, src: string, c: string) => {
 
   const hsv = Color(c).hsv()
 
-  const [hr, s, b] = [hsv.hue(), hsv.saturationl(), hsv.value()*3.2]
+  const [hr, s, b] = [hsv.hue(), hsv.saturationv(), hsv.l() * 2]
 
   // For now good enough. Just in the future 
   const style = {

@@ -1,10 +1,8 @@
-import { useGlobalStore } from "../../../hooks/useGlobalStore"
-import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "../../../logic/childManaging"
 import { changeTextInParent } from "../../../logic/designationPack"
 import { OrgUnit } from "../../../logic/logic"
-import { LargeTextInput } from "./LargeTextInput"
 
 interface props {
 
@@ -41,7 +39,7 @@ export function CommentsFromParentEditorSegment(p: props) {
     {slct.length > 0 && <label className="editor-segment-row">
       <span className="font-bold">DfP:</span>
       <input
-        id="CallSignInputId"
+        id="DescFromParentInputId"
         type="text"
         value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
         onChange={(e) => handleTextsInParent(undefined, e.target.value)}

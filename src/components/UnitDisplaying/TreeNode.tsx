@@ -1,16 +1,17 @@
-import { useGlobalStore } from "../../hooks/useGlobalStore";
 import { useHoverStore } from "../../hooks/useHoverStore";
 import { processSelect, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetChildIdFromPath, GetTrueColorRecursively } from "../../logic/childManaging";
-import { getDesignationPack } from "../../logic/designationPack";
-import { defaultUnitColor, OrgUnit } from "../../logic/logic";
+import { DesignationPack } from "../../logic/designationPack";
+import { defaultUnitColor } from "../../logic/logic";
 import { UnitClickable } from "./UnitClickable";
 import { UnitDisplay } from "./UnitDisplay"
 
 interface TreeNodeProps {
   unitId?: string;
   path?: number[];
+  dp?: DesignationPack
+  stack?: number
 }
 
 function TreeNode(p: TreeNodeProps) {  
@@ -21,32 +22,16 @@ function TreeNode(p: TreeNodeProps) {
   const selectedId = processSelect(slct, unitMap, trueRootId)
   const {id: curHovered, call: onHover} = useHoverStore(s => s)
   
-  const {staffComments, staffNames, stacking} = useGlobalStore(s => s)
-  
   if (!p.unitId && !p.path) {
     console.warn("No path or id assigned!")
     return <>No path or id assigned!</>
   }
   
   const id = p.path ? GetChildIdFromPath(trueRootId, p.path, unitMap) : p.unitId as string
-  const myParentId = p.path && p.path.length > 0 ? GetChildIdFromPath(trueRootId, p.path.slice(0, -1), unitMap) : undefined
   
   const isSelectedInstance = Array.isArray(slct) && p.path?.toString() === slct.toString()
   const isSelectedType = id === selectedId && !isSelectedInstance
   const isHovered = id === curHovered && !(isSelectedInstance || isSelectedType)
-  
-  let amIStacked = false
-  let countInParent = undefined
-  if (myParentId && stacking) {
-    countInParent = (unitMap[myParentId] as OrgUnit).children[id]
-    const multipleInParent = countInParent > 1
-    amIStacked = multipleInParent ? true : false
-  }
-
-  let dp = p.path && !amIStacked ? 
-    getDesignationPack(p.path, unitMap, trueRootId, staffNames, staffComments) 
-    : 
-    {}
  
   const smartColor = unitMap[id].smartColor
   const color = p.path ? GetTrueColorRecursively(trueRootId, p.path, unitMap) : (smartColor === "inheret" ? defaultUnitColor : smartColor)
@@ -64,7 +49,7 @@ function TreeNode(p: TreeNodeProps) {
           <UnitDisplay 
             unitId={id} color={color} 
             style={{boxShadow: boxShadow}} className="transition-colors ring-white" 
-            designationPack={dp} countInParent={countInParent}
+            designationPack={p.dp ?? {}} stack={p.stack}
             showText={true}
           />
         </UnitClickable>

@@ -36,7 +36,7 @@ export function UnitDisplayTexts({
         <div
           className={`flex-1 text-right flex flex-col justify-end ${pink}`}
         >
-          {TruncateName(designationPack.staffName ?? designationPack.callSignFromParent)}
+          {TruncateName(designationPack.name)}
         </div>
       </div>
 

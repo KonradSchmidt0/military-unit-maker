@@ -2,7 +2,6 @@ import { useGlobalStore } from "../../../hooks/useGlobalStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
-import { LargeTextInput } from "./LargeTextInput";
 
 interface CommentsEditorSegmentProps {
   
@@ -49,7 +48,7 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
     <label className="editor-segment-row">
       <span className="font-bold">Name:</span>
       <input
-        id="NameInputId"
+        id="LowerNameInputId"
         type="text"
         value={unit.name}
         onChange={(e) => handleInnerTexts(unitId, e.target.value, undefined)}
@@ -59,7 +58,7 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
     <label className="editor-segment-row">
       <span className="font-bold">Desc.:</span>
       <textarea
-        id="NameInputId"
+        id="descInputId"
         value={unit.desc}
         onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
         className="editor-element"

@@ -4,17 +4,20 @@ import { useGlobalStore } from "../../hooks/useGlobalStore";
 import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { GetChildIdFromPath, GetFlatIds } from "../../logic/childManaging";
 import { OrgUnit } from "../../logic/logic";
+import { DesignationPack, getMergedDPFromChildren } from "../../logic/designationPack";
 
 interface TreeViewProps {
   path: number[];
   leftDisplayDepth: number;
+  stack?: number;
+  dp?: DesignationPack
 }
 
 function TreeView(p : TreeViewProps) {
   const {unitMap, trueRootId} = useUnitStore(s => s)
   const unitId = useUnitInteractionStore((s) => s.getIdFromPath)(unitMap, trueRootId, p.path) as string
   const unit = unitMap[unitId]
-  const {echelonFoldingLevel, stacking} = useGlobalStore(s => s)
+  const {echelonFoldingLevel, stacking, staffNames, staffComments} = useGlobalStore(s => s)
   const parentBoxOn = useGlobalStore(s => s.displayParentBox)
 
   if (!unit)
@@ -25,32 +28,39 @@ function TreeView(p : TreeViewProps) {
   const box = (parentBoxOn && classification === "a") ? "border-slate-500" : "border-transparent"
 
   function getChildList(u: OrgUnit) {
-    const flat = GetFlatIds(u.children).map((cid, i) => ({index: i, childId: cid}));
+    const flat = GetFlatIds(u.children).map((cid, i) => ({index: i, childId: cid, count: 1}));
   
     if (!stacking) {
       return flat;
     }
   
     const seen = new Set();
-    return flat.filter(entry => {
+    const filtered = flat.filter(entry => {
       if (seen.has(entry.childId)) return false;
       seen.add(entry.childId);
       return true;
     });
+    return filtered.map((entry, i) => { return { ...entry, count: u.children[entry.childId] } })
+  }
+
+  function getDP(path: number[], startingIndex: number, count: number) {
+    //console.log(path, startingIndex, count)
+    return getMergedDPFromChildren(path, startingIndex, count, unitMap, trueRootId, staffNames, staffComments)
   }
   
 
   return (
     <div className={"border-dashed border-2 " + box + " flex flex-col"}>
-      <TreeNode path={p.path}/>
+      <TreeNode path={p.path} stack={p.stack} dp={p.dp}/>
       
       <div className={"tree-" + classification}>
         {unit.type === "org" && classification !== "c" && 
-          getChildList(unit).map((o, i) => (
+          getChildList(unit).map((entry, i) => (
             <TreeView
-              path={[...p.path, o.index]}
+              path={[...p.path, entry.index]}
               leftDisplayDepth={p.leftDisplayDepth - 1}
-              key={unitId + i}
+              key={unitId + p.path + i}
+              stack={entry.count} dp={getDP(p.path, entry.index, entry.count)}
             />
           ))}
       </div>
