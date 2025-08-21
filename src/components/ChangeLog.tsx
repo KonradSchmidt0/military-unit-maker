@@ -18,8 +18,8 @@ export default function ChangelogOverlay() {
         </button>
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
-
         <div className="space-y-4 text-sm">
+          
           <b className='text-base'>Unit Text Stacking (2025 8 17)</b><br/>
           - Texts now displays when units are stacked<br/>
           - Minor bugs fixed<br/>

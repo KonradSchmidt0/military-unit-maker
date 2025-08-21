@@ -5,6 +5,7 @@ import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { GetChildIdFromPath, GetFlatIds } from "../../logic/childManaging";
 import { OrgUnit } from "../../logic/logic";
 import { DesignationPack, getMergedDPFromChildren } from "../../logic/designationPack";
+import { FoldingMap, getPathAsString, useForceFoldingStore } from "../../hooks/useForceFoldingStore";
 
 interface TreeViewProps {
   path: number[];
@@ -19,12 +20,13 @@ function TreeView(p : TreeViewProps) {
   const unit = unitMap[unitId]
   const {echelonFoldingLevel, stacking, staffNames, staffComments} = useGlobalStore(s => s)
   const parentBoxOn = useGlobalStore(s => s.displayParentBox)
+  const foldingUnfoldingMap = useForceFoldingStore(s => s.foldingUnfoldingMap)
 
   if (!unit)
     return <>Unit is not a unit! ({unitId} {unit})
     Please screenshot and send this to dev 🥺 (konrad.m.schmidt@gmail.com)</>
 
-  const classification = GetFoldingClassification(p.path, p.leftDisplayDepth, echelonFoldingLevel, unitMap, trueRootId)
+  const classification = GetFoldingClassification(p.path, p.leftDisplayDepth, echelonFoldingLevel, unitMap, trueRootId, foldingUnfoldingMap)
   const box = (parentBoxOn && classification === "a") ? "border-slate-500" : "border-transparent"
 
   function getChildList(u: OrgUnit) {
@@ -72,36 +74,43 @@ export default TreeView;
 
 // memoize? Normaly i would do it, but not sure how will it react with (haha) react
 export function GetFoldingClassification(
-  path: number[], depthLeft: number, minEchelonLvl: number, unitMap: UnitMap, trueRootId: string
+  path: number[], depthLeft: number, minEchelonLvl: number, unitMap: UnitMap, trueRootId: string, foldingMap: FoldingMap
 ): "a" | "b" | "c" {
-  if (depthLeft === 0) {
-    return "c"
-  }
   const id = GetChildIdFromPath(trueRootId, path, unitMap)
   const unit = unitMap[id]
+  // Err
   if (!unit) {
     console.warn("No unit with give id! " + id)
     return "c"
   }
-  if (unit.type === "raw" || unit.echelonLevel <= minEchelonLvl) {
-    return "c"
-  }
-  if (unit.children.count === 0) {
+  // Reached base value
+  if (unit.type === "raw" || unit.children.count === 0) {
     return "c"
   }
 
-  if (depthLeft === 1) {
-    return "b"
+  const overrideDesigner = foldingMap[getPathAsString(path)]
+  if (overrideDesigner === "Fold") {
+    return "c"
   }
+
+  // if (overrideDesigner === "Unfold") {
+  //   return "a"
+  // }
+  
+  const cCusDesignerChoice = depthLeft <= 0 || unit.echelonLevel <= minEchelonLvl
+  if (cCusDesignerChoice && !overrideDesigner) {
+    return "c"
+  }
+
+  const flatChildren = GetFlatIds(unit.children)
   let allChildrenAreC = true
-  let i = 0
-  for (const [_cId, cCount] of Object.entries(unit.children)) {
-    if (GetFoldingClassification([...path, i], depthLeft - 1, minEchelonLvl, unitMap, trueRootId) !== "c") {
+  for (let i = 0; i < flatChildren.length; i++) {
+    if (GetFoldingClassification([...path, i], depthLeft - 1, minEchelonLvl, unitMap, trueRootId, foldingMap) !== "c") {
       allChildrenAreC = false
       break
     }
-    i += cCount
   }
+
   if (allChildrenAreC) {
     return "b"
   }

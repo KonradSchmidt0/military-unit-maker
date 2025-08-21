@@ -9,6 +9,7 @@ import { UnitColorOptions } from "./UnitColorOptions";
 import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { GetFlatIds } from "../../../logic/childManaging";
+import { ForceFoldingSegment } from "./ForceFoldingSegment";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extreme, then this is the opposite one
@@ -90,7 +91,7 @@ export default function CommonUnitEditorSegment() {
       </label>
 
       <div className="editor-segment-row">
-        {parentId ? <button className="btn-editor" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
+        {parentId ? <button className="btn-emoji" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
         {trueRootId === selectedId && 
           <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕🫚</button>}
         {curRootId !== selectedId && parentId &&
@@ -104,6 +105,8 @@ export default function CommonUnitEditorSegment() {
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => addUnitToPalet(selectedId)}>➕🎨</button> : null}
       </div>
+
+      {Array.isArray(slctd) && <ForceFoldingSegment path={slctd}></ForceFoldingSegment>}
 
       {parentId && <ChildRow
         childId={selectedId}

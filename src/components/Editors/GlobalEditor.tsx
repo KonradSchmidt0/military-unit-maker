@@ -10,6 +10,8 @@ import ThemeToggle from "./EditorSegments/ThemeToggle";
 import { EchelonSettingChanger } from "./EditorSegments/EchelonSettingChanger";
 import { ExtrnlLink } from "../ExtrnlLink";
 import { UnitTextsDisplaySwitches } from "./EditorSegments/UnitTextsDisplaySwitches";
+import { ResetAllForceFoldingButton } from "./EditorSegments/ResetAllForceFoldingButton";
+import { ResetRemporaryRootButton } from "./EditorSegments/ResetRemporaryRootButton";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
@@ -54,6 +56,10 @@ export default function GlobalEditor() {
           <EchelonSettingChanger/>
         </div>
 
+        <div className="editor-segment-row">
+          <ResetRemporaryRootButton/>
+        </div>
+
         <div className="flex flex-col gap-1">
           <UnitTextsDisplaySwitches/>
         </div>
@@ -82,7 +88,10 @@ export default function GlobalEditor() {
         </div>
         <div>Project by <ExtrnlLink href="https://github.com/KonradSchmidt0">Konrad Schmidt</ExtrnlLink></div>
         <div>Most icons by one and only <ExtrnlLink href="https://www.battleorder.org/">BattleOrder</ExtrnlLink></div>
-        <ThemeToggle/>
+        <div className="editor-segment-row">
+          <ResetAllForceFoldingButton/>
+          <ThemeToggle/>
+        </div>
       </div>
 
       <DebugSegment></DebugSegment>
