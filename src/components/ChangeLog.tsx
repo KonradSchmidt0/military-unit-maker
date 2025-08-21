@@ -19,6 +19,11 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Force folding/unfolding! (2025 8 21)</b><br/>
+           - Added abillity to force some units to unfold/fold<br/>
+           - Added abillity to reset temporary root from global editor<br/>
+           - Minor visual bugs fixed<br/>
+          <br/>
           
           <b className='text-base'>Unit Text Stacking (2025 8 17)</b><br/>
           - Texts now displays when units are stacked<br/>
