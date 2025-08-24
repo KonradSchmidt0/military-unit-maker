@@ -124,7 +124,7 @@ export function GetFlatIds(children: ChildrenList) {
   return o;
 }
 
-export function GetIdFromFlatIndex(children: ChildrenList, index: number) {
+export function GetIdFromFlatIndex(children: ChildrenList, index: number) : string | undefined {
   return GetFlatIds(children)[index]
 }
 
@@ -141,12 +141,18 @@ export function GetFlatIndexFromId(children: ChildrenList, id: string) {
   return o;
 }
 
-export function GetChildIdFromPath(rootId: string, path: number[], unitMap: UnitMap): string {
+export function GetChildIdFromPath(rootId: string, path: number[], unitMap: UnitMap): string | undefined {
   if (path.length === 0) {
     return rootId
   }
-  const parent = unitMap[rootId] as OrgUnit
+  const parent = unitMap[rootId]
+  if (parent.type !== "org") {
+    return undefined
+  }
   const nextId = GetIdFromFlatIndex(parent.children, path[0])
+  if (!nextId) {
+    return undefined
+  }
   if (path.length === 1) {
     return nextId
   }
@@ -159,7 +165,11 @@ export function GetTrueColorRecursively(rootId: string, path: number[], unitMap:
     const root = unitMap[rootId] 
     return (root.smartColor !== "inheret" ? root.smartColor : defaultUnitColor)
   }
-  const unit = unitMap[GetChildIdFromPath(rootId, path, unitMap)]
+  const unitId = GetChildIdFromPath(rootId, path, unitMap)
+  if (!unitId) {
+    return defaultUnitColor
+  }
+  const unit = unitMap[unitId]
   if (unit.smartColor !== "inheret") {
     return unit.smartColor
   }

@@ -3,7 +3,7 @@ import { usePaletStore } from "./hooks/usePaletStore";
 import { UnitMap, useUnitStore } from "./hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-const SAVE_SYSTEM_VERSION = 4;
+const SAVE_SYSTEM_VERSION = 5;
 
 interface SaveFile {
   version: number;
@@ -11,13 +11,15 @@ interface SaveFile {
   unitPalet: string[];
   rootUnitId: string;
   staffComments: StaffText[];
+  staffNames: StaffText[];
 }
 
-export function saveToFile() {
+export function getSaveFileJson(): string {
   const unitMap = useUnitStore.getState().unitMap;
   const rootUnitId = useUnitStore.getState().trueRootId;
   const unitPalet = usePaletStore.getState().unitPalet;
   const staffComments = useGlobalStore.getState().staffComments;
+  const staffNames = useGlobalStore.getState().staffNames;
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -25,58 +27,69 @@ export function saveToFile() {
     unitPalet,
     rootUnitId,
     staffComments,
+    staffNames
   };
 
-  const blob = new Blob([JSON.stringify(saveData, null, 2)], {
-    type: "application/json",
-  });
+  return JSON.stringify(saveData, null, 2);
+}
+
+export function saveToFile(filename: string = "mysave.json") {
+  const jsonString = getSaveFileJson();
+  const blob = new Blob([jsonString], { type: "application/json" });
 
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "mysave.json";
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
 }
 
-export function handleLoadFile(
-  event: React.ChangeEvent<HTMLInputElement>, setUnitMap: Function, setUnitPalet: Function, setRootId: Function, setStaffComments: Function)
-   {
+
+export function loadSaveFile(
+  jsonString: string,
+) {
+  try {
+    const json = JSON.parse(jsonString) as SaveFile;
+
+    if (typeof json.version !== "number") {
+      alert("Invalid save file: Missing version");
+      return;
+    }
+
+    let unitMap = { ...json.unitMap };
+    if (json.version <= 2) {
+      unitMap = swapLayerSubstrings(
+        unitMap,
+        "/icons/",
+        `${process.env.PUBLIC_URL}/icons/`
+      );
+    }
+
+    usePaletStore.setState({unitPalet: json.unitPalet})
+    useUnitStore.setState({unitMap: unitMap, trueRootId: json.rootUnitId})
+    useGlobalStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
+  } catch (err) {
+    alert("Failed to load file: " + (err as Error).message);
+  }
+}
+
+export function loadUserSaveFile(
+  event: React.ChangeEvent<HTMLInputElement>,
+) {
   const file = event.target.files?.[0];
   if (!file) return;
 
   const reader = new FileReader();
   reader.onload = () => {
-    try {
-      const json = JSON.parse(reader.result as string) as SaveFile;
-
-      if (typeof json.version !== "number") {
-        alert("Invalid save file: Missing version");
-        return;
-      }
-
-      let unitMap = {...json.unitMap}
-      if (json.version <= 2) {
-        unitMap = swapLayerSubstrings(unitMap, "/icons/", `${process.env.PUBLIC_URL}/icons/`)
-      }
-      let staffComments: StaffText[] = []
-      if (json.version > 3) {
-        staffComments = [...json.staffComments]
-      }
-
-      // Potentially in the future: handle migrations based on version here
-      setUnitPalet(json.unitPalet)
-      // TODO: Bundle these two babies up so when ctrl z they are rolled back together, insted of sepparate
-      setUnitMap(unitMap)
-      setRootId(json.rootUnitId)
-      setStaffComments(staffComments)
-    } catch (err) {
-      alert("Failed to load file: " + (err as Error).message);
+    if (typeof reader.result === "string") {
+      loadSaveFile(reader.result);
     }
   };
 
   reader.readAsText(file);
 }
+
 
 function swapLayerSubstrings(unitMap: UnitMap, a: string, b: string): UnitMap {
   const updatedMap: UnitMap = {};

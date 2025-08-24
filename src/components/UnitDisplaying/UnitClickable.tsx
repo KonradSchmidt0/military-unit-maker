@@ -27,6 +27,11 @@ export function UnitClickable(p: React.PropsWithChildren<props>) {
 
 
   const handleClick = () => {
+    if (!id) {
+      console.warn("Incoret unit signature in UnitClickable! ", p.signature)
+      return
+    }
+
     if (shift && ctrl) {
       const dupId = duplicateUnit(id)
 

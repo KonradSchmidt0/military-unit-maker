@@ -1,7 +1,6 @@
 import TreeNode from "./TreeNode";
 import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
-import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { GetChildIdFromPath, GetFlatIds } from "../../logic/childManaging";
 import { OrgUnit } from "../../logic/logic";
 import { DesignationPack, getMergedDPFromChildren } from "../../logic/designationPack";
@@ -16,15 +15,15 @@ interface TreeViewProps {
 
 function TreeView(p : TreeViewProps) {
   const {unitMap, trueRootId} = useUnitStore(s => s)
-  const unitId = useUnitInteractionStore((s) => s.getIdFromPath)(unitMap, trueRootId, p.path) as string
-  const unit = unitMap[unitId]
   const {echelonFoldingLevel, stacking, staffNames, staffComments} = useGlobalStore(s => s)
   const parentBoxOn = useGlobalStore(s => s.displayParentBox)
   const foldingUnfoldingMap = useForceFoldingStore(s => s.foldingUnfoldingMap)
+  const unitId = GetChildIdFromPath(trueRootId, p.path, unitMap) as string
+  const unit = unitMap[unitId]
 
   if (!unit)
     return <>Unit is not a unit! ({unitId} {unit})
-    Please screenshot and send this to dev 🥺 (konrad.m.schmidt@gmail.com)</>
+    Please screenshot and send this to dev (konrad.m.schmidt@gmail.com)</>
 
   const classification = GetFoldingClassification(p.path, p.leftDisplayDepth, echelonFoldingLevel, unitMap, trueRootId, foldingUnfoldingMap)
   const box = (parentBoxOn && classification === "a") ? "border-slate-500" : "border-transparent"
@@ -76,7 +75,7 @@ export default TreeView;
 export function GetFoldingClassification(
   path: number[], depthLeft: number, minEchelonLvl: number, unitMap: UnitMap, trueRootId: string, foldingMap: FoldingMap
 ): "a" | "b" | "c" {
-  const id = GetChildIdFromPath(trueRootId, path, unitMap)
+  const id = GetChildIdFromPath(trueRootId, path, unitMap) as string
   const unit = unitMap[id]
   // Err
   if (!unit) {

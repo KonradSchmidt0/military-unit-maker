@@ -19,6 +19,17 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Autosaving (2025 8 24)</b><br/>
+           - Added local save, stored in the browser. Mostly used for autosave<br/>
+           - The local save automatically gets loaded when page is loaded<br/>
+           - Added autosave system that saves automatically every 1.5 minute or so<br/>
+           - Added abillity for user to manually do the autosave, and mannually load it<br/>
+           - Added few new icon, mostly size (med, heavy, light, super heavy)<br/>
+           - Fixed: Staff names are now saved and loaded<br/>
+           - Fixed bug with program crashing when removing parent<br/>
+           - Minor ui changes<br/>
+          <br/>
+          
           <b className='text-base'>Force folding/unfolding! (2025 8 21)</b><br/>
            - Added abillity to force some units to unfold/fold<br/>
            - Added abillity to reset temporary root from global editor<br/>

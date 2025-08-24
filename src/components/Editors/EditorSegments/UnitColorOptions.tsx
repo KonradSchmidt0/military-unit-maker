@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { defaultUnitColor, SmartColor, Unit } from "../../../logic/logic";
+import { defaultUnitColor, SmartColor } from "../../../logic/logic";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { GetTrueColorRecursively } from "../../../logic/childManaging";
 
@@ -46,7 +46,7 @@ export function UnitColorOptions() {
     <button className="btn-emoji" onClick={() => { 
       let c = path ? GetTrueColorRecursively(trueRootId, path, unitMap) : defaultUnitColor
       updateUnit(selectedId, { ...unit, smartColor: c}) }
-      }>🦋🖌️</button>
+      }>🕊️🖌️</button>
   )
 
   return <>

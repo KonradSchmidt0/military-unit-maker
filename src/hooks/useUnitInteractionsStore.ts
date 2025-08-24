@@ -13,7 +13,6 @@ export interface UnitInteractionStore {
   selectParent: () => void
   offsetSelect: () => void
   changeSelectedChild: (newPos: "top" | "bottom", parentChildren: ChildrenList) => void
-  getIdFromPath: (map: UnitMap, trueRootId: string, path: number[]) => string
   selectSibling: (siblingFlatIndex: number) => void
   resetSelected: () => void;
 }
@@ -86,10 +85,6 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
       return
     }
     set({select: [...s.slice(0, -1), siblingFlatIndex]})
-  },
-
-  getIdFromPath: (map, trueRootId, path) => {
-    return GetChildIdFromPath(trueRootId, path, map)
   },
 
   resetSelected: () => set({ select: undefined}),

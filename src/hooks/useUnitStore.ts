@@ -24,7 +24,7 @@ interface UnitStore {
   consolidateOrgUnit: (id: string) => void,
   setInnerTexts: (id: string, shortName?: string, desc?: string) => void,
 
-  getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap) => string;
+  getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap) => string | undefined;
   trueRootId: string;
   setTrueRootId: (newRootId: string) => void;
   actingRootPath: number[];

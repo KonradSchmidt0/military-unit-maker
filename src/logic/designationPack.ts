@@ -30,7 +30,7 @@ export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId:
   let desc = undefined
   if (path.length > 0) {
     const parentId = GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap)
-    const parent = unitMap[parentId] as OrgUnit
+    const parent = unitMap[parentId as string] as OrgUnit
 
     cs = parent.flatCallSigns[path[path.length - 1]]
     desc = parent.flatDescriptions[path[path.length - 1]]
@@ -40,7 +40,7 @@ export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId:
 }
 
 export function changeTextInParent(path: number[], unitMap: UnitMap, trueRootId: string, callSign?: string, desc?: string): OrgUnit {
-  const parent =  unitMap[GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap)] as OrgUnit
+  const parent =  unitMap[GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap) as string] as OrgUnit
   const childFlatIndex = path[path.length - 1]
 
   return {...parent, 
@@ -68,7 +68,7 @@ export function mergeDesignationPacks(packs: DesignationPack[]): DesignationPack
 }
 
 export function getMergedDPFromChildren(parentPath: number[], startingFlatIndex: number, count: number, unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
-  const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap)] as OrgUnit
+  const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap) as string] as OrgUnit
   const flatChildrenIndexes = GetFlatIds(parent.children).filter(
     (_, i) => i >= startingFlatIndex && i < startingFlatIndex + count
   );

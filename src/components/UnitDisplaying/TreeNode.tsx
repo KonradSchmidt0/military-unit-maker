@@ -22,12 +22,12 @@ function TreeNode(p: TreeNodeProps) {
   const selectedId = processSelect(slct, unitMap, trueRootId)
   const {id: curHovered, call: onHover} = useHoverStore(s => s)
   
-  if (!p.unitId && !p.path) {
-    console.warn("No path or id assigned!")
+  const id = p.path ? GetChildIdFromPath(trueRootId, p.path, unitMap) : p.unitId
+
+  if (!id) {
+    console.warn("Incorect path or id assigned to TreeNode! ", p.unitId, p.path)
     return <>No path or id assigned!</>
   }
-  
-  const id = p.path ? GetChildIdFromPath(trueRootId, p.path, unitMap) : p.unitId as string
   
   const isSelectedInstance = Array.isArray(slct) && p.path?.toString() === slct.toString()
   const isSelectedType = id === selectedId && !isSelectedInstance

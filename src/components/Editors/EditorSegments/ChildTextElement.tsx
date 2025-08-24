@@ -11,8 +11,8 @@ interface props {
 
 export function ChildTextElement(p: props) {
   const {unitMap, updateUnit, trueRootId} = useUnitStore(s=>s)
-  const parentId = Array.isArray(p.parentSignature) ? GetChildIdFromPath(trueRootId, p.parentSignature, unitMap) : p.parentSignature
-  const childId = GetChildIdFromPath(parentId, [p.childFlatIndex], unitMap)
+  const parentId = (Array.isArray(p.parentSignature) ? GetChildIdFromPath(trueRootId, p.parentSignature, unitMap) : p.parentSignature) as string
+  const childId = GetChildIdFromPath(parentId, [p.childFlatIndex], unitMap) as string
   const parent = unitMap[parentId] as OrgUnit
   const callSign = parent.flatCallSigns[p.childFlatIndex]
   const desc = parent.flatDescriptions[p.childFlatIndex]

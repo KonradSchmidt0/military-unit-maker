@@ -15,6 +15,7 @@ import Papa from 'papaparse';
 import IconDropdown from './components/IconDropdown';
 import ArrowNavigation from './components/ArrowNavigation';
 import { HoverInspector } from './components/HoverInspector';
+import { AutoSave } from './components/AutoSave';
 
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
@@ -56,6 +57,7 @@ function App() {
       <IconDropdown/>
       <ArrowNavigation/>
       <HoverInspector/>
+      <AutoSave/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

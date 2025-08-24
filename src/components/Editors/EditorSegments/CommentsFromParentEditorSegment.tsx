@@ -16,7 +16,7 @@ export function CommentsFromParentEditorSegment(p: props) {
   if (!Array.isArray(slct))
     return null
   
-  const parentId = GetChildIdFromPath(trueRootId, slct.slice(0, -1), unitMap)
+  const parentId = GetChildIdFromPath(trueRootId, slct.slice(0, -1), unitMap) as string
   const parent = unitMap[parentId] as OrgUnit
 
   function handleTextsInParent(cs: string | undefined, desc: string | undefined) {
