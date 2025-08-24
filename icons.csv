@@ -5,15 +5,16 @@ b-tank.svg,tank armor armored vehicle apc ifv fighting assult gun afv
 b-fixed-wing.svg,aviation fixed wing plane aircraft airship air
 b-rotary.svg,rotary helicopter aviation gunship air
 b-aa.svg,anti air aa air to air
-b-at.svg,anti-tank at air to ground
+b-at.svg,anti tank at air to ground td tank destroyer
 b-at.svg,anti air aa air to air gun konrad niehorster
-k-at.svg,anti-tank at air to ground gun konrad niehorster
+k-at.svg,anti tank at air to ground gun konrad niehorster td tank destroyer
 k-aa-missile.svg,anti air aa air to air missile konrad
-k-at-missile.svg,anti-tank at air to ground missile konrad
+k-at-missile.svg,anti tank at air to ground missile konrad td tank destroyer
 b-engi.svg,engineer support
 b-flame.svg,flamethrower engineer
 b-hq.svg,headquarters hq command leader
 b-hq.png,headquarters hq command leader alt
+b-laser.svg,laser direct energy weapon
 b-maintenance.svg,maintenance repair support shot
 b-med.svg,medic medical health support
 b-hospital.svg,medical health support field hospital
@@ -41,8 +42,12 @@ b-towed.svg,towed trailer truck motorized
 b-towed-trck.svg,towed trailer tractor half track mechanized
 b-costal.svg,costal static fortress bunker
 b-light.svg,light
-b-heavy.svg,heavy
+k-light-alt.svg,light alt niehorster
+k-medium.svg,medium mbt main battle niehorster
+b-heavy.svg,heavy niehorster
+k-super-heavy.svg,super heavy niehorster
 b-mountain.svg,mountain alpine
+b-hq-ooo.svg,headquarters hq command leader platoon ooo
 b-hq-I.svg,headquarters hq command leader company I
 b-hq-II.svg,headquarters hq command leader battalion II
 b-supports-I.svg,supports auxiliary company I
