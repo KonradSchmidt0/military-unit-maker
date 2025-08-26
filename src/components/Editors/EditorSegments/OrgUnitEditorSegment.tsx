@@ -76,10 +76,7 @@ export default function OrgUnitEditorSegment() {
     const childUnit = unitMap[childId];
     const safeUnitsPlusMyself: UnitMap = { ...safeChildrenOptions, [childId]: childUnit, };
 
-    // 
-    const key = select + "" + childId + "" + index
-    return (<div className="" key={key}>
-      <ChildRow key={childId + "childEdittingList"}
+    return <ChildRow key={index + "childEdittingList"}
         childId={childId} count={count} childrenChoices={safeUnitsPlusMyself}
         onChildChange={(n) => setChildId(selectedId, childId, n)}
         onCountChange={(n) => {
@@ -92,8 +89,7 @@ export default function OrgUnitEditorSegment() {
         upDownButton={true}
         onUpPressed={() => moveChild(selectedId, childId, "top")}
         onDownPressed={() => moveChild(selectedId, childId, "bottom")}
-      />
-    </div>); 
+      />; 
   } );
   return (
     <div className="editor-segment-flex">

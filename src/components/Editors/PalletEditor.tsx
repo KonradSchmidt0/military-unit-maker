@@ -68,7 +68,7 @@ export default function PalletEditorSegment() {
             const inPalet = isInPalet(unitId);
             return (
               <div key={unitId} className="editor-segment-row">
-                {<TreeNode unitId={unitId}/>}
+                {<TreeNode signature={unitId}/>}
                 {addToPalletButton(unitId, inPalet)}
                 {removeFromPalletButton(unitId, inPalet)}
                 {buttonToRemoveUnitFromMemory(unitId)}

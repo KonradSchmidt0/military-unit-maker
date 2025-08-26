@@ -160,7 +160,7 @@ export function GetChildIdFromPath(rootId: string, path: number[], unitMap: Unit
   return GetChildIdFromPath(nextId, np, unitMap)
 }
 
-export function GetTrueColorRecursively(rootId: string, path: number[], unitMap: UnitMap): `#${string}` {
+function GetTrueColorRecursively(rootId: string, path: number[], unitMap: UnitMap): `#${string}` {
   if (path.length <= 0) {
     const root = unitMap[rootId] 
     return (root.smartColor !== "inheret" ? root.smartColor : defaultUnitColor)
@@ -174,4 +174,13 @@ export function GetTrueColorRecursively(rootId: string, path: number[], unitMap:
     return unit.smartColor
   }
   return GetTrueColorRecursively(rootId, path.slice(0, -1), unitMap)
+}
+
+export function GetTrueColor(signature: number[] | string, rootId: string, unitMap: UnitMap): `#${string}` {
+  if (!Array.isArray(signature)) {
+    const unit = unitMap[signature]
+    return unit.smartColor !== "inheret" ? unit.smartColor : defaultUnitColor
+  }
+
+  return GetTrueColorRecursively(rootId, signature, unitMap)
 }

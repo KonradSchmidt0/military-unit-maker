@@ -10,8 +10,9 @@ b-at.svg,anti air aa air to air gun konrad niehorster
 k-at.svg,anti tank at air to ground gun konrad niehorster td tank destroyer
 k-aa-missile.svg,anti air aa air to air missile konrad
 k-at-missile.svg,anti tank at air to ground missile konrad td tank destroyer
-b-engi.svg,engineer support
-b-flame.svg,flamethrower engineer
+b-engi.svg,engineers support
+b-firefighters.svg,firefighting firefighters
+b-flame.svg,flamethrower engineers
 b-hq.svg,headquarters hq command leader
 b-hq.png,headquarters hq command leader alt
 b-laser.svg,laser direct energy weapon
@@ -20,6 +21,7 @@ b-med.svg,medic medical health support
 b-hospital.svg,medical health support field hospital
 b-mortar.svg,artillery indirect mortart HE
 b-mortar-alt.svg,artillery indirect mortart HE alternative
+b-pioneers.svg,infantry pioneers engineers
 b-rec.svg,recon reconnaissance scout support cavalery hussars
 b-signal.svg,signal communication comms support radio
 b-supply.svg,supply logistics support storage

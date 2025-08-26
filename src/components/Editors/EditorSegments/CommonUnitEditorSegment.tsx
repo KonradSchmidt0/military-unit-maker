@@ -125,6 +125,7 @@ export default function CommonUnitEditorSegment() {
         upDownButton={true}
         onUpPressed={() => {moveChild(parentId, selectedId, "top"); if (ctrl) selectParent(); else selectSister("top", parent.children)}}
         onDownPressed={() => {moveChild(parentId, selectedId, "bottom"); if (ctrl) selectParent(); else selectSister("bottom", parent.children)}}
+        key="top child row"
       />}
 
       <div className="editor-segment-row">

@@ -12,12 +12,14 @@ interface UnitDisplayProps {
   style?: {}
   className?: string
   onClick?: (e: any) => void
-  showText?: boolean
   designationPack?: DesignationPack
   stack?: number
+  showLeftText?: boolean
+  showRightText?: boolean
+  overrideDisplayTextSetting?: boolean
 }
 
-export function UnitDisplay({ unitId, color, style, className, onClick, showText = true, designationPack: dp, stack }: UnitDisplayProps) {
+export function UnitDisplay({ unitId, color, style, className, onClick, showLeftText = true, showRightText = true, designationPack: dp, stack, overrideDisplayTextSetting = false }: UnitDisplayProps) {
   const unit = useUnitQuick(unitId)
 
   const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
@@ -52,7 +54,8 @@ export function UnitDisplay({ unitId, color, style, className, onClick, showText
         ))}
         {echelonElement}
 
-        {showText && <UnitDisplayTexts name={unit.name} desc={unit.desc} designationPack={dp} rightOffset={(stack ?? 1) - 1 }/>}
+        <UnitDisplayTexts name={unit.name} desc={unit.desc} designationPack={dp} rightOffset={(stack ?? 1) - 1 } 
+        showLeft={showLeftText} showRight={showRightText} overrideDisplayTextSetting={overrideDisplayTextSetting}/>
 
         <img src={process.env.PUBLIC_URL + "/icons/b-frame.svg"} className="absolute bottom-0 z-[5]" alt="unit icon frame"/>
         {stack && stack > 1 && <UnitStackShadow stack={stack - 1} color={color} style={style ?? {}}/>}

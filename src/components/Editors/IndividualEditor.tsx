@@ -15,8 +15,6 @@ export default function IndividualEditor() {
   const selectedId = processSelect(selected, unitMap, trueRootId)
   const resetSelected = useUnitInteractionStore(s => s.resetSelected)
 
-  const rootUnitId = useUnitStore(s => s.trueRootId)
-
   if (!selectedId)
     return null
 
@@ -24,16 +22,8 @@ export default function IndividualEditor() {
   if (!selectedUnit)
     return null
 
-  const commonPart = <CommonUnitEditorSegment/>;
-
-  const rawUnitPart = selectedUnit?.type === "raw" ?
-    <RawUnitEditorSegment/> : null;
-
-  const orgUnitSegment = selectedUnit?.type === "org" ?
-    <OrgUnitEditorSegment/> : null;
-
-  const currentlySelectedCount = rootUnitId !== selectedId 
-    ? HowManyOfThisTypeInParent(rootUnitId, selectedId, unitMap)
+  const currentlySelectedCount = trueRootId !== selectedId 
+    ? HowManyOfThisTypeInParent(trueRootId, selectedId, unitMap)
     : 1
   const currentlySelectedDisplay = ( <>
       (cur. selected:{" "}
@@ -43,7 +33,6 @@ export default function IndividualEditor() {
       )
     </> );
 
-  
   return (
     <div className="editor-box">
       <div className="editor-segment font-bold">
@@ -53,9 +42,9 @@ export default function IndividualEditor() {
       </div>
       
       <div className="overflow-y-auto max-h-fit">
-        {commonPart}
-        {rawUnitPart}
-        {orgUnitSegment}
+        <CommonUnitEditorSegment/>
+        {selectedUnit.type === "raw" && <RawUnitEditorSegment/>}
+        {selectedUnit.type === "org" && <OrgUnitEditorSegment/>}
         <CommentsEditorSegment/>
         {selectedUnit.type === "org" && <EQListAndRemover/>}
       </div>

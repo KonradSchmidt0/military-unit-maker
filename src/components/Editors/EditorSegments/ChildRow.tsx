@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import { UnitMap } from "../../../hooks/useUnitStore"
+import { SafeNumberInput } from "./SafeNumberInput"
 
 interface ChildRowProps {
   childId: string
@@ -11,29 +11,10 @@ interface ChildRowProps {
   upDownButton: boolean
   onUpPressed?: () => void
   onDownPressed?: () => void
+  key: string
 }
 
 export function ChildRow(p: ChildRowProps) {
-  const [tempCount, setTempCount] = useState(p.count.toString());
-
-  // Keep local input synced if parent updates count from outside
-  useEffect(() => {
-    if (p.count.toString() !== tempCount) {
-      setTempCount(p.count.toString());
-    }
-  }, [p.count]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setTempCount(val);
-
-    // Parse and only call onCountChange if valid number
-    const parsed = parseInt(val, 10);
-    if (!isNaN(parsed)) {
-      p.onCountChange(parsed);
-    }
-  };
-
   return (
     <div className="editor-segment-row">
       {p.upDownButton && <button className="btn-emoji !p-0" onClick={p.onUpPressed}>⬆️</button>}
@@ -52,15 +33,8 @@ export function ChildRow(p: ChildRowProps) {
         ))}
       </select>
 
-      {/* Input to change count */}
-      <input
-        type="number"
-        className="editor-element !w-16"
-        value={tempCount}
-        onChange={handleChange}
-      />
+      <SafeNumberInput count={p.count} onCountChange={p.onCountChange} key={"sni" + p.key}/>
 
-      {/* Button to remove this child entry */}
       <button
         className="btn-emoji !p-0"
         onClick={() => p.onRemoveButtonPressed()}

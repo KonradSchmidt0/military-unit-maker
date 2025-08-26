@@ -1,6 +1,6 @@
-import { StaffText, useGlobalStore } from "./hooks/useGlobalStore";
-import { usePaletStore } from "./hooks/usePaletStore";
-import { UnitMap, useUnitStore } from "./hooks/useUnitStore";
+import { StaffText, useGlobalStore } from "../hooks/useGlobalStore";
+import { usePaletStore } from "../hooks/usePaletStore";
+import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
 const SAVE_SYSTEM_VERSION = 5;

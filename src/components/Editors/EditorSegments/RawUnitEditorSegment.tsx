@@ -1,6 +1,7 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
+import { SafeNumberInput } from "./SafeNumberInput";
 
 export default function RawUnitEditorSegment() {
   const unitMap = useUnitStore(s => s.unitMap)
@@ -37,14 +38,15 @@ export default function RawUnitEditorSegment() {
     const pairs = inp.split(/\s*,\s*/) // Splits if theres comma between
     for (const pair of pairs) {
       const [left, right] = pair.split(/ {2,}/); // Split by double space or more
+      const type = left.trim()
       const qty = parseInt(right, 10);
   
       if (!isNaN(qty)) {
-        eq[left] = qty;
+        eq[type] = qty;
       } else {
         const qtyPrompt = prompt(`Enter quantity for "${left}":`);
         if (qtyPrompt && !isNaN(parseInt(qtyPrompt, 10))) {
-          eq[left] = parseInt(qtyPrompt, 10);
+          eq[type] = parseInt(qtyPrompt, 10);
         }
       }
     }
@@ -81,12 +83,11 @@ export default function RawUnitEditorSegment() {
       {equipmentEntries.map(([type, value]) => (
         <div key={type} className="editor-segment-row">
           <span className="w-24">{type}</span>
-          <input
-            id={type}
-            type="number"
-            value={value}
-            className="editor-element !w-24"
-            onChange={(e) => changeEquipment({[type]: parseInt(e.target.value)})}
+          <SafeNumberInput
+            key={type}
+            count={value}
+            onCountChange={nc => changeEquipment({[type]: nc})}
+            className="!w-24"
           />
           <button onClick={() => deleteEquipment(type)} className="btn-emoji !p-0">
             ❌

@@ -52,7 +52,9 @@ function TreeView(p : TreeViewProps) {
 
   return (
     <div className={"border-dashed border-2 " + box + " flex flex-col"}>
-      <TreeNode path={p.path} stack={p.stack} dp={p.dp}/>
+      <div className="flex flex-row justify-center">
+        <TreeNode signature={p.path} stack={p.stack} dp={p.dp}/>
+      </div>
       
       <div className={"tree-" + classification}>
         {unit.type === "org" && classification !== "c" && 

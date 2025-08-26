@@ -9,6 +9,7 @@ import { ResetAllForceFoldingButton } from "./EditorSegments/ResetAllForceFoldin
 import { ResetRemporaryRootButton } from "./EditorSegments/ResetRemporaryRootButton";
 import { QuickSaveButtons } from "./EditorSegments/QuickSaveButtons";
 import { SaveButtons } from "./EditorSegments/SaveButtons";
+import { SafeNumberInput } from "./EditorSegments/SafeNumberInput";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
@@ -32,8 +33,8 @@ export default function GlobalEditor() {
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
           Folding Level:
-          <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"></EchelonEditor>
-          <input className="editor-element !w-16" type="number" value={foldingDepth} onChange={(e) => setFoldingDepth(parseInt(e.target.value))}/>
+          <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"/>
+          <SafeNumberInput count={foldingDepth} onCountChange={setFoldingDepth}/>
         </div>
 
         <div className="editor-segment-row">

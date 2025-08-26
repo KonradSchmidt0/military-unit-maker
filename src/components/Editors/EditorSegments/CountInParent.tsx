@@ -3,6 +3,7 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { removeAllOfAChild } from "../../../logic/childManaging";
 import { OrgUnit } from "../../../logic/logic";
+import { SafeNumberInput } from "./SafeNumberInput";
 
 export default function CountInParent() {
   const unitMap = useUnitStore(s => s.unitMap)
@@ -26,16 +27,10 @@ export default function CountInParent() {
   const selfCountInParent = selfInParent ? selfInParent : 0
 
   return (
-    <input
-      id="count-in-parent"
-      type="number"
-      className="w-16 editor-element"
-      value={selfCountInParent}
-      onChange={e => {
-        const newCount = parseInt(e.target.value);
-
-        if (isNaN(newCount)) return;
-        
+    <SafeNumberInput
+      key="count-in-parent"
+      count={selfCountInParent}
+      onCountChange={ newCount => {
         if (newCount <= 0) {
           updateUnit(parentId, removeAllOfAChild(parent, selectedId))
           return

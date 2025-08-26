@@ -6,7 +6,7 @@ interface props {
 
 export function QuickSaveButtons(p: props) {
   function handleLoadRequest() {
-    if (window.confirm("⚠️ Quick load will overwrite your current progress. Continue?")) {
+    if (window.confirm("⚠️ Quick restoring has potential to overwrite your current progress. Continue?")) {
       loadFromLocalStorage();
     }
   }

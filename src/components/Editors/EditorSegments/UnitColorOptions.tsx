@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor, SmartColor } from "../../../logic/logic";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { GetTrueColorRecursively } from "../../../logic/childManaging";
+import { GetTrueColor } from "../../../logic/childManaging";
 
 
 export function UnitColorOptions() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
-  const selected = useUnitInteractionStore(s => s.select)
-  const path = Array.isArray(selected) ? selected : undefined
+  const selectSignature = useUnitInteractionStore(s => s.select)
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[selectedId];
 
   const updateUnit = useUnitStore(s => s.updateUnit)
@@ -29,6 +28,10 @@ export function UnitColorOptions() {
     setColor(unit.smartColor)
   }, [unit.smartColor])
 
+  if (!selectSignature) {
+    return null
+  }
+
   const colorPicker = 
     (<input
       id="ColorPickerInputId"
@@ -44,7 +47,7 @@ export function UnitColorOptions() {
   )
   const uninheretColor = (
     <button className="btn-emoji" onClick={() => { 
-      let c = path ? GetTrueColorRecursively(trueRootId, path, unitMap) : defaultUnitColor
+      let c = GetTrueColor(selectSignature, trueRootId, unitMap)
       updateUnit(selectedId, { ...unit, smartColor: c}) }
       }>🕊️🖌️</button>
   )

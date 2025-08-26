@@ -7,6 +7,9 @@ interface UnitDisplayTextsProps {
   designationPack?: DesignationPack
   debug?: boolean;
   rightOffset?: number;
+  showLeft?: boolean
+  showRight?: boolean
+  overrideDisplayTextSetting?: boolean
 }
 
 export function UnitDisplayTexts({
@@ -15,10 +18,13 @@ export function UnitDisplayTexts({
   designationPack = {},
   debug = false,
   rightOffset = 0,
+  showLeft = true,
+  showRight = true,
+  overrideDisplayTextSetting = false
 }: UnitDisplayTextsProps) {
   const {shouldAllTextDisplay, shouldUnitTypeNameDisplay } = useTextOptionStore(s => s)
 
-  if (!shouldAllTextDisplay) {
+  if (!shouldAllTextDisplay && !overrideDisplayTextSetting) {
     return null
   }
 
@@ -30,7 +36,7 @@ export function UnitDisplayTexts({
 
   return (
     <>
-      {/* Left block */}
+      {showLeft && 
       <div className="absolute right-full flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none">
         {shouldUnitTypeNameDisplay && <div className={`flex-1 text-right ${red}`}>{TruncateName(name)}</div>}
         <div
@@ -38,9 +44,9 @@ export function UnitDisplayTexts({
         >
           {TruncateName(designationPack.name)}
         </div>
-      </div>
+      </div>}
 
-      {/* Right block */}
+      {showRight && 
       <div
         style={{
           left: `calc(100% + ${rightOffset * 6}px)`,
@@ -61,7 +67,7 @@ export function UnitDisplayTexts({
         >
           {TruncateDesc(desc)}
         </div>
-      </div>
+      </div>}
     </>
   );
 }

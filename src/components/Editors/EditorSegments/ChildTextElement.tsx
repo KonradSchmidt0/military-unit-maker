@@ -1,8 +1,9 @@
+import { useGlobalStore } from "../../../hooks/useGlobalStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath, GetTrueColorRecursively } from "../../../logic/childManaging"
+import { GetChildIdFromPath } from "../../../logic/childManaging"
+import { getDesignationPack } from "../../../logic/designationPack"
 import { OrgUnit } from "../../../logic/logic"
-import { UnitClickable } from "../../UnitDisplaying/UnitClickable"
-import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay"
+import TreeNode from "../../UnitDisplaying/TreeNode"
 
 interface props {
   parentSignature: number[] | string
@@ -17,6 +18,7 @@ export function ChildTextElement(p: props) {
   const callSign = parent.flatCallSigns[p.childFlatIndex]
   const desc = parent.flatDescriptions[p.childFlatIndex]
   const mySignature = Array.isArray(p.parentSignature) ? [...p.parentSignature, p.childFlatIndex] : childId
+  const { staffNames, staffComments } = useGlobalStore(s => s)
 
   function handleCallSign(n: string) {
     updateUnit(parentId, {...parent, flatCallSigns: {...parent.flatCallSigns, [p.childFlatIndex]: n}})
@@ -26,18 +28,15 @@ export function ChildTextElement(p: props) {
     updateUnit(parentId, {...parent, flatDescriptions: {...parent.flatDescriptions, [p.childFlatIndex]: n}})
   }
 
-  const color = 
-    Array.isArray(p.parentSignature) ? GetTrueColorRecursively(trueRootId, [...p.parentSignature, p.childFlatIndex], unitMap) 
-    :
-    GetTrueColorRecursively(parentId, [p.childFlatIndex], unitMap)
+  const dp = Array.isArray(mySignature) ? getDesignationPack(mySignature, unitMap, trueRootId, staffNames, staffComments) : {}
 
-  return <div className="flex flex-row gap-2 justify-center">
-    <UnitClickable signature={mySignature}>
-      <UnitDisplay className="!mt-3.5" unitId={childId} color={color} showText={false}/>
-    </UnitClickable>
+  return <div className="flex flex-row gap-2 h-[4.75rem]">
+    <div className="flex flex-col items-center justify-center h-full">
+      <TreeNode signature={mySignature} showRightText={false} overrideDisplayTextSetting={true} dp={dp}/>
+    </div>
     <div className="flex flex-col gap-1">
-      <input className="editor-element w-40" type="text" value={callSign} onChange={(e) => handleCallSign(e.target.value)}/>
-      <input className="editor-element w-40" type="text" value={desc} onChange={(e) => handleDesc(e.target.value)}/>
+      <input id={mySignature + "cs editor"} className="editor-element w-36" type="text" value={callSign} onChange={(e) => handleCallSign(e.target.value)}/>
+      <input id={mySignature + "parent desc editor"} className="editor-element w-36" type="text" value={desc} onChange={(e) => handleDesc(e.target.value)}/>
     </div>
   </div>
 }

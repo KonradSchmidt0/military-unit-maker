@@ -93,8 +93,12 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
 export function processSelect(select: string | number[] | undefined, map: UnitMap, trueRootId: string) {
   if (!select)
     return undefined
-  if (Array.isArray(select)) {
-    return GetChildIdFromPath(trueRootId, select, map)
+  return processSignature(select, map, trueRootId)
+}
+
+export function processSignature(signature: string | number[], map: UnitMap, trueRootId: string) {
+  if (Array.isArray(signature)) {
+    return GetChildIdFromPath(trueRootId, signature, map)
   }
-  return select
+  return signature
 }

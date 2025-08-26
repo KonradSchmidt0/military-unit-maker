@@ -19,6 +19,12 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Mostly internal cleanup (2025 8 26)</b><br/>
+           - Fixed bug with eq count being set to NaN when fully backspacing
+           - EQ name now gets trimmed (removed spaces from front and end) when inputing its name
+           - Added firefighting and pioneers icons (credits battleorder)
+          <br/>
+          
           <b className='text-base'>Autosaving (2025 8 24)</b><br/>
            - Added local save, stored in the browser. Mostly used for autosave<br/>
            - The local save automatically gets loaded when page is loaded<br/>
