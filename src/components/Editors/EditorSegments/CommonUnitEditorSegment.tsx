@@ -93,13 +93,13 @@ export default function CommonUnitEditorSegment() {
       <div className="editor-segment-row">
         {parentId ? <button className="btn-emoji" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
         {trueRootId === selectedId && 
-          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕🫚</button>}
+          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕</button>}
         {curRootId !== selectedId && parentId &&
           <button className="btn-emoji" 
                   onClick={() => handleSelectingUnselectingActingRoot(true)}
-                >📌🫚</button>}
+                >📌🦒</button>}
         {curRootId === selectedId && trueRootId !== selectedId &&
-          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(false)}>🦒🫚</button>}
+          <button className="btn-emoji" onClick={() => handleSelectingUnselectingActingRoot(false)}>❌📌</button>}
         {unitPalet.includes(selectedId) ? <button className="btn-emoji"
           onClick={() => removeUnitFromPalet(selectedId)}>🎨🚮</button> : null}
         {!unitPalet.includes(selectedId) ? <button className="btn-emoji"

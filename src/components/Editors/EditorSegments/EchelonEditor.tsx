@@ -5,16 +5,17 @@ interface EchelonEditorProps {
   onChange: Function,
   additionalStartingOption?: number
   id: string
+  className?: string
 }
 
-export function EchelonEditor({echelonLevel, onChange, additionalStartingOption = undefined, id}: EchelonEditorProps) {
+export function EchelonEditor({echelonLevel, onChange, additionalStartingOption = undefined, id, className = undefined}: EchelonEditorProps) {
   const echelons = useEchelonStore(s => s.intToSymbol);
   
   const additionalOption = additionalStartingOption ? <option key={additionalStartingOption} value={additionalStartingOption}/> : null
 
   return ( <select
     id={id}
-    className="editor-element"
+    className={"editor-element " + className}
     value={echelonLevel}
     onChange={(e) => {
       const newLevel = parseInt(e.target.value);

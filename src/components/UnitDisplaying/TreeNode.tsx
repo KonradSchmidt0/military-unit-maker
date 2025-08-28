@@ -1,4 +1,5 @@
 import { useHoverStore } from "../../hooks/useHoverStore";
+import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetTrueColor } from "../../logic/childManaging";
@@ -19,7 +20,7 @@ interface TreeNodeProps {
 function TreeNode(p: TreeNodeProps) {  
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  
+  const isDarkmode = useThemeStore(s => s.isDark)
   const selectedSignature = useUnitInteractionStore(s => s.select)
   const {id: curHoveredId, call: onHover} = useHoverStore(s => s)
   
@@ -31,7 +32,7 @@ function TreeNode(p: TreeNodeProps) {
   }
 
   const color = GetTrueColor(p.signature, trueRootId, unitMap)
-  const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId)
+  const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode)
  
   return (
     <div onMouseEnter={(e) => onHover(myId, {left: e.clientX, top: e.clientY})} onMouseLeave={() => onHover(undefined)} >

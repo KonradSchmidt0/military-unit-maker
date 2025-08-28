@@ -67,7 +67,7 @@ export default function OrgUnitEditorSegment() {
       }
     </div>
     <div className="editor-segment-row">
-      <button onClick={() => consolidateUnit(selectedId)} className="btn-emoji">🟰Consolidate</button>
+      <button onClick={() => consolidateUnit(selectedId)} className="btn-emoji">🤝Consolidate</button>
     </div>
   </>)
   const childEdittingList = Object.entries(unit.children).map(([childId, count], index) =>  {

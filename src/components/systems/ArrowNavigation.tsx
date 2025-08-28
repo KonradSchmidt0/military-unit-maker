@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { processSelect, useUnitInteractionStore } from '../hooks/useUnitInteractionsStore';
-import { useUnitStore } from '../hooks/useUnitStore';
-import { OrgUnit } from '../logic/logic';
-import { GetFlatIds } from '../logic/childManaging';
+import { useUnitInteractionStore, processSelect } from '../../hooks/useUnitInteractionsStore';
+import { useUnitStore } from '../../hooks/useUnitStore';
+import { GetFlatIds } from '../../logic/childManaging';
+import { OrgUnit } from '../../logic/logic';
 
 export default function ArrowNavigation() {
   const { selectParent, selectSibling, selectChild } = useUnitInteractionStore(s => s)

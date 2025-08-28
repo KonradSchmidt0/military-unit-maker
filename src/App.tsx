@@ -2,7 +2,6 @@ import TreeView from './components/UnitDisplaying/TreeView';
 import { useUnitStore } from './hooks/useUnitStore';
 import { initialUnits } from './myUnits';
 import { usePaletStore } from './hooks/usePaletStore';
-import { KeyboardWatcher } from './systems/KeyboardWatcher';
 import { useShortcutStore } from './hooks/shortcutStore';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { useGlobalStore } from './hooks/useGlobalStore';
@@ -10,14 +9,17 @@ import ChangelogOverlay from './components/ChangeLog';
 import ShortcutBox from './components/ShortcutBox';
 import { EditorPanel } from './components/Editors/EditorPanel';
 import IconDropdown from './components/IconDropdown';
-import ArrowNavigation from './systems/ArrowNavigation';
 import { HoverInspector } from './components/HoverInspector';
-import { AutoSave } from './components/AutoSave';
-import { LoadIconsCsv } from './systems/LoadIconsCsv';
+import { AutoSave } from './components/systems/AutoSave';
+import ArrowNavigation from './components/systems/ArrowNavigation';
+import { KeyboardWatcher } from './components/systems/KeyboardWatcher';
+import { LoadIconsCsv } from './components/systems/LoadIconsCsv';
+import { DialogBox } from './components/DialogBox';
+import { EmptyUnitsInTreeSystem } from './components/systems/EmptyUnitsInTreeSystem';
 
+useUnitStore.getState().setTrueRootId("infatry_oo");
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
 useUnitStore.getState().setUnitMap(initialUnits);
-useUnitStore.getState().setTrueRootId("infatry_oo");
 useUnitStore.temporal.getState().clear()
 
 function App() {
@@ -33,12 +35,14 @@ function App() {
       <KeyboardWatcher />
       <AutoSave/>
       <ArrowNavigation/>
+      <EmptyUnitsInTreeSystem/>
 
       {/* Overlays */}
       <HoverInspector/>
       <ChangelogOverlay/>
       <ShortcutBox/>
       <IconDropdown/>
+      <DialogBox/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

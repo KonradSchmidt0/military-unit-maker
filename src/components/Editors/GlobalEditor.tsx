@@ -10,6 +10,7 @@ import { ResetRemporaryRootButton } from "./EditorSegments/ResetRemporaryRootBut
 import { QuickSaveButtons } from "./EditorSegments/QuickSaveButtons";
 import { SaveButtons } from "./EditorSegments/SaveButtons";
 import { SafeNumberInput } from "./EditorSegments/SafeNumberInput";
+import { NewProjectButton } from "./EditorSegments/NewProjectButton";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
@@ -33,8 +34,8 @@ export default function GlobalEditor() {
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
           Folding Level:
-          <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor"/>
-          <SafeNumberInput count={foldingDepth} onCountChange={setFoldingDepth}/>
+          <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor" className="!max-w-20"/>
+          <SafeNumberInput count={foldingDepth} onCountChange={setFoldingDepth} className="!w-14" key="sni-foldingDepth"/>
         </div>
 
         <div className="editor-segment-row">
@@ -52,6 +53,10 @@ export default function GlobalEditor() {
       </div>
 
       <div className="editor-segment-flex">
+        <div className="editor-segment-row">
+          <NewProjectButton/>
+        </div>
+
         <div className="editor-segment-row">
           <QuickSaveButtons/>
         </div>

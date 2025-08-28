@@ -1,4 +1,4 @@
-import { loadFromLocalStorage, saveToLocalStorage } from "../../AutoSave";
+import { loadFromLocalStorage, saveToLocalStorage } from "../../systems/AutoSave";
 
 interface props {
 
@@ -12,7 +12,7 @@ export function QuickSaveButtons(p: props) {
   }
 
   return (<>
-    <button onClick={() => saveToLocalStorage} className="btn-emoji">Quick💾</button>
+    <button onClick={() => saveToLocalStorage()} className="btn-emoji">Quick💾</button>
     <button onClick={handleLoadRequest} className="btn-emoji">Quick⬇️💾</button>
   </>)
 }

@@ -19,10 +19,19 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Empty units in tree warning (2025 8 28)</b><br/>
+           - Added a system that detects and informs if theres a empty unit in the tree (can be turned off)<br/>
+           - Added new project button<br/>
+           - Minor UI changes (changed few emojis)<br/>
+           - Fixed: Bug with previously selected unit description staying in editor<br/>
+           - Fixed: Quick save now works correctly<br/>
+           - Fixed: White units 'selection shadow' is now visible also in light mode<br/>
+          <br/>
+
           <b className='text-base'>Mostly internal cleanup (2025 8 26)</b><br/>
-           - Fixed bug with eq count being set to NaN when fully backspacing
-           - EQ name now gets trimmed (removed spaces from front and end) when inputing its name
-           - Added firefighting and pioneers icons (credits battleorder)
+           - Fixed bug with eq count being set to NaN when fully backspacing<br/>
+           - EQ name now gets trimmed (removed spaces from front and end) when inputing its name<br/>
+           - Added firefighting and pioneers icons (credits battleorder)<br/>
           <br/>
           
           <b className='text-base'>Autosaving (2025 8 24)</b><br/>
@@ -54,7 +63,7 @@ export default function ChangelogOverlay() {
           - Added abillity to hide unit texts<br/>
           <br/>
 
-          <b className='text-base'>Parent Comments (2025 8 12)</b><br/>
+          <b className='text-base'>Staff Names (2025 8 12)</b><br/>
           - Added Staff Names. Very usefull if youre naming 'named' units (eg. 123rd infantry division), not just a alpha numeric designation from the parent<br/>
           - UX upgrades for mobile<br/>
           - Fixed bug with setting child count to not a number<br/>

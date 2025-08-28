@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 import { useEffect } from "react";
-import { useIconsStore, IconEntry } from "../hooks/useIcons";
+import { useIconsStore, IconEntry } from "../../hooks/useIcons";
 
 export function LoadIconsCsv(p: any) {
   const setIcons = useIconsStore(s => s.setIcons);

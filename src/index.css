@@ -15,6 +15,13 @@
   @apply disabled:cursor-not-allowed disabled:opacity-60
 }
 
+.btn-dialog {
+  @apply editor-element;
+  @apply dark:hover:bg-white/30 hover:bg-black/30 dark:active:bg-white/60 active:bg-black/60;
+  @apply transition-all duration-200 ease-in-out rounded-sm;
+  @apply disabled:cursor-not-allowed disabled:opacity-60;
+}
+
 .editor-box {
   @apply dark:border-bg_alt border-primary_alt border-2 w-72 max-h-screen border-r-0 flex flex-col;
 }
@@ -74,3 +81,5 @@ a {
 .tree-c {
   @apply tree gap-0
 }
+
+

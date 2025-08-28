@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getSaveFileJson, loadSaveFile } from "../logic/saveSystem";
+import { getSaveFileJson, loadSaveFile } from "../../logic/saveSystem";
 
 export function loadFromLocalStorage(
   key: string = "autosave")

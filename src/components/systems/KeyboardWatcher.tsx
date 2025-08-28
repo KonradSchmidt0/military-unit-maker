@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useShortcutStore } from "../hooks/shortcutStore";
-import { processSelect, useUnitInteractionStore } from "../hooks/useUnitInteractionsStore";
-import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
-import { hoverStore, useHoverStore } from "../hooks/useHoverStore";
+import { useShortcutStore } from "../../hooks/shortcutStore";
+import { hoverStore, useHoverStore } from "../../hooks/useHoverStore";
+import { useUnitInteractionStore, processSelect } from "../../hooks/useUnitInteractionsStore";
+import { useUnitStore, UnitMap } from "../../hooks/useUnitStore";
 
 export function KeyboardWatcher() {
   const selectBundle: hoverStore = useHoverStore(s => s)

@@ -58,8 +58,8 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
     <label className="editor-segment-row">
       <span className="font-bold">Desc.:</span>
       <textarea
-        id="descInputId"
-        value={unit.desc}
+        id={"descInputId"}
+        value={unit.desc ?? ""}
         onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
         className="editor-element"
       />
