@@ -13,7 +13,7 @@ export function HoverInspector() {
     if (id) {
       const timer = setTimeout(() => {
         setShow(true);
-      }, 750);
+      }, 700);
       setDelayTimer(timer);
     } else {
       setShow(false);

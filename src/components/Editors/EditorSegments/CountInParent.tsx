@@ -15,7 +15,7 @@ export default function CountInParent() {
 
   const updateUnit = useUnitStore(s => s.updateUnit)
 
-  const [ctrl] = [useShortcutStore(s => s.isCtrlHeld)]
+  const {ctrl} = useShortcutStore(s => s)
 
   
   if (!parentId || !selectedId)

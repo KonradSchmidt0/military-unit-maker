@@ -7,8 +7,6 @@ export interface UnitInteractionStore {
   select: string | number[] | undefined
   setSelect: (newSelect: string | number[] | undefined) => void;
   getSelectedParent: (map: UnitMap, trueRootId: string) => string | undefined
-  // TODO: Remove
-  path: number[] | undefined // Causes bugs because stupind react rerenders
   selectChild: (newElement: number) => void
   selectParent: () => void
   offsetSelect: () => void

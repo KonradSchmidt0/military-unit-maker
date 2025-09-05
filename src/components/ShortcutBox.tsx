@@ -1,14 +1,14 @@
 import { useShortcutStore } from "../hooks/shortcutStore";
 
 export default function ShortcutBox() {
-  const { isShiftHeld: shift, isCtrlHeld: ctrl, isAltHeld: alt } = useShortcutStore(s => s);
+  const { shift, ctrl, alt } = useShortcutStore(s => s);
 
   const text = (
     <>
-      {ctrl && !shift && <div>Select / Add key held</div>}
+      {ctrl && !shift && <div>Add key held</div>}
       {shift && !ctrl && <div>Remove key held</div>}
       {ctrl && shift && <div>Duplicate key held</div>}
-      {alt && <div>Alt key held</div>}
+      {alt && <div>Select key held</div>}
     </>
   );
 

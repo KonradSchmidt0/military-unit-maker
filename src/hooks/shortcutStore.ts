@@ -1,19 +1,19 @@
 import { create } from "zustand";
 
 interface ShortcutStore {
-  isShiftHeld: boolean;
-  isCtrlHeld: boolean;
-  isAltHeld: boolean;
-  isMetaHeld: boolean;
+  shift: boolean;
+  ctrl: boolean;
+  alt: boolean;
+  meta: boolean;
 
-  setModifiers: (mods: Partial<Pick<ShortcutStore, 'isShiftHeld' | 'isCtrlHeld' | 'isAltHeld' | 'isMetaHeld'>>) => void;
+  setModifiers: (mods: Partial<Pick<ShortcutStore, 'shift' | 'ctrl' | 'alt' | 'meta'>>) => void;
 }
 
 export const useShortcutStore = create<ShortcutStore>((set) => ({
-  isShiftHeld: false,
-  isCtrlHeld: false,
-  isAltHeld: false,
-  isMetaHeld: false,
+  shift: false,
+  ctrl: false,
+  alt: false,
+  meta: false,
 
   setModifiers: (mods) => set(mods),
 }));

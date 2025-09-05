@@ -2,7 +2,6 @@ import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
 import { OrgUnit } from "../../../logic/logic";
 import { ChildRow } from "./ChildRow";
 import { UnitColorOptions } from "./UnitColorOptions";
@@ -20,17 +19,11 @@ export default function CommonUnitEditorSegment() {
   const selectPath = slctd as number[]
   
   const setSelected = useUnitInteractionStore(s => s.setSelect)
-  const selectParent = useUnitInteractionStore(s => s.selectParent)
   const offsetSelect = useUnitInteractionStore(s => s.offsetSelect)
-  const selectSister = useUnitInteractionStore(s => s.changeSelectedChild)
 
   const updateUnit = useUnitStore(s => s.updateUnit)
   const duplicateUnit = useUnitStore(s => s.duplicateUnit)
   const addChild = useUnitStore(s => s.addOrSubtractChild)
-  const setChildCount = useUnitStore(s => s.changeChildCount)
-  const setChildId = useUnitStore(s => s.changeChildId)
-  const removeChildFully = useUnitStore(s => s.removeChildType)
-  const moveChild = useUnitStore(s => s.moveChildPos)
 
   const unitPalet = usePaletStore((state) => state.unitPalet)
   const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
@@ -39,7 +32,7 @@ export default function CommonUnitEditorSegment() {
   const {getCurrentRootId, actingRootPath, setActingRootPath, popNewTrueRoot} = useUnitStore(s => s)
   const curRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
 
-  const [ctrl, alt] = [useShortcutStore(s => s.isCtrlHeld), useShortcutStore(s => s.isAltHeld)]
+  const {ctrl, alt} = useShortcutStore(s => s)
 
   if (!slctd)
     return null
@@ -109,23 +102,11 @@ export default function CommonUnitEditorSegment() {
       {Array.isArray(slctd) && <ForceFoldingSegment path={slctd}></ForceFoldingSegment>}
 
       {parentId && <ChildRow
-        childId={selectedId}
-        count={(parent as OrgUnit).children[selectedId]}
-        childrenChoices={{[selectedId]: selected, ...getSafeChildOptions(parentId, unitMap, unitPalet, (parent as OrgUnit).children)}}
-        onChildChange={(n) => {
-          setChildId(parentId, selectedId, n);
-          ctrl ? selectParent() : setSelected(n)
-        }}
-        onCountChange={(n) => { setChildCount(parentId, selectedId, n); if (ctrl) selectParent();}}
-        onRemoveButtonPressed={ () => {
-          removeChildFully(parentId, selectedId); 
-          ctrl ? selectParent() : setSelected(undefined)
-        } }
-        
-        upDownButton={true}
-        onUpPressed={() => {moveChild(parentId, selectedId, "top"); if (ctrl) selectParent(); else selectSister("top", parent.children)}}
-        onDownPressed={() => {moveChild(parentId, selectedId, "bottom"); if (ctrl) selectParent(); else selectSister("bottom", parent.children)}}
+        parentSignature={selectPath.slice(0, -1)}
+        childSignature={slctd}
+        whoSelectOnSelectClick={selectPath.slice(0, -1)}
         key="top child row"
+        disableShadow={true}
       />}
 
       <div className="editor-segment-row">

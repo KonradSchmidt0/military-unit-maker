@@ -129,10 +129,11 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`No unit of id = ${parentId} found`); return;
       }
       if (parent.type === "raw") {
-        console.warn(`Cant add child to rawUnit ${parentId}`); return;
+        console.warn(`Cant change child in rawUnit ${parentId}`); return;
       }
 
       const parentUpdated = setChildId(parent, oldId, newId)
+
       get().updateUnit(parentId, parentUpdated)
     },
 
@@ -243,12 +244,3 @@ export const useUnitStore = create<UnitStore>()(
     },
   }))
 )
-
-// The likely hood that id is not corrent is close to zero
-// This was originaly always returning Unit, and throwing an error if it was incorect, but
-// React really hates when you conditionally call hooks. So no "If was given UnitId: useUnitQuick"
-// As such, you just use this hook and then check if it gives back a undef
-export function useUnitQuick(id: string): Unit | undefined {
-  const unit = useUnitStore((state) => state.unitMap[id]);
-  return unit
-}

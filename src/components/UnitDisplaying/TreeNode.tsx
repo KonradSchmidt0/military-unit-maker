@@ -7,6 +7,7 @@ import { DesignationPack } from "../../logic/designationPack";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
 import { UnitClickable } from "./UnitClickable";
 import { UnitDisplay } from "./UnitDisplay"
+import { UnitHoverable } from "./UnitHoverable";
 
 interface TreeNodeProps {
   signature: number[] | string
@@ -22,20 +23,20 @@ function TreeNode(p: TreeNodeProps) {
   const trueRootId = useUnitStore(s => s.trueRootId)
   const isDarkmode = useThemeStore(s => s.isDark)
   const selectedSignature = useUnitInteractionStore(s => s.select)
-  const {id: curHoveredId, call: onHover} = useHoverStore(s => s)
+  const {id: curHoveredId } = useHoverStore(s => s)
   
   const myId = processSignature(p.signature, unitMap, trueRootId)
 
   if (!myId) {
     console.warn("Incorect path or id assigned to TreeNode! ", p.signature)
-    return <>Something went wrong wi signature :(</>
+    return <>Something went wrong with signature :(</>
   }
 
   const color = GetTrueColor(p.signature, trueRootId, unitMap)
   const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode)
  
   return (
-    <div onMouseEnter={(e) => onHover(myId, {left: e.clientX, top: e.clientY})} onMouseLeave={() => onHover(undefined)} >
+    <UnitHoverable signature={p.signature}>
       <UnitClickable signature={p.signature}>
         <UnitDisplay 
           unitId={myId} color={color} 
@@ -44,7 +45,7 @@ function TreeNode(p: TreeNodeProps) {
           showLeftText={p.showLeftText} showRightText={p.showRightText} overrideDisplayTextSetting={p.overrideDisplayTextSetting}
         />
       </UnitClickable>
-    </div>
+    </UnitHoverable>
   );
 }
 

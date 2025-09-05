@@ -21,20 +21,20 @@ function HandleModifiers() {
   useEffect(() => {
     const updateModifiers = (e: KeyboardEvent) => {
         setModsInStore({
-            isShiftHeld: e.shiftKey,
-            isCtrlHeld: e.ctrlKey,
-            isAltHeld: e.altKey,
-            isMetaHeld: e.metaKey,
+            shift: e.shiftKey,
+            ctrl: e.ctrlKey,
+            alt: e.altKey,
+            meta: e.metaKey,
         });
     };
 
     window.addEventListener("keydown", updateModifiers);
     window.addEventListener("keyup", updateModifiers);
     window.addEventListener("blur", () => setModsInStore({
-        isShiftHeld: false,
-        isCtrlHeld: false,
-        isAltHeld: false,
-        isMetaHeld: false,
+        shift: false,
+        ctrl: false,
+        alt: false,
+        meta: false,
     })
     );
 
@@ -42,10 +42,10 @@ function HandleModifiers() {
         window.removeEventListener("keydown", updateModifiers);
         window.removeEventListener("keyup", updateModifiers);
         window.removeEventListener("blur", () => setModsInStore({
-            isShiftHeld: false,
-            isCtrlHeld: false,
-            isAltHeld: false,
-            isMetaHeld: false,
+            shift: false,
+            ctrl: false,
+            alt: false,
+            meta: false,
         })
         );
     };

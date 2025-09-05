@@ -59,7 +59,7 @@ export function VisualLayeringEditor() {
           color={GetTrueColor(unitSignature, trueRootId, unitMap)}
           className="!w-28 translate-y-4"
           onClick={handleClickOnDisp}
-          showLeftText={false}
+          showLeftText={false} showRightText={false}
         />
         <div className="flex flex-col items-center gap-2 mb-2 pt-4">
           {unit.layers.map((layerSrc, index) => (

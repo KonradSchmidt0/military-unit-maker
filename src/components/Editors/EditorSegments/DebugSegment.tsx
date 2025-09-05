@@ -6,7 +6,7 @@ import { useDialogBoxStorage } from "../../../hooks/useDialogBoxStore"
 export function DebugSegment() {
   const [dbg, setDbg] = useState(false)
 
-  const alt = useShortcutStore(s => s.isAltHeld)
+  const alt = useShortcutStore(s => s.alt)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

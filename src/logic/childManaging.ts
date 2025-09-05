@@ -184,3 +184,19 @@ export function GetTrueColor(signature: number[] | string, rootId: string, unitM
 
   return GetTrueColorRecursively(rootId, signature, unitMap)
 }
+
+export function getComplexChildList(u: OrgUnit, shouldFlatten: boolean) {
+    const flat = GetFlatIds(u.children).map((cid, i) => ({flatIndex: i, childId: cid, count: u.children[cid]}));
+  
+    if (shouldFlatten) {
+      return flat;
+    }
+  
+    const seen = new Set();
+    const filtered = flat.filter(entry => {
+      if (seen.has(entry.childId)) return false;
+      seen.add(entry.childId);
+      return true;
+    });
+    return filtered
+  }

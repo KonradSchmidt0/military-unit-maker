@@ -52,7 +52,7 @@ export function UnitDisplayTexts({
           left: `calc(100% + ${rightOffset * 6}px)`,
           top: `calc(0% + ${rightOffset * 6}px)`,
         }}
-        className="absolute flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal"
+        className="absolute flex flex-col h-full px-[1px] w-[30px] justify-between pointer-events-none font-medium dark:font-normal text-left"
       >
         <div className={`text-unit-s flex-1 ${yellow}`}>
           {TruncateDesc(designationPack.staffComment)}

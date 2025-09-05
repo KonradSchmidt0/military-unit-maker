@@ -9,13 +9,13 @@ import ChangelogOverlay from './components/ChangeLog';
 import ShortcutBox from './components/ShortcutBox';
 import { EditorPanel } from './components/Editors/EditorPanel';
 import IconDropdown from './components/IconDropdown';
-import { HoverInspector } from './components/HoverInspector';
 import { AutoSave } from './components/systems/AutoSave';
 import ArrowNavigation from './components/systems/ArrowNavigation';
 import { KeyboardWatcher } from './components/systems/KeyboardWatcher';
 import { LoadIconsCsv } from './components/systems/LoadIconsCsv';
 import { DialogBox } from './components/DialogBox';
 import { EmptyUnitsInTreeSystem } from './components/systems/EmptyUnitsInTreeSystem';
+import UnitDropdown from './components/UnitDropdown';
 
 useUnitStore.getState().setTrueRootId("infatry_oo");
 usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
@@ -26,7 +26,7 @@ function App() {
   const { actingRootPath } = useUnitStore(s => s)
   const displayDepth = useGlobalStore(s => s.foldingDepth)
 
-  const disableSelection = useShortcutStore((s) => s.isShiftHeld) ? "select-none" : ""
+  const disableSelection = useShortcutStore((s) => s.shift) ? "select-none" : ""
 
   return (
     <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>
@@ -38,11 +38,12 @@ function App() {
       <EmptyUnitsInTreeSystem/>
 
       {/* Overlays */}
-      <HoverInspector/>
+      {/* <HoverInspector/> */}
       <ChangelogOverlay/>
       <ShortcutBox/>
       <IconDropdown/>
       <DialogBox/>
+      <UnitDropdown/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

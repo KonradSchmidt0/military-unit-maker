@@ -1,5 +1,5 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { useUnitQuick, useUnitStore } from "../../../hooks/useUnitStore";
+import { useUnitStore } from "../../../hooks/useUnitStore";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
 import { SafeNumberInput } from "./SafeNumberInput";
 
@@ -8,7 +8,7 @@ export default function RawUnitEditorSegment() {
   const trueRootId = useUnitStore(s => s.trueRootId)
   const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
 
-  const unit = useUnitQuick(selectedId) as RawUnit
+  const unit = unitMap[selectedId] as RawUnit
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const splitUnit = useUnitStore(s => s.splitRawUnit)
 

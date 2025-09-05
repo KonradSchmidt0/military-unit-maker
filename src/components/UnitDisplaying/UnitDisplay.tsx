@@ -1,10 +1,10 @@
 import Color from "color";
 import { RecoloredImage } from "../RecoloredPicture";
 import { useEchelonStore } from "../../hooks/useEchelonStore";
-import { useUnitQuick } from "../../hooks/useUnitStore";
 import { DesignationPack } from "../../logic/designationPack";
 import { UnitStackShadow } from "./UnitStackShadow";
 import { UnitDisplayTexts } from "./UnitDisplayTexts";
+import { useUnitStore } from "../../hooks/useUnitStore";
 
 interface UnitDisplayProps {
   unitId: string;
@@ -20,7 +20,8 @@ interface UnitDisplayProps {
 }
 
 export function UnitDisplay({ unitId, color, style, className, onClick, showLeftText = true, showRightText = true, designationPack: dp, stack, overrideDisplayTextSetting = false }: UnitDisplayProps) {
-  const unit = useUnitQuick(unitId)
+  const unitMap = useUnitStore(s => s.unitMap)
+  const unit = unitMap[unitId]
 
   const echelonIconEndings = useEchelonStore(s => s.intToIconPathEndings)
   const echelonSymbols = useEchelonStore(s => s.intToSymbol)
@@ -76,7 +77,7 @@ const makeLayer = (index: number, src: string, c: string) => {
 
   const [hr, s, b] = [hsv.hue(), hsv.saturationv(), hsv.l() * 2]
 
-  // For now good enough. Just in the future 
+  // For now good enough
   const style = {
     filter: `hue-rotate(${hr}deg) saturate(${s}%) brightness(${b}%)`
   }

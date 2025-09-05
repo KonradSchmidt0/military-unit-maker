@@ -27,10 +27,10 @@ export function SafeNumberInput(p: props) {
   };
 
   return <input
+        id={p.key}
         type="number"
         className={"editor-element !w-16 " + p.className}
         value={tempCount}
         onChange={handleChange}
-        key={p.key}
       />
 }
