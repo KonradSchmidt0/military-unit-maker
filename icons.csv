@@ -24,18 +24,21 @@ b-mortar-alt.svg,artillery indirect mortart HE alternative
 b-pioneers.svg,infantry pioneers engineers
 b-rec.svg,recon reconnaissance scout support cavalery hussars
 b-signal.svg,signal communication comms support radio
+b-sniper.svg,sniper sharp shooters sharpshooters
 b-supply.svg,supply logistics support storage
 b-armored.svg,armor armored vehicle apc ifv fighting protected
 b-air-assault.svg, air assault
-b-air-mobile.svg, air mobile
+b-air-assault-alt.svg, air assault alt
+b-air-mobile.svg, air mobile air borne airborne
+b-air-mobile-alt.svg, air mobile air borne airborne alt
 b-gun.svg,gun direct fire HE assult
 b-missile.svg,missile launcher
 b-motorized.svg,motorized truck transport
 b-unmanned.svg,unmanned drone uav robot autonomus
 b-robotic.svg,unmanned drone robot usv autonomus
 b-robot-alt.svg,unmanned drone robot usv autonomus alternative
-b-amph.svg,amphibious see water marine naval
-b-amph-alt.svg,amphibious see water marine naval alternative
+b-amph.svg,amphibious sea water marine naval
+b-amph-alt.svg,amphibious sea water marine naval alternative
 b-horse.svg,horse cavalery animal mounted hussars
 b-wheeled-cc.svg,wheeled cc cross country motorized
 b-wheeled-rb.svg,wheeled rb road bound motorized
@@ -43,6 +46,7 @@ b-tracked.svg,tracked mechanized
 b-towed.svg,towed trailer truck motorized
 b-towed-trck.svg,towed trailer tractor half track mechanized
 b-costal.svg,costal static fortress bunker
+b-ski.svg,ski snow
 b-light.svg,light
 k-light-alt.svg,light alt niehorster
 k-medium.svg,medium mbt main battle niehorster
@@ -52,8 +56,12 @@ b-mountain.svg,mountain alpine
 b-hq-ooo.svg,headquarters hq command leader platoon ooo
 b-hq-I.svg,headquarters hq command leader company I
 b-hq-II.svg,headquarters hq command leader battalion II
+b-hq-III.svg,headquarters hq command leader regiment III
+b-hq-x.svg,headquarters hq command leader brigade X
 b-supports-I.svg,supports auxiliary company I
 b-supports-II.svg,supports auxiliary battalion II
+b-supports-III.svg,supports auxiliary regiment III
+b-supports-x.svg,supports auxiliary brigade X
 k-gun.svg,gun HE direct fire support fire assult konrad niehorster weapon
 k-gun-alt.svg,gun HE direct fire support fire assult alternative konrad niehorster weapon
 c-inf.png, infantry rifle foot artistic
