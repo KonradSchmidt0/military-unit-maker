@@ -16,7 +16,7 @@ export function DialogBox(p: props) {
         <h2 className="text-2xl font-bold mb-4">{header}</h2>
         <div className="space-y-4 text-base mb-4">{longText}</div>
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           {options.map((opt, idx) => (
             <button
               key={idx}
@@ -24,12 +24,13 @@ export function DialogBox(p: props) {
                 opt.action()
                 close()
               }}
-              className="btn-dialog !w-60"
+              className="btn-dialog min-w-32 min-h-12 flex-1"
             >
               {opt.text}
             </button>
           ))}
         </div>
+
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { OrgUnit } from '../../logic/logic';
 
 export default function ArrowNavigation() {
   const { selectParent, selectSibling, selectChild } = useUnitInteractionStore(s => s)
-  const slctd = useUnitInteractionStore(s => s.select)
+  const slctd = useUnitInteractionStore(s => s.selectSignature)
 
   const {unitMap, trueRootId, actingRootPath} = useUnitStore(s => s)
 

@@ -8,7 +8,7 @@ import { SafeNumberInput } from "./SafeNumberInput";
 export default function CountInParent() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
   
   const selectParent = useUnitInteractionStore(s => s.selectParent)

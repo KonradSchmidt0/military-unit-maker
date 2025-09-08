@@ -14,12 +14,12 @@ interface UnitStore {
   updateUnit: (id: string, newUnit: Unit) => void;
   duplicateUnit: (id: string) => string;
   addOrSubtractChild: (parentId: string, childId: string, count: number) => void;
-  creatNewChild: (parentId: string, type: "raw" | "org") => string;
+  creatNewChild: (parentId: string, type: "raw" | "org", addUnitToPalet?: Function) => string;
   removeChildType: (parentId: string, childId: string) => void;
   changeChildCount: (parentId: string, childId: string, newCount: number) => void;
   changeChildId: (parentId: string, oldId: string, newId: string) => void;
   moveChildPos: (parentId: string, childId: string, destination: "top" | "bottom") => void,
-  splitRawUnit: (parentId: string, childCount: number) => string,
+  splitRawUnit: (parentId: string, childCount: number, addUnitToPalet?: Function) => string,
   addNewChild: (parentId: string, childId: string) => void,
   consolidateOrgUnit: (id: string) => void,
   setInnerTexts: (id: string, shortName?: string, desc?: string) => void,
@@ -85,7 +85,7 @@ export const useUnitStore = create<UnitStore>()(
       get().updateUnit(parentId, parentUpdated)
     },
 
-    creatNewChild: (parentId, type) => {
+    creatNewChild: (parentId, type, addUnitToPalet) => {
       const parent = get().unitMap[parentId]
 
       const childInput = {layers: parent.layers, echelonLevel: Math.max(0, parent.echelonLevel - 1), smartColor: "inheret" as SmartColor}
@@ -93,6 +93,9 @@ export const useUnitStore = create<UnitStore>()(
       const childId = crypto.randomUUID()
       get().updateUnit(childId, child)
       get().addOrSubtractChild(parentId, childId, 1)
+      if (addUnitToPalet) {
+        addUnitToPalet(childId)
+      }
       return childId
     },
 
@@ -152,7 +155,7 @@ export const useUnitStore = create<UnitStore>()(
     },
 
 
-    splitRawUnit: (newMadeParentId, childCount) => {
+    splitRawUnit: (newMadeParentId, childCount, addUnitToPalet) => {
       const unitMap = get().unitMap;
       const parent = unitMap[newMadeParentId]
       if (!parent) {
@@ -180,6 +183,10 @@ export const useUnitStore = create<UnitStore>()(
         flatDescriptions: {}
       };
       get().updateUnit(newMadeParentId, updatedParent);
+
+      if (addUnitToPalet) {
+        addUnitToPalet(babyId)
+      }
 
       // Return baby id
       return babyId

@@ -8,7 +8,7 @@ interface EQListAndRemoverProps {
 
 export function EQListAndRemover(p : EQListAndRemoverProps) {
   const {unitMap, trueRootId, setUnitMap} = useUnitStore(s => s)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
+  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
 
   const equipmentEntries = Object.entries(getEquipmentTable(selectedId, unitMap));
   const unit = unitMap[selectedId]

@@ -1,16 +1,17 @@
+import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
 import { SafeNumberInput } from "./SafeNumberInput";
 
 export default function RawUnitEditorSegment() {
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.select), unitMap, trueRootId) as string
-
-  const unit = unitMap[selectedId] as RawUnit
+  const { unitMap, trueRootId } = useUnitStore(s => s)
+  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const splitUnit = useUnitStore(s => s.splitRawUnit)
+  const { addUnitToPalet } = usePaletStore(s => s)
+
+  const unit = unitMap[selectedId] as RawUnit
 
   if (!unit || unit.type !== "raw") {
     throw Error(`Unit ID or type wrong ID = ${selectedId}, type = ${unit?.type}`)
@@ -65,7 +66,7 @@ export default function RawUnitEditorSegment() {
       return
     }
 
-    splitUnit(selectedId, childCount)
+    splitUnit(selectedId, childCount, addUnitToPalet)
   }
 
   return (

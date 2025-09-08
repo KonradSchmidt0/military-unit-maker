@@ -18,7 +18,7 @@ interface props {
 export function ComplexChildNode(p: props) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const isDarkmode = useThemeStore(s => s.isDark)
-  const selectedSignature = useUnitInteractionStore(s => s.select)
+  const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId} = useHoverStore(s => s)
   
   const childId = processSignature(p.childSignature, unitMap, trueRootId)

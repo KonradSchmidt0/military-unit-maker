@@ -2,6 +2,7 @@ import { useGlobalStore } from "../../../hooks/useGlobalStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
+import { LabledInput } from "./LabledInput";
 
 interface CommentsEditorSegmentProps {
   
@@ -12,11 +13,9 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
   const { setStaffName, removeStaffName, getStaffName } = useGlobalStore(s => s)
   const { unitMap, trueRootId, setInnerTexts } = useUnitStore(s => s)
 
-  const slct = useUnitInteractionStore(s => s.select)
-  const unitId = processSelect(slct, unitMap, trueRootId) as string
+  const selectSignature = useUnitInteractionStore(s => s.selectSignature)
+  const unitId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[unitId]
-
-  const isInTree = Array.isArray(slct)
   
   function handleStaffComment(path: number[], comment: string) {
     if (comment === "") {
@@ -38,58 +37,43 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
     setInnerTexts(unitId, shortName, desc)
   }
   
-  const path = slct as number[]
-  
 
   return <div className="editor-segment-flex">
     <div className="editor-segment-row">
       <h2 className="font-bold text-lg">Comments</h2>
     </div>
-    <label className="editor-segment-row">
-      <span className="font-bold">Name:</span>
-      <input
-        id="LowerNameInputId"
-        type="text"
-        value={unit.name}
-        onChange={(e) => handleInnerTexts(unitId, e.target.value, undefined)}
-        className="editor-element"
-      />
-    </label>
-    <label className="editor-segment-row">
-      <span className="font-bold">Desc.:</span>
+    <LabledInput
+      label="Name:"
+      id="LowerNameInputId"
+      value={unit.name}
+      onChange={(e) => handleInnerTexts(unitId, e.target.value, undefined)}
+    />
+    <label className="flex flex-row items-center gap-2 w-full">
+      <span className="font-bold whitespace-nowrap">Desc.:</span>
       <textarea
         id={"descInputId"}
         value={unit.desc ?? ""}
         onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
-        className="editor-element"
+        className="editor-element flex-1 min-w-0" // By default, the browser sets min-w to auto, meaning flex-1 cant actually shrink it
+        rows={3}
       />
     </label>
     <CommentsFromParentEditorSegment></CommentsFromParentEditorSegment>
-    {isInTree && 
-      <label className="editor-segment-row">
-        <span className="font-bold">SN:</span>
-        <input
+    {Array.isArray(selectSignature) && 
+      <>
+        <LabledInput
+          label="SN:"
           id="StaffNameInputId"
-          type="text"
-          value={getStaffName(path)}
-          onChange={(e) => handleStaffName(path, e.target.value)}
-          className="editor-element"
-          alt="Name given by staff"
+          value={getStaffName(selectSignature)}
+          onChange={(e) => handleStaffName(selectSignature, e.target.value)}
         />
-      </label>
-    }
-    {isInTree && 
-      <label className="editor-segment-row">
-        <span className="font-bold">SC:</span>
-        <input
+        <LabledInput
+          label="SC:"
           id="StaffCommentInputId"
-          type="text"
-          value={getStaffComment(path)}
-          onChange={(e) => handleStaffComment(path, e.target.value)}
-          className="editor-element"
-          alt="Description given by staff"
+          value={getStaffComment(selectSignature)}
+          onChange={(e) => handleStaffComment(selectSignature, e.target.value)}
         />
-      </label>
+      </>
     }
   </div>
 }

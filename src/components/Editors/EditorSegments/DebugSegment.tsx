@@ -20,7 +20,7 @@ export function DebugSegment() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [alt]);
 
-  const select = useUnitInteractionStore(s => s.select)
+  const select = useUnitInteractionStore(s => s.selectSignature)
 
   const { open } = useDialogBoxStorage(s => s)
 

@@ -19,6 +19,7 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          
           <b className='text-base'>Better unit picker! (2025 9 05) </b> <br/>
            - Temporally removed Hover Inspector (too much spilling)<br/>
            - Added unit dropdown, so no more dealing with just names, you can actully see the units now<br/>

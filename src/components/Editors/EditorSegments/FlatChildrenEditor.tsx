@@ -10,7 +10,7 @@ interface props {
 
 export function FlatChildrenEditor(p: props) {
   const { trueRootId, unitMap } = useUnitStore(s => s)
-  const select = useUnitInteractionStore(s => s.select)
+  const select = useUnitInteractionStore(s => s.selectSignature)
   const parentId = processSelect(select, unitMap, trueRootId)
 
   if (!parentId || !select)

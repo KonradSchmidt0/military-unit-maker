@@ -3,7 +3,7 @@ import { usePaletStore } from "../hooks/usePaletStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-const SAVE_SYSTEM_VERSION = 5;
+const SAVE_SYSTEM_VERSION = 6;
 
 interface SaveFile {
   version: number;

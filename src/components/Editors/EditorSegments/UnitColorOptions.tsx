@@ -8,7 +8,7 @@ import { GetTrueColor } from "../../../logic/childManaging";
 export function UnitColorOptions() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectSignature = useUnitInteractionStore(s => s.select)
+  const selectSignature = useUnitInteractionStore(s => s.selectSignature)
   const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[selectedId];
 

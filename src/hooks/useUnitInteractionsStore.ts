@@ -4,7 +4,7 @@ import { GetChildIdFromPath, GetFlatIds } from '../logic/childManaging';
 import { ChildrenList } from '../logic/logic';
 
 export interface UnitInteractionStore {
-  select: string | number[] | undefined
+  selectSignature: string | number[] | undefined
   setSelect: (newSelect: string | number[] | undefined) => void;
   getSelectedParent: (map: UnitMap, trueRootId: string) => string | undefined
   selectChild: (newElement: number) => void
@@ -16,10 +16,10 @@ export interface UnitInteractionStore {
 }
 
 export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) => ({
-  select: undefined,
-  setSelect: (newSelect) => {set({select: newSelect})},
+  selectSignature: undefined,
+  setSelect: (newSelect) => {set({selectSignature: newSelect})},
   getSelectedParent(map, trueRootId) {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s))
       return undefined
     if (s.length === 0)
@@ -28,7 +28,7 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   },
 
   get path() {
-    const s = get().select
+    const s = get().selectSignature
     if (Array.isArray(s)) {
       return s
     }
@@ -36,36 +36,36 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   },
 
   selectChild: (n) => {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s)) {
       console.warn("s is not a path!")
       return
     }
-    set({select: [...s, n]})
+    set({selectSignature: [...s, n]})
   },
 
   selectParent: () => {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s)) {
       console.warn("s is not a path!")
       return
     }
 
-    set({select: s.slice(0, -1)})
+    set({selectSignature: s.slice(0, -1)})
   },
 
   offsetSelect: () => {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s)) {
       console.warn("s is not a path!")
       return
     }
 
-    set({select: [0, ...s]})
+    set({selectSignature: [0, ...s]})
   },
 
   changeSelectedChild: (newPos, parentChildren) => {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s)) {
       console.warn("s is not a path!")
       return
@@ -73,19 +73,19 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
 
     const flat = GetFlatIds(parentChildren)
 
-    set({select: [...s.slice(0, -1), newPos === 'top' ? 0 : flat.length - 1]})
+    set({selectSignature: [...s.slice(0, -1), newPos === 'top' ? 0 : flat.length - 1]})
   },
 
   selectSibling: (siblingFlatIndex) => {
-    const s = get().select
+    const s = get().selectSignature
     if (!Array.isArray(s)) {
       console.warn("s is not a path!")
       return
     }
-    set({select: [...s.slice(0, -1), siblingFlatIndex]})
+    set({selectSignature: [...s.slice(0, -1), siblingFlatIndex]})
   },
 
-  resetSelected: () => set({ select: undefined}),
+  resetSelected: () => set({ selectSignature: undefined}),
 }));
 
 export function processSelect(select: string | number[] | undefined, map: UnitMap, trueRootId: string) {

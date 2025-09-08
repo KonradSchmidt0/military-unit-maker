@@ -1,5 +1,5 @@
 # Editor that allows to create an Order of Battle (Military unit structure), and focuses on flowing user expierience
-[Check it out!!](https://konradschmidt0.github.io/military-unit-maker/)
+# [Check it out!!](https://konradschmidt0.github.io/military-unit-maker/)
 ![Screenshot of a program](public/MUM-2025-07-21.png)
 [Check the official Trello!](https://trello.com/b/UTt0xWVR/military-unit-maker)
 

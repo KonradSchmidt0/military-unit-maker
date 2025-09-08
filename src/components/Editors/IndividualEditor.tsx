@@ -11,7 +11,7 @@ import { SelectParent } from "./EditorSegments/SelectParent";
 export default function IndividualEditor() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const selected = useUnitInteractionStore(s => s.select)
+  const selected = useUnitInteractionStore(s => s.selectSignature)
   const selectedId = processSelect(selected, unitMap, trueRootId)
   const resetSelected = useUnitInteractionStore(s => s.resetSelected)
 

@@ -1,7 +1,6 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { createNewOrgUnit } from "../../../logic/logic";
-import { initialUnits } from "../../../myUnits";
 
 interface props {
 

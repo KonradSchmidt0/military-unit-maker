@@ -12,8 +12,9 @@ import { MouseEvent } from "react";
 export default function OrgUnitEditorSegment() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const select = useUnitInteractionStore(s => s.select) as string | number[]
+  const select = useUnitInteractionStore(s => s.selectSignature) as string | number[]
   const selectedId = processSelect(select, unitMap, trueRootId) as string
+  const { addUnitToPalet } = usePaletStore(s => s)
   
   const createChild = useUnitStore(s => s.creatNewChild)
   const addChild = useUnitStore(s => s.addNewChild)
@@ -40,7 +41,7 @@ export default function OrgUnitEditorSegment() {
         safeChildrenOptions
       )
     } else {
-      createChild(selectedId, type); 
+      createChild(selectedId, type, addUnitToPalet); 
     }
   }
 

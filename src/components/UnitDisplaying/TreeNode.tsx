@@ -22,7 +22,7 @@ function TreeNode(p: TreeNodeProps) {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
   const isDarkmode = useThemeStore(s => s.isDark)
-  const selectedSignature = useUnitInteractionStore(s => s.select)
+  const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId } = useHoverStore(s => s)
   
   const myId = processSignature(p.signature, unitMap, trueRootId)

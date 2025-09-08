@@ -1,6 +1,5 @@
 import TreeView from './components/UnitDisplaying/TreeView';
 import { useUnitStore } from './hooks/useUnitStore';
-import { initialUnits } from './myUnits';
 import { usePaletStore } from './hooks/usePaletStore';
 import { useShortcutStore } from './hooks/shortcutStore';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
@@ -16,16 +15,22 @@ import { LoadIconsCsv } from './components/systems/LoadIconsCsv';
 import { DialogBox } from './components/DialogBox';
 import { EmptyUnitsInTreeSystem } from './components/systems/EmptyUnitsInTreeSystem';
 import UnitDropdown from './components/UnitDropdown';
+import { GenerateInitialUnits } from './myUnits';
+import { HoverInspector } from './components/HoverInspector';
 
-useUnitStore.getState().setTrueRootId("infatry_oo");
-usePaletStore.getState().setUnitPalet(["rifle_e", "rifle_o", "infatry_oo"])
-useUnitStore.getState().setUnitMap(initialUnits);
+const ini = GenerateInitialUnits()
+
+useUnitStore.getState().setTrueRootId(ini.rootId);
+usePaletStore.getState().setUnitPalet(ini.palet)
+useUnitStore.getState().setUnitMap(ini.unitMap);
 useUnitStore.temporal.getState().clear()
 
 function App() {
   const { actingRootPath } = useUnitStore(s => s)
   const displayDepth = useGlobalStore(s => s.foldingDepth)
 
+  // Problem: User can hold shift to interact with units, but browser by default interprets shift as sign that you want to select text
+  // Solution: We disable it, but only when shift is held, so user can still select text on page
   const disableSelection = useShortcutStore((s) => s.shift) ? "select-none" : ""
 
   return (
@@ -38,7 +43,7 @@ function App() {
       <EmptyUnitsInTreeSystem/>
 
       {/* Overlays */}
-      {/* <HoverInspector/> */}
+      <HoverInspector/>
       <ChangelogOverlay/>
       <ShortcutBox/>
       <IconDropdown/>

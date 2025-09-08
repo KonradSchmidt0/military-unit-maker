@@ -3,6 +3,7 @@ import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "../../../logic/childManaging"
 import { changeTextInParent } from "../../../logic/designationPack"
 import { OrgUnit } from "../../../logic/logic"
+import { LabledInput } from "./LabledInput"
 
 interface props {
 
@@ -11,7 +12,7 @@ interface props {
 export function CommentsFromParentEditorSegment(p: props) {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
 
-  const slct = useUnitInteractionStore(s => s.select)
+  const slct = useUnitInteractionStore(s => s.selectSignature)
 
   if (!Array.isArray(slct))
     return null
@@ -24,28 +25,22 @@ export function CommentsFromParentEditorSegment(p: props) {
     updateUnit(parentId, nParent)
   }
 
+  if (slct.length === 0) {
+    return null
+  }
+
   return <>
-    {slct.length > 0 && <label className="editor-segment-row">
-      <span className="font-bold">CS:</span>
-      <input
-        id="CallSignInputId"
-        type="text"
-        value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""}
-        onChange={(e) => handleTextsInParent(e.target.value, undefined)}
-        className="editor-element"
-        alt="Name given by parent (callsign)"
-      />
-    </label>}
-    {slct.length > 0 && <label className="editor-segment-row">
-      <span className="font-bold">DfP:</span>
-      <input
-        id="DescFromParentInputId"
-        type="text"
-        value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
-        onChange={(e) => handleTextsInParent(undefined, e.target.value)}
-        className="editor-element"
-        alt="Description given by parent"
-      />
-    </label>}
+    <LabledInput
+      label="CS:"
+      id="CallSignInputId"
+      value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""}
+      onChange={(e) => handleTextsInParent(e.target.value, undefined)}
+    />
+    <LabledInput
+      label="DfP:"
+      id="DescFromParentInputId"
+      value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
+      onChange={(e) => handleTextsInParent(undefined, e.target.value)}
+    />
   </>
 }

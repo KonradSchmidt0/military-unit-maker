@@ -8,7 +8,7 @@ interface props {
 
 export function UnitHoverable(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
-  const { call } = useHoverStore(s => s)
+  const { callId, callOff } = useHoverStore(s => s)
 
   const myId = processSignature(p.signature, unitMap, trueRootId)
 
@@ -18,7 +18,7 @@ export function UnitHoverable(p: React.PropsWithChildren<props>) {
   }
 
   return (
-    <div onMouseEnter={(e) => call(myId, {left: e.clientX, top: e.clientY})} onMouseLeave={() => call(undefined)}>
+    <div onMouseEnter={() => callId(myId)} onMouseLeave={() => callOff()}>
       {p.children}
     </div>
   )

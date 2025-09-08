@@ -36,7 +36,7 @@ export default function PalletEditorSegment() {
 
   const displayedList = showHidden
     ? Object.entries(unitMap) // show everything when "showHidden" is true
-    : unitPalet.map((id) => [id, unitMap[id]]) as [string, Unit | undefined][]; // else show only units in palet
+    : Object.entries(unitMap).filter(([id, unit]) => isInPalet(id))
     
 
   const addToPalletButton = (unitId: string, inPalet: boolean) => 

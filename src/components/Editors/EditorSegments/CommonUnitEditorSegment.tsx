@@ -9,11 +9,13 @@ import { EchelonEditor } from "./EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { GetFlatIds } from "../../../logic/childManaging";
 import { ForceFoldingSegment } from "./ForceFoldingSegment";
+import { LabledInput } from "./LabledInput";
+import { useHoverStore } from "../../../hooks/useHoverStore";
 
 export default function CommonUnitEditorSegment() {
   // Man, if propdrilling is one extreme, then this is the opposite one
   const { unitMap, trueRootId } = useUnitStore(s => s)
-  const slctd = useUnitInteractionStore(s => s.select)
+  const slctd = useUnitInteractionStore(s => s.selectSignature)
   const selectedId = processSelect(slctd, unitMap, trueRootId) as string
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
   const selectPath = slctd as number[]
@@ -31,6 +33,8 @@ export default function CommonUnitEditorSegment() {
   
   const {getCurrentRootId, actingRootPath, setActingRootPath, popNewTrueRoot} = useUnitStore(s => s)
   const curRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
+  
+  const { callSimple, callOff } = useHoverStore(s => s)
 
   const {ctrl, alt} = useShortcutStore(s => s)
 
@@ -70,21 +74,24 @@ export default function CommonUnitEditorSegment() {
     setActingRootPath(selectPath)
   }
 
-  return (
-    <><div className="editor-segment-flex">
-      <label className="editor-segment-row">
-        <span className="font-bold">Name:</span>
-        <input
-          id="NameInputId"
-          type="text"
-          value={selected?.name}
-          onChange={handleNameChange}
-          className="editor-element"
-        />
-      </label>
+  return ( 
+  <>
+    <div className="editor-segment-flex">
+
+      <LabledInput
+        label="Name:"
+        value={selected?.name}
+        onChange={handleNameChange}
+        id="UnitNameInput"
+      />
 
       <div className="editor-segment-row">
-        {parentId ? <button className="btn-emoji" onClick={() => handleUnlinking(selectedId)}>Unlink</button> : null}
+        {parentId ? <button 
+          className="btn-emoji" 
+          onClick={() => handleUnlinking(selectedId)}
+          onMouseEnter={() => callSimple("Unlinks this unit, meaning makes so changes to this unit, don't affect units of previously the same type")}
+          onMouseLeave={() => callOff()}
+        >Unlink</button> : null}
         {trueRootId === selectedId && 
           <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕</button>}
         {curRootId !== selectedId && parentId &&

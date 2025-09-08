@@ -7,7 +7,7 @@ import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay";
 export function VisualLayeringEditor() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
-  const unitSignature = useUnitInteractionStore(s => s.select)
+  const unitSignature = useUnitInteractionStore(s => s.selectSignature)
   const unitId = processSelect(unitSignature, unitMap, trueRootId) as string
   const unit = unitMap[unitId];
   const updateUnit = useUnitStore((s) => s.updateUnit);
