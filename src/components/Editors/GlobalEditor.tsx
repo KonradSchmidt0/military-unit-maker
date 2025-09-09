@@ -1,16 +1,16 @@
 import { useGlobalStore } from "../../hooks/useGlobalStore";
-import { EchelonEditor } from "./EditorSegments/EchelonEditor";
+import { EchelonEditor } from "./EditorElements/EchelonEditor";
 import { DebugSegment } from "./EditorSegments/DebugSegment";
-import ThemeToggle from "./EditorSegments/ThemeToggle";
-import { EchelonSettingChanger } from "./EditorSegments/EchelonSettingChanger";
+import ThemeToggle from "./EditorElements/ThemeToggle";
+import { EchelonSettingChanger } from "./EditorElements/EchelonSettingChanger";
 import { ExtrnlLink } from "../ExtrnlLink";
-import { UnitTextsDisplaySwitches } from "./EditorSegments/UnitTextsDisplaySwitches";
-import { ResetAllForceFoldingButton } from "./EditorSegments/ResetAllForceFoldingButton";
-import { ResetRemporaryRootButton } from "./EditorSegments/ResetRemporaryRootButton";
-import { QuickSaveButtons } from "./EditorSegments/QuickSaveButtons";
-import { SaveButtons } from "./EditorSegments/SaveButtons";
-import { SafeNumberInput } from "./EditorSegments/SafeNumberInput";
-import { NewProjectButton } from "./EditorSegments/NewProjectButton";
+import { UnitTextsDisplaySwitches } from "./EditorElements/UnitTextsDisplaySwitches";
+import { ResetAllForceFoldingButton } from "./EditorElements/ResetAllForceFoldingButton";
+import { ResetRemporaryRootButton } from "./EditorElements/ResetRemporaryRootButton";
+import { QuickSaveButtons } from "./EditorElements/QuickSaveButtons";
+import { SaveButtons } from "./EditorElements/SaveButtons";
+import { SafeNumberInput } from "./EditorElements/SafeNumberInput";
+import { NewProjectButton } from "./EditorElements/NewProjectButton";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)

@@ -32,6 +32,8 @@ function App() {
   // Problem: User can hold shift to interact with units, but browser by default interprets shift as sign that you want to select text
   // Solution: We disable it, but only when shift is held, so user can still select text on page
   const disableSelection = useShortcutStore((s) => s.shift) ? "select-none" : ""
+  
+  const isMobile = "ontouchstart" in window
 
   return (
     <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>
@@ -43,9 +45,9 @@ function App() {
       <EmptyUnitsInTreeSystem/>
 
       {/* Overlays */}
-      <HoverInspector/>
+      {!isMobile && <HoverInspector/>}
+      {!isMobile && <ShortcutBox/>}
       <ChangelogOverlay/>
-      <ShortcutBox/>
       <IconDropdown/>
       <DialogBox/>
       <UnitDropdown/>

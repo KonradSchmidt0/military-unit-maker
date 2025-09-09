@@ -1,16 +1,16 @@
-import { useGlobalStore } from "../../../hooks/useGlobalStore";
+import { useStaffTextStore } from "../../../hooks/useStaffTextStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
-import { LabledInput } from "./LabledInput";
+import { LabledInput } from "../EditorElements/LabledInput";
 
 interface CommentsEditorSegmentProps {
   
 }
 
 export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
-  const { setStaffComment, removeStaffComment, getStaffComment } = useGlobalStore(s => s)
-  const { setStaffName, removeStaffName, getStaffName } = useGlobalStore(s => s)
+  const { setStaffComment, removeStaffComment, getStaffComment } = useStaffTextStore(s => s)
+  const { setStaffName, removeStaffName, getStaffName } = useStaffTextStore(s => s)
   const { unitMap, trueRootId, setInnerTexts } = useUnitStore(s => s)
 
   const selectSignature = useUnitInteractionStore(s => s.selectSignature)

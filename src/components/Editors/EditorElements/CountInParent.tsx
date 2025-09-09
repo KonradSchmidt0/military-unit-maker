@@ -30,7 +30,7 @@ export default function CountInParent() {
     <SafeNumberInput
       key="count-in-parent"
       count={selfCountInParent}
-      onCountChange={ newCount => {
+      onCountChange={ (newCount: number) => {
         if (newCount <= 0) {
           updateUnit(parentId, removeAllOfAChild(parent, selectedId))
           return

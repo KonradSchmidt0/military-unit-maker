@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import { useShortcutStore } from "../../hooks/shortcutStore";
-import { useUnitInteractionStore, processSelect, UnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
+import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore, UnitMap } from "../../hooks/useUnitStore";
 
 export function KeyboardWatcher() {
-  const selectBundle = useUnitInteractionStore(s => s)
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
 
   const resetAllSelected = useUnitInteractionStore((s) => s.resetSelected);
 
   // React, so you have to render handlers, cant just call
-  return <>{HandleModifiers()}{HandleEscape(resetAllSelected)}{HandleCtrlZ(selectBundle, unitMap, trueRootId)}</>; // It’s invisible, just for effect
+  return <>{HandleModifiers()}{HandleEscape(resetAllSelected)}{HandleCtrlZ(unitMap, trueRootId)}</>; // It’s invisible, just for effect
 }
 
 function HandleModifiers() {
@@ -68,7 +67,7 @@ function HandleEscape(resetAllSelected: Function) {
   return null
 }
 
-function HandleCtrlZ(selectBundle: UnitInteractionStore, unitMap: UnitMap, trueRootId: string) {
+function HandleCtrlZ(unitMap: UnitMap, trueRootId: string) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isCtrl = e.ctrlKey || e.metaKey;
@@ -86,17 +85,11 @@ function HandleCtrlZ(selectBundle: UnitInteractionStore, unitMap: UnitMap, trueR
       } else {
         return
       }
-
-      // const selectedId = processSelect(selectBundle.selectSignature, unitMap, trueRootId)
-      // if (!selectedId)
-      //   selectBundle.setSelect(undefined)
-      // else if (!unitMap[selectedId])
-      //   selectBundle.setSelect(undefined)
     };
   
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [unitMap, selectBundle, trueRootId]);
+  }, [unitMap, trueRootId]);
   
 }
 

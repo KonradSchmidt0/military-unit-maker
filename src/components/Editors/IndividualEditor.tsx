@@ -6,15 +6,14 @@ import CommonUnitEditorSegment from "./EditorSegments/CommonUnitEditorSegment";
 import { EQListAndRemover } from "./EditorSegments/EQListAndRemover";
 import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
-import { SelectParent } from "./EditorSegments/SelectParent";
+import { SelectParent } from "./EditorElements/SelectParent";
+import { UnselectUnitButton } from "./EditorElements/UnselectUnitButton";
 
 export default function IndividualEditor() {
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const selected = useUnitInteractionStore(s => s.selectSignature)
-  const selectedId = processSelect(selected, unitMap, trueRootId)
-  const resetSelected = useUnitInteractionStore(s => s.resetSelected)
-
+  const {unitMap, trueRootId} = useUnitStore(s => s)
+  const { selectSignature } = useUnitInteractionStore(s => s)
+  
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
   if (!selectedId)
     return null
 
@@ -37,8 +36,8 @@ export default function IndividualEditor() {
     <div className="editor-box">
       <div className="editor-segment font-bold">
         INDIV {currentlySelectedDisplay}
-        {Array.isArray(selected) && selected.length > 0 && <SelectParent myPath={selected}/>}
-        <button className="btn-emoji !p-0 !ml-2" onClick={resetSelected}>❌</button>
+        {Array.isArray(selectSignature) && selectSignature.length > 0 && <SelectParent myPath={selectSignature}/>}
+        <UnselectUnitButton className="!p-0 !ml-2"/>
       </div>
       
       <div className="overflow-y-auto max-h-fit">

@@ -1,4 +1,4 @@
-import { StaffText } from "../hooks/useGlobalStore";
+import { StaffText } from "../hooks/useStaffTextStore";
 import { UnitMap } from "../hooks/useUnitStore";
 import { GetChildIdFromPath, GetFlatIds } from "./childManaging";
 import { OrgUnit } from "./logic";

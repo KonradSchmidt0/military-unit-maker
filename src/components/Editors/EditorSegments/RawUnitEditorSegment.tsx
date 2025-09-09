@@ -2,7 +2,7 @@ import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
-import { SafeNumberInput } from "./SafeNumberInput";
+import { SafeNumberInput } from "../EditorElements/SafeNumberInput";
 
 export default function RawUnitEditorSegment() {
   const { unitMap, trueRootId } = useUnitStore(s => s)

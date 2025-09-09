@@ -3,8 +3,8 @@ import { useUnitInteractionStore, processSignature } from "../../../hooks/useUni
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { OrgUnit } from "../../../logic/logic"
 import { ComplexChildNode } from "../../UnitDisplaying/ComplexChildNode"
-import { RemoveChildButton } from "./RemoveChildButton"
-import { SafeNumberInput } from "./SafeNumberInput"
+import { RemoveChildButton } from "../EditorElements/RemoveChildButton"
+import { SafeNumberInput } from "../EditorElements/SafeNumberInput"
 
 interface ChildRowProps {
   parentSignature: string | number[]

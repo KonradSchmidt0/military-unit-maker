@@ -4,7 +4,7 @@ interface props {
   
 }
 
-// Im too lazy to rename
+// Im too lazy to rename and its a bit funny
 export function ResetRemporaryRootButton(p: props) {
   const { actingRootPath, setActingRootPath } = useUnitStore(s => s)
 

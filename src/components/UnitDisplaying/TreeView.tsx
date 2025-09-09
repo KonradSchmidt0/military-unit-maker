@@ -4,6 +4,7 @@ import { useGlobalStore } from "../../hooks/useGlobalStore";
 import { GetChildIdFromPath, getComplexChildList, GetFlatIds } from "../../logic/childManaging";
 import { DesignationPack, getMergedDPFromChildren } from "../../logic/designationPack";
 import { FoldingMap, getPathAsString, useForceFoldingStore } from "../../hooks/useForceFoldingStore";
+import { useStaffTextStore } from "../../hooks/useStaffTextStore";
 
 interface TreeViewProps {
   path: number[];
@@ -14,7 +15,8 @@ interface TreeViewProps {
 
 function TreeView(p : TreeViewProps) {
   const {unitMap, trueRootId} = useUnitStore(s => s)
-  const {echelonFoldingLevel, stacking, staffNames, staffComments} = useGlobalStore(s => s)
+  const {echelonFoldingLevel, stacking} = useGlobalStore(s => s)
+  const { staffNames, staffComments } = useStaffTextStore(s => s)
   const parentBoxOn = useGlobalStore(s => s.displayParentBox)
   const foldingUnfoldingMap = useForceFoldingStore(s => s.foldingUnfoldingMap)
   const unitId = GetChildIdFromPath(trueRootId, p.path, unitMap) as string

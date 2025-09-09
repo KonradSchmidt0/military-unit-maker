@@ -3,7 +3,7 @@ import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "../../../logic/childManaging"
 import { changeTextInParent } from "../../../logic/designationPack"
 import { OrgUnit } from "../../../logic/logic"
-import { LabledInput } from "./LabledInput"
+import { LabledInput } from "../EditorElements/LabledInput"
 
 interface props {
 

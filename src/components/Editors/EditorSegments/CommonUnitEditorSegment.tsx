@@ -4,12 +4,12 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { OrgUnit } from "../../../logic/logic";
 import { ChildRow } from "./ChildRow";
-import { UnitColorOptions } from "./UnitColorOptions";
-import { EchelonEditor } from "./EchelonEditor";
+import { UnitColorOptions } from "../EditorElements/UnitColorOptions";
+import { EchelonEditor } from "../EditorElements/EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { GetFlatIds } from "../../../logic/childManaging";
 import { ForceFoldingSegment } from "./ForceFoldingSegment";
-import { LabledInput } from "./LabledInput";
+import { LabledInput } from "../EditorElements/LabledInput";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 
 export default function CommonUnitEditorSegment() {
@@ -89,11 +89,13 @@ export default function CommonUnitEditorSegment() {
         {parentId ? <button 
           className="btn-emoji" 
           onClick={() => handleUnlinking(selectedId)}
-          onMouseEnter={() => callSimple("Unlinks this unit, meaning makes so changes to this unit, don't affect units of previously the same type")}
+          onMouseEnter={() => callSimple("Unlinks this unit", "Makes so changes to this unit, don't affect units of previously the same type")}
           onMouseLeave={() => callOff()}
         >Unlink</button> : null}
         {trueRootId === selectedId && 
-          <button className="btn-emoji" onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}>⬆️➕</button>}
+          <button className="btn-emoji" 
+                  onClick={() => popNewTrueRoot(setSelected, offsetSelect, !ctrl)}
+                >⬆️➕</button>}
         {curRootId !== selectedId && parentId &&
           <button className="btn-emoji" 
                   onClick={() => handleSelectingUnselectingActingRoot(true)}

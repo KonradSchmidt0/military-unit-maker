@@ -1,5 +1,5 @@
-import { StaffText, useGlobalStore } from "../hooks/useGlobalStore";
 import { usePaletStore } from "../hooks/usePaletStore";
+import { StaffText, useStaffTextStore } from "../hooks/useStaffTextStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
@@ -18,8 +18,8 @@ export function getSaveFileJson(): string {
   const unitMap = useUnitStore.getState().unitMap;
   const rootUnitId = useUnitStore.getState().trueRootId;
   const unitPalet = usePaletStore.getState().unitPalet;
-  const staffComments = useGlobalStore.getState().staffComments;
-  const staffNames = useGlobalStore.getState().staffNames;
+  const staffComments = useStaffTextStore.getState().staffComments;
+  const staffNames = useStaffTextStore.getState().staffNames;
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -68,7 +68,7 @@ export function loadSaveFile(
 
     usePaletStore.setState({unitPalet: json.unitPalet})
     useUnitStore.setState({unitMap: unitMap, trueRootId: json.rootUnitId})
-    useGlobalStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
+    useStaffTextStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
   } catch (err) {
     alert("Failed to load file: " + (err as Error).message);
   }

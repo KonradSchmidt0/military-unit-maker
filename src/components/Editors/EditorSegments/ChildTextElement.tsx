@@ -1,4 +1,4 @@
-import { useGlobalStore } from "../../../hooks/useGlobalStore"
+import { useStaffTextStore } from "../../../hooks/useStaffTextStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "../../../logic/childManaging"
 import { getDesignationPack } from "../../../logic/designationPack"
@@ -18,7 +18,7 @@ export function ChildTextElement(p: props) {
   const callSign = parent.flatCallSigns[p.childFlatIndex]
   const desc = parent.flatDescriptions[p.childFlatIndex]
   const mySignature = Array.isArray(p.parentSignature) ? [...p.parentSignature, p.childFlatIndex] : childId
-  const { staffNames, staffComments } = useGlobalStore(s => s)
+  const { staffNames, staffComments } = useStaffTextStore(s => s)
 
   function handleCallSign(n: string) {
     updateUnit(parentId, {...parent, flatCallSigns: {...parent.flatCallSigns, [p.childFlatIndex]: n}})
