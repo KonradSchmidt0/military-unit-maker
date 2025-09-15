@@ -58,8 +58,14 @@ export function HoverInspector() {
     };
   }, [id, simple, setPos]);
 
-  const header = simple?.header ?? unitMap[id ?? ""]?.name 
-  const desc = simple?.desc ?? unitMap[id ?? ""]?.desc
+  let header = undefined
+  let desc = undefined
+  if (typeof simple === "string") {
+    header = simple
+  } else {
+    header = simple?.header ?? unitMap[id ?? ""]?.name 
+    desc = simple?.desc ?? unitMap[id ?? ""]?.desc
+  }
 
   return (
     <div

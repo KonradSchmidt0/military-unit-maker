@@ -1,3 +1,4 @@
+import { useHoverStore } from "../../../hooks/useHoverStore";
 import { useIconsStore } from "../../../hooks/useIcons";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
@@ -11,6 +12,7 @@ export function VisualLayeringEditor() {
   const unitId = processSelect(unitSignature, unitMap, trueRootId) as string
   const unit = unitMap[unitId];
   const updateUnit = useUnitStore((s) => s.updateUnit);
+  const { callSimpleI, callOff } = useHoverStore(s => s)
 
   const setDropdown_onChosen = useIconsStore(s => s.callDropDown)
 
@@ -51,7 +53,7 @@ export function VisualLayeringEditor() {
     <div className="editor-segment-flex min-h-40 ">
       <div className="editor-segment-row">
         <h2 className="font-bold text-lg">Visual Layers</h2>
-        <button onClick={(e) => setDropdown_onChosen((n:string) => addLayer(n), {top: e.clientY + 10, left: e.clientX})} className="btn-emoji !pr-2.5">➕🗃️</button>
+        <button onClick={(e) => setDropdown_onChosen((n:string) => addLayer(n), {top: e.clientY + 10, left: e.clientX})} className="btn-emoji !pr-2.5" onMouseEnter={() => { callSimpleI("Adds new visual layer") }} onMouseLeave={callOff}>➕🗃️</button>
       </div>
       <div className="flex flex-row gap-2 mb-2 relative">
         <UnitDisplay 
@@ -67,8 +69,10 @@ export function VisualLayeringEditor() {
               <img src={layerSrc} className="editor-element !p-0 !bg-defaultUnitIcon w-14 aspect-[243/166]"
                   onClick={(e) => setDropdown_onChosen((n: string) => updateLayer(index, n), {top: e.clientY + 10, left: e.clientX})}
                   alt={"Visual layer with file name of: " + layerSrc}
+                  onMouseEnter={() => {callSimpleI("Changes this layer to other icon")}}
+                  onMouseLeave={callOff}
               ></img>
-              <button onClick={() => removeLayer(index)} className="btn-emoji !p-0">❌</button>
+              <button onClick={() => removeLayer(index)} onMouseEnter={() => callSimpleI("Removes this layer")} onMouseLeave={callOff} className="btn-emoji !p-0">❌</button>
             </div>
           ))}
         </div>

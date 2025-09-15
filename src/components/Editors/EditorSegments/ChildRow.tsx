@@ -1,4 +1,5 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore"
+import { useHoverStore } from "../../../hooks/useHoverStore"
 import { useUnitInteractionStore, processSignature } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { OrgUnit } from "../../../logic/logic"
@@ -12,16 +13,15 @@ interface ChildRowProps {
   whoSelectOnSelectClick: string | number[]
   key: string
   disableShadow?: boolean
+  onMoveMade?: (dir: "top" | "bottom") => void
 }
 
 export function ChildRow(p: ChildRowProps) {
-  // TODO:
-  /// Make More rigid
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const { alt } = useShortcutStore(s => s)
-
   const { setSelect } = useUnitInteractionStore(s => s)
   const { changeChildCount, moveChildPos } = useUnitStore(s => s)
+  const { callSimpleI, callOff } = useHoverStore(s => s)
   
   const childId = processSignature(p.childSignature, unitMap, trueRootId)
   if (!childId) {
@@ -38,15 +38,25 @@ export function ChildRow(p: ChildRowProps) {
 
   const handleMove = (d: "top" | "bottom") => {
     moveChildPos(parentId, childId, d)
+
     if (alt) {
       setSelect(p.whoSelectOnSelectClick)
+      return
     }
+
+    if (!p.onMoveMade)
+      return
+    p.onMoveMade(d)
   }
 
   return (
     <div className="editor-segment-row">
-      <button className="btn-emoji !p-0" onClick={() => handleMove("top")}>⬆️</button>
-      <button className="btn-emoji !p-0" onClick={() => handleMove("bottom")}>⬇️</button>
+      <button className="btn-emoji !p-0" onClick={() => handleMove("top")}
+        onMouseEnter={() => callSimpleI("Moves shown unit to the top of children list")} onMouseLeave={callOff}
+        >⬆️</button>
+      <button className="btn-emoji !p-0" onClick={() => handleMove("bottom")}
+        onMouseEnter={() => callSimpleI("Moves shown unit to the bottom of children list")} onMouseLeave={callOff}
+        >⬇️</button>
 
       <div className="!w-[6.5rem] flex justify-center">
         <ComplexChildNode 
@@ -60,9 +70,14 @@ export function ChildRow(p: ChildRowProps) {
         count={parent.children[childId]}
         onCountChange={(n) => { changeChildCount(parentId, childId, n); if (alt) { setSelect(p.whoSelectOnSelectClick) } }} 
         key={"sni" + p.key}
+        hover={"Count of shown unit in parent"}
       />
 
-      <RemoveChildButton parentSignature={p.parentSignature} childSignature={p.childSignature}/>
+      <RemoveChildButton 
+        parentSignature={p.parentSignature} 
+        childSignature={p.childSignature}
+        hover={"Removes this unit type from parent"}
+      />
     </div> 
   )
 }

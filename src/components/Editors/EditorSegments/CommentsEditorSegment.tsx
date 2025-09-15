@@ -3,6 +3,7 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
 import { LabledInput } from "../EditorElements/LabledInput";
+import { LargeTextInput } from "../EditorElements/LargeTextInput";
 
 interface CommentsEditorSegmentProps {
   
@@ -48,16 +49,12 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
       value={unit.name}
       onChange={(e) => handleInnerTexts(unitId, e.target.value, undefined)}
     />
-    <label className="flex flex-row items-center gap-2 w-full">
-      <span className="font-bold whitespace-nowrap">Desc.:</span>
-      <textarea
-        id={"descInputId"}
-        value={unit.desc ?? ""}
-        onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
-        className="editor-element flex-1 min-w-0" // By default, the browser sets min-w to auto, meaning flex-1 cant actually shrink it
-        rows={3}
-      />
-    </label>
+    <LargeTextInput
+      label="Desc.:"
+      id={"descInputId"}
+      value={unit.desc ?? ""}
+      onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
+    />
     <CommentsFromParentEditorSegment></CommentsFromParentEditorSegment>
     {Array.isArray(selectSignature) && 
       <>
@@ -67,7 +64,7 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
           value={getStaffName(selectSignature)}
           onChange={(e) => handleStaffName(selectSignature, e.target.value)}
         />
-        <LabledInput
+        <LargeTextInput
           label="SC:"
           id="StaffCommentInputId"
           value={getStaffComment(selectSignature)}

@@ -4,6 +4,7 @@ import { GetChildIdFromPath } from "../../../logic/childManaging"
 import { changeTextInParent } from "../../../logic/designationPack"
 import { OrgUnit } from "../../../logic/logic"
 import { LabledInput } from "../EditorElements/LabledInput"
+import { LargeTextInput } from "../EditorElements/LargeTextInput"
 
 interface props {
 
@@ -36,7 +37,7 @@ export function CommentsFromParentEditorSegment(p: props) {
       value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""}
       onChange={(e) => handleTextsInParent(e.target.value, undefined)}
     />
-    <LabledInput
+    <LargeTextInput
       label="DfP:"
       id="DescFromParentInputId"
       value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
