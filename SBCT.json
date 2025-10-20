@@ -1,0 +1,5184 @@
+{
+  "version": 6,
+  "unitMap": {
+    "40807c10-5362-4b16-95a7-5ad889ae956b": {
+      "type": "org",
+      "name": "SBCT",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "smartColor": "#33d17a",
+      "echelonLevel": 7,
+      "children": {
+        "fa2e906e-7761-4af8-b3d2-271a41f8c495": 1,
+        "c7c5023a-ca97-4f8d-8f81-22a3ada7d447": 1,
+        "16f38703-53c4-449f-b569-46c662faf25f": 3,
+        "e9146055-1687-44ca-bc06-f3748fbfda5a": 1,
+        "dbcb78bd-e2d6-46b5-b267-94ba02b35723": 1,
+        "ca4e8dd3-574b-453a-9d45-5d99ad53c89e": 1,
+        "91476c8d-bd7b-4149-a200-4695513e9339": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Stryker Brigade Combat Team \n\nPrimary source: https://a137e02c-e205-49b8-9057-b38df8af3e50.usrfiles.com/ugd/a137e0_7f1584bc75b24e8c83a2fffb352c6d5b.pdf\n\nSecondary source: https://www.cbo.gov/sites/default/files/cbofiles/attachments/51535-breakout-figure2_3.pdf"
+    },
+    "c7c5023a-ca97-4f8d-8f81-22a3ada7d447": {
+      "type": "org",
+      "name": "HHC SBCT",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "children": {
+        "b399f641-8120-42f0-ab0b-594c68b52589": 1,
+        "2d0d8ef9-2e7c-49c4-90d9-236e92c28d89": 1,
+        "8e91e0f0-f356-45df-b6a6-b750f327d11b": 1,
+        "42e82225-9b4b-4976-97ee-3dac017d359c": 1,
+        "60a615a1-12b5-4807-84aa-593e07341542": 1,
+        "ba98a846-3c1f-40e7-b2ed-e3fdd7485dad": 1,
+        "513af2e8-6242-4440-b0d2-68ba1b610a37": 1,
+        "636a1954-b456-447f-a2e5-f5710ff736e5": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1,
+        "d59b0c60-8da9-42c3-a164-20c4075930cd": 1,
+        "55231d15-8226-4903-a584-95850b47e871": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "16f38703-53c4-449f-b569-46c662faf25f": {
+      "type": "org",
+      "name": "Stryker Btl",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 5,
+      "children": {
+        "37cc5543-7721-463e-b2fe-c34675c805d4": 1,
+        "868eb723-4245-4af7-8a06-41d797e54959": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "e9146055-1687-44ca-bc06-f3748fbfda5a": {
+      "type": "org",
+      "name": "Cav Sqd",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "#f6d32d",
+      "echelonLevel": 5,
+      "children": {
+        "277c931d-e72b-4abf-ad76-9744328b209c": 1,
+        "70fe6407-2d2a-4f10-a5e7-a881d67268a5": 3,
+        "da3cc041-9042-4af9-bba8-486c1605feb0": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "dbcb78bd-e2d6-46b5-b267-94ba02b35723": {
+      "type": "org",
+      "name": "Art Btl",
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-towed.svg"
+      ],
+      "smartColor": "#e01b24",
+      "echelonLevel": 5,
+      "children": {
+        "14ff7973-4fa0-4798-af33-9ff94be4ec72": 1,
+        "e877fa08-f55c-4c75-afc1-704c891f82d7": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "ca4e8dd3-574b-453a-9d45-5d99ad53c89e": {
+      "type": "org",
+      "name": "Engi Btl",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 5,
+      "children": {
+        "71c900f8-bdc2-4986-8988-1e799c63cdd1": 1,
+        "6615859f-bf86-4dab-bb6e-cb645da17052": 1,
+        "b2af9bf3-36b0-4a83-91f6-fa40a1f49ff9": 1,
+        "5f0b8c06-4e48-4710-85ed-dd67123f0284": 1,
+        "20b1d416-5a4f-4d38-b20c-974b4dea7b33": 1,
+        "a1b837f1-e87a-42e5-8bd7-0f6a5a835b08": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "91476c8d-bd7b-4149-a200-4695513e9339": {
+      "type": "org",
+      "name": "Spprt Btl",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "#ff7800",
+      "echelonLevel": 5,
+      "children": {
+        "1dcd57bf-9a36-4b4e-adb2-58ca206ed754": 1,
+        "25931fc5-75a4-478d-9824-fa87b582409a": 1,
+        "a3c93373-101a-41b7-aa71-84181b439cd0": 1,
+        "d563b507-79c6-4202-b190-588a98c98966": 1,
+        "a99c06c0-9d41-4241-9bbd-228f8f9134e4": 3,
+        "0ffc71ed-4b74-4dc3-b1b9-95763021ab07": 1,
+        "6634e36b-9df7-47fc-b535-28155beceaeb": 1,
+        "3d67e86f-d9a2-414b-94ec-1d4ee3466abf": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "37cc5543-7721-463e-b2fe-c34675c805d4": {
+      "type": "org",
+      "name": "Stryker HHC",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "children": {
+        "b9c1c82d-95fa-495e-a257-32e5be75eb60": 1,
+        "25f65cec-c182-4daf-ba54-0ef39ff5067e": 1,
+        "024adfa3-18d4-4927-a7c9-2b2d8e067dd6": 1,
+        "dd3ac696-1517-49b2-9f56-c30bbebc51d9": 1,
+        "ea191b54-adb6-4a91-a7fe-8f242aaf1277": 1,
+        "dfa38970-26c1-4332-8524-a6c4600aa71f": 1,
+        "765aaac0-a3f9-46ae-b949-8e720207a8e8": 1,
+        "60286da0-e3a9-448f-8da7-d0577c6f488c": 1,
+        "01aef1f1-da4f-4807-a78a-7b17715c0d08": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "868eb723-4245-4af7-8a06-41d797e54959": {
+      "type": "org",
+      "name": "Stryker Coy",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "dc378dec-2f69-431e-898c-d391cfa47c62": 1,
+        "5f8a81e9-5c03-49aa-80e0-2b54e7940eb8": 3,
+        "24a7b509-e034-4f62-8617-c9540b0d3879": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "5f8a81e9-5c03-49aa-80e0-2b54e7940eb8": {
+      "type": "org",
+      "name": "Stryker PLT",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "children": {
+        "fb751a2e-08aa-406c-bed2-c527f9f4e164": 1,
+        "2a076cf6-cc96-4170-bdcc-a1260059afc7": 3,
+        "99f7333d-ec04-4414-a6d9-2e8dad21055f": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "dc378dec-2f69-431e-898c-d391cfa47c62": {
+      "type": "raw",
+      "name": "Coy HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "Stryker (command)": 1,
+        "Stryker (ICV)": 1,
+        "HMMWV": 1,
+        "MTV": 2,
+        "M4A1": 12
+      }
+    },
+    "24a7b509-e034-4f62-8617-c9540b0d3879": {
+      "type": "org",
+      "name": "Mortar",
+      "smartColor": "#e01b24",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-mortar.svg"
+      ],
+      "children": {
+        "33c36255-330b-4638-8a2f-2776a4b1f4bd": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "2a076cf6-cc96-4170-bdcc-a1260059afc7": {
+      "type": "org",
+      "name": "Stryker Sqd",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "41b4cc7f-19cc-4129-95e3-ab419af71dbd": 1,
+        "c9035f95-31b9-4ed0-9036-c83af5a56e8b": 1,
+        "e07f615e-9782-44c1-a00d-ee9d0199e51f": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Javelin is tasked attached to fireteams"
+    },
+    "fb751a2e-08aa-406c-bed2-c527f9f4e164": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3
+      }
+    },
+    "ff4acf55-9f8f-4dbd-8e72-1ea1ed9397da": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "equipment": {}
+    },
+    "99f7333d-ec04-4414-a6d9-2e8dad21055f": {
+      "type": "org",
+      "name": "Stryker Inf Wpn",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-gun.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "children": {
+        "54a36a61-2c9c-4c9c-83ad-a2cf9d7930a2": 1,
+        "c9035f95-31b9-4ed0-9036-c83af5a56e8b": 1,
+        "82138400-7951-4369-8d66-c2072aedd5fb": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "e07f615e-9782-44c1-a00d-ee9d0199e51f": {
+      "type": "raw",
+      "name": "3 rfl, 1 LMG",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 3,
+        "M249": 1,
+        "AT4 (L AT mssl)": 1
+      }
+    },
+    "41b4cc7f-19cc-4129-95e3-ab419af71dbd": {
+      "type": "raw",
+      "name": "Infantry Leader",
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {
+        "Warrior": 1,
+        "M4A1": 1,
+        "Javelin": 1
+      },
+      "desc": "w/ javelin"
+    },
+    "c9035f95-31b9-4ed0-9036-c83af5a56e8b": {
+      "type": "raw",
+      "name": "Striker Vehicle",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-motorized.svg"
+      ],
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2,
+        "Stryker (ICV)": 1
+      }
+    },
+    "ac84ba56-6017-4c61-a1bf-359d52d78748": {
+      "type": "raw",
+      "name": "Stryker Sec (Copy) (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-gun.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {}
+    },
+    "82138400-7951-4369-8d66-c2072aedd5fb": {
+      "type": "raw",
+      "name": "1 x M240L",
+      "layers": [
+        "/military-unit-maker/icons/b-gun.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M240L": 1,
+        "M4A1": 1
+      }
+    },
+    "54a36a61-2c9c-4c9c-83ad-a2cf9d7930a2": {
+      "type": "raw",
+      "name": "Infantry Leader",
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {
+        "Warrior": 1,
+        "M4A1": 1
+      },
+      "desc": ""
+    },
+    "70fe6407-2d2a-4f10-a5e7-a881d67268a5": {
+      "type": "org",
+      "name": "Cav Troop",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "88fede80-d745-4fef-9c5d-d6adc2efaeca": 1,
+        "dfa38970-26c1-4332-8524-a6c4600aa71f": 2,
+        "339eed3d-8494-401b-87a4-9b07c5ea5c0e": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "b22c6754-5f20-4b97-b53a-cae59b5a8401": {
+      "type": "org",
+      "name": "",
+      "smartColor": "#e01b24",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-at.svg"
+      ],
+      "children": {
+        "8afbe28b-a08b-408f-b98d-7804c88e0883": 1,
+        "4074dfae-aad2-4505-8b6f-72eebd450beb": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "4074dfae-aad2-4505-8b6f-72eebd450beb": {
+      "type": "raw",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-missile-alt.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-at.svg"
+      ],
+      "equipment": {
+        "Stryker (ATGM)": 3
+      }
+    },
+    "8afbe28b-a08b-408f-b98d-7804c88e0883": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-motorized.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "Stryker (ICV)": 1,
+        "HMMWV": 1,
+        "MTV": 1
+      }
+    },
+    "14ff7973-4fa0-4798-af33-9ff94be4ec72": {
+      "type": "org",
+      "name": "HHB",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "children": {
+        "87be3f44-4b70-4c7e-b24c-f583abf3016e": 1,
+        "7cd59921-e038-4706-aea3-41a9607397b8": 1,
+        "60534106-b295-41cc-9bb3-9b0d9cfdda44": 1,
+        "c8689b9a-f71f-46ee-99b8-5123bc1f977e": 1,
+        "afe09a76-2a28-441e-9f97-5578279e7ea2": 1,
+        "dce06b65-999b-48a4-bf2a-c2b26b1a935e": 1,
+        "28846d39-7358-48c1-b315-c73ff733b6e0": 1,
+        "e41a5742-0925-41f7-9749-7078799db9b7": 1,
+        "19503bfe-72bb-472f-aa2a-312525a365ee": 1,
+        "df8f828f-7d89-4b52-bc9c-b0113096ab2d": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "e877fa08-f55c-4c75-afc1-704c891f82d7": {
+      "type": "org",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-towed.svg"
+      ],
+      "children": {
+        "ccebdfb2-fd71-4079-986e-409e7e294607": 1,
+        "249edc10-1a0e-4638-a23f-e541b43fa34b": 1,
+        "84ac8925-36c3-4302-9e64-7b7071a4f65a": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "5f88b270-c69b-4d79-b328-1b617ceab217": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "equipment": {}
+    },
+    "71c900f8-bdc2-4986-8988-1e799c63cdd1": {
+      "type": "org",
+      "name": "Engi HHC",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "children": {
+        "fe99a568-fe10-41e0-a723-2932574b5e1b": 1,
+        "17be9766-1926-47e1-94e7-b6231a4694b1": 1,
+        "4d0d6436-262f-4084-85b9-66a26c308dc7": 1,
+        "0a24fac5-3fe4-43cd-9840-177d93b87667": 1,
+        "f84fc7f3-29da-4c10-afd8-81f56aeca84a": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "6615859f-bf86-4dab-bb6e-cb645da17052": {
+      "type": "org",
+      "name": "Engi COY alpha",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "a77efc57-9cdd-4fa9-99e5-7780781271c9": 1,
+        "1eec675e-e82f-4cfd-af38-3987b2003511": 2,
+        "606b8a57-3bfb-45a6-b105-e238dfb32e94": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": ""
+    },
+    "b2af9bf3-36b0-4a83-91f6-fa40a1f49ff9": {
+      "type": "org",
+      "name": "Engi COY bravo",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-light.svg"
+      ],
+      "children": {
+        "8bdaff58-f90d-4606-a05d-e620024c3d5d": 1,
+        "1eec675e-e82f-4cfd-af38-3987b2003511": 1,
+        "b7bd93fa-9283-4df1-9310-56fe9f158ae7": 1,
+        "606b8a57-3bfb-45a6-b105-e238dfb32e94": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "swaps 1 mblt for anti IED"
+    },
+    "5f0b8c06-4e48-4710-85ed-dd67123f0284": {
+      "type": "org",
+      "name": "BGD signal COY",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "children": {
+        "e4444967-0865-49cd-8012-75bb984ecbea": 1,
+        "9035ea48-b687-4c01-92cf-994bc7d0a74d": 1,
+        "fc78250c-93bd-4a67-b4d5-d9562fa0de05": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "20b1d416-5a4f-4d38-b20c-974b4dea7b33": {
+      "type": "org",
+      "name": "MI",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "children": {
+        "011c8fd1-6f88-421d-8a17-a9f44f81be86": 1,
+        "32d3a498-0736-41e2-a850-cacb86e0cead": 1,
+        "839f4c7d-9948-44e4-b040-2b4d048d0d0a": 1,
+        "04552101-6293-480f-90eb-f5a08e71dc74": 1,
+        "c5af84e7-9589-4faf-8eb4-e79d35630328": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "a1b837f1-e87a-42e5-8bd7-0f6a5a835b08": {
+      "type": "org",
+      "name": "",
+      "smartColor": "#6ad8e2",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-unmanned.svg",
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "children": {
+        "5a02c53b-f61d-48db-8ccf-067b9b3d8192": 1,
+        "4acb4694-5c50-4fb9-bce3-8bcf8bb21481": 1,
+        "2cd0bacc-6d07-4899-b068-e78b9fbb889c": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "277c931d-e72b-4abf-ad76-9744328b209c": {
+      "type": "org",
+      "name": "HHT",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "children": {
+        "00908985-3446-4f76-aafa-6d37faa1f7e2": 1,
+        "60fe29f7-4cd5-4569-8849-bb50e11ed137": 1,
+        "1457bfcf-4872-4cf6-9975-32c3b88d07dd": 1,
+        "28ea1157-252b-4952-8a39-8714a4ad4786": 1,
+        "13b511be-7979-4d33-a1bb-cf299f2b0b0e": 1,
+        "206176d5-e081-44f7-8394-76d94bb7f914": 1,
+        "2241ecf6-197d-4671-b0d1-10f1de3dce4d": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "1dcd57bf-9a36-4b4e-adb2-58ca206ed754": {
+      "type": "org",
+      "name": "Support HHC",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "68c35cfb-2ecd-493c-bde0-6c61c4260427": 1,
+        "b8eb530a-0194-4544-a19a-60faef584b6c": 1,
+        "ea854c04-d499-418b-a986-5dd569b46a98": 1,
+        "83442b6b-5aec-4860-877d-d60b5ea2ac8e": 1,
+        "547f33e7-abab-4670-ad3e-c25db0266ca4": 1,
+        "9cbad992-57bc-4159-ba9c-83ab401c0c32": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "691f8e18-e375-43ef-980a-f588de2ab53f": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "equipment": {}
+    },
+    "639e826e-353d-4179-baa2-449c5f03933c": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "equipment": {}
+    },
+    "faea6838-97f2-4e63-9e35-2e074e5af686": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "equipment": {}
+    },
+    "25931fc5-75a4-478d-9824-fa87b582409a": {
+      "type": "org",
+      "name": "Dstrbtn",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "e5109962-a56c-4dc9-b4d9-ae0cf5c20b6c": 1,
+        "6b02d2bb-e79f-4973-bfd6-515ba9eb2021": 1,
+        "d9b66d62-93ab-4872-b3e9-5d11b9fcc253": 1,
+        "0b80d3f7-5c1f-4158-aec0-53aafcaed937": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "a3c93373-101a-41b7-aa71-84181b439cd0": {
+      "type": "org",
+      "name": "Field Mntnnc",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "b695305b-d5a8-4f84-8f21-d2c28786df93": 1,
+        "17359df2-487e-4c34-b29c-23d33ccd97c5": 1,
+        "21b53f61-329d-4ae8-86d8-57135b7d4a07": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "d563b507-79c6-4202-b190-588a98c98966": {
+      "type": "org",
+      "name": "",
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "children": {
+        "e9496c5d-6fe7-4037-8350-90854fce4ce1": 1,
+        "a2c41590-fa54-42e3-9564-3b94205c4ebb": 1,
+        "25fca2cd-1bcd-4142-b6b8-c28177a46a40": 1,
+        "97b132e2-81f3-4ffd-ade4-7fd3dfb51036": 1,
+        "ea65af37-0dc4-4a20-947a-085f0ff70740": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "a99c06c0-9d41-4241-9bbd-228f8f9134e4": {
+      "type": "org",
+      "name": "INF fwd spt",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "c8e28942-2325-4ed4-ac9a-e0629b96812a": 1,
+        "31eaaf33-dd80-4519-8849-b2c7d8e4847e": 1,
+        "39a9cad5-28d2-4f55-8a96-c8c012b10591": 1,
+        "6ae428c1-902b-4e1d-a302-bf037727c30c": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Attached to Inf BTL"
+    },
+    "0ffc71ed-4b74-4dc3-b1b9-95763021ab07": {
+      "type": "org",
+      "name": "CAV fwd spt",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "66ca9586-f8e8-4e84-ab6c-439f8b1b6ed2": 1,
+        "31eaaf33-dd80-4519-8849-b2c7d8e4847e": 1,
+        "22cac266-a821-4655-83e9-7fa9eec94dcb": 1,
+        "7caa17dd-3b5c-42cf-a0ae-1f870f71dc8c": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Attached to Cav SQD"
+    },
+    "6634e36b-9df7-47fc-b535-28155beceaeb": {
+      "type": "org",
+      "name": "ART fwd spt",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "c8e28942-2325-4ed4-ac9a-e0629b96812a": 1,
+        "3ebd9220-200e-4893-9a8d-188865ceedde": 1,
+        "974eb5ff-720c-4533-8838-0d995fdd6b56": 1,
+        "d1a6117a-65f5-41bc-a0fc-cbb0e69cfd32": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Attached to Art BTL"
+    },
+    "3d67e86f-d9a2-414b-94ec-1d4ee3466abf": {
+      "type": "org",
+      "name": "ENGI fwd spt",
+      "smartColor": "inheret",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "66ca9586-f8e8-4e84-ab6c-439f8b1b6ed2": 1,
+        "262161e9-244e-40d8-8be1-592c0f5562f8": 1,
+        "203b9819-a7f4-4207-965f-1e8b02ec27bb": 1,
+        "81dc2a19-f67a-45ce-a07c-43f501c2c032": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Attached to engi BTL"
+    },
+    "b399f641-8120-42f0-ab0b-594c68b52589": {
+      "type": "raw",
+      "name": "Brigade Cmnd SCT",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-x.svg"
+      ],
+      "equipment": {
+        "Warrior": 7,
+        "Stryker (command)": 1,
+        "HMMWV": 3,
+        "M4A1": 7
+      }
+    },
+    "6a4d38e2-0ebb-4968-9bb1-2e78ddc892cd": {
+      "type": "raw",
+      "name": "(UNCLAS)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 129,
+        "HMMWV": 28
+      }
+    },
+    "8e91e0f0-f356-45df-b6a6-b750f327d11b": {
+      "type": "org",
+      "name": "Crrnt Ops",
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "children": {
+        "1018209f-ed03-45b6-aa6a-1f31e358df3b": 1,
+        "2997b175-cc06-49b6-90db-50f6953e84eb": 1,
+        "7e7b4faa-470f-41b8-8dc7-fbc2e7029607": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {
+        "2": ""
+      }
+    },
+    "0ea422b0-ebc8-44fd-bd70-2a0ee8137983": {
+      "type": "raw",
+      "name": "Current Ops lso",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 1,
+        "M4A1": 4
+      },
+      "desc": "Liaison"
+    },
+    "1018209f-ed03-45b6-aa6a-1f31e358df3b": {
+      "type": "raw",
+      "name": "Crrnt Ops SCT",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 1,
+        "M4A1": 4
+      }
+    },
+    "2997b175-cc06-49b6-90db-50f6953e84eb": {
+      "type": "raw",
+      "name": "Liaison",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 1,
+        "HMMWV": 1,
+        "M4A1": 1
+      },
+      "desc": ""
+    },
+    "7e7b4faa-470f-41b8-8dc7-fbc2e7029607": {
+      "type": "raw",
+      "name": "FIRE SPT/TACP",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2,
+        "Stryker (command)": 1
+      },
+      "desc": "For USAF staff"
+    },
+    "42e82225-9b4b-4976-97ee-3dac017d359c": {
+      "type": "raw",
+      "name": "INTEL CELL S2X",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 6,
+        "MTV": 1,
+        "HMMWV": 1
+      },
+      "desc": "Full of geo nerds"
+    },
+    "60a615a1-12b5-4807-84aa-593e07341542": {
+      "type": "raw",
+      "name": "PLANS CELL",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "M4A1": 5,
+        "HMMWV": 1
+      },
+      "desc": ""
+    },
+    "50bfd912-88bc-40be-ad75-0b22f2b3c158": {
+      "type": "raw",
+      "name": "PLANS CELL (Copy)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 6,
+        "MTV": 1,
+        "HMMWV": 1
+      },
+      "desc": "Full of geo nerds"
+    },
+    "5e52fc15-48c3-44f5-ba42-97079ebafae9": {
+      "type": "raw",
+      "name": "FIRE SPT/PROT",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 11,
+        "M4A1": 9,
+        "HMMWV": 1
+      },
+      "desc": ""
+    },
+    "ba98a846-3c1f-40e7-b2ed-e3fdd7485dad": {
+      "type": "org",
+      "name": "Fire Spt",
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "children": {
+        "5e52fc15-48c3-44f5-ba42-97079ebafae9": 1,
+        "0dde08b6-c4fd-4b95-980a-6bd4285fe6a0": 1,
+        "2997b175-cc06-49b6-90db-50f6953e84eb": 1
+      },
+      "flatCallSigns": {
+        "2": ""
+      },
+      "flatDescriptions": {
+        "2": "Public Affair Officer"
+      }
+    },
+    "21cdaf08-cb71-4cab-881a-c77be0108592": {
+      "type": "raw",
+      "name": "FIRE SPT/PROT ADAM/BAE",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {}
+    },
+    "0dde08b6-c4fd-4b95-980a-6bd4285fe6a0": {
+      "type": "raw",
+      "name": "ADAM/BAE",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 10,
+        "M4A1": 7,
+        "HMMWV": 3
+      },
+      "desc": ""
+    },
+    "2cdedc84-305a-47fa-91ae-2838ceb1cb4f": {
+      "type": "raw",
+      "name": "PAO",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 1,
+        "M4A1": 1,
+        "HMMWV": 1
+      },
+      "desc": "Public Affair Officer"
+    },
+    "513af2e8-6242-4440-b0d2-68ba1b610a37": {
+      "type": "org",
+      "name": "MVMT & MNVR",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "74d60d91-1c6a-4214-b24d-b1725db8d932": 1,
+        "3d8e9a17-de4f-4b63-8669-d68667feac81": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "74d60d91-1c6a-4214-b24d-b1725db8d932": {
+      "type": "raw",
+      "name": "MVMT & MNVR CELL",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "HMMWV": 1,
+        "MTV": 1
+      },
+      "desc": ""
+    },
+    "3d8e9a17-de4f-4b63-8669-d68667feac81": {
+      "type": "raw",
+      "name": "PROT – PMO",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 1,
+        "HMMWV": 1
+      },
+      "desc": ""
+    },
+    "636a1954-b456-447f-a2e5-f5710ff736e5": {
+      "type": "org",
+      "name": "Sustainm.",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "4c587ad8-72ec-4aea-a79a-ba5df9040459": 1,
+        "0fd35c9a-0e02-42a1-a897-297132acb488": 1,
+        "0d133fe7-d2ca-4f3a-89a5-32821b065d52": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "1d176925-401a-41ee-af56-723ca9691720": {
+      "type": "raw",
+      "name": "UMT",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 1
+      },
+      "desc": "Chaplin & Ass. Chaplin"
+    },
+    "d59b0c60-8da9-42c3-a164-20c4075930cd": {
+      "type": "org",
+      "name": "Tac current ops",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "1b144120-32d9-43b9-9f7d-f9c6b9d2c04d": 1,
+        "d0e6b049-da12-4019-b0fa-9592f6587383": 1,
+        "7e7b4faa-470f-41b8-8dc7-fbc2e7029607": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "55231d15-8226-4903-a584-95850b47e871": {
+      "type": "org",
+      "name": "Tac current ops 2",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "6ca76952-c3c3-4e34-a978-08bff09290d3": 1,
+        "7bb02461-f2b3-4368-96c0-a51d9cba262a": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "2d0d8ef9-2e7c-49c4-90d9-236e92c28d89": {
+      "type": "raw",
+      "name": "Coy HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-I.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "children": {},
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "HMMWV": 1,
+        "MTV": 2
+      }
+    },
+    "4c587ad8-72ec-4aea-a79a-ba5df9040459": {
+      "type": "raw",
+      "name": "SUST S1",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "M4A1": 9,
+        "MTV": 1
+      }
+    },
+    "0fd35c9a-0e02-42a1-a897-297132acb488": {
+      "type": "raw",
+      "name": "S4/MED",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "M4A1": 10,
+        "HMMWV": 2
+      }
+    },
+    "0d133fe7-d2ca-4f3a-89a5-32821b065d52": {
+      "type": "raw",
+      "name": "S8",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 1
+      },
+      "desc": "finances"
+    },
+    "1b144120-32d9-43b9-9f7d-f9c6b9d2c04d": {
+      "type": "raw",
+      "name": "C4 ops S6",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 20,
+        "M4A1": 19,
+        "HMMWV": 5,
+        "MTV": 1
+      }
+    },
+    "d0e6b049-da12-4019-b0fa-9592f6587383": {
+      "type": "raw",
+      "name": "TAC CURRENT OPS 1 – OPS",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 7,
+        "HMMWV": 2,
+        "MTV": 1,
+        "Stryker (command)": 1
+      }
+    },
+    "6ca76952-c3c3-4e34-a978-08bff09290d3": {
+      "type": "raw",
+      "name": "INTEL/S2",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "HMMWV": 1
+      }
+    },
+    "7bb02461-f2b3-4368-96c0-a51d9cba262a": {
+      "type": "raw",
+      "name": "SUS.",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 1,
+        "M4A1": 1
+      }
+    },
+    "fe99a568-fe10-41e0-a723-2932574b5e1b": {
+      "type": "raw",
+      "name": "Engi Cmmnd SCT",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-II.svg"
+      ],
+      "equipment": {
+        "Warrior": 6,
+        "Stryker (command)": 1,
+        "HMMWV": 2,
+        "M4A1": 6
+      }
+    },
+    "17be9766-1926-47e1-94e7-b6231a4694b1": {
+      "type": "raw",
+      "name": "Coy HQ (BEB)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-I.svg"
+      ],
+      "equipment": {
+        "Warrior": 7,
+        "HMMWV": 2,
+        "M4A1": 6,
+        "MTV": 1,
+        "M249": 1
+      }
+    },
+    "4d0d6436-262f-4084-85b9-66a26c308dc7": {
+      "type": "org",
+      "name": "Sustainmt.",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "9cbb9eee-c3c6-4564-bd1b-d844a77e42ae": 1,
+        "faa4ef6a-304c-4ba9-9f41-bc732ca502d4": 1,
+        "0096c30a-4af7-41c1-ad45-75c595d70068": 1,
+        "69e1a4e4-3c10-4581-8380-bbd08d99ad45": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "0a24fac5-3fe4-43cd-9840-177d93b87667": {
+      "type": "org",
+      "name": "Main CP",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "238c0cd2-a9aa-489b-a817-d0602b481e12": 1,
+        "112fd097-557c-4f8d-89dd-da28b5933518": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "f84fc7f3-29da-4c10-afd8-81f56aeca84a": {
+      "type": "org",
+      "name": "CRNB recon",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-cbrn.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "6e47300c-8872-4de1-9bd0-d3642fc529a9": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "6e47300c-8872-4de1-9bd0-d3642fc529a9": {
+      "type": "raw",
+      "name": "CRNB recon",
+      "layers": [
+        "/military-unit-maker/icons/b-cbrn.svg",
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "Stryker (CBRN-rec)": 1,
+        "M4A1": 3,
+        "M249": 1
+      },
+      "desc": "Chemical Radiological Nuclear Biological"
+    },
+    "9cbb9eee-c3c6-4564-bd1b-d844a77e42ae": {
+      "type": "raw",
+      "name": "BEB S1",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 7,
+        "M4A1": 6,
+        "M249": 1,
+        "MTV": 1
+      }
+    },
+    "238c0cd2-a9aa-489b-a817-d0602b481e12": {
+      "type": "raw",
+      "name": "BEB S2/INTEL",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 7,
+        "M4A1": 6,
+        "M249": 1,
+        "MTV": 1,
+        "HMMWV": 1
+      }
+    },
+    "112fd097-557c-4f8d-89dd-da28b5933518": {
+      "type": "raw",
+      "name": "BEB OPS/S3",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 15,
+        "M4A1": 14,
+        "M249": 1,
+        "HMMWV": 4,
+        "Stryker (command)": 1
+      }
+    },
+    "faa4ef6a-304c-4ba9-9f41-bc732ca502d4": {
+      "type": "raw",
+      "name": "BEB S4",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 3,
+        "M249": 1,
+        "MTV": 1,
+        "HMMWV": 1
+      }
+    },
+    "0096c30a-4af7-41c1-ad45-75c595d70068": {
+      "type": "raw",
+      "name": "BEB C4 OPS/S6",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 7,
+        "M249": 1,
+        "MTV": 1,
+        "HMMWV": 1
+      }
+    },
+    "69e1a4e4-3c10-4581-8380-bbd08d99ad45": {
+      "type": "org",
+      "name": "BEB MED SUPPORT",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "children": {
+        "f0cc8a03-4d4e-4ede-a115-a797f52851c1": 1,
+        "a19adb94-423b-472d-8f2f-4d07c41129e8": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "f0cc8a03-4d4e-4ede-a115-a797f52851c1": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "MTV": 1,
+        "M4A1": 2
+      }
+    },
+    "a19adb94-423b-472d-8f2f-4d07c41129e8": {
+      "type": "raw",
+      "name": "4ppl",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 3,
+        "Stryker (MedVac)": 1
+      }
+    },
+    "1eec675e-e82f-4cfd-af38-3987b2003511": {
+      "type": "org",
+      "name": "Mobility PLT",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "b9457b16-2ca4-42e3-b1cf-99548335d2d9": 1,
+        "5d9f082a-0b5e-4c98-99e8-897f54fb5023": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "5d9f082a-0b5e-4c98-99e8-897f54fb5023": {
+      "type": "raw",
+      "name": "Mobility SQD",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "M4A1": 7,
+        "M249": 2,
+        "Stryker (engineer)": 1,
+        "UGV": 1
+      }
+    },
+    "b9457b16-2ca4-42e3-b1cf-99548335d2d9": {
+      "type": "raw",
+      "name": "Mobility PLT hq",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 7,
+        "Stryker (engineer)": 1,
+        "HMMWV": 1,
+        "MTV": 1,
+        "HEMTT": 1,
+        "M4A1": 7
+      }
+    },
+    "606b8a57-3bfb-45a6-b105-e238dfb32e94": {
+      "type": "org",
+      "name": "Engi SPRT",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg"
+      ],
+      "children": {
+        "2c242067-e0ae-4506-8419-ebb88c3438c4": 1,
+        "090731f6-d5de-45ff-83e3-a8822a7149ab": 1,
+        "6df7da7b-bb5d-47c5-978d-5ada6f9238ce": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "bdc67477-a427-455d-8fc7-c178f97a27d4": {
+      "type": "raw",
+      "name": "87 warrior (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg"
+      ],
+      "equipment": {
+        "Warrior": 87
+      }
+    },
+    "b7bd93fa-9283-4df1-9310-56fe9f158ae7": {
+      "type": "org",
+      "name": "Route Clearance PLT",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-light.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "ec3c6cfb-aa33-4d6e-958d-ddb8b489e725": 1,
+        "2bcee3aa-c9d8-4877-9c56-0c1e66a35eed": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Anti IED"
+    },
+    "ec3c6cfb-aa33-4d6e-958d-ddb8b489e725": {
+      "type": "raw",
+      "name": "RC HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-light.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "MMPV": 2,
+        "Warrior": 6,
+        "M4A1": 6,
+        "UGV": 1
+      }
+    },
+    "2bcee3aa-c9d8-4877-9c56-0c1e66a35eed": {
+      "type": "raw",
+      "name": "Route Clearance SQD",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-light.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 8,
+        "MMPV": 1,
+        "MPCV": 1,
+        "Engi Vehicle": 2
+      }
+    },
+    "a77efc57-9cdd-4fa9-99e5-7780781271c9": {
+      "type": "raw",
+      "name": "Engi COY hq alpha",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "Stryker (ICV)": 1,
+        "HMMWV": 2,
+        "MTV": 1,
+        "M4A1": 9
+      }
+    },
+    "2c242067-e0ae-4506-8419-ebb88c3438c4": {
+      "type": "raw",
+      "name": "Engi SPRT plt HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 2,
+        "M4A1": 4
+      }
+    },
+    "090731f6-d5de-45ff-83e3-a8822a7149ab": {
+      "type": "raw",
+      "name": "Bridge",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "HEMTT": 2,
+        "Mobile Bridge": 2
+      }
+    },
+    "6df7da7b-bb5d-47c5-978d-5ada6f9238ce": {
+      "type": "raw",
+      "name": "Hrzntl Cnstrctn",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg"
+      ],
+      "equipment": {
+        "Warrior": 14,
+        "M4A1": 14,
+        "MTV": 4,
+        "Engi Vehicle": 8
+      }
+    },
+    "8bdaff58-f90d-4606-a05d-e620024c3d5d": {
+      "type": "raw",
+      "name": "Engi COY hq bravo",
+      "layers": [
+        "/military-unit-maker/icons/b-engi.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "Stryker (ICV)": 1,
+        "HMMWV": 1,
+        "MTV": 1,
+        "M4A1": 9
+      }
+    },
+    "e4444967-0865-49cd-8012-75bb984ecbea": {
+      "type": "org",
+      "name": "Coy HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "children": {
+        "97113ad9-7284-4842-af06-133fc897942c": 1,
+        "1504600b-2324-48b1-92ae-dd8ddd085ebd": 1,
+        "64b02fdd-238c-4995-b2a8-76952077e636": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "97113ad9-7284-4842-af06-133fc897942c": {
+      "type": "raw",
+      "name": "Coy Leader",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 1,
+        "M4A1": 4,
+        "MTV": 1
+      }
+    },
+    "1504600b-2324-48b1-92ae-dd8ddd085ebd": {
+      "type": "raw",
+      "name": "SMALL CMD POST SUPPORT TM",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "equipment": {
+        "Warrior": 7,
+        "HMMWV": 2,
+        "M4A1": 6,
+        "MTV": 1,
+        "M249": 1,
+        "SatCom": 1
+      }
+    },
+    "64b02fdd-238c-4995-b2a8-76952077e636": {
+      "type": "raw",
+      "name": "Re-trans Team",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-armored.svg",
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "M-ATV": 1
+      },
+      "desc": "On MRAP"
+    },
+    "9035ea48-b687-4c01-92cf-994bc7d0a74d": {
+      "type": "org",
+      "name": "NEP (Upper TI)",
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "90551fa9-d246-4014-a1c0-bc4c195e7ca4": 1,
+        "9bf13ad6-257a-4902-b999-c21f81fcf416": 1,
+        "64b02fdd-238c-4995-b2a8-76952077e636": 1,
+        "a714fca3-0d56-422d-8388-1d2879ec1ca9": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Network Extension Platoon"
+    },
+    "fc78250c-93bd-4a67-b4d5-d9562fa0de05": {
+      "type": "org",
+      "name": "NEP (Lower TI)",
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "90551fa9-d246-4014-a1c0-bc4c195e7ca4": 1,
+        "f4c7b2aa-8f6f-4988-aa6b-92c468fad1c0": 1,
+        "64b02fdd-238c-4995-b2a8-76952077e636": 1,
+        "a714fca3-0d56-422d-8388-1d2879ec1ca9": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "Network Extension Platoon"
+    },
+    "90551fa9-d246-4014-a1c0-bc4c195e7ca4": {
+      "type": "raw",
+      "name": "Leader in HMMWV",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 1
+      }
+    },
+    "9bf13ad6-257a-4902-b999-c21f81fcf416": {
+      "type": "raw",
+      "name": "JOINT NTWRK NODE/SMART-T",
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 3,
+        "MTV": 1,
+        "M4A1": 6,
+        "SatCom": 2
+      },
+      "desc": "Upper TI"
+    },
+    "f4c7b2aa-8f6f-4988-aa6b-92c468fad1c0": {
+      "type": "raw",
+      "name": "JOINT NTWRK NODE/SMART-T",
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 3,
+        "MTV": 1,
+        "M4A1": 5,
+        "SatCom": 2
+      },
+      "desc": "Lower TI"
+    },
+    "a714fca3-0d56-422d-8388-1d2879ec1ca9": {
+      "type": "raw",
+      "name": "EPLRS NETWORK MANAGER & GATEWAY",
+      "layers": [
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 5,
+        "Stryker (command)": 1,
+        "HMMWV": 1,
+        "M4A1": 4,
+        "M249": 1
+      }
+    },
+    "b8beefbf-f02e-41d8-9566-62f69633dfc0": {
+      "type": "raw",
+      "name": "MI (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [],
+      "equipment": {
+        "Warrior": 45
+      }
+    },
+    "5a02c53b-f61d-48db-8ccf-067b9b3d8192": {
+      "type": "raw",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4
+      }
+    },
+    "4acb4694-5c50-4fb9-bce3-8bcf8bb21481": {
+      "type": "raw",
+      "name": "Plant & Control SEC",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-unmanned.svg",
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "M4A1": 8,
+        "M249": 1,
+        "HMMWV": 4
+      }
+    },
+    "2cd0bacc-6d07-4899-b068-e78b9fbb889c": {
+      "type": "raw",
+      "name": "Launch & Recovery SEC",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-unmanned.svg",
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "equipment": {
+        "Warrior": 15,
+        "M4A1": 13,
+        "M249": 2,
+        "HMMWV": 6,
+        "MTV": 1,
+        "Shadow (UAV)": 4,
+        "UAV Launcher": 2
+      }
+    },
+    "b9c1c82d-95fa-495e-a257-32e5be75eb60": {
+      "type": "raw",
+      "name": "Command (S-HHC)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq-II.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "M4A1": 9,
+        "HMMWV": 2,
+        "Stryker (command)": 1
+      }
+    },
+    "024adfa3-18d4-4927-a7c9-2b2d8e067dd6": {
+      "type": "org",
+      "name": "Current Ops",
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "40a3eb89-4bd8-4e7e-ac23-350e6558ba42": 1,
+        "1e397503-2f1b-4646-9204-e7aecc34b241": 1,
+        "5cc6fffe-7c69-4a02-b3d1-1412fd2d9a91": 1,
+        "7e7b4faa-470f-41b8-8dc7-fbc2e7029607": 1,
+        "2997b175-cc06-49b6-90db-50f6953e84eb": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "dd3ac696-1517-49b2-9f56-c30bbebc51d9": {
+      "type": "org",
+      "name": "Sustanmnt",
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "3449a499-8ea8-4b59-9a85-43cc64fa9692": 1,
+        "8ec46e5f-e1d9-4386-9616-bdd3712d9a2d": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1,
+        "af2d40c7-2728-4de7-b179-bb267b2f5139": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "da1290ff-f2e3-4cc4-bcb5-04a8d50d4e4e": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "equipment": {}
+    },
+    "25f65cec-c182-4daf-ba54-0ef39ff5067e": {
+      "type": "raw",
+      "name": "Coy HQ (S-HHC)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq-I.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "HMMWV": 2,
+        "MTV": 1
+      }
+    },
+    "dfa38970-26c1-4332-8524-a6c4600aa71f": {
+      "type": "org",
+      "name": "Scout",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "#f6d32d",
+      "echelonLevel": 3,
+      "children": {
+        "cc5080cd-b256-41db-a225-379141b22651": 1,
+        "b602f138-6393-43d3-abee-c51f7409e7de": 4
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "The structure inside the PLT is more loosy-goosy. They are task organized into 3 pairs or 2 x 3"
+    },
+    "765aaac0-a3f9-46ae-b949-8e720207a8e8": {
+      "type": "org",
+      "name": "Mortar PLT",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-mortar.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "#e01b24",
+      "echelonLevel": 3,
+      "children": {
+        "6d4fd8c3-cf48-4b2e-928f-63597668f2c4": 1,
+        "335343ab-2db0-4835-9bf8-870e70ec550b": 4
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "60286da0-e3a9-448f-8da7-d0577c6f488c": {
+      "type": "org",
+      "name": "Sniper",
+      "smartColor": "#33d17a",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-sniper.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "children": {
+        "4d6280a4-51e6-44ba-a7d6-4763a3205152": 1,
+        "310c87b1-462f-424c-b25d-d565e3ce7fd6": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {
+        "0": "Weapons are task attached"
+      }
+    },
+    "01aef1f1-da4f-4807-a78a-7b17715c0d08": {
+      "type": "org",
+      "name": "Med Treat",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "50a2b6b3-e9d9-4223-aa28-4e341d732d99": 1,
+        "c118b320-4ae9-429c-98f5-3c4ffb256bef": 1,
+        "04c2368d-0333-41b1-ad13-0a4afcee62dd": 4,
+        "04e1fc89-0b2a-4328-8ed3-dda75c64552b": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "fa58256a-f270-44fc-84f4-491a87549cea": {
+      "type": "raw",
+      "name": "Re-transmtn Team",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-armored.svg",
+        "/military-unit-maker/icons/b-signal.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "M-ATV": 1
+      },
+      "desc": "On MRAP"
+    },
+    "ea191b54-adb6-4a91-a7fe-8f242aaf1277": {
+      "type": "org",
+      "name": "Re-transmtn Sec",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-signal.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "5a99e786-57d5-4a3c-bef8-5f5302a1e84d": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "5a99e786-57d5-4a3c-bef8-5f5302a1e84d": {
+      "type": "raw",
+      "name": "Re-transmtn Stryker",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-signal.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "Stryker (command)": 1
+      },
+      "desc": "On Stykers"
+    },
+    "33c36255-330b-4638-8a2f-2776a4b1f4bd": {
+      "type": "raw",
+      "name": "Mortar (120+60)",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-mortar.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "Stryker (mortar)": 1,
+        "60mm mortar": 1
+      },
+      "desc": "120mm on chassi + 60mm crew"
+    },
+    "6d4fd8c3-cf48-4b2e-928f-63597668f2c4": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-mortar.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 7,
+        "M4A1": 7,
+        "HMMWV": 2
+      }
+    },
+    "335343ab-2db0-4835-9bf8-870e70ec550b": {
+      "type": "raw",
+      "name": "Mortar (120+81)",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-mortar.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "Stryker (mortar)": 1,
+        "81mm mortar": 1,
+        "M4A1": 5
+      },
+      "desc": "120mm on chassi + 81mm for dismount"
+    },
+    "50a2b6b3-e9d9-4223-aa28-4e341d732d99": {
+      "type": "raw",
+      "name": "Med Treat HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2,
+        "HMMWV": 1
+      }
+    },
+    "c118b320-4ae9-429c-98f5-3c4ffb256bef": {
+      "type": "raw",
+      "name": "Med Treat",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 6,
+        "MTV": 2
+      }
+    },
+    "04c2368d-0333-41b1-ad13-0a4afcee62dd": {
+      "type": "raw",
+      "name": "Medvac",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "Stryker (MedVac)": 1
+      },
+      "desc": "3ppl"
+    },
+    "04e1fc89-0b2a-4328-8ed3-dda75c64552b": {
+      "type": "raw",
+      "name": "Combat Medic",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 14
+      }
+    },
+    "40a3eb89-4bd8-4e7e-ac23-350e6558ba42": {
+      "type": "raw",
+      "name": "INTEL/S2",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "HMMWV": 1
+      }
+    },
+    "1e397503-2f1b-4646-9204-e7aecc34b241": {
+      "type": "raw",
+      "name": "OPS/S3 (S-HHC)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 13,
+        "M4A1": 13,
+        "Stryker (command)": 1,
+        "HMMWV": 2,
+        "MTV": 1
+      }
+    },
+    "f4781b6a-fff7-42d3-83cf-ce12175504b9": {
+      "type": "raw",
+      "name": "Sniper (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-sniper.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {}
+    },
+    "5cc6fffe-7c69-4a02-b3d1-1412fd2d9a91": {
+      "type": "raw",
+      "name": "FIRE SPT",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2,
+        "HMMWV": 1
+      }
+    },
+    "3449a499-8ea8-4b59-9a85-43cc64fa9692": {
+      "type": "raw",
+      "name": "S1 (Para 7)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 8,
+        "MTV": 1
+      }
+    },
+    "8ec46e5f-e1d9-4386-9616-bdd3712d9a2d": {
+      "type": "raw",
+      "name": "S4",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "M4A1": 5,
+        "HMMWV": 1
+      }
+    },
+    "af2d40c7-2728-4de7-b179-bb267b2f5139": {
+      "type": "raw",
+      "name": "C3 OPS/S6",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "M4A1": 11,
+        "HMMWV": 3,
+        "MTV": 1,
+        "SatCom": 1
+      }
+    },
+    "cc5080cd-b256-41db-a225-379141b22651": {
+      "type": "raw",
+      "name": "Scout",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "M4A1": 12,
+        "Stryker (scout)": 2
+      }
+    },
+    "b602f138-6393-43d3-abee-c51f7409e7de": {
+      "type": "org",
+      "name": "Scout",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "children": {
+        "63df72e5-cd2e-4ce8-8ffd-8c2d885fcd9d": 1,
+        "83325cf1-cb08-45f8-ba19-3f1a5674e6dd": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "63df72e5-cd2e-4ce8-8ffd-8c2d885fcd9d": {
+      "type": "raw",
+      "name": "Scout Veh",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "Stryker (scout)": 1
+      }
+    },
+    "83325cf1-cb08-45f8-ba19-3f1a5674e6dd": {
+      "type": "raw",
+      "name": "Dismount Scouts",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3
+      }
+    },
+    "310c87b1-462f-424c-b25d-d565e3ce7fd6": {
+      "type": "raw",
+      "name": "Sniper",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-sniper.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 2
+      },
+      "desc": ""
+    },
+    "4d6280a4-51e6-44ba-a7d6-4763a3205152": {
+      "type": "raw",
+      "name": "Sniper SQD Leader",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 1,
+        "M4A1": 1,
+        "HMMWV": 1,
+        "M110 Rifle": 3,
+        ".30 Cal Rifle": 3,
+        ".50 Cal M107": 3
+      }
+    },
+    "cacc9440-5c8a-4ef5-83b2-5e89fdbe0aac": {
+      "type": "raw",
+      "name": "HHT (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "equipment": {
+        "Warrior": 108
+      }
+    },
+    "60fe29f7-4cd5-4569-8849-bb50e11ed137": {
+      "type": "raw",
+      "name": "Trp HQ (HHT)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq-I.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "HMMWV": 1,
+        "MTV": 2
+      }
+    },
+    "1457bfcf-4872-4cf6-9975-32c3b88d07dd": {
+      "type": "org",
+      "name": "Current Ops",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "40a3eb89-4bd8-4e7e-ac23-350e6558ba42": 1,
+        "d77b4b4d-d7fa-433d-a69c-d5cb593e79a6": 1,
+        "5cc6fffe-7c69-4a02-b3d1-1412fd2d9a91": 1,
+        "7e7b4faa-470f-41b8-8dc7-fbc2e7029607": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "44b21a08-fa62-4c2f-86a8-4b413cc07d6f": {
+      "type": "raw",
+      "name": "INTEL/S2 (Copy)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "HMMWV": 1
+      }
+    },
+    "d77b4b4d-d7fa-433d-a69c-d5cb593e79a6": {
+      "type": "raw",
+      "name": "OPS/S3 (HHT)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "M4A1": 11,
+        "Stryker (command)": 1,
+        "HMMWV": 3,
+        "MTV": 1
+      }
+    },
+    "28ea1157-252b-4952-8a39-8714a4ad4786": {
+      "type": "org",
+      "name": "Sustnmnt",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "38a95efd-76f3-425f-ae2b-8cbec4406881": 1,
+        "ef16b26f-16aa-4687-bd70-f52cb9f74a6b": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1,
+        "6a603999-3c72-4964-b9af-ea63871cf85e": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "38a95efd-76f3-425f-ae2b-8cbec4406881": {
+      "type": "raw",
+      "name": "SUST S1 (HHT)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 7,
+        "M4A1": 7,
+        "MTV": 1
+      }
+    },
+    "ef16b26f-16aa-4687-bd70-f52cb9f74a6b": {
+      "type": "raw",
+      "name": "S4 (HHC)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "HMMWV": 1,
+        "MTV": 1
+      }
+    },
+    "6a603999-3c72-4964-b9af-ea63871cf85e": {
+      "type": "raw",
+      "name": "C4 ops S6 (HHT)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "M4A1": 11,
+        "HMMWV": 2,
+        "MTV": 1,
+        "SatCom": 1
+      }
+    },
+    "13b511be-7979-4d33-a1bb-cf299f2b0b0e": {
+      "type": "org",
+      "name": "Re-transmtn Sec (HHT)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-signal.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "children": {
+        "5a99e786-57d5-4a3c-bef8-5f5302a1e84d": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "206176d5-e081-44f7-8394-76d94bb7f914": {
+      "type": "org",
+      "name": "Sniper (HHT)",
+      "smartColor": "#33d17a",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-sniper.svg",
+        "/military-unit-maker/icons/b-inf.svg"
+      ],
+      "children": {
+        "4d6280a4-51e6-44ba-a7d6-4763a3205152": 1,
+        "310c87b1-462f-424c-b25d-d565e3ce7fd6": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {
+        "0": "Weapons are task attached"
+      }
+    },
+    "2241ecf6-197d-4671-b0d1-10f1de3dce4d": {
+      "type": "org",
+      "name": "Med Treat",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "50a2b6b3-e9d9-4223-aa28-4e341d732d99": 1,
+        "c9c0a435-fcb4-43ed-b2cb-d67b54342498": 1,
+        "04c2368d-0333-41b1-ad13-0a4afcee62dd": 4,
+        "728fc7ea-470a-4a39-a029-d82a799b16b0": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "f72723bc-4c7d-494a-bcc0-b321fdd82df3": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {}
+    },
+    "c9c0a435-fcb4-43ed-b2cb-d67b54342498": {
+      "type": "raw",
+      "name": "Med Treat (HHT)",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 6,
+        "MTV": 2,
+        "HMMWV": 1
+      }
+    },
+    "728fc7ea-470a-4a39-a029-d82a799b16b0": {
+      "type": "raw",
+      "name": "Combat Medic (HHC)",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "M4A1": 3
+      }
+    },
+    "7946f818-0c77-4b81-ad18-8cf51912789b": {
+      "type": "raw",
+      "name": "Cav Troop (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg"
+      ],
+      "equipment": {
+        "Warrior": 47.5
+      }
+    },
+    "88fede80-d745-4fef-9c5d-d6adc2efaeca": {
+      "type": "raw",
+      "name": "Troop HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "Stryker (command)": 1,
+        "MTV": 1,
+        "M4A1": 11,
+        "Stryker (scout)": 1
+      }
+    },
+    "d7d61d2f-3ffd-4d47-a12e-d07cb3af5ba5": {
+      "type": "raw",
+      "name": "Trp HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq-I.svg",
+        "/military-unit-maker/icons/b-hq.png"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "HMMWV": 2,
+        "MTV": 1
+      }
+    },
+    "339eed3d-8494-401b-87a4-9b07c5ea5c0e": {
+      "type": "org",
+      "name": "Mortar (cav)",
+      "smartColor": "#e01b24",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-mortar.svg"
+      ],
+      "children": {
+        "ad25aaed-1e30-4e1d-a5f2-095e6029c4e8": 1,
+        "33c36255-330b-4638-8a2f-2776a4b1f4bd": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "ad25aaed-1e30-4e1d-a5f2-095e6029c4e8": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-mortar.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2,
+        "MTV": 1
+      }
+    },
+    "da3cc041-9042-4af9-bba8-486c1605feb0": {
+      "type": "org",
+      "name": "Weapon Troop",
+      "smartColor": "#e01b24",
+      "echelonLevel": 4,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-at.svg"
+      ],
+      "children": {
+        "4f1953bd-e777-4e9a-9a6e-e2a2537ff5cd": 1,
+        "964b472e-15bf-4430-a559-cd0c5367b86a": 3,
+        "b513411e-9e46-40f4-8cb7-a345335a7d27": 3,
+        "4aa4c5a9-ad03-4b71-ac74-4240b3d011c2": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "964b472e-15bf-4430-a559-cd0c5367b86a": {
+      "type": "org",
+      "name": "AT",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-at.svg"
+      ],
+      "children": {
+        "14286550-897e-400b-925f-24ee6408dba5": 3
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "b513411e-9e46-40f4-8cb7-a345335a7d27": {
+      "type": "org",
+      "name": "MGS",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "children": {
+        "98a48058-77f8-4c44-a0ea-e689cf322386": 4
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "4f1953bd-e777-4e9a-9a6e-e2a2537ff5cd": {
+      "type": "raw",
+      "name": "Wpn Troop HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "M4A1": 9,
+        "Stryker (ICV)": 1,
+        "HMMWV": 1,
+        "MTV": 1
+      }
+    },
+    "14286550-897e-400b-925f-24ee6408dba5": {
+      "type": "raw",
+      "name": "AT",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-at.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "Stryker (ATGM)": 1
+      }
+    },
+    "4aa4c5a9-ad03-4b71-ac74-4240b3d011c2": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 4
+      }
+    },
+    "98a48058-77f8-4c44-a0ea-e689cf322386": {
+      "type": "raw",
+      "name": "MGS",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-inf.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "Stryker (MGS)": 1
+      }
+    },
+    "00908985-3446-4f76-aafa-6d37faa1f7e2": {
+      "type": "raw",
+      "name": "Command Group",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-II.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "M4A1": 6,
+        "Stryker (command)": 1,
+        "HMMWV": 2
+      }
+    },
+    "c8e28942-2325-4ed4-ac9a-e0629b96812a": {
+      "type": "raw",
+      "name": "FSC Coy HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "M-ATV": 1,
+        "MTV": 1,
+        "M4A1": 4,
+        "M249": 1
+      }
+    },
+    "d1a6117a-65f5-41bc-a0fc-cbb0e69cfd32": {
+      "type": "raw",
+      "name": "FIeld Feeding",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg",
+        "/military-unit-maker/icons/b-food.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 3,
+        "MTV": 2,
+        "HEMTT": 1,
+        "M4A1": 11,
+        "M249": 1,
+        "Field Kitchen": 4
+      }
+    },
+    "3ebd9220-200e-4893-9a8d-188865ceedde": {
+      "type": "org",
+      "name": "Distribtn",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "ce5d6b23-5045-4c71-b1c3-3b74f8a75310": 1,
+        "7cf66c20-b964-43fc-917c-15797cbd89b4": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "ce5d6b23-5045-4c71-b1c3-3b74f8a75310": {
+      "type": "raw",
+      "name": "Distribtn HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "HMMWV": 1
+      }
+    },
+    "54e77656-1eb4-4fe2-a5f5-3b1ffa7da701": {
+      "type": "raw",
+      "name": "Distribtn",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 16,
+        "HEMTT": 8,
+        "M4A1": 13,
+        "M249": 3,
+        "Forklift": 1
+      }
+    },
+    "974eb5ff-720c-4533-8838-0d995fdd6b56": {
+      "type": "org",
+      "name": "Maintnnc",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "dd449d7a-741a-4870-acfc-de37006b009e": 1,
+        "7d34b88c-0691-4cd8-bd4b-14c8a15c339f": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "dd449d7a-741a-4870-acfc-de37006b009e": {
+      "type": "raw",
+      "name": "Maintnnc Controll & HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 1,
+        "MTV": 2,
+        "M4A1": 8,
+        "M249": 1
+      }
+    },
+    "7d34b88c-0691-4cd8-bd4b-14c8a15c339f": {
+      "type": "raw",
+      "name": "Field Maintnnc",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 45,
+        "HMMWV": 3,
+        "MTV": 4,
+        "HEMTT": 4,
+        "M4A1": 38,
+        "M249": 7
+      }
+    },
+    "c1040aa2-fddf-41ca-a306-33aee35e28d9": {
+      "type": "raw",
+      "name": "Radar Repair",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "MTV": 1,
+        "M4A1": 2
+      }
+    },
+    "866d5b6b-f897-4db2-b5b0-d2704332bb51": {
+      "type": "raw",
+      "name": "INF fwd spt (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 90
+      }
+    },
+    "6ae428c1-902b-4e1d-a302-bf037727c30c": {
+      "type": "raw",
+      "name": "FIeld Feeding (INF)",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg",
+        "/military-unit-maker/icons/b-food.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 14,
+        "HMMWV": 3,
+        "MTV": 3,
+        "HEMTT": 1,
+        "M4A1": 11,
+        "M249": 1,
+        "Field Kitchen": 4
+      }
+    },
+    "7cf66c20-b964-43fc-917c-15797cbd89b4": {
+      "type": "raw",
+      "name": "Distribtn",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 16,
+        "HEMTT": 8,
+        "M4A1": 13,
+        "M249": 3,
+        "Forklift": 1
+      }
+    },
+    "31eaaf33-dd80-4519-8849-b2c7d8e4847e": {
+      "type": "org",
+      "name": "Distribtn",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "ce5d6b23-5045-4c71-b1c3-3b74f8a75310": 1,
+        "64700f02-19ed-47b2-98ae-ec25f2dead37": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "7 x HEMTT"
+    },
+    "64700f02-19ed-47b2-98ae-ec25f2dead37": {
+      "type": "raw",
+      "name": "Distribtn",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 14,
+        "HEMTT": 7,
+        "M4A1": 12,
+        "M249": 2,
+        "Forklift": 1
+      },
+      "desc": "(7 HEMTT)"
+    },
+    "39a9cad5-28d2-4f55-8a96-c8c012b10591": {
+      "type": "org",
+      "name": "Maintnnc (INF)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "dd449d7a-741a-4870-acfc-de37006b009e": 1,
+        "d57d0356-1f61-49b1-ac3a-b736a18b2487": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "d57d0356-1f61-49b1-ac3a-b736a18b2487": {
+      "type": "raw",
+      "name": "Field Maintnnc (INF)",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 45,
+        "HMMWV": 6,
+        "MTV": 5,
+        "HEMTT": 5,
+        "M4A1": 39,
+        "M249": 6
+      }
+    },
+    "bb132348-561d-43cc-ac9c-b5885f5b533a": {
+      "type": "raw",
+      "name": "CAV fwd spt (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 87
+      }
+    },
+    "66ca9586-f8e8-4e84-ab6c-439f8b1b6ed2": {
+      "type": "raw",
+      "name": "FSC Coy HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "M-ATV": 1,
+        "MTV": 1,
+        "M4A1": 5
+      },
+      "desc": "Ver w/ no m249"
+    },
+    "7caa17dd-3b5c-42cf-a0ae-1f870f71dc8c": {
+      "type": "raw",
+      "name": "FIeld Feeding",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg",
+        "/military-unit-maker/icons/b-food.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 3,
+        "MTV": 3,
+        "HEMTT": 1,
+        "M4A1": 10,
+        "M249": 2,
+        "Field Kitchen": 4
+      },
+      "desc": "3/3/1"
+    },
+    "22cac266-a821-4655-83e9-7fa9eec94dcb": {
+      "type": "org",
+      "name": "Maintnnc (CAV)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "dd449d7a-741a-4870-acfc-de37006b009e": 1,
+        "c2a6f6cc-34ab-47c5-99d3-eec4d5ae18d1": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "c2a6f6cc-34ab-47c5-99d3-eec4d5ae18d1": {
+      "type": "raw",
+      "name": "Field Maintnnc (CAV)",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 44,
+        "HMMWV": 6,
+        "MTV": 4,
+        "HEMTT": 5,
+        "M4A1": 39,
+        "M249": 5
+      }
+    },
+    "abe6fe0e-07fc-40fc-9eca-2d0b47444894": {
+      "type": "raw",
+      "name": "ENGI fwd spt (copy)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 114
+      }
+    },
+    "81dc2a19-f67a-45ce-a07c-43f501c2c032": {
+      "type": "raw",
+      "name": "FIeld Feeding (ENGI)",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg",
+        "/military-unit-maker/icons/b-food.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 15,
+        "HMMWV": 3,
+        "MTV": 3,
+        "HEMTT": 1,
+        "M4A1": 14,
+        "M249": 1,
+        "Field Kitchen": 4
+      }
+    },
+    "262161e9-244e-40d8-8be1-592c0f5562f8": {
+      "type": "org",
+      "name": "Distribtn (ENGI)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "ce5d6b23-5045-4c71-b1c3-3b74f8a75310": 1,
+        "5d30d84c-6850-4efb-8e8d-f2713d756c1a": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {},
+      "desc": "7 x HEMTT"
+    },
+    "5d30d84c-6850-4efb-8e8d-f2713d756c1a": {
+      "type": "raw",
+      "name": "Distribtn (ENGI)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "equipment": {
+        "Warrior": 14,
+        "HEMTT": 7,
+        "M4A1": 11,
+        "M249": 3,
+        "Forklift": 1
+      },
+      "desc": "(7 HEMTT)"
+    },
+    "203b9819-a7f4-4207-965f-1e8b02ec27bb": {
+      "type": "org",
+      "name": "Maintnnc (ENGI)",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "dd449d7a-741a-4870-acfc-de37006b009e": 1,
+        "945b10ab-1d80-44dc-955c-f9f08c93c575": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "945b10ab-1d80-44dc-955c-f9f08c93c575": {
+      "type": "raw",
+      "name": "Field Maintnnc (ENGI)",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 68,
+        "HMMWV": 6,
+        "MTV": 6,
+        "HEMTT": 5,
+        "M4A1": 61,
+        "M249": 7
+      }
+    },
+    "e9496c5d-6fe7-4037-8350-90854fce4ce1": {
+      "type": "raw",
+      "name": "Med COY HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 3,
+        "MTV": 2,
+        "M4A1": 12
+      }
+    },
+    "a2c41590-fa54-42e3-9564-3b94205c4ebb": {
+      "type": "raw",
+      "name": "Prev Med",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 2
+      },
+      "desc": "Its called section but is 2 people really a section?"
+    },
+    "25fca2cd-1bcd-4142-b6b8-c28177a46a40": {
+      "type": "raw",
+      "name": "Mental Med",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 1,
+        "M4A1": 4
+      },
+      "desc": "Its called section but is 4 people really a section?"
+    },
+    "97b132e2-81f3-4ffd-ade4-7fd3dfb51036": {
+      "type": "org",
+      "name": "Treatment",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "children": {
+        "c18aa46d-e5ed-497d-ae2d-1d479714d146": 1,
+        "cca9aada-364d-48e4-9ea7-f5b37a1ecf26": 1,
+        "153fef04-d0cc-4906-87f4-50ce95465765": 1,
+        "99b0e80d-5e7d-4df8-beed-892b5fe6dcee": 1,
+        "7b50139a-2230-4d73-8be3-8dec1eeb6fc9": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "ea65af37-0dc4-4a20-947a-085f0ff70740": {
+      "type": "org",
+      "name": "Evacuation",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "children": {
+        "4d51fc3d-43b8-4d10-91d5-31196ac84c14": 1,
+        "4421d95e-bd9e-403f-ad83-dcb0f02b4ff3": 3,
+        "826173dd-efbe-473d-8736-19762bc97d9d": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "84ac8925-36c3-4302-9e64-7b7071a4f65a": {
+      "type": "org",
+      "name": "Firing",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-towed.svg"
+      ],
+      "children": {
+        "93cf7a9b-657b-4d12-a20a-30657c64e415": 1,
+        "d40572a9-2a13-4dea-89f5-29724c12f44b": 3,
+        "2cf0b134-affc-4f61-a40f-ecd9648acd82": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "ccebdfb2-fd71-4079-986e-409e7e294607": {
+      "type": "raw",
+      "name": "Battery HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "#f6f5f4",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M-ATV": 1,
+        "M4A1": 4
+      }
+    },
+    "249edc10-1a0e-4638-a23f-e541b43fa34b": {
+      "type": "raw",
+      "name": "Supply \"\"Section\"\"",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "#ff7800",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 2,
+        "MTV": 1,
+        "M4A1": 2
+      }
+    },
+    "d40572a9-2a13-4dea-89f5-29724c12f44b": {
+      "type": "raw",
+      "name": "Howitzer (155T)",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-towed.svg"
+      ],
+      "equipment": {
+        "Warrior": 9,
+        "MTV": 2,
+        "M4A1": 9,
+        "(155mm) M777": 1
+      }
+    },
+    "93cf7a9b-657b-4d12-a20a-30657c64e415": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 2,
+        "M4A1": 4
+      }
+    },
+    "2cf0b134-affc-4f61-a40f-ecd9648acd82": {
+      "type": "raw",
+      "name": "FDC",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-art.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 8,
+        "HMMWV": 1,
+        "M-ATV": 2,
+        "M4A1": 8
+      },
+      "desc": "Fire Direction Center"
+    },
+    "c18aa46d-e5ed-497d-ae2d-1d479714d146": {
+      "type": "raw",
+      "name": "Treatment HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 1,
+        "M4A1": 3,
+        "MTV": 1
+      }
+    },
+    "153fef04-d0cc-4906-87f4-50ce95465765": {
+      "type": "raw",
+      "name": "Area Support",
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 7,
+        "MTV": 1
+      },
+      "desc": "Radiological and dental nerds"
+    },
+    "cca9aada-364d-48e4-9ea7-f5b37a1ecf26": {
+      "type": "raw",
+      "name": "Medical",
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 4,
+        "M4A1": 9
+      }
+    },
+    "99b0e80d-5e7d-4df8-beed-892b5fe6dcee": {
+      "type": "raw",
+      "name": "Treatment",
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "M4A1": 6,
+        "MTV": 1,
+        "HMMWV": 2
+      }
+    },
+    "7b50139a-2230-4d73-8be3-8dec1eeb6fc9": {
+      "type": "raw",
+      "name": "Patient Holding",
+      "layers": [
+        "/military-unit-maker/icons/b-hospital.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "M4A1": 5,
+        "MTV": 1
+      }
+    },
+    "4d51fc3d-43b8-4d10-91d5-31196ac84c14": {
+      "type": "raw",
+      "name": "Evac HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 2
+      }
+    },
+    "4421d95e-bd9e-403f-ad83-dcb0f02b4ff3": {
+      "type": "org",
+      "name": "Evac Forward",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "children": {
+        "5b55e9f8-22ef-435b-a489-bb4285139d82": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "5b55e9f8-22ef-435b-a489-bb4285139d82": {
+      "type": "raw",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-tank.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3,
+        "Stryker (MedVac)": 1
+      }
+    },
+    "826173dd-efbe-473d-8736-19762bc97d9d": {
+      "type": "org",
+      "name": "Evac Area",
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "children": {
+        "f002ae4e-3fe3-4e3a-a476-2eec78d20d1e": 2
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "f002ae4e-3fe3-4e3a-a476-2eec78d20d1e": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 1,
+        "M4A1": 3
+      }
+    },
+    "b695305b-d5a8-4f84-8f21-d2c28786df93": {
+      "type": "raw",
+      "name": "Coy HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 3,
+        "MTV": 1,
+        "M4A1": 5
+      }
+    },
+    "17359df2-487e-4c34-b29c-23d33ccd97c5": {
+      "type": "org",
+      "name": "Mntnnc",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "e6d52a4d-614d-47bf-96d6-1d4d56cf4902": 1,
+        "e559c958-d5c1-45ce-b852-fbf243ef3498": 1,
+        "65b56b0b-8fc6-42a7-a6f3-eac51d8253cd": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "21b53f61-329d-4ae8-86d8-57135b7d4a07": {
+      "type": "org",
+      "name": "Mntnnc Support",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "21d06394-aef6-4e21-a5cb-682024e9ac7a": 1,
+        "7e365d75-598d-4aa6-ae60-9f5b358e1689": 1,
+        "42c0005c-08be-493b-99eb-4356433170be": 1,
+        "43a55e37-57e4-4b12-8f62-1a17100c3178": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "e6d52a4d-614d-47bf-96d6-1d4d56cf4902": {
+      "type": "raw",
+      "name": "Mntnnc Control / HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg",
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 1,
+        "MTV": 3,
+        "Forklift": 1,
+        "M4A1": 8,
+        "M249": 1
+      }
+    },
+    "e559c958-d5c1-45ce-b852-fbf243ef3498": {
+      "type": "raw",
+      "name": "Service / Recovery",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 15,
+        "MTV": 5,
+        "M4A1": 13,
+        "M249": 2,
+        "HEMTT": 5
+      }
+    },
+    "65b56b0b-8fc6-42a7-a6f3-eac51d8253cd": {
+      "type": "raw",
+      "name": "Wheel Veh Repair",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 36,
+        "MTV": 7,
+        "M4A1": 32,
+        "M249": 4,
+        "HEMTT": 2,
+        "HMMWV": 4
+      }
+    },
+    "21d06394-aef6-4e21-a5cb-682024e9ac7a": {
+      "type": "raw",
+      "name": "PLT HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2
+      }
+    },
+    "7e365d75-598d-4aa6-ae60-9f5b358e1689": {
+      "type": "raw",
+      "name": "Armament Reapair",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 8,
+        "MTV": 1,
+        "M4A1": 7,
+        "M249": 1
+      }
+    },
+    "42c0005c-08be-493b-99eb-4356433170be": {
+      "type": "raw",
+      "name": "Ground spt eq reapair",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "MTV": 2,
+        "M4A1": 11,
+        "M249": 1,
+        "HMMWV": 5
+      }
+    },
+    "43a55e37-57e4-4b12-8f62-1a17100c3178": {
+      "type": "raw",
+      "name": "MSL/Elect reapair",
+      "layers": [
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 15,
+        "MTV": 7,
+        "M4A1": 13,
+        "M249": 2,
+        "HMMWV": 2
+      }
+    },
+    "e5109962-a56c-4dc9-b4d9-ae0cf5c20b6c": {
+      "type": "raw",
+      "name": "Coy HQ",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 2,
+        "MTV": 1,
+        "M4A1": 6
+      }
+    },
+    "6b02d2bb-e79f-4973-bfd6-515ba9eb2021": {
+      "type": "org",
+      "name": "Trans",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "cad91ead-3c6e-4769-a9c7-b11a3a452144": 1,
+        "f78e4d2d-b03d-494b-a3a6-edec5cb8613e": 4
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "cad91ead-3c6e-4769-a9c7-b11a3a452144": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 2
+      }
+    },
+    "f78e4d2d-b03d-494b-a3a6-edec5cb8613e": {
+      "type": "raw",
+      "name": "MTV",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 10,
+        "HEMTT": 5,
+        "M4A1": 9,
+        "M249": 1
+      }
+    },
+    "d9b66d62-93ab-4872-b3e9-5d11b9fcc253": {
+      "type": "org",
+      "name": "Supply",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "56e7dd5e-d342-4cc4-89fb-9142381e9f87": 1,
+        "7716b719-7fd6-406e-ab1f-ce99332a8f2b": 1,
+        "2b419052-340b-4ba2-832f-0fd9fb41bee7": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "56e7dd5e-d342-4cc4-89fb-9142381e9f87": {
+      "type": "raw",
+      "name": "",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "MTV": 1,
+        "M4A1": 7,
+        "M249": 1
+      }
+    },
+    "7716b719-7fd6-406e-ab1f-ce99332a8f2b": {
+      "type": "raw",
+      "name": "General Supply & Class IX",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 27,
+        "MTV": 5,
+        "HEMTT": 8,
+        "M4A1": 26,
+        "M249": 1,
+        "Forklift": 5
+      }
+    },
+    "2b419052-340b-4ba2-832f-0fd9fb41bee7": {
+      "type": "raw",
+      "name": "Ammo transfer holding point",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "HMMWV": 1,
+        "MTV": 1,
+        "HEMTT": 3,
+        "M4A1": 10,
+        "M249": 1,
+        "Forklift": 3
+      }
+    },
+    "0e729e1a-1a2b-4533-9f36-86f740b29efa": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {}
+    },
+    "0b80d3f7-5c1f-4158-aec0-53aafcaed937": {
+      "type": "org",
+      "name": "Fuel & Water",
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "children": {
+        "503a62d6-faf9-4aed-b90c-ebbc7c0ba7e8": 1,
+        "e3d629bc-8fe1-4b1d-9e13-04e991c19291": 1,
+        "921ebfdd-d8c1-48d3-a943-c8f2645d926e": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "77e21df0-1962-4ab8-8840-aaf67df23192": {
+      "type": "raw",
+      "name": "New Raw Unit",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "equipment": {}
+    },
+    "503a62d6-faf9-4aed-b90c-ebbc7c0ba7e8": {
+      "type": "raw",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 1,
+        "M4A1": 3
+      }
+    },
+    "e3d629bc-8fe1-4b1d-9e13-04e991c19291": {
+      "type": "raw",
+      "name": "Class III",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 25,
+        "MTV": 1,
+        "HEMTT": 12,
+        "M4A1": 23,
+        "M249": 2
+      },
+      "desc": "(Flammable stuff)"
+    },
+    "921ebfdd-d8c1-48d3-a943-c8f2645d926e": {
+      "type": "raw",
+      "name": "Water",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 11,
+        "MTV": 1,
+        "HEMTT": 5,
+        "M4A1": 10,
+        "M249": 1
+      },
+      "desc": ""
+    },
+    "68c35cfb-2ecd-493c-bde0-6c61c4260427": {
+      "type": "raw",
+      "name": "Command",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-II.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "M-ATV": 1,
+        "HMMWV": 1,
+        "M4A1": 4
+      }
+    },
+    "b8eb530a-0194-4544-a19a-60faef584b6c": {
+      "type": "raw",
+      "name": "Coy HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-I.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 2,
+        "MTV": 1,
+        "M4A1": 4,
+        "M249": 1
+      }
+    },
+    "ea854c04-d499-418b-a986-5dd569b46a98": {
+      "type": "org",
+      "name": "Cur Ops",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "90751b77-cdc5-49f0-8b6a-7dee524fe340": 1,
+        "a9510319-b8a3-4a96-8eda-c9201bcd626c": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "90751b77-cdc5-49f0-8b6a-7dee524fe340": {
+      "type": "raw",
+      "name": "Intel/S2",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 1,
+        "M4A1": 3
+      }
+    },
+    "a9510319-b8a3-4a96-8eda-c9201bcd626c": {
+      "type": "raw",
+      "name": "Ops/S3",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 2,
+        "MTV": 2,
+        "M4A1": 9
+      }
+    },
+    "83442b6b-5aec-4860-877d-d60b5ea2ac8e": {
+      "type": "org",
+      "name": "Sust 1",
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "children": {
+        "07db5579-6ac4-4969-8c9d-c1f8ddbe2a5c": 1,
+        "60114211-3710-4199-805b-9d13115f7251": 1,
+        "0121af63-ba7d-4a5e-b2ad-5a8d62bc690b": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "07db5579-6ac4-4969-8c9d-c1f8ddbe2a5c": {
+      "type": "raw",
+      "name": "S4",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 2,
+        "M4A1": 4
+      }
+    },
+    "60114211-3710-4199-805b-9d13115f7251": {
+      "type": "raw",
+      "name": "S1",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 8,
+        "MTV": 1,
+        "M4A1": 6,
+        "M249": 2
+      }
+    },
+    "0121af63-ba7d-4a5e-b2ad-5a8d62bc690b": {
+      "type": "raw",
+      "name": "C4 ops S6",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 3,
+        "MTV": 1,
+        "M4A1": 11,
+        "M249": 1,
+        "SatCom": 1
+      }
+    },
+    "547f33e7-abab-4670-ad3e-c25db0266ca4": {
+      "type": "org",
+      "name": "Sust 2",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-maintenance.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "5c9611de-b90f-4bd8-920d-a3bf708f8fde": 1,
+        "67a8464a-d4ee-45dd-924d-7b5a12504126": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "9cbad992-57bc-4159-ba9c-83ab401c0c32": {
+      "type": "raw",
+      "name": "FIeld Feeding",
+      "layers": [
+        "/military-unit-maker/icons/b-supply.svg",
+        "/military-unit-maker/icons/b-food.svg"
+      ],
+      "smartColor": "#ff7800",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 1,
+        "MTV": 2,
+        "HEMTT": 1,
+        "M4A1": 10,
+        "M249": 2,
+        "Field Kitchen": 2
+      }
+    },
+    "5c9611de-b90f-4bd8-920d-a3bf708f8fde": {
+      "type": "raw",
+      "name": "Suport Ops",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 17,
+        "HMMWV": 5,
+        "MTV": 1,
+        "M4A1": 16,
+        "M249": 1
+      }
+    },
+    "67a8464a-d4ee-45dd-924d-7b5a12504126": {
+      "type": "raw",
+      "name": "C4OPS/ SASMO",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 11,
+        "MTV": 2,
+        "M4A1": 11
+      }
+    },
+    "87be3f44-4b70-4c7e-b24c-f583abf3016e": {
+      "type": "raw",
+      "name": "Command",
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-II.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 1,
+        "M4A1": 5,
+        "Stryker (command)": 1
+      }
+    },
+    "7cd59921-e038-4706-aea3-41a9607397b8": {
+      "type": "raw",
+      "name": "Battery HQs",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-hq-I.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 2,
+        "M4A1": 5
+      },
+      "desc": "(no idea why the S at the end. Maybe OG author made an typo?)"
+    },
+    "60534106-b295-41cc-9bb3-9b0d9cfdda44": {
+      "type": "org",
+      "name": "Current OPS",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "6ca76952-c3c3-4e34-a978-08bff09290d3": 1,
+        "6ac6ccd6-3c29-4b38-8961-7947d619975e": 1,
+        "11c8971e-84c3-484c-b414-dc9e2d29d326": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "c8689b9a-f71f-46ee-99b8-5123bc1f977e": {
+      "type": "org",
+      "name": "SBCT",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "16e6b9de-c883-4a74-8f61-2e16340a8a7e": 1,
+        "19bac0db-6e6e-4ceb-bd11-4c2f0e74c3f4": 1,
+        "9d4af016-ddbd-4da4-87da-08cdcb2adfc7": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "6601c406-29e7-436f-9f3c-1d3f83bcef05": {
+      "type": "raw",
+      "name": "Inf BTL Fires Cell",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 7,
+        "HMMWV": 2,
+        "M4A1": 7
+      }
+    },
+    "c49dc2be-beb0-4ef4-9f3b-8f5e9104ee06": {
+      "type": "raw",
+      "name": "Inf BTL Fire Support",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "equipment": {
+        "Warrior": 90,
+        "M4A1": 90,
+        "Stryker (fire support)": 9
+      }
+    },
+    "1c9376c0-7b9f-44e6-886e-86dd36ca183b": {
+      "type": "raw",
+      "name": "Weapons Troop FIST",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 4,
+        "Stryker (fire support)": 1
+      }
+    },
+    "c081cce2-7df1-47b2-9629-15b37b838bc7": {
+      "type": "raw",
+      "name": "Cav SQD Fires Cell",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 7,
+        "HMMWV": 2,
+        "M4A1": 7
+      }
+    },
+    "afe09a76-2a28-441e-9f97-5578279e7ea2": {
+      "type": "org",
+      "name": "Fire Support",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "6601c406-29e7-436f-9f3c-1d3f83bcef05": 3,
+        "c49dc2be-beb0-4ef4-9f3b-8f5e9104ee06": 1,
+        "1c9376c0-7b9f-44e6-886e-86dd36ca183b": 1,
+        "c081cce2-7df1-47b2-9629-15b37b838bc7": 1,
+        "374d362b-0a97-4758-be38-134df83722d4": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "374d362b-0a97-4758-be38-134df83722d4": {
+      "type": "raw",
+      "name": "Cav SQD Fire Support",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "equipment": {
+        "Warrior": 12,
+        "M4A1": 12,
+        "Stryker (fire support)": 3
+      }
+    },
+    "dce06b65-999b-48a4-bf2a-c2b26b1a935e": {
+      "type": "org",
+      "name": "Sustnmnt",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "1e166be0-a913-4da4-813a-65b02ab64559": 1,
+        "36fc08af-b71a-4fd7-9648-6a22a2a22946": 1,
+        "1d176925-401a-41ee-af56-723ca9691720": 1,
+        "1248b0a6-dae6-4c66-a74a-1af7a62f64e9": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "28846d39-7358-48c1-b315-c73ff733b6e0": {
+      "type": "org",
+      "name": "Network",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 15,
+      "children": {
+        "93a00da4-eac2-4bf1-86fa-1db8fea92964": 1,
+        "75aed8f4-fd3b-4d4e-a6c3-dd1add172a4f": 1,
+        "f59a5958-ab13-4981-9499-869371794721": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "e41a5742-0925-41f7-9749-7078799db9b7": {
+      "type": "raw",
+      "name": "Supply \"\"Section\"\"",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 1,
+        "MTV": 1,
+        "M4A1": 3
+      }
+    },
+    "19503bfe-72bb-472f-aa2a-312525a365ee": {
+      "type": "org",
+      "name": "TGT ACQ",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "b26f1911-cb9d-467e-82a2-7a44df46c986": 1,
+        "371b0b37-a14d-4c3d-a75b-52fe7a7cff62": 2,
+        "b1366e4e-0017-4c52-b9e6-5522c0a81a3e": 1,
+        "829a268e-cf3c-49b2-991f-cb9c16f2d9db": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "8bf35ca4-a8fa-4847-9624-294f41d3090d": {
+      "type": "raw",
+      "name": "CNTR FIRE OPRNS",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {}
+    },
+    "df8f828f-7d89-4b52-bc9c-b0113096ab2d": {
+      "type": "org",
+      "name": "Med Treat (ART)",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "50a2b6b3-e9d9-4223-aa28-4e341d732d99": 1,
+        "7675f943-c248-4837-a9d4-cb50ca10a7f9": 1,
+        "04c2368d-0333-41b1-ad13-0a4afcee62dd": 3,
+        "8dd69677-7c8f-4e7b-b0ec-47f3bf39f28a": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "7675f943-c248-4837-a9d4-cb50ca10a7f9": {
+      "type": "raw",
+      "name": "Med Treat Team",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "M4A1": 3,
+        "MTV": 2
+      }
+    },
+    "8dd69677-7c8f-4e7b-b0ec-47f3bf39f28a": {
+      "type": "raw",
+      "name": "Combat Medic (Art)",
+      "layers": [
+        "/military-unit-maker/icons/b-med.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6
+      }
+    },
+    "6ac6ccd6-3c29-4b38-8961-7947d619975e": {
+      "type": "raw",
+      "name": "OPS/S3",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 12,
+        "HMMWV": 2,
+        "M-ATV": 1,
+        "M4A1": 11
+      }
+    },
+    "11c8971e-84c3-484c-b414-dc9e2d29d326": {
+      "type": "raw",
+      "name": "FDC",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 9,
+        "HMMWV": 2,
+        "MTV": 1,
+        "M4A1": 9
+      }
+    },
+    "16e6b9de-c883-4a74-8f61-2e16340a8a7e": {
+      "type": "raw",
+      "name": "Fires Cell HQ",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 1
+      }
+    },
+    "19bac0db-6e6e-4ceb-bd11-4c2f0e74c3f4": {
+      "type": "raw",
+      "name": "Leathal Effects Cell",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 1,
+        "M4A1": 5
+      }
+    },
+    "9d4af016-ddbd-4da4-87da-08cdcb2adfc7": {
+      "type": "raw",
+      "name": "Non-Leathal Effects Cell",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 1,
+        "M4A1": 5
+      }
+    },
+    "1e166be0-a913-4da4-813a-65b02ab64559": {
+      "type": "raw",
+      "name": "S1",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 8,
+        "MTV": 1,
+        "M4A1": 8
+      }
+    },
+    "36fc08af-b71a-4fd7-9648-6a22a2a22946": {
+      "type": "raw",
+      "name": "S4",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 1,
+        "MTV": 1,
+        "M4A1": 6
+      }
+    },
+    "1248b0a6-dae6-4c66-a74a-1af7a62f64e9": {
+      "type": "raw",
+      "name": "C4/S6",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 1,
+        "M4A1": 5
+      }
+    },
+    "93a00da4-eac2-4bf1-86fa-1db8fea92964": {
+      "type": "raw",
+      "name": "Network mgmt",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 2
+      }
+    },
+    "75aed8f4-fd3b-4d4e-a6c3-dd1add172a4f": {
+      "type": "raw",
+      "name": "Network Ops",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 1,
+        "MTV": 1,
+        "M4A1": 4,
+        "SatCom": 1
+      }
+    },
+    "f59a5958-ab13-4981-9499-869371794721": {
+      "type": "raw",
+      "name": "Network Extension",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "M-ATV": 2,
+        "M4A1": 6
+      },
+      "desc": "(on M-ATV)"
+    },
+    "b26f1911-cb9d-467e-82a2-7a44df46c986": {
+      "type": "raw",
+      "name": "Leader in HMMWV",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "HMMWV": 1,
+        "M4A1": 2
+      }
+    },
+    "371b0b37-a14d-4c3d-a75b-52fe7a7cff62": {
+      "type": "raw",
+      "name": "Radar",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 5,
+        "MTV": 2,
+        "M4A1": 5,
+        "AN/TPQ-53 (cntr.bttr rdr)": 1
+      }
+    },
+    "b1366e4e-0017-4c52-b9e6-5522c0a81a3e": {
+      "type": "raw",
+      "name": "Counter Fire ORPNS",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 1,
+        "M4A1": 6
+      }
+    },
+    "79c341b3-74f6-4abb-8216-fdbc9c6f333f": {
+      "type": "raw",
+      "name": "Counter Fire ORPNS (Copy)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 1,
+        "M4A1": 6
+      }
+    },
+    "829a268e-cf3c-49b2-991f-cb9c16f2d9db": {
+      "type": "raw",
+      "name": "LCMR",
+      "layers": [
+        "/military-unit-maker/icons/b-rec.svg",
+        "/military-unit-maker/icons/b-light.svg",
+        "/military-unit-maker/icons/b-art.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 8,
+        "HMMWV": 4,
+        "M4A1": 8,
+        "LCMR (cntr.mrtr.rdr)": 4
+      },
+      "desc": "Counter mortar radar"
+    },
+    "011c8fd1-6f88-421d-8a17-a9f44f81be86": {
+      "type": "raw",
+      "name": "",
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "equipment": {
+        "Warrior": 5,
+        "HMMWV": 1,
+        "MTV": 1,
+        "M4A1": 4,
+        "M249": 1
+      }
+    },
+    "32d3a498-0736-41e2-a850-cacb86e0cead": {
+      "type": "raw",
+      "name": "IEW SYSTEMS INTEGRATION",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 7,
+        "HMMWV": 1,
+        "MTV": 2,
+        "M4A1": 6,
+        "M249": 1
+      }
+    },
+    "839f4c7d-9948-44e4-b040-2b4d048d0d0a": {
+      "type": "raw",
+      "name": "Intel Com",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "HMMWV": 2,
+        "M4A1": 3
+      }
+    },
+    "04552101-6293-480f-90eb-f5a08e71dc74": {
+      "type": "org",
+      "name": "Info Collection",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "a9eb7940-39c7-4bd5-80be-129dec15b802": 1,
+        "bebeaa29-267c-487c-b48f-2f607f57cab8": 1,
+        "8823bcf7-30a9-45d2-99bc-c40633a0b77a": 1,
+        "55c6bcd0-aa96-42ce-82d8-5303bbc5bc2f": 1,
+        "52a62278-b861-412b-a854-163cc5c4327f": 1,
+        "73a2f4d2-e57e-4ab4-adb4-ed1c34ba80c2": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "a9eb7940-39c7-4bd5-80be-129dec15b802": {
+      "type": "raw",
+      "name": "Plt HQ (legs)",
+      "layers": [
+        "/military-unit-maker/icons/b-hq.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 2,
+        "M4A1": 2
+      }
+    },
+    "bebeaa29-267c-487c-b48f-2f607f57cab8": {
+      "type": "raw",
+      "name": "Ops MGMT",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 4,
+        "HMMWV": 1,
+        "M4A1": 4
+      },
+      "desc": "Human Intelligence"
+    },
+    "8823bcf7-30a9-45d2-99bc-c40633a0b77a": {
+      "type": "raw",
+      "name": "Crypto Support (cst)",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 2,
+        "M4A1": 6,
+        "SatCom": 1
+      },
+      "desc": ""
+    },
+    "55c6bcd0-aa96-42ce-82d8-5303bbc5bc2f": {
+      "type": "raw",
+      "name": "Intel process",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "Warrior": 6,
+        "HMMWV": 2,
+        "M4A1": 5,
+        "M249": 1
+      },
+      "desc": ""
+    },
+    "52a62278-b861-412b-a854-163cc5c4327f": {
+      "type": "raw",
+      "name": "Synch. & coll. mgmt.",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 10,
+        "HMMWV": 2,
+        "MTV": 2,
+        "M4A1": 9,
+        "M249": 1
+      },
+      "desc": ""
+    },
+    "73a2f4d2-e57e-4ab4-adb4-ed1c34ba80c2": {
+      "type": "raw",
+      "name": "Coist",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 21,
+        "M4A1": 21
+      },
+      "desc": ""
+    },
+    "c5af84e7-9589-4faf-8eb4-e79d35630328": {
+      "type": "org",
+      "name": "Multi Function",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 3,
+      "children": {
+        "a9eb7940-39c7-4bd5-80be-129dec15b802": 1,
+        "3626745d-c405-4994-a768-760be5a32a35": 1,
+        "6246e75b-f633-4643-9b92-0fc441d3adb0": 3,
+        "d7998175-3420-4372-be42-58bc3e489c08": 1
+      },
+      "flatCallSigns": {},
+      "flatDescriptions": {}
+    },
+    "3626745d-c405-4994-a768-760be5a32a35": {
+      "type": "raw",
+      "name": "Exploittion",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 0,
+      "equipment": {
+        "Warrior": 3,
+        "M4A1": 3
+      },
+      "desc": "Intel Annalist"
+    },
+    "6246e75b-f633-4643-9b92-0fc441d3adb0": {
+      "type": "raw",
+      "name": "BCT MFT",
+      "layers": [
+        "/military-unit-maker/icons/b-wheeled-cc.svg",
+        "/military-unit-maker/icons/b-armored.svg",
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 2,
+      "equipment": {
+        "Warrior": 7,
+        "M-ATV": 2,
+        "M4A1": 7
+      },
+      "desc": "Linguists & Humint"
+    },
+    "d7998175-3420-4372-be42-58bc3e489c08": {
+      "type": "raw",
+      "name": "Staff Weather Office",
+      "layers": [
+        "/military-unit-maker/icons/b-mi.svg"
+      ],
+      "smartColor": "inheret",
+      "echelonLevel": 1,
+      "equipment": {
+        "HMMWV": 1
+      },
+      "desc": "For USAF Staff"
+    },
+    "fa2e906e-7761-4af8-b3d2-271a41f8c495": {
+      "type": "raw",
+      "name": "NaRU",
+      "layers": [],
+      "smartColor": "#000000",
+      "echelonLevel": 15,
+      "equipment": {
+        "Warrior": 0,
+        "SatCom": 0,
+        "HMMWV": 0,
+        "MTV": 0,
+        "HEMTT": 0,
+        "M-ATV": 0,
+        "M4A1": 0,
+        "M249": 0,
+        "Stryker (ICV)": 0,
+        "Stryker (command)": 0,
+        "Stryker (scout)": 0,
+        "Stryker (mortar)": 0,
+        "Stryker (ATGM)": 0,
+        "Stryker (MGS)": 0,
+        "Stryker (MedVac)": 0,
+        "Stryker (fire support)": 0,
+        "Stryker (engineer)": 0,
+        "Stryker (CBRN-rec)": 0,
+        "AT4 (L AT mssl)": 0,
+        "Javelin": 0,
+        "M240L": 0,
+        "M110 Rifle": 0,
+        ".30 Cal Rifle": 0,
+        ".50 Cal M107": 0,
+        "60mm mortar": 0,
+        "81mm mortar": 0,
+        "(155mm) M777": 0,
+        "AN/TPQ-53 (cntr.bttr rdr)": 0,
+        "LCMR (cntr.mrtr.rdr)": 0,
+        "Shadow (UAV)": 0,
+        "UAV Launcher": 0,
+        "UGV": 0,
+        "Engi Vehicle": 0,
+        "Mobile Bridge": 0,
+        "MMPV": 0,
+        "MPCV": 0
+      },
+      "desc": "Not a real unit, just a quick hack to order the equipment"
+    }
+  },
+  "unitPalet": [
+    "c7c5023a-ca97-4f8d-8f81-22a3ada7d447",
+    "16f38703-53c4-449f-b569-46c662faf25f",
+    "37cc5543-7721-463e-b2fe-c34675c805d4",
+    "868eb723-4245-4af7-8a06-41d797e54959",
+    "5f8a81e9-5c03-49aa-80e0-2b54e7940eb8",
+    "dc378dec-2f69-431e-898c-d391cfa47c62",
+    "2a076cf6-cc96-4170-bdcc-a1260059afc7",
+    "fb751a2e-08aa-406c-bed2-c527f9f4e164",
+    "ff4acf55-9f8f-4dbd-8e72-1ea1ed9397da",
+    "e07f615e-9782-44c1-a00d-ee9d0199e51f",
+    "ac84ba56-6017-4c61-a1bf-359d52d78748",
+    "c9035f95-31b9-4ed0-9036-c83af5a56e8b",
+    "41b4cc7f-19cc-4129-95e3-ab419af71dbd",
+    "82138400-7951-4369-8d66-c2072aedd5fb",
+    "70fe6407-2d2a-4f10-a5e7-a881d67268a5",
+    "4074dfae-aad2-4505-8b6f-72eebd450beb",
+    "8afbe28b-a08b-408f-b98d-7804c88e0883",
+    "14ff7973-4fa0-4798-af33-9ff94be4ec72",
+    "e877fa08-f55c-4c75-afc1-704c891f82d7",
+    "5f88b270-c69b-4d79-b328-1b617ceab217",
+    "71c900f8-bdc2-4986-8988-1e799c63cdd1",
+    "6615859f-bf86-4dab-bb6e-cb645da17052",
+    "277c931d-e72b-4abf-ad76-9744328b209c",
+    "1dcd57bf-9a36-4b4e-adb2-58ca206ed754",
+    "691f8e18-e375-43ef-980a-f588de2ab53f",
+    "639e826e-353d-4179-baa2-449c5f03933c",
+    "faea6838-97f2-4e63-9e35-2e074e5af686",
+    "a99c06c0-9d41-4241-9bbd-228f8f9134e4",
+    "b399f641-8120-42f0-ab0b-594c68b52589",
+    "1018209f-ed03-45b6-aa6a-1f31e358df3b",
+    "42e82225-9b4b-4976-97ee-3dac017d359c",
+    "ba98a846-3c1f-40e7-b2ed-e3fdd7485dad",
+    "21cdaf08-cb71-4cab-881a-c77be0108592",
+    "5e52fc15-48c3-44f5-ba42-97079ebafae9",
+    "2997b175-cc06-49b6-90db-50f6953e84eb",
+    "513af2e8-6242-4440-b0d2-68ba1b610a37",
+    "636a1954-b456-447f-a2e5-f5710ff736e5",
+    "d59b0c60-8da9-42c3-a164-20c4075930cd",
+    "4c587ad8-72ec-4aea-a79a-ba5df9040459",
+    "0d133fe7-d2ca-4f3a-89a5-32821b065d52",
+    "1b144120-32d9-43b9-9f7d-f9c6b9d2c04d",
+    "7e7b4faa-470f-41b8-8dc7-fbc2e7029607",
+    "6ca76952-c3c3-4e34-a978-08bff09290d3",
+    "fe99a568-fe10-41e0-a723-2932574b5e1b",
+    "4d0d6436-262f-4084-85b9-66a26c308dc7",
+    "1d176925-401a-41ee-af56-723ca9691720",
+    "f84fc7f3-29da-4c10-afd8-81f56aeca84a",
+    "6e47300c-8872-4de1-9bd0-d3642fc529a9",
+    "9cbb9eee-c3c6-4564-bd1b-d844a77e42ae",
+    "69e1a4e4-3c10-4581-8380-bbd08d99ad45",
+    "f0cc8a03-4d4e-4ede-a115-a797f52851c1",
+    "1eec675e-e82f-4cfd-af38-3987b2003511",
+    "5d9f082a-0b5e-4c98-99e8-897f54fb5023",
+    "606b8a57-3bfb-45a6-b105-e238dfb32e94",
+    "bdc67477-a427-455d-8fc7-c178f97a27d4",
+    "b7bd93fa-9283-4df1-9310-56fe9f158ae7",
+    "ec3c6cfb-aa33-4d6e-958d-ddb8b489e725",
+    "2bcee3aa-c9d8-4877-9c56-0c1e66a35eed",
+    "a77efc57-9cdd-4fa9-99e5-7780781271c9",
+    "2c242067-e0ae-4506-8419-ebb88c3438c4",
+    "e4444967-0865-49cd-8012-75bb984ecbea",
+    "97113ad9-7284-4842-af06-133fc897942c",
+    "64b02fdd-238c-4995-b2a8-76952077e636",
+    "9035ea48-b687-4c01-92cf-994bc7d0a74d",
+    "fc78250c-93bd-4a67-b4d5-d9562fa0de05",
+    "90551fa9-d246-4014-a1c0-bc4c195e7ca4",
+    "9bf13ad6-257a-4902-b999-c21f81fcf416",
+    "a714fca3-0d56-422d-8388-1d2879ec1ca9",
+    "b8beefbf-f02e-41d8-9566-62f69633dfc0",
+    "5a02c53b-f61d-48db-8ccf-067b9b3d8192",
+    "b9c1c82d-95fa-495e-a257-32e5be75eb60",
+    "024adfa3-18d4-4927-a7c9-2b2d8e067dd6",
+    "dd3ac696-1517-49b2-9f56-c30bbebc51d9",
+    "da1290ff-f2e3-4cc4-bcb5-04a8d50d4e4e",
+    "25f65cec-c182-4daf-ba54-0ef39ff5067e",
+    "dfa38970-26c1-4332-8524-a6c4600aa71f",
+    "765aaac0-a3f9-46ae-b949-8e720207a8e8",
+    "60286da0-e3a9-448f-8da7-d0577c6f488c",
+    "01aef1f1-da4f-4807-a78a-7b17715c0d08",
+    "5a99e786-57d5-4a3c-bef8-5f5302a1e84d",
+    "33c36255-330b-4638-8a2f-2776a4b1f4bd",
+    "6d4fd8c3-cf48-4b2e-928f-63597668f2c4",
+    "50a2b6b3-e9d9-4223-aa28-4e341d732d99",
+    "a19adb94-423b-472d-8f2f-4d07c41129e8",
+    "c118b320-4ae9-429c-98f5-3c4ffb256bef",
+    "04e1fc89-0b2a-4328-8ed3-dda75c64552b",
+    "1e397503-2f1b-4646-9204-e7aecc34b241",
+    "f4781b6a-fff7-42d3-83cf-ce12175504b9",
+    "5cc6fffe-7c69-4a02-b3d1-1412fd2d9a91",
+    "8ec46e5f-e1d9-4386-9616-bdd3712d9a2d",
+    "cc5080cd-b256-41db-a225-379141b22651",
+    "b602f138-6393-43d3-abee-c51f7409e7de",
+    "63df72e5-cd2e-4ce8-8ffd-8c2d885fcd9d",
+    "310c87b1-462f-424c-b25d-d565e3ce7fd6",
+    "4d6280a4-51e6-44ba-a7d6-4763a3205152",
+    "40a3eb89-4bd8-4e7e-ac23-350e6558ba42",
+    "04c2368d-0333-41b1-ad13-0a4afcee62dd",
+    "cacc9440-5c8a-4ef5-83b2-5e89fdbe0aac",
+    "1457bfcf-4872-4cf6-9975-32c3b88d07dd",
+    "28ea1157-252b-4952-8a39-8714a4ad4786",
+    "ea191b54-adb6-4a91-a7fe-8f242aaf1277",
+    "2241ecf6-197d-4671-b0d1-10f1de3dce4d",
+    "f72723bc-4c7d-494a-bcc0-b321fdd82df3",
+    "7946f818-0c77-4b81-ad18-8cf51912789b",
+    "24a7b509-e034-4f62-8617-c9540b0d3879",
+    "ad25aaed-1e30-4e1d-a5f2-095e6029c4e8",
+    "da3cc041-9042-4af9-bba8-486c1605feb0",
+    "964b472e-15bf-4430-a559-cd0c5367b86a",
+    "4f1953bd-e777-4e9a-9a6e-e2a2537ff5cd",
+    "14286550-897e-400b-925f-24ee6408dba5",
+    "4aa4c5a9-ad03-4b71-ac74-4240b3d011c2",
+    "98a48058-77f8-4c44-a0ea-e689cf322386",
+    "00908985-3446-4f76-aafa-6d37faa1f7e2",
+    "c8e28942-2325-4ed4-ac9a-e0629b96812a",
+    "d1a6117a-65f5-41bc-a0fc-cbb0e69cfd32",
+    "ce5d6b23-5045-4c71-b1c3-3b74f8a75310",
+    "7d34b88c-0691-4cd8-bd4b-14c8a15c339f",
+    "866d5b6b-f897-4db2-b5b0-d2704332bb51",
+    "3ebd9220-200e-4893-9a8d-188865ceedde",
+    "974eb5ff-720c-4533-8838-0d995fdd6b56",
+    "bb132348-561d-43cc-ac9c-b5885f5b533a",
+    "64700f02-19ed-47b2-98ae-ec25f2dead37",
+    "31eaaf33-dd80-4519-8849-b2c7d8e4847e",
+    "dd449d7a-741a-4870-acfc-de37006b009e",
+    "abe6fe0e-07fc-40fc-9eca-2d0b47444894",
+    "66ca9586-f8e8-4e84-ab6c-439f8b1b6ed2",
+    "e9496c5d-6fe7-4037-8350-90854fce4ce1",
+    "84ac8925-36c3-4302-9e64-7b7071a4f65a",
+    "ccebdfb2-fd71-4079-986e-409e7e294607",
+    "d40572a9-2a13-4dea-89f5-29724c12f44b",
+    "93cf7a9b-657b-4d12-a20a-30657c64e415",
+    "c18aa46d-e5ed-497d-ae2d-1d479714d146",
+    "153fef04-d0cc-4906-87f4-50ce95465765",
+    "4d51fc3d-43b8-4d10-91d5-31196ac84c14",
+    "4421d95e-bd9e-403f-ad83-dcb0f02b4ff3",
+    "5b55e9f8-22ef-435b-a489-bb4285139d82",
+    "826173dd-efbe-473d-8736-19762bc97d9d",
+    "f002ae4e-3fe3-4e3a-a476-2eec78d20d1e",
+    "b695305b-d5a8-4f84-8f21-d2c28786df93",
+    "17359df2-487e-4c34-b29c-23d33ccd97c5",
+    "e6d52a4d-614d-47bf-96d6-1d4d56cf4902",
+    "21d06394-aef6-4e21-a5cb-682024e9ac7a",
+    "7e365d75-598d-4aa6-ae60-9f5b358e1689",
+    "e5109962-a56c-4dc9-b4d9-ae0cf5c20b6c",
+    "6b02d2bb-e79f-4973-bfd6-515ba9eb2021",
+    "cad91ead-3c6e-4769-a9c7-b11a3a452144",
+    "f78e4d2d-b03d-494b-a3a6-edec5cb8613e",
+    "d9b66d62-93ab-4872-b3e9-5d11b9fcc253",
+    "56e7dd5e-d342-4cc4-89fb-9142381e9f87",
+    "7716b719-7fd6-406e-ab1f-ce99332a8f2b",
+    "2b419052-340b-4ba2-832f-0fd9fb41bee7",
+    "0e729e1a-1a2b-4533-9f36-86f740b29efa",
+    "0b80d3f7-5c1f-4158-aec0-53aafcaed937",
+    "77e21df0-1962-4ab8-8840-aaf67df23192",
+    "503a62d6-faf9-4aed-b90c-ebbc7c0ba7e8",
+    "e3d629bc-8fe1-4b1d-9e13-04e991c19291",
+    "68c35cfb-2ecd-493c-bde0-6c61c4260427",
+    "b8eb530a-0194-4544-a19a-60faef584b6c",
+    "ea854c04-d499-418b-a986-5dd569b46a98",
+    "90751b77-cdc5-49f0-8b6a-7dee524fe340",
+    "83442b6b-5aec-4860-877d-d60b5ea2ac8e",
+    "07db5579-6ac4-4969-8c9d-c1f8ddbe2a5c",
+    "547f33e7-abab-4670-ad3e-c25db0266ca4",
+    "9cbad992-57bc-4159-ba9c-83ab401c0c32",
+    "5c9611de-b90f-4bd8-920d-a3bf708f8fde",
+    "87be3f44-4b70-4c7e-b24c-f583abf3016e",
+    "7cd59921-e038-4706-aea3-41a9607397b8",
+    "60534106-b295-41cc-9bb3-9b0d9cfdda44",
+    "c8689b9a-f71f-46ee-99b8-5123bc1f977e",
+    "6601c406-29e7-436f-9f3c-1d3f83bcef05",
+    "c081cce2-7df1-47b2-9629-15b37b838bc7",
+    "1c9376c0-7b9f-44e6-886e-86dd36ca183b",
+    "c49dc2be-beb0-4ef4-9f3b-8f5e9104ee06",
+    "afe09a76-2a28-441e-9f97-5578279e7ea2",
+    "dce06b65-999b-48a4-bf2a-c2b26b1a935e",
+    "28846d39-7358-48c1-b315-c73ff733b6e0",
+    "e41a5742-0925-41f7-9749-7078799db9b7",
+    "19503bfe-72bb-472f-aa2a-312525a365ee",
+    "8bf35ca4-a8fa-4847-9624-294f41d3090d",
+    "6ac6ccd6-3c29-4b38-8961-7947d619975e",
+    "11c8971e-84c3-484c-b414-dc9e2d29d326",
+    "16e6b9de-c883-4a74-8f61-2e16340a8a7e",
+    "93a00da4-eac2-4bf1-86fa-1db8fea92964",
+    "f59a5958-ab13-4981-9499-869371794721",
+    "371b0b37-a14d-4c3d-a75b-52fe7a7cff62",
+    "011c8fd1-6f88-421d-8a17-a9f44f81be86",
+    "32d3a498-0736-41e2-a850-cacb86e0cead",
+    "04552101-6293-480f-90eb-f5a08e71dc74",
+    "a9eb7940-39c7-4bd5-80be-129dec15b802",
+    "c5af84e7-9589-4faf-8eb4-e79d35630328",
+    "fa2e906e-7761-4af8-b3d2-271a41f8c495"
+  ],
+  "rootUnitId": "40807c10-5362-4b16-95a7-5ad889ae956b",
+  "staffComments": [],
+  "staffNames": []
+}

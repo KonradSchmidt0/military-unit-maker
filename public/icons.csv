@@ -5,11 +5,13 @@ b-tank.svg,tank armor armored vehicle apc ifv fighting assult gun afv
 b-fixed-wing.svg,aviation fixed wing plane aircraft airship air
 b-rotary.svg,rotary helicopter aviation gunship air
 b-aa.svg,anti air aa air to air
+b-air-warning.svg,air warning detection
 b-at.svg,anti tank at air to ground td tank destroyer
 b-at.svg,anti air aa air to air gun konrad niehorster
 k-at.svg,anti tank at air to ground gun konrad niehorster td tank destroyer
 k-aa-missile.svg,anti air aa air to air missile konrad
 k-at-missile.svg,anti tank at air to ground missile konrad td tank destroyer
+b-cbrn.svg,chemical biological radiological nuclear cbrn recon
 b-combinedarms.svg,combinde arms mix tank infantry
 b-engi.svg,engineers support
 b-firefighters.svg,firefighting firefighters
@@ -21,14 +23,17 @@ b-laser.svg,laser direct energy weapon
 b-maintenance.svg,maintenance repair support shot
 b-med.svg,medic medical health support
 b-hospital.svg,medical health support field hospital
+b-mi.svg, military intelligence
 b-mortar.svg,artillery indirect mortart HE
 b-mortar-alt.svg,artillery indirect mortart HE alternative
 b-pioneers.svg,infantry pioneers engineers
 b-police.svg,police
 b-rec.svg,recon reconnaissance scout support cavalery hussars
 b-signal.svg,signal communication comms support radio
+b-search-light.svg,search light spotting aa air detection
 b-sniper.svg,sniper sharp shooters sharpshooters
 b-supply.svg,supply logistics support storage
+b-food.svg,supply logistics support food yummy kitchen
 b-armored.svg,armor armored vehicle apc ifv fighting protected
 b-air-assault.svg, air assault
 b-air-assault-alt.svg, air assault alt

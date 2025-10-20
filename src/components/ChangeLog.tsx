@@ -19,14 +19,23 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
-          <b className='text-base'>Small changes (2025 9 12)</b> <br/>
-           - All descriptions are now large input fields<br/>
+          <b className='text-base'>The project is not dead! (2025 10 20)</b><br/>
+          I just had a lot of things to do outiside of it and also was reasearching a Stryker Brigade to show off the project!<br/>
+          You can download it <ExtrnlLink link='https://github.com/KonradSchmidt0/military-unit-maker?tab=readme-ov-file'>here</ExtrnlLink>! (File called SBCT.json)<br/>
+           - Added new icons (<ExtrnlLink link='https://www.battleorder.org/icons'>BattleOrder</ExtrnlLink>)<br/>
+          <br/>
+
+          <b className='text-base'>Small changes (2025 9 15)</b><br/>
+           - Added more hoverables in unit editor, so user can better understand what elements do what<br/>
            - UX fix: When unit is force folded, but also is a temporary root, it dosen't fold now<br/>
-           - Fix: If unit has zero children then won't be expanded (helps with making trees more <br/>
+           - UX fix: All descriptions are now large input fields<br/>
+           - Other minor UX enhancements<br/>
+           - Fix: If unit has zero children then it properlly gets classified as "c". Meaning the tree should collaps better now<br/>
            - Added new icons (BattleOrder)<br/>
+          <br/>
 
           <b className='text-base'>Hovertool reborn (2025 9 09) </b> <br/>
-           - New hovertool that dosent spill<br/>
+           - New hovertool that dosent spill<br/> 
            - Begun implementing alts for buttons, so you can hover them and get description of what they do<br/>
            - Added: Options now autosave<br/>
            - Change: Units now automatically get added to pallet<br/>
