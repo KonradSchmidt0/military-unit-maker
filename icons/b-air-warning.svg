@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<svg width="81" height="55.33" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" data-bbox="-0.44 0 81.88 55.33" data-type="ugc">
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <defs>
+    <clipPath id="f1399b21-489a-48a8-b68e-b38d9b4cd456">
+     <path d="m78,3l0,49.33l-75,0l0,-49.33l75,0z" id="svg_2"/>
+    </clipPath>
+   </defs>
+   <path d="m78,3l0,49.33l-75,0l0,-49.33l75,0m3,-3l-81,0l0,55.33l81,0l0,-55.33z" id="svg_4"/>
+   <g clip-path="url(#f1399b21-489a-48a8-b68e-b38d9b4cd456)" id="svg_5">
+    <path d="m-0.44,31.9s12.57,15.69 40.94,15.69s40.94,-15.69 40.94,-15.69" fill="none" id="svg_6" stroke="#000000" stroke-miterlimit="10" stroke-width="2.18"/>
+   </g>
+  </g>
+ </g>
+</svg>
