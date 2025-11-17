@@ -4,7 +4,7 @@ import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitIn
 import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetTrueColor } from "../../logic/childManaging";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
-import { UnitClickableAlt } from "./UnitClickableAlt";
+import { UnitClickableIdSwap } from "./UnitClickable/UnitClickableIdSwap";
 import { UnitDisplay } from "./UnitDisplay";
 import { UnitHoverable } from "./UnitHoverable";
 
@@ -27,19 +27,17 @@ export function ComplexChildNode(p: props) {
     return null
   }
     
-  const child = unitMap[childId]
-  
-  const color = child.smartColor === "inheret" ? GetTrueColor(p.parentSignature, trueRootId, unitMap) : child.smartColor
+  const color = GetTrueColor(p.childSignature, trueRootId, unitMap)
   const boxShadow = calculateUnitShadow(p.childSignature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode)
 
   return (
-    <UnitClickableAlt parentSignature={p.parentSignature} childSignature={p.childSignature} whoSelectOnSelectClick={p.whoSelectOnSelectClick}>
+    <UnitClickableIdSwap parentSignature={p.parentSignature} childSignature={p.childSignature} whoSelectOnSelectClick={p.whoSelectOnSelectClick}>
       <UnitHoverable signature={p.childSignature}>
         <UnitDisplay 
           unitId={childId} color={color} className="!mt-1 transition-colors ring-white"
           style={{boxShadow: p.disableShadow ? "" : boxShadow}}
         />
       </UnitHoverable>
-    </UnitClickableAlt>
+    </UnitClickableIdSwap>
   )
 }

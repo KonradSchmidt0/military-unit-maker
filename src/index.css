@@ -9,7 +9,7 @@
 }
 
 .btn-emoji {
-  @apply p-1 hover:rounded-md;
+  @apply p-1 hover:rounded-md min-w-5 text-center;
   @apply bg-transparent dark:hover:bg-white/20 hover:bg-black/20 dark:active:bg-white/30 active:bg-black/30;
   @apply transition-all duration-200 ease-in-out rounded-sm;
   @apply disabled:cursor-not-allowed disabled:opacity-60

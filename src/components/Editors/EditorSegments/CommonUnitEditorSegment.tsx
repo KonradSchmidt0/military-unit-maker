@@ -8,6 +8,7 @@ import { ForceFoldingSegment } from "./ForceFoldingSegment";
 import { LabledInput } from "../EditorElements/LabledInput";
 import { CommonEditorAlphaRow } from "./CommonEditorAlphaRow";
 import { OrgUnit } from "../../../logic/logic";
+import { RootSwapIdNode } from "../../UnitDisplaying/RootSwapIdNode";
 
 export default function CommonUnitEditorSegment() {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
@@ -48,14 +49,17 @@ export default function CommonUnitEditorSegment() {
 
       {Array.isArray(selectSignature) && <ForceFoldingSegment path={selectSignature}></ForceFoldingSegment>}
 
-      {parentId && Array.isArray(selectSignature) && <ChildRow
+      {parentId && Array.isArray(selectSignature) ?
+      <ChildRow
         parentSignature={selectSignature.slice(0, -1)}
         childSignature={selectSignature}
         whoSelectOnSelectClick={selectSignature.slice(0, -1)}
         key="top child row"
         disableShadow={true}
         onMoveMade={(d) => changeSelectedChild(d, (unitMap[parentId] as OrgUnit).children)}
-      />}
+      /> : 
+      <RootSwapIdNode unitSignature={selectSignature}/>
+      }
 
       <div className="editor-segment-row">
         <EchelonEditor 

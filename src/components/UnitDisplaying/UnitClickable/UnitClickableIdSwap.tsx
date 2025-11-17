@@ -1,10 +1,10 @@
-import { useShortcutStore } from "../../hooks/shortcutStore"
-import { usePaletStore } from "../../hooks/usePaletStore"
-import { useUnitDropdownStore } from "../../hooks/useUnitDropdownStore"
-import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore"
-import { useUnitStore } from "../../hooks/useUnitStore"
-import { getSafeChildOptions } from "../../logic/getSafeChildOptions"
-import { OrgUnit } from "../../logic/logic"
+import { useShortcutStore } from "../../../hooks/shortcutStore"
+import { usePaletStore } from "../../../hooks/usePaletStore"
+import { useUnitDropdownStore } from "../../../hooks/useUnitDropdownStore"
+import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
+import { useUnitStore } from "../../../hooks/useUnitStore"
+import { getSafeChildOptions } from "../../../logic/getSafeChildOptions"
+import { OrgUnit } from "../../../logic/logic"
 
 interface props {
   parentSignature: string | number[]
@@ -12,7 +12,7 @@ interface props {
   whoSelectOnSelectClick: string | number[]
 }
 
-export function UnitClickableAlt(p: React.PropsWithChildren<props>) {
+export function UnitClickableIdSwap(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const { unitPalet } = usePaletStore(s => s)
   const { alt, shift, ctrl} = useShortcutStore(s => s)

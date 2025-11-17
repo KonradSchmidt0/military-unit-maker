@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { UnitMap } from './useUnitStore';
 
 interface PaletStore {
   unitPalet: string[];
@@ -24,3 +25,11 @@ export const usePaletStore = create<PaletStore>((set) => ({
       unitPalet: state.unitPalet.filter((id) => id !== unitId),
     })),
 }));
+
+export function GetUnitPaletAsUnitMap(unitPalet: string[], unitMap: UnitMap): UnitMap {
+  const paletSet = new Set(unitPalet);
+
+  return Object.fromEntries(
+    Object.entries(unitMap).filter(([id]) => paletSet.has(id))
+  );
+}

@@ -5,6 +5,7 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetFlatIds } from "../../../logic/childManaging"
 import { OrgUnit } from "../../../logic/logic"
+import { RemoveRootButton } from "../EditorElements/RemoveRootButton"
 import { TemporaryRootButton } from "../EditorElements/TemporaryRootButton"
 
 interface props {
@@ -52,6 +53,7 @@ export function CommonEditorAlphaRow(p:props) {
           onMouseLeave={() => callOff()}
         >⬆️➕</button>}
       <TemporaryRootButton/>
+      <RemoveRootButton/>
       {!unitPalet.includes(selectedId) && 
         <button 
           className="btn-emoji"

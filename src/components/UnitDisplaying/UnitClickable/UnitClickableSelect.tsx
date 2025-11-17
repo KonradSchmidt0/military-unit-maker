@@ -1,14 +1,14 @@
-import { useShortcutStore } from "../../hooks/shortcutStore"
-import { usePaletStore } from "../../hooks/usePaletStore"
-import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore"
-import { useUnitStore } from "../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../logic/childManaging"
+import { useShortcutStore } from "../../../hooks/shortcutStore"
+import { usePaletStore } from "../../../hooks/usePaletStore"
+import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
+import { useUnitStore } from "../../../hooks/useUnitStore"
+import { GetChildIdFromPath } from "../../../logic/childManaging"
 
 interface props {
   signature: string | number[]
 }
 
-export function UnitClickable(p: React.PropsWithChildren<props>) {
+export function UnitClickableSelect(p: React.PropsWithChildren<props>) {
   const {unitMap, trueRootId} = useUnitStore(s => s)
 
   const {shift, ctrl} = useShortcutStore(s => s)

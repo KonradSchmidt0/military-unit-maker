@@ -19,6 +19,12 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Removable Roots (2025 11 17)</b><br/>
+          You can now remove the true root<br/>
+          When selecting true root you can swap it to a diffrent unit<br/>
+          Minor UX changes<br/>
+          <br/>
+          
           <b className='text-base'>The project is not dead! (2025 10 20)</b><br/>
           I just had a lot of things to do outiside of it and also was reasearching a Stryker Brigade to show off the project!<br/>
           You can download it <ExtrnlLink link='https://github.com/KonradSchmidt0/military-unit-maker?tab=readme-ov-file'>here</ExtrnlLink>! (File called SBCT.json)<br/>

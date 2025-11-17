@@ -5,7 +5,7 @@ import { useUnitStore } from "../../hooks/useUnitStore";
 import { GetTrueColor } from "../../logic/childManaging";
 import { DesignationPack } from "../../logic/designationPack";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
-import { UnitClickable } from "./UnitClickable";
+import { UnitClickableSelect } from "./UnitClickable/UnitClickableSelect";
 import { UnitDisplay } from "./UnitDisplay"
 import { UnitHoverable } from "./UnitHoverable";
 
@@ -37,14 +37,14 @@ function TreeNode(p: TreeNodeProps) {
  
   return (
     <UnitHoverable signature={p.signature}>
-      <UnitClickable signature={p.signature}>
+      <UnitClickableSelect signature={p.signature}>
         <UnitDisplay 
           unitId={myId} color={color} 
           style={{boxShadow: boxShadow}} className="transition-colors ring-white" 
           designationPack={p.dp ?? {}} stack={p.stack}
           showLeftText={p.showLeftText} showRightText={p.showRightText} overrideDisplayTextSetting={p.overrideDisplayTextSetting}
         />
-      </UnitClickable>
+      </UnitClickableSelect>
     </UnitHoverable>
   );
 }
