@@ -9,13 +9,16 @@ interface GlobalStore {
   displayParentBox: boolean;
   setDisplayParentBox: (b: boolean) => void;
   isGlobalMini: boolean;
+  setIsChangeLogMini: (b: boolean) => void;
+  stacking: boolean;
+  setStacking: (b: boolean) => void;
+
   setIsGlobalMini: (b: boolean) => void;
   isPalletMini: boolean;
   setIsPalletMini: (b: boolean) => void;
   isChangeLogMini: boolean;
-  setIsChangeLogMini: (b: boolean) => void;
-  stacking: boolean;
-  setStacking: (b: boolean) => void;
+  setIsItemManagerMini: (b: boolean) => void;
+  isItemManagerMini: boolean
 }
 
 export const useGlobalStore = create<GlobalStore>()(
@@ -27,14 +30,17 @@ export const useGlobalStore = create<GlobalStore>()(
       setFoldingDepth: (n) => set({ foldingDepth: n }),
       displayParentBox: false,
       setDisplayParentBox: (b) => set({ displayParentBox: b }),
+      stacking: false,
+      setStacking: (b) => set({ stacking: b }),
+      isChangeLogMini: true,
+      setIsChangeLogMini: (b) => set({ isChangeLogMini: b }),
+
       isGlobalMini: true,
       setIsGlobalMini: (b) => set({ isGlobalMini: b }),
       isPalletMini: true,
       setIsPalletMini: (b) => set({ isPalletMini: b }),
-      isChangeLogMini: true,
-      setIsChangeLogMini: (b) => set({ isChangeLogMini: b }),
-      stacking: false,
-      setStacking: (b) => set({ stacking: b }),
+      isItemManagerMini: true,
+      setIsItemManagerMini: (b) => set({ isItemManagerMini: b }),
     }),
     {
       name: "global-store", // 🔑 key for localStorage
