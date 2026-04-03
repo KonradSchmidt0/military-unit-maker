@@ -37,30 +37,6 @@ export interface OrgUnit {
 export type Unit = RawUnit | OrgUnit;
 
 
-export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTable {
-  const unit = unitMap[unitId]
-
-  if (!unit) {
-    throw Error(`No unit with ID = ${unitId}`)
-  }
-
-  if (unit.type === "raw") {
-    return unit.equipment;
-  } else {
-    const combined: EquipmentTable = {};
-
-    for (const [childId, count] of Object.entries(unit.children)) {
-      const childEq = getEquipmentTable(childId, unitMap);
-
-      for (const [type, qty] of Object.entries(childEq)) {
-        combined[type] = (combined[type] || 0) + qty * count;
-      }
-    }
-
-    return combined;
-  }
-}
-
 export function createNewRawUnit({
   name = "New Raw Unit",
   layers = [],

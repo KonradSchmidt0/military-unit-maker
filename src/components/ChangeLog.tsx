@@ -19,6 +19,14 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Equipment grouping (2026 4 03)</b><br/>
+           - Added new 'item groups'. They allow for better organization of equipment. (Ordering, minimalizing)<br/>
+           - Ex. of minimalizing: (brigade has 120 strykers apc + 30 stryker scouts -{">"} user dosen't care for specific stryker type -{">"} user minimalizes the group -{">"} gets displayed 150 strykers<br/>
+           - New way of displaying items implemented for hover tool and individual editor<br/>
+           - Item groups can be deleted, minimalized, have item added, have item removed<br/>
+           - Item groups are saved together with project file<br/>
+          <br/>
+          
           <b className='text-base'>Kept you waiting, huh? (2026 3 26)</b><br/>
            - Added new item editor segment<br/>
            - Added the ability to change equipment names<br/>

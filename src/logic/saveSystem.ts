@@ -1,9 +1,10 @@
+import { EquipGroup, useEquipGroupingStore } from "../hooks/useEquipGroupingStore";
 import { usePaletStore } from "../hooks/usePaletStore";
 import { StaffText, useStaffTextStore } from "../hooks/useStaffTextStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-const SAVE_SYSTEM_VERSION = 6;
+const SAVE_SYSTEM_VERSION = 7;
 
 interface SaveFile {
   version: number;
@@ -12,6 +13,7 @@ interface SaveFile {
   rootUnitId: string;
   staffComments: StaffText[];
   staffNames: StaffText[];
+  equipGroups: EquipGroup[];
 }
 
 export function getSaveFileJson(): string {
@@ -20,6 +22,7 @@ export function getSaveFileJson(): string {
   const unitPalet = usePaletStore.getState().unitPalet;
   const staffComments = useStaffTextStore.getState().staffComments;
   const staffNames = useStaffTextStore.getState().staffNames;
+  const equipGroups = useEquipGroupingStore.getState().groups;
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -27,7 +30,8 @@ export function getSaveFileJson(): string {
     unitPalet,
     rootUnitId,
     staffComments,
-    staffNames
+    staffNames,
+    equipGroups
   };
 
   return JSON.stringify(saveData, null, 2);
@@ -69,6 +73,7 @@ export function loadSaveFile(
     usePaletStore.setState({unitPalet: json.unitPalet})
     useUnitStore.setState({unitMap: unitMap, trueRootId: json.rootUnitId})
     useStaffTextStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
+    useEquipGroupingStore.setState({groups: json.equipGroups ?? []})
   } catch (err) {
     alert("Failed to load file: " + (err as Error).message);
   }

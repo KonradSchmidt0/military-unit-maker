@@ -1,4 +1,5 @@
 import { useGlobalStore } from "../../hooks/useGlobalStore"
+import EquipGroupingManagerSegment from "./EditorSegments/EquipmentGrouping/EquipGroupingManagerSegment"
 import RenamingItemSegment from "./EditorSegments/RenamingItemSegment"
 
 export default function ItemManagerEditor() {
@@ -13,7 +14,10 @@ export default function ItemManagerEditor() {
         <button className="btn-emoji !p-0 ml-auto" onClick={() => setIsItemManagerMini(true)}>❌</button>
       </div>
 
-      <RenamingItemSegment/>
+      <div className="overflow-y-auto max-h-fit">
+        <RenamingItemSegment/>
+        <EquipGroupingManagerSegment/>
+      </div>
     </div>
   )
 }
