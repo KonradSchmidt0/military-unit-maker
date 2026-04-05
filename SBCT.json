@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "unitMap": {
     "40807c10-5362-4b16-95a7-5ad889ae956b": {
       "type": "org",
@@ -12,7 +12,6 @@
       "smartColor": "#33d17a",
       "echelonLevel": 7,
       "children": {
-        "fa2e906e-7761-4af8-b3d2-271a41f8c495": 1,
         "c7c5023a-ca97-4f8d-8f81-22a3ada7d447": 1,
         "16f38703-53c4-449f-b569-46c662faf25f": 3,
         "e9146055-1687-44ca-bc06-f3748fbfda5a": 1,
@@ -309,7 +308,7 @@
         "Warrior": 4,
         "M4A1": 3,
         "M249": 1,
-        "AT4 (L AT mssl)": 1
+        "AT4": 1
       }
     },
     "41b4cc7f-19cc-4129-95e3-ab419af71dbd": {
@@ -4672,7 +4671,7 @@
         "Warrior": 5,
         "MTV": 2,
         "M4A1": 5,
-        "AN/TPQ-53 (cntr.bttr rdr)": 1
+        "AN/TPQ-53": 1
       }
     },
     "b1366e4e-0017-4c52-b9e6-5522c0a81a3e": {
@@ -4717,7 +4716,7 @@
         "Warrior": 8,
         "HMMWV": 4,
         "M4A1": 8,
-        "LCMR (cntr.mrtr.rdr)": 4
+        "LCMR": 4
       },
       "desc": "Counter mortar radar"
     },
@@ -4963,7 +4962,7 @@
         "Stryker (fire support)": 0,
         "Stryker (engineer)": 0,
         "Stryker (CBRN-rec)": 0,
-        "AT4 (L AT mssl)": 0,
+        "AT4": 0,
         "Javelin": 0,
         "M240L": 0,
         "M110 Rifle": 0,
@@ -4972,8 +4971,8 @@
         "60mm mortar": 0,
         "81mm mortar": 0,
         "(155mm) M777": 0,
-        "AN/TPQ-53 (cntr.bttr rdr)": 0,
-        "LCMR (cntr.mrtr.rdr)": 0,
+        "AN/TPQ-53": 0,
+        "LCMR": 0,
         "Shadow (UAV)": 0,
         "UAV Launcher": 0,
         "UGV": 0,
@@ -5180,5 +5179,112 @@
   ],
   "rootUnitId": "40807c10-5362-4b16-95a7-5ad889ae956b",
   "staffComments": [],
-  "staffNames": []
+  "staffNames": [],
+  "equipGroups": [
+    {
+      "name": "People",
+      "entries": [
+        "Warrior",
+        "Officer",
+        "Enlisted"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Strykers",
+      "entries": [
+        "Stryker (ICV)",
+        "Stryker (command)",
+        "Stryker (scout)",
+        "Stryker (mortar)",
+        "Stryker (mortar)",
+        "Stryker (ATGM)",
+        "Stryker (MGS)",
+        "Stryker (MedVac)",
+        "Stryker (fire support)",
+        "Stryker (engineer)",
+        "Stryker (CBRN-rec)"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Small Arms",
+      "entries": [
+        "M4A1",
+        "M249",
+        "M240L",
+        "M110 Rifle",
+        ".30 Cal Rifle",
+        ".50 Cal M107"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Utility Vehicles",
+      "entries": [
+        "HMMWV",
+        "MTV",
+        "HEMTT",
+        "M-ATV",
+        "MMPV",
+        "MPCV"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Shoulder ATGM",
+      "entries": [
+        "AT4",
+        "AT4 (L AT mssl)",
+        "Javelin"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Howitzers",
+      "entries": [
+        "(155mm) M777"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Mortars",
+      "entries": [
+        "81mm mortar",
+        "60mm mortar"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Drones",
+      "entries": [
+        "Shadow (UAV)",
+        "UGV"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Support Equipment",
+      "entries": [
+        "UAV Launcher",
+        "Engi Vehicle",
+        "Engineering Vehicle",
+        "Mobile Bridge",
+        "Field Kitchen",
+        "Forklift"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Support Electronics",
+      "entries": [
+        "AN/TPQ-53 (cntr.bttr rdr)",
+        "AN/TPQ-53",
+        "LCMR",
+        "LCMR (cntr.mrtr.rdr)",
+        "SatCom"
+      ],
+      "minimalized": true
+    }
+  ]
 }

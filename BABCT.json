@@ -1,9 +1,9 @@
 {
-  "version": 6,
+  "version": 7,
   "unitMap": {
     "40807c10-5362-4b16-95a7-5ad889ae956b": {
       "type": "org",
-      "name": "SBCT",
+      "name": "BABCT",
       "layers": [
         "/military-unit-maker/icons/x-bad-apple!!.gif",
         "/military-unit-maker/icons/x-bad-apple!!.gif",
@@ -24,7 +24,7 @@
       },
       "flatCallSigns": {},
       "flatDescriptions": {},
-      "desc": "Stryker Brigade Combat Team \n\nPrimary source: https://a137e02c-e205-49b8-9057-b38df8af3e50.usrfiles.com/ugd/a137e0_7f1584bc75b24e8c83a2fffb352c6d5b.pdf\n\nSecondary source: https://www.cbo.gov/sites/default/files/cbofiles/attachments/51535-breakout-figure2_3.pdf"
+      "desc": "Bad Apple Brigade Combat Team \n\nPrimary source: https://a137e02c-e205-49b8-9057-b38df8af3e50.usrfiles.com/ugd/a137e0_7f1584bc75b24e8c83a2fffb352c6d5b.pdf\n\nSecondary source: https://www.cbo.gov/sites/default/files/cbofiles/attachments/51535-breakout-figure2_3.pdf"
     },
     "c7c5023a-ca97-4f8d-8f81-22a3ada7d447": {
       "type": "org",
@@ -4968,7 +4968,7 @@
         "Warrior": 5,
         "MTV": 2,
         "M4A1": 5,
-        "AN/TPQ-53 (cntr.bttr rdr)": 1
+        "AN/TPQ-53": 1
       }
     },
     "b1366e4e-0017-4c52-b9e6-5522c0a81a3e": {
@@ -5016,7 +5016,7 @@
         "Warrior": 8,
         "HMMWV": 4,
         "M4A1": 8,
-        "LCMR (cntr.mrtr.rdr)": 4
+        "LCMR": 4
       },
       "desc": "Counter mortar radar"
     },
@@ -5287,8 +5287,8 @@
         "60mm mortar": 0,
         "81mm mortar": 0,
         "(155mm) M777": 0,
-        "AN/TPQ-53 (cntr.bttr rdr)": 0,
-        "LCMR (cntr.mrtr.rdr)": 0,
+        "AN/TPQ-53": 0,
+        "LCMR": 0,
         "Shadow (UAV)": 0,
         "UAV Launcher": 0,
         "UGV": 0,
@@ -5495,5 +5495,112 @@
   ],
   "rootUnitId": "40807c10-5362-4b16-95a7-5ad889ae956b",
   "staffComments": [],
-  "staffNames": []
+  "staffNames": [],
+  "equipGroups": [
+    {
+      "name": "People",
+      "entries": [
+        "Warrior",
+        "Officer",
+        "Enlisted"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Strykers",
+      "entries": [
+        "Stryker (ICV)",
+        "Stryker (command)",
+        "Stryker (scout)",
+        "Stryker (mortar)",
+        "Stryker (mortar)",
+        "Stryker (ATGM)",
+        "Stryker (MGS)",
+        "Stryker (MedVac)",
+        "Stryker (fire support)",
+        "Stryker (engineer)",
+        "Stryker (CBRN-rec)"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Small Arms",
+      "entries": [
+        "M4A1",
+        "M249",
+        "M240L",
+        "M110 Rifle",
+        ".30 Cal Rifle",
+        ".50 Cal M107"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Utility Vehicles",
+      "entries": [
+        "HMMWV",
+        "MTV",
+        "HEMTT",
+        "M-ATV",
+        "MMPV",
+        "MPCV"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Shoulder ATGM",
+      "entries": [
+        "AT4",
+        "AT4 (L AT mssl)",
+        "Javelin"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Howitzers",
+      "entries": [
+        "(155mm) M777"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Mortars",
+      "entries": [
+        "81mm mortar",
+        "60mm mortar"
+      ],
+      "minimalized": false
+    },
+    {
+      "name": "Drones",
+      "entries": [
+        "Shadow (UAV)",
+        "UGV"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Support Equipment",
+      "entries": [
+        "UAV Launcher",
+        "Engi Vehicle",
+        "Engineering Vehicle",
+        "Mobile Bridge",
+        "Field Kitchen",
+        "Forklift"
+      ],
+      "minimalized": true
+    },
+    {
+      "name": "Support Electronics",
+      "entries": [
+        "AN/TPQ-53 (cntr.bttr rdr)",
+        "AN/TPQ-53",
+        "LCMR",
+        "LCMR (cntr.mrtr.rdr)",
+        "SatCom"
+      ],
+      "minimalized": true
+    }
+  ]
 }
