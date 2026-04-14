@@ -4,7 +4,7 @@ import { StaffText, useStaffTextStore } from "../hooks/useStaffTextStore";
 import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-const SAVE_SYSTEM_VERSION = 7;
+const SAVE_SYSTEM_VERSION = 8;
 
 interface SaveFile {
   version: number;

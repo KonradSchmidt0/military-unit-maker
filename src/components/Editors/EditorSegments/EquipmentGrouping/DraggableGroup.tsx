@@ -11,6 +11,7 @@ interface props {
   removeItemInMyGroup: (eqItem: string) => void;
   addItemInMyGroup: () => void;
   removeMyGroup: () => void
+  setColor: (col: string) => void
 }
 
 export default function DraggableGroup(p: props) {
@@ -23,6 +24,13 @@ export default function DraggableGroup(p: props) {
       <button className="btn-emoji !p-0" onClick={p.toggleMinimalize}>
         {p.group.minimalized ? "↔️" : "🤏"}
       </button>
+      <input
+        id="ColorPickerInputId"
+        type="color"
+        className="!h-6 !w-6 cursor-pointer hover:rounded-md bg-transparent"
+        value={p.group.color}
+        onChange={(e) => p.setColor(e.target.value as string)}
+      />
     </div>
     {!p.group.minimalized && p.group.entries.map(
       (equipment) => <GroupItem equipment={equipment} group={p.group} remove={() => p.removeItemInMyGroup(equipment)}/>

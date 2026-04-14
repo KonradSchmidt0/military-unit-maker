@@ -49,20 +49,26 @@ export default function EquipGroupingManagerSegment() {
     const inp = prompt(p);
     if (!inp) return;
 
-    const updated = [
-      {name: inp, entries: [], minimalized: false}, 
-      ...groups]
+    const updated = [...groups,
+      {name: inp, entries: [], minimalized: false, color: "#aaaaaa"}
+    ]
     setGroups(updated);
   }
 
-  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const changeColor = (groupKey: number, col: string) => {
+    const updated = groups.map((g, i) =>
+      i === groupKey ? { ...g, color: col } : g
+    );
+    setGroups(updated)
+  }
+
+  const [giverIndex, setGiverIndex] = useState<number | null>(null);
 
   const handleDragStart = (index: number) => {
-    setDragIndex(index);
+    setGiverIndex(index);
   };
 
   const handleDragEnter = (receiverIndex: number) => {
-    const giverIndex = dragIndex;
     if (giverIndex === null || giverIndex === receiverIndex) return;
 
     const updated = bumpGroup(groups, giverIndex, receiverIndex);
@@ -71,11 +77,11 @@ export default function EquipGroupingManagerSegment() {
     setGroups(updated);
 
     // IMPORTANT: update dragIndex to the new location!
-    setDragIndex(receiverIndex);
+    setGiverIndex(receiverIndex);
   };
 
   const handleDragEnd = () => {
-    setDragIndex(null);
+    setGiverIndex(null);
   };
 
   return (
@@ -101,6 +107,7 @@ export default function EquipGroupingManagerSegment() {
             removeItemInMyGroup={(eqItem: string) => removeEqItem(i, eqItem)} 
             addItemInMyGroup={() => addEqItem(i)} 
             removeMyGroup={() => removeGroup(i)}
+            setColor={(col: string) => changeColor(i, col)}
           />
         </div>
       ))}

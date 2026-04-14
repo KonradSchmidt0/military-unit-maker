@@ -1,4 +1,3 @@
-import { useDialogBoxStorage } from "../../../hooks/useDialogBoxStore"
 import { useHoverStore } from "../../../hooks/useHoverStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
@@ -19,14 +18,15 @@ export function RemoveRootButton(p: props) {
   const isChild = Array.isArray(selectSignature) && selectSignature.length > 0
 
   function handleUserCallToRemoveTrueRoot() {
-    addUnitToPalet(trueRootId)
 
     if (!selectedId) {
       console.warn(selectedId + " is undef. Check the parent where this component is placed")
       return
     }
+    
+    // If user accidentally removes true root, this ensures that they can bring it right back 
+    addUnitToPalet(trueRootId)
 
-    console.log(selectedId)
     setTrueRootId(selectedId)
     setActingRootPath([])
     setSelect([])

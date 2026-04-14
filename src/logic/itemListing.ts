@@ -72,3 +72,7 @@ export function getGroupedEquipmentTable(
   return Array.from(output, ([name, data]) => ({ name, count: data.count, type: data.type }))
   .filter(entry => entry.count !== 0);
 }
+
+export function getSingleItemsGroup(groups: EquipGroup[], searchedItem: string) : EquipGroup | null {
+  return groups.find(g => g.entries.includes(searchedItem)) ?? null
+}

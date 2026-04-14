@@ -1,6 +1,9 @@
+import { EquipGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
+import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
+import { getSingleItemsGroup } from "../../../logic/itemListing";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
 import { SafeNumberInput } from "../EditorElements/SafeNumberInput";
 
@@ -10,6 +13,8 @@ export default function RawUnitEditorSegment() {
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const splitUnit = useUnitStore(s => s.splitRawUnit)
   const { addUnitToPalet } = usePaletStore(s => s)
+  const { groups: eqGroups } = useEquipGroupingStore(s => s)
+  const { callSimpleI, callOff } = useHoverStore(s => s)
 
   const unit = unitMap[selectedId] as RawUnit
 
@@ -45,7 +50,7 @@ export default function RawUnitEditorSegment() {
       if (!isNaN(qty)) {
         eq[type] = qty;
       } else {
-        const qtyPrompt = prompt(`Enter quantity for "${left}":`);
+        const qtyPrompt = prompt(`Enter quantity for "${type}":`);
         if (qtyPrompt && !isNaN(parseInt(qtyPrompt, 10))) {
           eq[type] = parseInt(qtyPrompt, 10);
         }
@@ -81,19 +86,38 @@ export default function RawUnitEditorSegment() {
         </button>
       </div>
 
-      {equipmentEntries.map(([type, value]) => (
-        <div key={type} className="editor-segment-row">
-          <span className="w-24">{type}</span>
-          <SafeNumberInput
-            key={type}
-            count={value}
-            onCountChange={nc => changeEquipment({[type]: nc})}
-            className="!w-24"
-          />
-          <button onClick={() => deleteEquipment(type)} className="btn-emoji !p-0">
-            ❌
-          </button>
-        </div>
-      ))}
+      {equipmentEntries.map(([type, value]) => 
+        equimentEntry(type, value, eqGroups, changeEquipment, deleteEquipment, callSimpleI, callOff)
+      )}
     </div> )
+}
+
+function equimentEntry(
+  type: string, amount: number, eqGroups: EquipGroup[], 
+  changeEquipment: (additionalEq: EquipmentTable) => void, deleteEquipment: (type: string) => void,
+  callSimpleI: (n: simpleHover) => void, callOff: () => void
+) {
+  const eqGroup = getSingleItemsGroup(eqGroups, type);
+  const style = eqGroup ? {color: eqGroup.color} : undefined;
+  const onHover = () => eqGroup 
+          ? callSimpleI({header: eqGroup.name, desc: "This item belongs to the Equipment Group (🗡️) '" + eqGroup.name + "'"}) 
+          : callSimpleI("This item dosen't belong to any Equipment Group (🗡️)")
+
+  return (
+    <div key={type} className="editor-segment-row" 
+      style={style}
+      onMouseEnter={onHover}
+      onMouseLeave={callOff}
+    >
+      <span className="w-24"><b>{type}</b></span>
+      <SafeNumberInput
+        key={type}
+        count={amount}
+        onCountChange={nc => changeEquipment({[type]: nc})}
+        className="!w-24"
+      />
+      <button onClick={() => deleteEquipment(type)} className="btn-emoji !p-0">
+        ❌
+      </button>
+    </div>)
 }

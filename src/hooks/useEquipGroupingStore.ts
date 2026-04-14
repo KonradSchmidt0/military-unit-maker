@@ -2,8 +2,9 @@ import { create } from "zustand";
 
 export interface EquipGroup {
   name: string, 
-  entries: string[]
-  minimalized: boolean
+  entries: string[],
+  minimalized: boolean,
+  color: string
 }
 
 interface EquipGroupingStore {
