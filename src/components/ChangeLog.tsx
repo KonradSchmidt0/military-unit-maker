@@ -19,6 +19,14 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Equipment grouping colors (2026 4 19)</b><br/>
+           - Added color to item groups. The idea is that color coding item groups will make it easier to understand the eq tables<br/>
+           - All places where items are displayed or edited (hover tool, editors) now utilize said colors<br/>
+           - When editing org units (units containing other units), you can now double click the item / eqGroup to fold it / unfold it<br/>
+           - Hover tool now displays 3 columns of items (i am not sure if its a good idea, but lets try it)<br/>
+           - Fixed little bug with entering eq with space at the end of their name<br/>
+          <br/>
+
           <b className='text-base'>Equipment grouping (2026 4 03)</b><br/>
            - Added new 'item groups'. They allow for better organization of equipment. (Ordering, minimalizing)<br/>
            - Ex. of minimalizing: (brigade has 120 strykers apc + 30 stryker scouts -{">"} user dosen't care for specific stryker type -{">"} user minimalizes the group -{">"} gets displayed 150 strykers<br/>

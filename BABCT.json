@@ -5504,7 +5504,8 @@
         "Officer",
         "Enlisted"
       ],
-      "minimalized": true
+      "minimalized": true,
+      "color": "#d0b967"
     },
     {
       "name": "Strykers",
@@ -5521,7 +5522,8 @@
         "Stryker (engineer)",
         "Stryker (CBRN-rec)"
       ],
-      "minimalized": false
+      "minimalized": false,
+      "color": "#cb6262"
     },
     {
       "name": "Small Arms",
@@ -5533,7 +5535,8 @@
         ".30 Cal Rifle",
         ".50 Cal M107"
       ],
-      "minimalized": true
+      "minimalized": false,
+      "color": "#a72f87"
     },
     {
       "name": "Utility Vehicles",
@@ -5545,7 +5548,8 @@
         "MMPV",
         "MPCV"
       ],
-      "minimalized": true
+      "minimalized": false,
+      "color": "#9c88d3"
     },
     {
       "name": "Shoulder ATGM",
@@ -5554,14 +5558,16 @@
         "AT4 (L AT mssl)",
         "Javelin"
       ],
-      "minimalized": true
+      "minimalized": false,
+      "color": "#a8d1dc"
     },
     {
       "name": "Howitzers",
       "entries": [
         "(155mm) M777"
       ],
-      "minimalized": false
+      "minimalized": false,
+      "color": "#83c387"
     },
     {
       "name": "Mortars",
@@ -5569,7 +5575,8 @@
         "81mm mortar",
         "60mm mortar"
       ],
-      "minimalized": false
+      "minimalized": true,
+      "color": "#cfd66b"
     },
     {
       "name": "Drones",
@@ -5577,7 +5584,8 @@
         "Shadow (UAV)",
         "UGV"
       ],
-      "minimalized": true
+      "minimalized": true,
+      "color": "#e4a972"
     },
     {
       "name": "Support Equipment",
@@ -5589,7 +5597,8 @@
         "Field Kitchen",
         "Forklift"
       ],
-      "minimalized": true
+      "minimalized": true,
+      "color": "#da6262"
     },
     {
       "name": "Support Electronics",
@@ -5600,7 +5609,8 @@
         "LCMR (cntr.mrtr.rdr)",
         "SatCom"
       ],
-      "minimalized": true
+      "minimalized": true,
+      "color": "#d185bd"
     }
   ]
 }

@@ -3,7 +3,7 @@ import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { getSingleItemsGroup } from "../../../logic/itemListing";
+import { getGroupFromSingleItem } from "../../../logic/itemListing";
 import { EquipmentTable, RawUnit } from "../../../logic/logic";
 import { SafeNumberInput } from "../EditorElements/SafeNumberInput";
 
@@ -97,11 +97,11 @@ function equimentEntry(
   changeEquipment: (additionalEq: EquipmentTable) => void, deleteEquipment: (type: string) => void,
   callSimpleI: (n: simpleHover) => void, callOff: () => void
 ) {
-  const eqGroup = getSingleItemsGroup(eqGroups, type);
+  const eqGroup = getGroupFromSingleItem(eqGroups, type);
   const style = eqGroup ? {color: eqGroup.color} : undefined;
   const onHover = () => eqGroup 
-          ? callSimpleI({header: eqGroup.name, desc: "This item belongs to the Equipment Group (🗡️) '" + eqGroup.name + "'"}) 
-          : callSimpleI("This item dosen't belong to any Equipment Group (🗡️)")
+          ? callSimpleI({header: `${eqGroup.name}/${type}`, desc: "This item belongs to the Equipment Group (🗡️) '" + eqGroup.name + "'"}) 
+          : callSimpleI("This item doesn't belong to any Equipment Group (🗡️)")
 
   return (
     <div key={type} className="editor-segment-row" 

@@ -31,7 +31,7 @@ export function getGroupedEquipmentTable(
   unitId: string,
   unitMap: UnitMap,
   groups: EquipGroup[]
-): { name: string; count: number, type: 'individual' | 'group' }[] {
+): { name: string; count: number, type: 'individual' | 'group', group: EquipGroup | undefined }[] {
   const et = getEquipmentTable(unitId, unitMap);
 
   // Build item → group lookup
@@ -42,15 +42,15 @@ export function getGroupedEquipmentTable(
     }
   }
 
-  const output = new Map<string, {count: number, type: 'individual' | 'group'}>();
+  const output = new Map<string, {count: number, type: 'individual' | 'group', group: EquipGroup | undefined}>();
 
   // Pre-seed result based on groups
   for (const group of groups) {
     if (group.minimalized) {
-      output.set(group.name, {count: 0, type: 'group'});
+      output.set(group.name, {count: 0, type: 'group', group: group});
     } else {
       for (const entry of group.entries) {
-        output.set(entry, {count: 0, type: 'individual'});
+        output.set(entry, {count: 0, type: 'individual', group: group});
       }
     }
   }
@@ -61,18 +61,18 @@ export function getGroupedEquipmentTable(
 
     if (myGroup && myGroup.minimalized) {
       const cur = output.get(myGroup.name)
-      output.set(myGroup.name, {count: (cur ? cur.count : 0) + count, type: 'group'});
+      output.set(myGroup.name, {count: (cur ? cur.count : 0) + count, type: 'group', group: myGroup});
       continue;
     }
 
     const cur = output.get(item)
-    output.set(item,{count: (cur ? cur.count : 0) + count, type: 'individual'});
+    output.set(item,{count: (cur ? cur.count : 0) + count, type: 'individual', group: myGroup});
   }
 
-  return Array.from(output, ([name, data]) => ({ name, count: data.count, type: data.type }))
+  return Array.from(output, ([name, data]) => ({ name, count: data.count, type: data.type, group: data.group }))
   .filter(entry => entry.count !== 0);
 }
 
-export function getSingleItemsGroup(groups: EquipGroup[], searchedItem: string) : EquipGroup | null {
-  return groups.find(g => g.entries.includes(searchedItem)) ?? null
+export function getGroupFromSingleItem(groups: EquipGroup[], searchedItem: string) : EquipGroup | undefined {
+  return groups.find(g => g.entries.includes(searchedItem)) ?? undefined
 }
