@@ -1,7 +1,7 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
-import { getGroupedEquipmentTable, getGroupFromSingleItem } from "../../../logic/itemListing";
+import { getGroupedEquipmentTable } from "../../../logic/itemListing";
 import { EquipGroup, toggleGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 
@@ -36,11 +36,16 @@ export function EQListAndRemover() {
     toggleTheGroup(myGroup.name)
   }
 
-  const onMouseEnter = (itemName: string, myGroup: EquipGroup | undefined) => {
+  const onMouseEnter = (itemName: string, myGroup: EquipGroup | undefined, type: "individual" | "group") => {
     if (!myGroup) {
+      callSimpleI({header: `Item does not belong to any group!`, desc: "Consider opening the item editor (🗡️)"})
       return
     }
-    callSimpleI({header: `${myGroup.name}/${itemName}`, desc: "Double click me to fold my item group!"})
+    if (type === "group") {
+      callSimpleI({header: `Group: ${myGroup.name}`, desc: "Double click me to unfold me and see my items!"})
+      return
+    }
+    callSimpleI({header: `${myGroup.name}/${itemName}`, desc: "Double click me to fold my item group and simplify the chart!"})
   }
 
   return (
@@ -53,7 +58,7 @@ export function EQListAndRemover() {
         <div key={name} className="flex items-center gap-2" style={style}>
           <b 
             onDoubleClick={() => onDoubleClick(group)} 
-            onMouseEnter={() => onMouseEnter(name, group)} onMouseLeave={callOff} 
+            onMouseEnter={() => onMouseEnter(name, group, type)} onMouseLeave={callOff} 
             className="w-24"
           >
             {name}

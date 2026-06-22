@@ -1,3 +1,4 @@
+import { EquipGroup } from "../hooks/useEquipGroupingStore";
 import { UnitMap } from "../hooks/useUnitStore";
 import { EquipmentTable } from "./logic";
 
@@ -46,4 +47,39 @@ export function renameItemInUnitMap(
   }
 
   return {unitMap: updatedMap, changesCount: howManyRenamedInstances};
+}
+
+export function renameItemInEqGroups(
+  groups: EquipGroup[],
+  originalItemName: string,
+  newItemName: string
+): 
+  {groups: EquipGroup[], 
+   changesCount: number} 
+{
+  var changesCount = 0
+
+  const helper = (group: EquipGroup) => {
+    const o = {...group, entries: group.entries.map((entry) => {
+      if (entry === originalItemName) {
+        changesCount++
+        return newItemName
+      }
+      return entry
+    })}
+
+    var dic: Record<string, boolean> = {}
+    
+    return {...o, entries: o.entries.filter((entry) => {
+      if (dic[entry]) {
+        changesCount++
+        return false
+      }
+      dic[entry] = true
+      return true
+    })}
+  }
+
+  const o = groups.map((g) => helper(g))
+  return {groups: o, changesCount: changesCount}
 }

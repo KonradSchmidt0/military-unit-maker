@@ -18,6 +18,7 @@ export function NewProjectButton(p: props) {
     useUnitStore.getState().setTrueRootId(newRootId);
     usePaletStore.getState().setUnitPalet([])
     useUnitStore.getState().setUnitMap({[newRootId]: newRoot});
+    // New project doesn't set eq groups on purpose, to make UX flow better
   }
 
   return <button className="btn-emoji" onClick={handleClick}>🆕Project!</button>

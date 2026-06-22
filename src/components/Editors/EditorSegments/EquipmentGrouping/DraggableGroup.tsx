@@ -16,7 +16,7 @@ interface props {
 
 export default function DraggableGroup(p: props) {
   return (
-  <li className="editor-element flex flex-col" key={p.index} id={"" + p.index}>
+  <li className="editor-element flex flex-col" key={p.index} id={"" + p.index} onDoubleClick={p.toggleMinimalize}>
     <div className="flex flex-row">
       <b className="text-pretty">{p.group.name}</b>
       <button className="btn-emoji !p-0" onClick={p.removeMyGroup}>❌</button>

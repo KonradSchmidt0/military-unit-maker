@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { LabledInput } from "../EditorElements/LabledInput";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { renameItemInUnitMap } from "../../../logic/itemRenaming";
+import { renameItemInEqGroups, renameItemInUnitMap } from "../../../logic/itemRenaming";
+import { useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 
 export default function RenamingItemSegment() {
   const [currentItemName, setCurrentItemName] = useState("");
@@ -10,11 +11,15 @@ export default function RenamingItemSegment() {
   const [resultsDisplay, setResultsDisplay] = useState("")
 
   const { unitMap, setUnitMap } = useUnitStore(e => e)
+  const { groups, setGroups } = useEquipGroupingStore(e => e)
 
   const handleRenameAction = () => {
-    const results = renameItemInUnitMap(unitMap, currentItemName, desiredItemName)
-    setUnitMap(results.unitMap)
-    setResultsDisplay("Changes implemented: " + results.changesCount + (results.changesCount == 0 ? " :(" : ""))
+    const unitResults = renameItemInUnitMap(unitMap, currentItemName, desiredItemName)
+    const groupsResults = renameItemInEqGroups(groups, currentItemName, desiredItemName)
+    setUnitMap(unitResults.unitMap)
+    setGroups(groupsResults.groups)
+    const cc = unitResults.changesCount + groupsResults.changesCount
+    setResultsDisplay("Changes implemented: " + cc + (cc === 0 ? " :(" : ""))
   }
   const swapCurrentAndDesired = () => {
     const a = currentItemName

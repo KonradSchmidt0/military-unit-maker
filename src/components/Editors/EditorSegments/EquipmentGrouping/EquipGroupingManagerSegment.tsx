@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { bumpGroup, toggleGroup, useEquipGroupingStore } from "../../../../hooks/useEquipGroupingStore"
 import DraggableGroup from "./DraggableGroup";
+import EquipGroupingSavingButtons from "./EquipGroupingSavingButtons";
 
 //
 // Logic part
@@ -89,6 +90,9 @@ export default function EquipGroupingManagerSegment() {
     <div className="editor-segment-row">
       <h2 className="font-bold text-lg">Equipment Grouping</h2>
       <button className="btn-emoji" onClick={addNewGroup}>➕</button>
+    </div>
+    <div className="editor-segment-row">
+      <EquipGroupingSavingButtons/>
     </div>
     <div 
       className="flex flex-col gap-1 items-center"

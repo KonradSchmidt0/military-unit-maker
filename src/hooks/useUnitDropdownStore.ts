@@ -13,7 +13,7 @@ export const useUnitDropdownStore = create<UnitDropdownStore>((set, get) => ({
   pos: {top: 100, left: 100},
   options: {},
   callDropDown(onChosen, pos, options) {
-    /// The dropdown menu can overflow, breaking the height and/or width limits of our page
+    /// Problem: The dropdown menu can overflow, breaking the height and/or width limits of our page
     /// Solution: Clamp it
 
     const padding = 8

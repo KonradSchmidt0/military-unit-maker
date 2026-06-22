@@ -19,6 +19,14 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Saving improvements (2026 6 22)</b><br/>
+           - You can now name the save files<br/>
+           - Hover tool for items/groups now works properly with groups<br/>
+           - Renaming tool now also renames inside eq groups<br/>
+           - Double clicking on eq group in item editor folds/unfolds it<br/>
+           - Added saving, loading and reseting eq groups<br/>
+          <br/>
+        
           <b className='text-base'>Equipment grouping colors (2026 4 19)</b><br/>
            - Added color to item groups. The idea is that color coding item groups will make it easier to understand the eq tables<br/>
            - All places where items are displayed or edited (hover tool, editors) now utilize said colors<br/>
