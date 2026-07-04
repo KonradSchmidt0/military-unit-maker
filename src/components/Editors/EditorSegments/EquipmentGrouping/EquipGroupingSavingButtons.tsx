@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react"
-import { loadUserSave, saveToFile } from "../../../../logic/eqGroupsSaving"
+import { loadUserSave, saveToFile } from "../../../../logic/Items/eqGroupsSaving"
 import { useEquipGroupingStore } from "../../../../hooks/useEquipGroupingStore"
 
 export default function EquipGroupingSavingButtons() {
@@ -18,7 +18,7 @@ export default function EquipGroupingSavingButtons() {
   }
 
   const handleReset = () => {
-    const consent = window.confirm("Are you sure you want to reset Equipment Groups? Have you considered saing them before?")
+    const consent = window.confirm("Are you sure you want to reset Equipment Groups? Have you considered saving them before?")
     if (!consent) {
       return
     }

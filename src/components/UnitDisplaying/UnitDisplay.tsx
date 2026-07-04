@@ -1,7 +1,7 @@
 import Color from "color";
 import { RecoloredImage } from "../RecoloredPicture";
 import { useEchelonStore } from "../../hooks/useEchelonStore";
-import { DesignationPack } from "../../logic/designationPack";
+import { DesignationPack } from "../../logic/Designations/designationPack";
 import { UnitStackShadow } from "./UnitStackShadow";
 import { UnitDisplayTexts } from "./UnitDisplayTexts";
 import { useUnitStore } from "../../hooks/useUnitStore";

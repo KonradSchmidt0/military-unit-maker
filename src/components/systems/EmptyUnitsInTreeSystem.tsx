@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from "react";
 import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
-import { getEquipmentTable } from "../../logic/itemListing";
 import { useDialogBoxStorage } from "../../hooks/useDialogBoxStore";
 import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
+import { getEquipmentTable } from "../../logic/Items/itemListing";
 
 const REMINDER_TIME_MINUTES = 8.5
 

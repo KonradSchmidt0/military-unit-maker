@@ -1,5 +1,5 @@
-import { UnitMap } from "../hooks/useUnitStore";
-import { ChildrenList, defaultUnitColor, OrgUnit } from "./logic";
+import { UnitMap } from "../../hooks/useUnitStore";
+import { OrgUnit, ChildrenList, defaultUnitColor } from "./logic";
 
 export function addChild(
   parent: OrgUnit,
@@ -111,13 +111,14 @@ export function moveChild(
 }
 
 
-
+// "Flat" as in flatten the children
+// Example: Parent has children: 1 HQ, 3 Infantry, 1 Artillery. Flattening it gives us array: [HQ, inf, inf, inf, art]
 export function GetFlatIds(children: ChildrenList) {
   const o: string[] = [];
 
-  for (const [childType, count] of Object.entries(children)) {
+  for (const [childTypeId, count] of Object.entries(children)) {
     for (let i = 0; i < count; i++) {
-      o.push(childType);
+      o.push(childTypeId);
     }
   }
 
@@ -185,6 +186,7 @@ export function GetTrueColor(signature: number[] | string, rootId: string, unitM
   return GetTrueColorRecursively(rootId, signature, unitMap)
 }
 
+// Complex as in combines both standard child list (id: count) and flat list (flatten array)
 export function getComplexChildList(u: OrgUnit, shouldFlatten: boolean) {
     const flat = GetFlatIds(u.children).map((cid, i) => ({flatIndex: i, childId: cid, count: u.children[cid]}));
   

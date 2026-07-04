@@ -1,8 +1,8 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { removeAllOfAChild } from "../../../logic/childManaging";
-import { OrgUnit } from "../../../logic/logic";
+import { removeAllOfAChild } from "../../../logic/Units/childManaging";
+import { OrgUnit } from "../../../logic/Units/logic";
 import { SafeNumberInput } from "./SafeNumberInput";
 
 export default function CountInParent() {

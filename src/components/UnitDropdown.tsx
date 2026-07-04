@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { UnitDisplay } from "./UnitDisplaying/UnitDisplay";
-import { defaultUnitColor } from "../logic/logic";
+import { defaultUnitColor } from "../logic/Units/logic";
 import { useUnitDropdownStore } from "../hooks/useUnitDropdownStore";
 
 export default function UnitDropdown() {

@@ -1,7 +1,7 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { GetFlatIds } from "../../../logic/childManaging";
-import { OrgUnit } from "../../../logic/logic";
+import { GetFlatIds } from "../../../logic/Units/childManaging";
+import { OrgUnit } from "../../../logic/Units/logic";
 import { ChildTextElement } from "./ChildTextElement";
 
 interface props {

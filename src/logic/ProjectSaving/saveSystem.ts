@@ -1,7 +1,7 @@
-import { EquipGroup, useEquipGroupingStore } from "../hooks/useEquipGroupingStore";
-import { usePaletStore } from "../hooks/usePaletStore";
-import { StaffText, useStaffTextStore } from "../hooks/useStaffTextStore";
-import { UnitMap, useUnitStore } from "../hooks/useUnitStore";
+import { EquipGroup, useEquipGroupingStore } from "../../hooks/useEquipGroupingStore";
+import { usePaletStore } from "../../hooks/usePaletStore";
+import { StaffText, useStaffTextStore } from "../../hooks/useStaffTextStore";
+import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
 export const SAVE_SYSTEM_VERSION = 8;

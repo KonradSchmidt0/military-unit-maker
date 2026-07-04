@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { LabledInput } from "../EditorElements/LabledInput";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { renameItemInEqGroups, renameItemInUnitMap } from "../../../logic/itemRenaming";
 import { useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
+import { renameItemInUnitMap, renameItemInEqGroups } from "../../../logic/Items/itemRenaming";
 
 export default function RenamingItemSegment() {
   const [currentItemName, setCurrentItemName] = useState("");

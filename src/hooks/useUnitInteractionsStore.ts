@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { UnitMap } from './useUnitStore';
-import { GetChildIdFromPath, GetFlatIds } from '../logic/childManaging';
-import { ChildrenList } from '../logic/logic';
+import { GetChildIdFromPath, GetFlatIds } from '../logic/Units/childManaging';
+import { ChildrenList } from '../logic/Units/logic';
 
 export interface UnitInteractionStore {
   selectSignature: string | number[] | undefined

@@ -3,8 +3,8 @@ import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { getGroupFromSingleItem } from "../../../logic/itemListing";
-import { EquipmentTable, RawUnit } from "../../../logic/logic";
+import { getGroupFromSingleItem } from "../../../logic/Items/itemListing";
+import { EquipmentTable, RawUnit } from "../../../logic/Units/logic";
 import { SafeNumberInput } from "../EditorElements/SafeNumberInput";
 
 export default function RawUnitEditorSegment() {

@@ -1,8 +1,8 @@
 import TreeNode from "./TreeNode";
 import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
-import { GetChildIdFromPath, getComplexChildList } from "../../logic/childManaging";
-import { DesignationPack, getMergedDPFromChildren } from "../../logic/designationPack";
+import { GetChildIdFromPath, getComplexChildList } from "../../logic/Units/childManaging";
+import { DesignationPack, getMergedDPFromChildren } from "../../logic/Designations/designationPack";
 import { FoldingMap, getPathAsString, useForceFoldingStore } from "../../hooks/useForceFoldingStore";
 import { useStaffTextStore } from "../../hooks/useStaffTextStore";
 

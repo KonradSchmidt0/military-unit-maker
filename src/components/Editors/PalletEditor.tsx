@@ -2,7 +2,7 @@ import { useState } from "react";
 import { usePaletStore } from "../../hooks/usePaletStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
 import TreeNode from "../UnitDisplaying/TreeNode";
-import { Unit } from "../../logic/logic";
+import { Unit } from "../../logic/Units/logic";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
 
 export default function PalletEditorSegment() {

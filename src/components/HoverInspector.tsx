@@ -1,8 +1,8 @@
-import { getGroupedEquipmentTable, getGroupFromSingleItem } from "../logic/itemListing";
 import { useUnitStore } from "../hooks/useUnitStore";
 import { useHoverStore } from "../hooks/useHoverStore";
 import { useEffect, useRef, useState } from "react";
 import { useEquipGroupingStore } from "../hooks/useEquipGroupingStore";
+import { getGroupedEquipmentTable } from "../logic/Items/itemListing";
 
 export function HoverInspector() {
   const unitMap = useUnitStore((s) => s.unitMap);

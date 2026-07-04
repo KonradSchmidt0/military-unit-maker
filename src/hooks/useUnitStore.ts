@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/logic';
-import { getEquipmentTable } from "../logic/itemListing";
-import { addChild, GetChildIdFromPath, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/childManaging';
+import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/Units/logic';
+import { addChild, GetChildIdFromPath, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/Units/childManaging';
 import { temporal } from 'zundo'
-import { createRawUnitWithFractionOfEquipment } from '../logic/unitConversion';
+import { createRawUnitWithFractionOfEquipment } from '../logic/Units/unitConversion';
+import { getEquipmentTable } from '../logic/Items/itemListing';
 
 export interface UnitMap {
   [id: string]: Unit;
@@ -55,7 +55,6 @@ export const useUnitStore = create<UnitStore>()(
 
       const newId = crypto.randomUUID();
       const newUnit = structuredClone(unit);
-      newUnit.name += " (Copy)";
 
       set((state) => ({
         unitMap: {
@@ -76,14 +75,19 @@ export const useUnitStore = create<UnitStore>()(
       if (parent.type === "raw") {
         console.warn(`Cant add child to rawUnit ${parentId}`); return;
       }
-
       if (count === 0) {
         console.warn(`Count = 0. Are you sure everything ok?`); return;
       }
 
       const func = count > 0 ? addChild : removeChild;
       const parentUpdated = func(parent, childId, Math.abs(count))
-      get().updateUnit(parentId, parentUpdated)
+
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: parentUpdated,
+        },
+      }))
     },
 
     creatNewChild: (parentId, type, addUnitToPalet) => {
@@ -92,8 +96,15 @@ export const useUnitStore = create<UnitStore>()(
       const childInput = {layers: parent.layers, echelonLevel: Math.max(0, parent.echelonLevel - 1), smartColor: "inheret" as SmartColor}
       const child = type === "org" ? createNewOrgUnit(childInput) : createNewRawUnit(childInput)
       const childId = crypto.randomUUID()
-      get().updateUnit(childId, child)
-      get().addOrSubtractChild(parentId, childId, 1)
+      const parentWithNewChild = addChild(parent as OrgUnit, childId)
+
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [childId]: child,
+          [parentId]: parentWithNewChild,
+        },
+      }))
       if (addUnitToPalet) {
         addUnitToPalet(childId)
       }
@@ -110,7 +121,12 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`Cant add child to rawUnit ${parentId}`); return;
       }
       const parentUpdated = removeAllOfAChild(parent, childId)
-      get().updateUnit(parentId, parentUpdated)
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: parentUpdated,
+        },
+      }))
     },
 
     changeChildCount: (parentId, childId, newCount) => {
@@ -123,7 +139,12 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`Cant add child to rawUnit ${parentId}`); return;
       }
       const parentUpdated = setChildCount(parent, childId, newCount)
-      get().updateUnit(parentId, parentUpdated)
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: parentUpdated,
+        },
+      }))
     },
 
     changeChildId(parentId, oldId, newId) {
@@ -137,8 +158,12 @@ export const useUnitStore = create<UnitStore>()(
       }
 
       const parentUpdated = setChildId(parent, oldId, newId)
-
-      get().updateUnit(parentId, parentUpdated)
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: parentUpdated,
+        },
+      }))
     },
 
     moveChildPos: (parentId, childId, destination) => {
@@ -151,8 +176,13 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`Cant add child to rawUnit ${parentId}`); return;
       }
 
-      const np = moveChild(parent, childId, destination)
-      get().updateUnit(parentId, np)
+      const parentUpdated = moveChild(parent, childId, destination)
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: parentUpdated,
+        },
+      }))
     },
 
 
@@ -183,7 +213,12 @@ export const useUnitStore = create<UnitStore>()(
         flatCallSigns: {},
         flatDescriptions: {}
       };
-      get().updateUnit(newMadeParentId, updatedParent);
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [newMadeParentId]: updatedParent,
+        },
+      }))
 
       if (addUnitToPalet) {
         addUnitToPalet(babyId)
@@ -197,7 +232,12 @@ export const useUnitStore = create<UnitStore>()(
     addNewChild: (parentId, childId) => {
       const parent = get().unitMap[parentId] as OrgUnit
       const newChildren = {...parent.children, [childId]: 1}
-      get().updateUnit(parentId, {...parent, children: newChildren});
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [parentId]: {...parent, children: newChildren},
+        },
+      }))
     },
 
 
@@ -205,13 +245,23 @@ export const useUnitStore = create<UnitStore>()(
       const um = get().unitMap
       const unit = um[id] as OrgUnit
       const eq = getEquipmentTable(id, um)
-      get().updateUnit(id, {...unit, type: "raw", equipment: eq})
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [id]: {...unit, type: "raw", equipment: eq},
+        },
+      }))
     },
 
     setInnerTexts: (id, shortName, desc) => {
       const um = get().unitMap
       const unit = um[id]
-      get().updateUnit(id, {...unit, name: shortName ?? unit.name, desc: desc ?? unit.desc})
+      set((state) => ({
+        unitMap: {
+          ...state.unitMap,
+          [id]: {...unit, name: shortName ?? unit.name, desc: desc ?? unit.desc},
+        },
+      }))
     },
 
 
@@ -234,7 +284,7 @@ export const useUnitStore = create<UnitStore>()(
       let c: ChildrenList = { }; c[oldRootId] = 1;
       const newRoot: OrgUnit = { 
         ...oldRoot,
-        type: "org", name: "New Root Unit", echelonLevel: oldRoot.echelonLevel + 1,
+        type: "org", name: "", echelonLevel: oldRoot.echelonLevel + 1,
         children: c,
         flatCallSigns: {},
         flatDescriptions: {},
@@ -246,8 +296,13 @@ export const useUnitStore = create<UnitStore>()(
       else
         offsetSelect()
       
-      get().updateUnit(newRootId, newRoot)
-      get().setTrueRootId(newRootId)
+      set((state) => ({
+        trueRootId: newRootId,
+        unitMap: {
+          ...state.unitMap,
+          [newRootId]: newRoot,
+        },
+      }))
   
     },
   }))

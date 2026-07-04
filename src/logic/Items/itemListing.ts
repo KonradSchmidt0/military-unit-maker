@@ -1,7 +1,6 @@
-import { EquipGroup } from "../hooks/useEquipGroupingStore";
-import { UnitMap } from "../hooks/useUnitStore";
-import { EquipmentTable } from "./logic";
-
+import { EquipGroup } from "../../hooks/useEquipGroupingStore";
+import { UnitMap } from "../../hooks/useUnitStore";
+import { EquipmentTable } from "../Units/logic";
 
 export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTable {
   const unit = unitMap[unitId];

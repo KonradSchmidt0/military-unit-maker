@@ -2,7 +2,7 @@ import { useHoverStore } from "../../../hooks/useHoverStore";
 import { useIconsStore } from "../../../hooks/useIcons";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { GetTrueColor } from "../../../logic/childManaging";
+import { GetTrueColor } from "../../../logic/Units/childManaging";
 import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay";
 
 export function VisualLayeringEditor() {

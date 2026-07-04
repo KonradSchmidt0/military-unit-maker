@@ -1,8 +1,8 @@
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../../logic/childManaging"
-import { changeTextInParent } from "../../../logic/designationPack"
-import { OrgUnit } from "../../../logic/logic"
+import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
+import { changeTextInParent } from "../../../logic/Designations/designationPack"
+import { OrgUnit } from "../../../logic/Units/logic"
 import { LabledInput } from "../EditorElements/LabledInput"
 import { LargeTextInput } from "../EditorElements/LargeTextInput"
 

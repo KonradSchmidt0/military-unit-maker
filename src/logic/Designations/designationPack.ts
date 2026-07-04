@@ -1,7 +1,7 @@
-import { StaffText } from "../hooks/useStaffTextStore";
-import { UnitMap } from "../hooks/useUnitStore";
-import { GetChildIdFromPath, GetFlatIds } from "./childManaging";
-import { OrgUnit } from "./logic";
+import { StaffText } from "../../hooks/useStaffTextStore";
+import { UnitMap } from "../../hooks/useUnitStore";
+import { GetChildIdFromPath, GetFlatIds } from "../Units/childManaging";
+import { OrgUnit } from "../Units/logic";
 
 export interface DesignationPack {
   name?: string;
@@ -9,7 +9,6 @@ export interface DesignationPack {
   staffComment?: string;
 }
 
-// WIP
 export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
   let comment = undefined
   for (const sc of staffComments) {
@@ -69,12 +68,18 @@ export function mergeDesignationPacks(packs: DesignationPack[]): DesignationPack
 
 export function getMergedDPFromChildren(parentPath: number[], startingFlatIndex: number, count: number, unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
   const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap) as string] as OrgUnit
-  const flatChildrenIndexes = GetFlatIds(parent.children).filter(
+  const filteredChildrenIndexes = GetFlatIds(parent.children).filter(
     (_, i) => i >= startingFlatIndex && i < startingFlatIndex + count
   );
 
   const a: DesignationPack[] = []
-  flatChildrenIndexes.forEach((id, index) => { a.push(getDesignationPack([...parentPath, startingFlatIndex + index], unitMap, trueRootId, staffNames, staffComments)) })
+  filteredChildrenIndexes.forEach((_, notOffsetedIndex) => { a.push(getDesignationPack(
+    [...parentPath, startingFlatIndex + notOffsetedIndex], 
+    unitMap, 
+    trueRootId, 
+    staffNames, 
+    staffComments
+  )) })
 
   return mergeDesignationPacks(a)
 }

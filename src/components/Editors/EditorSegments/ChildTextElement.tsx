@@ -1,8 +1,8 @@
 import { useStaffTextStore } from "../../../hooks/useStaffTextStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../../logic/childManaging"
-import { getDesignationPack } from "../../../logic/designationPack"
-import { OrgUnit } from "../../../logic/logic"
+import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
+import { getDesignationPack } from "../../../logic/Designations/designationPack"
+import { OrgUnit } from "../../../logic/Units/logic"
 import TreeNode from "../../UnitDisplaying/TreeNode"
 
 interface props {

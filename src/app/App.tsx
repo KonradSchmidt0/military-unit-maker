@@ -1,22 +1,22 @@
-import TreeView from './components/UnitDisplaying/TreeView';
-import { useUnitStore } from './hooks/useUnitStore';
-import { usePaletStore } from './hooks/usePaletStore';
-import { useShortcutStore } from './hooks/shortcutStore';
+import TreeView from '../components/UnitDisplaying/TreeView';
+import { useUnitStore } from '../hooks/useUnitStore';
+import { usePaletStore } from '../hooks/usePaletStore';
+import { useShortcutStore } from '../hooks/shortcutStore';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
-import { useGlobalStore } from './hooks/useGlobalStore';
-import ChangelogOverlay from './components/ChangeLog';
-import ShortcutBox from './components/ShortcutBox';
-import { EditorPanel } from './components/Editors/EditorPanel';
-import IconDropdown from './components/IconDropdown';
-import { AutoSave } from './components/systems/AutoSave';
-import ArrowNavigation from './components/systems/ArrowNavigation';
-import { KeyboardWatcher } from './components/systems/KeyboardWatcher';
-import { LoadIconsCsv } from './components/systems/LoadIconsCsv';
-import { DialogBox } from './components/DialogBox';
-import { EmptyUnitsInTreeSystem } from './components/systems/EmptyUnitsInTreeSystem';
-import UnitDropdown from './components/UnitDropdown';
-import { GenerateInitialUnits } from './myUnits';
-import { HoverInspector } from './components/HoverInspector';
+import { useGlobalStore } from '../hooks/useGlobalStore';
+import ChangelogOverlay from '../components/ChangeLog';
+import ShortcutBox from '../components/ShortcutBox';
+import { EditorPanel } from '../components/Editors/EditorPanel';
+import IconDropdown from '../components/IconDropdown';
+import { AutoSave } from '../components/systems/AutoSave';
+import ArrowNavigation from '../components/systems/ArrowNavigation';
+import { KeyboardWatcher } from '../components/systems/KeyboardWatcher';
+import { LoadIconsCsv } from '../components/systems/LoadIconsCsv';
+import { DialogBox } from '../components/DialogBox';
+import { EmptyUnitsInTreeSystem } from '../components/systems/EmptyUnitsInTreeSystem';
+import UnitDropdown from '../components/UnitDropdown';
+import { GenerateInitialUnits } from '../logic/Units/myUnits';
+import { HoverInspector } from '../components/HoverInspector';
 
 const ini = GenerateInitialUnits()
 

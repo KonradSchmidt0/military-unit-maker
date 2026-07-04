@@ -1,5 +1,5 @@
-import { EquipGroup, useEquipGroupingStore } from "../hooks/useEquipGroupingStore";
-import { SAVE_SYSTEM_VERSION } from "./saveSystem";
+import { EquipGroup, useEquipGroupingStore } from "../../hooks/useEquipGroupingStore";
+import { SAVE_SYSTEM_VERSION } from "../ProjectSaving/saveSystem";
 
 interface SaveFile {
   version: number;

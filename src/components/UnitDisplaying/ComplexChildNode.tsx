@@ -2,7 +2,7 @@ import { useHoverStore } from "../../hooks/useHoverStore";
 import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
-import { GetTrueColor } from "../../logic/childManaging";
+import { GetTrueColor } from "../../logic/Units/childManaging";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
 import { UnitClickableIdSwap } from "./UnitClickable/UnitClickableIdSwap";
 import { UnitDisplay } from "./UnitDisplay";

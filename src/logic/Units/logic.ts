@@ -1,4 +1,4 @@
-import { UnitMap } from "../hooks/useUnitStore";
+import { UnitMap } from "../../hooks/useUnitStore";
 
 export const defaultUnitColor: `#${string}` = "#6ad8e2"
 
@@ -38,7 +38,7 @@ export type Unit = RawUnit | OrgUnit;
 
 
 export function createNewRawUnit({
-  name = "New Raw Unit",
+  name = "",
   layers = [],
   echelonLevel = 0,
   smartColor = "inheret",
@@ -62,7 +62,7 @@ export function createNewRawUnit({
 
 
 export function createNewOrgUnit({
-  name = "New Org Unit",
+  name = "",
   layers = [],
   echelonLevel = 0,
   smartColor = "inheret",

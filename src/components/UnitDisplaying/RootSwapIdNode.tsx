@@ -7,7 +7,7 @@
 
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../hooks/useUnitStore"
-import { GetTrueColor } from "../../logic/childManaging"
+import { GetTrueColor } from "../../logic/Units/childManaging"
 import { UnitClickableIdSwapRoot } from "./UnitClickable/UnitClickableIdSwapRoot"
 import { UnitDisplay } from "./UnitDisplay"
 import { UnitHoverable } from "./UnitHoverable"

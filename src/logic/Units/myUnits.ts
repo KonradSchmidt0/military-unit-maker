@@ -1,5 +1,5 @@
-import { UnitMap } from "./hooks/useUnitStore";
-import { RawUnit, OrgUnit, defaultUnitColor } from "./logic/logic"; 
+import { UnitMap } from "../../hooks/useUnitStore";
+import { RawUnit, OrgUnit, defaultUnitColor } from "./logic"; 
 
 const infVisual = [`${process.env.PUBLIC_URL}/icons/b-inf.svg`]
 const mgVisual = [`${process.env.PUBLIC_URL}/icons/b-inf.svg`, `${process.env.PUBLIC_URL}/icons/b-gun.svg`]

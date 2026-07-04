@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { defaultUnitColor, SmartColor } from "../../../logic/logic";
+import { defaultUnitColor, SmartColor } from "../../../logic/Units/logic";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { GetTrueColor } from "../../../logic/childManaging";
+import { GetTrueColor } from "../../../logic/Units/childManaging";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 
 

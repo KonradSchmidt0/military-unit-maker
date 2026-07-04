@@ -1,10 +1,10 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit } from "../../../logic/logic";
+import { OrgUnit } from "../../../logic/Units/logic";
 import { ChildRow } from "./ChildRow";
-import { getSafeChildOptions } from "../../../logic/getSafeChildOptions";
-import { getComplexChildList } from "../../../logic/childManaging";
+import { getSafeChildOptions } from "../../../logic/Units/getSafeChildOptions";
+import { getComplexChildList } from "../../../logic/Units/childManaging";
 import { FlatChildrenEditor } from "./FlatChildrenEditor";
 import { useUnitDropdownStore } from "../../../hooks/useUnitDropdownStore";
 import { MouseEvent } from "react";

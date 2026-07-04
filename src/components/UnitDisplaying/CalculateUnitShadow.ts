@@ -1,6 +1,6 @@
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { UnitMap } from "../../hooks/useUnitStore"
-import { GetTrueColor } from "../../logic/childManaging"
+import { GetTrueColor } from "../../logic/Units/childManaging"
 
 export function calculateUnitShadow(
   mySignature: number[] | string,

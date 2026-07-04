@@ -3,8 +3,8 @@ import { usePaletStore } from "../../../hooks/usePaletStore"
 import { useUnitDropdownStore } from "../../../hooks/useUnitDropdownStore"
 import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { getSafeChildOptions } from "../../../logic/getSafeChildOptions"
-import { OrgUnit } from "../../../logic/logic"
+import { getSafeChildOptions } from "../../../logic/Units/getSafeChildOptions"
+import { OrgUnit } from "../../../logic/Units/logic"
 
 interface props {
   parentSignature: string | number[]

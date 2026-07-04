@@ -2,8 +2,8 @@ import { useHoverStore } from "../../hooks/useHoverStore";
 import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
-import { GetTrueColor } from "../../logic/childManaging";
-import { DesignationPack } from "../../logic/designationPack";
+import { GetTrueColor } from "../../logic/Units/childManaging";
+import { DesignationPack } from "../../logic/Designations/designationPack";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
 import { UnitClickableSelect } from "./UnitClickable/UnitClickableSelect";
 import { UnitDisplay } from "./UnitDisplay"

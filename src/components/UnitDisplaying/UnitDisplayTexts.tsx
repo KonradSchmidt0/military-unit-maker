@@ -1,5 +1,5 @@
 import { useTextOptionStore } from "../../hooks/useTextOptionStore";
-import { DesignationPack } from "../../logic/designationPack";
+import { DesignationPack } from "../../logic/Designations/designationPack";
 
 interface UnitDisplayTextsProps {
   name?: string;

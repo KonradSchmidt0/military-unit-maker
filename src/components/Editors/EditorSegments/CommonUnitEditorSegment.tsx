@@ -7,7 +7,7 @@ import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { ForceFoldingSegment } from "./ForceFoldingSegment";
 import { LabledInput } from "../EditorElements/LabledInput";
 import { CommonEditorAlphaRow } from "./CommonEditorAlphaRow";
-import { OrgUnit } from "../../../logic/logic";
+import { OrgUnit } from "../../../logic/Units/logic";
 import { RootSwapIdNode } from "../../UnitDisplaying/RootSwapIdNode";
 
 export default function CommonUnitEditorSegment() {

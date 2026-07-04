@@ -2,7 +2,7 @@ import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
 import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../../logic/childManaging"
+import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
 
 interface props {
   signature: string | number[]

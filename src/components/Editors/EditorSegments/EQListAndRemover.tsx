@@ -1,9 +1,9 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/logic";
-import { getGroupedEquipmentTable } from "../../../logic/itemListing";
+import { OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/Units/logic";
 import { EquipGroup, toggleGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
+import { getGroupedEquipmentTable } from "../../../logic/Items/itemListing";
 
 export function EQListAndRemover() {
   const {unitMap, trueRootId, setUnitMap} = useUnitStore(s => s)
