@@ -14,7 +14,7 @@ export function createRawUnitWithFractionOfEquipment(parent: Unit, parentEq: Equ
 
   const inherited: RawUnit = {
     type: "raw",
-    name: parent.name + " (copy)",
+    name: "",
     smartColor: "inheret",
     echelonLevel: parent.echelonLevel - 1,
     layers: [...parent.layers], // shallow copy

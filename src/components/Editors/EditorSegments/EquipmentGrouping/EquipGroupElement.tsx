@@ -5,7 +5,6 @@ import { EquipGroup } from "../../../../hooks/useEquipGroupingStore"
 //
 
 interface props {
-  index: number;
   group: EquipGroup;
   toggleMinimalize: () => void;
   removeItemInMyGroup: (eqItem: string) => void;
@@ -14,9 +13,9 @@ interface props {
   setColor: (col: string) => void
 }
 
-export default function DraggableGroup(p: props) {
+export default function EquipGroupElement(p: props) {
   return (
-  <li className="editor-element flex flex-col" key={p.index} id={"" + p.index} onDoubleClick={p.toggleMinimalize}>
+  <li className="editor-element flex flex-col" key={p.group.name} id={"" + p.group.name} onDoubleClick={p.toggleMinimalize}>
     <div className="flex flex-row">
       <b className="text-pretty">{p.group.name}</b>
       <button className="btn-emoji !p-0" onClick={p.removeMyGroup}>❌</button>
