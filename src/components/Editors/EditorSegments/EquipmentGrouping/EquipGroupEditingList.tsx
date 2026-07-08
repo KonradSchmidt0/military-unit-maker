@@ -56,6 +56,19 @@ export default function EquipGroupEditingList() {
     setGroups(updated);
   }
 
+  const renameGroup = (groupKey: number) => {
+    const p = "Rename Group:"
+    const inp = prompt(p, groups[groupKey].name);
+    if (!inp) return;
+
+    const updated = groups.map((g, i) =>
+      i === groupKey ? { ...g, 
+        name: inp.trim()
+      } : g
+    );
+    setGroups(updated);
+  }
+
   return (
     <DraggableList
       childrenList={
@@ -67,6 +80,7 @@ export default function EquipGroupEditingList() {
             addItemInMyGroup={() => addEqItem(i)} 
             removeMyGroup={() => removeGroup(i)}
             setColor={(col: string) => changeColor(i, col)}
+            renameGroup={() => renameGroup(i)}
           />)
         )
       }

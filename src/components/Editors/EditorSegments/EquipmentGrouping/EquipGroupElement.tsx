@@ -18,7 +18,7 @@ export default function EquipGroupElement(p: props) {
   const style = {borderColor: p.group.color}
 
   return (
-  <li className="editor-element flex flex-col min-w-40 gap-1 text-xs !px-1" key={p.index} id={"" + p.index}
+  <li className="editor-element flex flex-col min-w-40 gap-1 text-xs !px-1" key={p.group.name}
     onDoubleClick={p.toggleMinimalize}
   >
     <div className="flex flex-row justify-between items-center w-full gap-1">
@@ -43,16 +43,16 @@ export default function EquipGroupElement(p: props) {
     </div> }
     {!p.group.minimalized && <div className="flex flex-col gap-0.5">
       {p.group.entries.map(
-        (equipment, i) => <GroupItem equipment={equipment} remove={() => p.removeItemInMyGroup(equipment)} i={i}/>
+        (equipment, i) => <GroupItem equipment={equipment} remove={() => p.removeItemInMyGroup(equipment)}/>
       )}
     </div>}
   </li>
 )
 }
 
-function GroupItem(p: {equipment: string, remove: () => void, i: number}) {
+function GroupItem(p: {equipment: string, remove: () => void}) {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row" key={p.equipment}>
       <div className="text-xs">- {p.equipment}</div>
       <button className="btn-emoji !p-0" onClick={p.remove}>❌</button>
     </div>
