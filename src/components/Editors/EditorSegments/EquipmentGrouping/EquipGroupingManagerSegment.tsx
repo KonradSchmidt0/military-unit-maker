@@ -62,6 +62,19 @@ export default function EquipGroupingManagerSegment() {
     setGroups(updated)
   }
 
+  const renameGroup = (groupKey: number) => {
+    const p = "Rename Group:"
+    const inp = prompt(p, groups[groupKey].name);
+    if (!inp) return;
+
+    const updated = groups.map((g, i) =>
+      i === groupKey ? { ...g, 
+        name: inp.trim()
+      } : g
+    );
+    setGroups(updated);
+  }
+
   const [giverIndex, setGiverIndex] = useState<number | null>(null);
 
   const handleDragStart = (index: number) => {
@@ -108,6 +121,7 @@ export default function EquipGroupingManagerSegment() {
             addItemInMyGroup={() => addEqItem(i)} 
             removeMyGroup={() => removeGroup(i)}
             setColor={(col: string) => changeColor(i, col)}
+            renameGroup={() => renameGroup(i)}
           />
         </div>
       ))}
