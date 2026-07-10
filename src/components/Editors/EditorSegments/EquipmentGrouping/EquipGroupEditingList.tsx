@@ -13,27 +13,8 @@ export default function EquipGroupEditingList() {
     setGroups(toggleGroup(groups, key));
   };
 
-  const removeEqItem = (groupKey: number, eqItem: string) => {
-    const updated = groups.map((g, i) =>
-      i === groupKey ? { ...g, 
-        entries: g.entries.filter( (entry) => entry !== eqItem )
-      } : g
-    );
-    setGroups(updated);
-  }
-
-  const addEqItem = (groupKey: number) => {
-    const p = "Enter new equipment type. Enter commas (,) to add new type:"
-    const inp = prompt(p);
-    if (!inp) return;
-
-    const pairs = inp.split(/\s*,\s*/) // Splits if theres comma between
-
-    const updated = groups.map((g, i) =>
-      i === groupKey ? { ...g, 
-        entries: [...g.entries, ...pairs ]
-      } : g
-    );
+  const onHandleDragEnter = (receiverIndex: number, giverIndex: number) => {
+    const updated = bumpGroup(groups, giverIndex, receiverIndex);
     setGroups(updated);
   }
 
@@ -51,11 +32,6 @@ export default function EquipGroupEditingList() {
     setGroups(updated)
   }
 
-  const onHandleDragEnter = (receiverIndex: number, giverIndex: number) => {
-    const updated = bumpGroup(groups, giverIndex, receiverIndex);
-    setGroups(updated);
-  }
-
   const renameGroup = (groupKey: number) => {
     const p = "Rename Group:"
     const inp = prompt(p, groups[groupKey].name);
@@ -69,6 +45,21 @@ export default function EquipGroupEditingList() {
     setGroups(updated);
   }
 
+  const setEqListFromString = (groupKey: number, text: string) => {
+    // We don't filter out the empty spaces on purpose to enable user to add empty spaces in the list, if they so desire 
+    const newItems = text
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+    
+    setGroups(
+      groups.map((g, i) =>
+        i === groupKey ? {
+          ...g, entries: newItems 
+        } : g
+      )
+    )
+  }
+
   return (
     <DraggableList
       childrenList={
@@ -76,11 +67,10 @@ export default function EquipGroupEditingList() {
           (<EquipGroupElement 
             group={group} 
             toggleMinimalize={() => toggleMinimalize(i)} 
-            removeItemInMyGroup={(eqItem: string) => removeEqItem(i, eqItem)} 
-            addItemInMyGroup={() => addEqItem(i)} 
             removeMyGroup={() => removeGroup(i)}
             setColor={(col: string) => changeColor(i, col)}
             renameGroup={() => renameGroup(i)}
+            setItems={(text: string) => setEqListFromString(i, text)}
           />)
         )
       }

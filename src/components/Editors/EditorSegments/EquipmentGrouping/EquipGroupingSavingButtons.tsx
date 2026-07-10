@@ -36,6 +36,6 @@ export default function EquipGroupingSavingButtons() {
         className="hidden"
       />
     </label>
-    <button className="btn-emoji" onClick={handleReset}>🆕</button>
+    <button className="btn-emoji" onClick={handleReset}>🌋</button>
   </>)
 }

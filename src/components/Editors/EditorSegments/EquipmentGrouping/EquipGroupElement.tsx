@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { EquipGroup } from "../../../../hooks/useEquipGroupingStore"
 
 //
@@ -7,11 +8,10 @@ import { EquipGroup } from "../../../../hooks/useEquipGroupingStore"
 interface props {
   group: EquipGroup;
   toggleMinimalize: () => void;
-  removeItemInMyGroup: (eqItem: string) => void;
-  addItemInMyGroup: () => void;
   removeMyGroup: () => void
   setColor: (col: string) => void
   renameGroup: () => void
+  setItems: (text: string) => void
 }
 
 export default function EquipGroupElement(p: props) {
@@ -31,7 +31,6 @@ export default function EquipGroupElement(p: props) {
       <button className="btn-emoji !p-0" onClick={p.removeMyGroup}>❌</button>
     </div>
     {!p.group.minimalized && <div className="flex flex-row justify-between w-full gap-1">
-      <button className="btn-emoji !p-0" onClick={p.addItemInMyGroup}>➕</button>
       <input
         id="ColorPickerInputId"
         type="color"
@@ -41,20 +40,23 @@ export default function EquipGroupElement(p: props) {
       />
       <button className="btn-emoji !p-0" onClick={p.renameGroup}>📝</button>
     </div> }
-    {!p.group.minimalized && <div className="flex flex-col gap-0.5">
-      {p.group.entries.map(
-        (equipment, i) => <GroupItem equipment={equipment} remove={() => p.removeItemInMyGroup(equipment)}/>
-      )}
-    </div>}
+    {!p.group.minimalized && EqEntriesList(p.group.entries, p.setItems)}
   </li>
 )
 }
 
-function GroupItem(p: {equipment: string, remove: () => void}) {
-  return (
-    <div className="flex flex-row" key={p.equipment}>
-      <div className="text-xs">- {p.equipment}</div>
-      <button className="btn-emoji !p-0" onClick={p.remove}>❌</button>
-    </div>
-  )
+function EqEntriesList(entries: string[], setItems: (text: string) => void) {
+  const [cache, setCache] = useState(entries.join("\n"))
+
+  return (<textarea
+    className="editor-element !p-1 resize-none overflow-hidden"
+    value={cache}
+    rows={Math.max(entries.length, 1)}
+    onChange={(e) => {
+      e.target.style.height = "auto";
+      e.target.style.height = `${e.target.scrollHeight}px`;
+      setCache(e.target.value)
+    }}
+    onBlur={() => setItems(cache)}
+  />)
 }

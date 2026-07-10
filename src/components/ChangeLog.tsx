@@ -19,6 +19,13 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Equipment group managing improvements (2026 7 10)</b><br/>
+           - Creating and duplicating units should no longer change their names to allow for more smooth UX<br/>
+           - You can now change eq group's name<br/>
+           - Elements that allow to manipulate group are now hidden when group is mini<br/>
+           - Eq group element's text is now a bit smaller<br/>
+          <br/>
+
           <b className='text-base'>Saving improvements (2026 6 22)</b><br/>
            - You can now name the save files<br/>
            - Hover tool for items/groups now works properly with groups<br/>

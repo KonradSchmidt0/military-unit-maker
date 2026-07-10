@@ -11,7 +11,7 @@ export default function EquipGroupingManagerSegment() {
     if (!inp) return;
 
     const updated = [...groups,
-      {name: inp, entries: [], minimalized: false, color: "#aaaaaa"}
+      {name: inp, entries: [], minimalized: false, color: "#888888"}
     ]
     setGroups(updated);
   }
