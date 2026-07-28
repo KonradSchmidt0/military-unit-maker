@@ -6,8 +6,6 @@ interface GlobalStore {
   setEchelonFoldingLevel: (n: number) => void;
   foldingDepth: number;
   setFoldingDepth: (n: number) => void;
-  displayParentBox: boolean;
-  setDisplayParentBox: (b: boolean) => void;
   isGlobalMini: boolean;
   setIsChangeLogMini: (b: boolean) => void;
   stacking: boolean;
@@ -28,8 +26,6 @@ export const useGlobalStore = create<GlobalStore>()(
       setEchelonFoldingLevel: (n) => set({ echelonFoldingLevel: n }),
       foldingDepth: 3,
       setFoldingDepth: (n) => set({ foldingDepth: n }),
-      displayParentBox: false,
-      setDisplayParentBox: (b) => set({ displayParentBox: b }),
       stacking: false,
       setStacking: (b) => set({ stacking: b }),
       isChangeLogMini: true,

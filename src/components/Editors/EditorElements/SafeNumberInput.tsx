@@ -4,7 +4,7 @@ import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
 interface props {
   count: number
   onCountChange: (newCount: number) => void
-  key?: string
+  id?: string
   className?: string
   hover?: simpleHover
 }
@@ -30,7 +30,7 @@ export function SafeNumberInput(p: props) {
   };
 
   return <input
-        id={p.key}
+        id={p.id}
         type="number"
         className={"editor-element !w-16 " + p.className}
         value={tempCount}

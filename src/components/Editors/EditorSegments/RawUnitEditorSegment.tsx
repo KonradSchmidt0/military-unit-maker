@@ -111,7 +111,7 @@ function equimentEntry(
     >
       <span className="w-24"><b>{type}</b></span>
       <SafeNumberInput
-        key={type}
+        id={type}
         count={amount}
         onCountChange={nc => changeEquipment({[type]: nc})}
         className="!w-24"

@@ -26,9 +26,9 @@ const defaultSymbols: EchelonSymbolMap = {
   7: "X",         
   8: "XX",       
   9: "XXX",
-  10: "Δ", // Army
-  11: "ΔΔ", // Army Group / Front
-  12: "ΔΔΔ", // Combatant Command / Front Group
+  10: "XXXX", // Army
+  11: "XXXXX", // Army Group / Front
+  12: "XXXXXX", // Combatant Command / Front Group
   13: "++",
   14: "oooo",
   15: "", // For when user wants to have unspecify

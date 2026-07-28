@@ -17,6 +17,8 @@ import { EmptyUnitsInTreeSystem } from '../components/systems/EmptyUnitsInTreeSy
 import UnitDropdown from '../components/UnitDropdown';
 import { GenerateInitialUnits } from '../logic/Units/myUnits';
 import { HoverInspector } from '../components/HoverInspector';
+import TreeLineDrawing from '../components/UnitDisplaying/UnitTree/TreeLineDrawing';
+import { useTreeLineStore } from '../hooks/useTreeLineStore';
 
 const ini = GenerateInitialUnits()
 
@@ -26,8 +28,9 @@ useUnitStore.getState().setUnitMap(ini.unitMap);
 useUnitStore.temporal.getState().clear()
 
 function App() {
-  const { actingRootPath } = useUnitStore(s => s)
+  const { actingRootPath } = useUnitStore()
   const displayDepth = useGlobalStore(s => s.foldingDepth)
+  const { rootRef } = useTreeLineStore()
 
   // Problem: User can hold shift to interact with units, but browser by default interprets shift as sign that you want to select text
   // Solution: We disable it, but only when shift is held, so user can still select text on page
@@ -55,7 +58,8 @@ function App() {
       {/* Left */}
       <TransformWrapper minScale={0.1}>
         <TransformComponent wrapperClass='flex-1 min-h-screen max-h-screen'>
-          <div className='pb-2 pt-8 px-40'>
+          <TreeLineDrawing/>
+          <div className='pb-2 pt-8 px-40' ref={rootRef}>
             <TreeView path={actingRootPath} leftDisplayDepth={displayDepth}/>
           </div>
         </TransformComponent>

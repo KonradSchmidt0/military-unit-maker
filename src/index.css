@@ -67,19 +67,21 @@ a {
 }
 
 .tree {
-  @apply p-3 flex
+  @apply flex
 }
 
 .tree-a {
-  @apply tree flex-row gap-14 my-8
+  @apply tree flex-row gap-14 mx-2
 }
 
 .tree-b {
-  @apply tree flex-col my-8 translate-x-0 !px-0 transition-transform duration-500 ease-in-out
+  @apply tree flex-col my-10 gap-6
 }
 
 .tree-c {
-  @apply tree gap-0
+  @apply tree
 }
 
-
+.ln-tree {
+  @apply dark:border-white border-black border-l-[2px] border-t-[2px]
+}

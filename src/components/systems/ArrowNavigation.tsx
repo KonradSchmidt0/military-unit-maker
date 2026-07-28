@@ -3,12 +3,17 @@ import { useUnitInteractionStore, processSelect } from '../../hooks/useUnitInter
 import { useUnitStore } from '../../hooks/useUnitStore';
 import { GetFlatIds } from '../../logic/Units/childManaging';
 import { OrgUnit } from '../../logic/Units/logic';
+import { GetFoldingClassification } from '../UnitDisplaying/TreeView';
+import { useGlobalStore } from '../../hooks/useGlobalStore';
+import { useForceFoldingStore } from '../../hooks/useForceFoldingStore';
 
 export default function ArrowNavigation() {
-  const { selectParent, selectSibling, selectChild } = useUnitInteractionStore(s => s)
+  const { selectParent, selectSibling, selectChild } = useUnitInteractionStore()
   const slctd = useUnitInteractionStore(s => s.selectSignature)
 
-  const {unitMap, trueRootId, actingRootPath} = useUnitStore(s => s)
+  const {unitMap, trueRootId, actingRootPath} = useUnitStore()
+  const { foldingDepth, echelonFoldingLevel, stacking: treeStacking } = useGlobalStore()
+  const { foldingUnfoldingMap } = useForceFoldingStore()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -28,6 +33,12 @@ export default function ArrowNavigation() {
       const selectedId  = processSelect(path, unitMap, trueRootId)
       const unit = unitMap[selectedId ?? ""]
       const parentId = processSelect(path.slice(0, -1), unitMap, trueRootId)
+      const parentsFoldingClass = GetFoldingClassification(
+        path.slice(0, -1), 
+        foldingDepth - path.length - 2, 
+        echelonFoldingLevel,
+        unitMap, trueRootId, foldingUnfoldingMap, actingRootPath, treeStacking
+      )
 
 
       function handleSelectParent() {
@@ -36,19 +47,15 @@ export default function ArrowNavigation() {
         selectParent()
       }
       function handleSelectChild() {
-        if (unit.type !== "org"){
-          return}
-        if (Object.entries(unit.children).length === 0){
-          return}
+        if (unit.type !== "org")
+          return
+        if (Object.entries(unit.children).length === 0)
+          return
         //const flatChildrenLenght = GetFlatIds(unit.children).length
         //const i = Math.floor((flatChildrenLenght - 1) / 2)
-        // ^ Will work better when the tree is in 'a' mode, but less intuitive when in 'b' mode.
-        // | For now i see it as too much od a petty thing, but in future the teoretical best UX would determin if if child is
-        //   stacked or not, and would choose which child to choose
-        const i = 0 
-        selectChild(i)
+        selectChild(0)
       }
-      function handleLeftRight(d: 1 | -1) {
+      function handleSelectSibling(d: 1 | -1) {
         if (actingRootPath.toString() === path.toString() || !parentId) {
           handleSelectChild()
           return
@@ -60,25 +67,26 @@ export default function ArrowNavigation() {
         selectSibling(o)
       }
 
-      switch (e.key) {
-        case 'ArrowUp':
-          handleSelectParent()
-          break;
-        case 'ArrowDown':
-          handleSelectChild()
-          break;
-        case 'ArrowLeft':
-          handleLeftRight(-1)
-          break;
-        case 'ArrowRight':
-          handleLeftRight(1)
-          break;
-      }
+      const bindings: Record<string, () => void> = 
+        parentsFoldingClass !== "b" ? {
+          ArrowUp: () => handleSelectParent(),
+          ArrowDown: () => handleSelectChild(),
+          ArrowLeft: () => handleSelectSibling(-1),
+          ArrowRight: () => handleSelectSibling(1),
+        } : {
+          ArrowUp: () => handleSelectSibling(-1),
+          ArrowDown: () => handleSelectSibling(1),
+          ArrowLeft: () => handleSelectParent(),
+          ArrowRight: () => handleSelectChild(),
+        }
+
+      bindings[e.key]?.()
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [slctd, trueRootId, unitMap]);
+  }, [slctd, trueRootId, unitMap, actingRootPath, echelonFoldingLevel, foldingDepth, foldingUnfoldingMap, treeStacking,
+    selectChild, selectParent, selectSibling]);
 
   return null; // no UI
 }

@@ -16,8 +16,6 @@ export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
   const foldingDepth = useGlobalStore(s => s.foldingDepth)
   const setFoldingDepth = useGlobalStore(s => s.setFoldingDepth)
-  const displayParentBox = useGlobalStore(s => s.displayParentBox)
-  const setDisplayParentBox = useGlobalStore(s => s.setDisplayParentBox)
   const setGlobalMini = useGlobalStore(s => s.setIsGlobalMini)
   const setChangeLogMini = useGlobalStore(s => s.setIsChangeLogMini)
   const { stacking, setStacking } = useGlobalStore(s => s)
@@ -35,7 +33,7 @@ export default function GlobalEditor() {
         <div className="editor-segment-row">
           Folding Level:
           <EchelonEditor echelonLevel={echelonFoldingLevel} onChange={setEchelonFoldingLevel} additionalStartingOption={-1} id="folding-echelon-editor" className="!max-w-20"/>
-          <SafeNumberInput count={foldingDepth} onCountChange={setFoldingDepth} className="!w-14" key="sni-foldingDepth"/>
+          <SafeNumberInput count={foldingDepth} onCountChange={setFoldingDepth} className="!w-14" id="sni-foldingDepth"/>
         </div>
 
         <div className="editor-segment-row">
@@ -63,9 +61,6 @@ export default function GlobalEditor() {
 
         <div className="editor-segment-row text">
           <SaveButtons/>
-
-          {!displayParentBox ? <button className="btn-emoji" onClick={() => setDisplayParentBox(true)}>➕🖼️</button> : null}
-          {displayParentBox ? <button className="btn-emoji" onClick={() => setDisplayParentBox(false)}>❌🖼️</button> : null}
         </div>
       </div>
 

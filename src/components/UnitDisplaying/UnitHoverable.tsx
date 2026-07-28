@@ -18,7 +18,10 @@ export function UnitHoverable(p: React.PropsWithChildren<props>) {
   }
 
   return (
-    <div onMouseEnter={() => callId(myId)} onMouseLeave={() => callOff()}>
+    <div 
+      onMouseEnter={() => callId(myId)} onMouseLeave={() => callOff()}
+      key={p.signature.toString()}
+    >
       {p.children}
     </div>
   )

@@ -5,17 +5,19 @@ import { GetChildIdFromPath, getComplexChildList } from "../../logic/Units/child
 import { DesignationPack, getMergedDPFromChildren } from "../../logic/Designations/designationPack";
 import { FoldingMap, getPathAsString, useForceFoldingStore } from "../../hooks/useForceFoldingStore";
 import { useStaffTextStore } from "../../hooks/useStaffTextStore";
+import TreeLineRefPoint from "./UnitTree/TreeLineRefPoint";
 
 interface TreeViewProps {
   path: number[];
   leftDisplayDepth: number;
   stack?: number;
   dp?: DesignationPack
+  parentClassification?: "a" | "b" | "c"
 }
 
 function TreeView(p : TreeViewProps) {
   const {unitMap, trueRootId, actingRootPath} = useUnitStore(s => s)
-  const {echelonFoldingLevel, stacking, displayParentBox} = useGlobalStore(s => s)
+  const {echelonFoldingLevel, stacking} = useGlobalStore(s => s)
   const { staffNames, staffComments } = useStaffTextStore(s => s)
   const foldingUnfoldingMap = useForceFoldingStore(s => s.foldingUnfoldingMap)
   const unitId = GetChildIdFromPath(trueRootId, p.path, unitMap) as string
@@ -26,17 +28,49 @@ function TreeView(p : TreeViewProps) {
     Please screenshot and send this to dev (konrad.m.schmidt@gmail.com)</>
 
   const classification = GetFoldingClassification(p.path, p.leftDisplayDepth, echelonFoldingLevel, unitMap, trueRootId, foldingUnfoldingMap, actingRootPath, stacking)
-  const box = (displayParentBox && classification === "a") ? "border-slate-500" : "border-transparent"
 
   function getDP(path: number[], startingIndex: number, count: number) {
     return getMergedDPFromChildren(path, startingIndex, count, unitMap, trueRootId, staffNames, staffComments)
   }
+
+  const treeLineHeight = 12
+  const bottomPadding = 16
+  const topPadding = 6
   
   return (
-    <div className={"border-dashed border-2 " + box + " flex flex-col"}>
+    <div className={"relative flex flex-col"}>
+
+      {p.parentClassification === "a" &&
+        <div className="flex flex-col min-w-3 items-center bg-blue-500/ 25">
+          <div style={{height: topPadding + treeLineHeight}}/>
+          <TreeLineRefPoint path={p.path}/>
+          <div className="w-fit" style={{height: treeLineHeight + bottomPadding, paddingBottom: bottomPadding}}>
+            <svg width="4" height="12" xmlns="http://www.w3.org/2000/svg">
+              <line 
+                className="dark:stroke-primary stroke-black" 
+                x1="2" y1="-2" x2="2" y2={treeLineHeight} 
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
+        </div>
+      }
+
       <div className="flex flex-row justify-center">
         <TreeNode signature={p.path} stack={p.stack} dp={p.dp}/>
       </div>
+
+      {classification === "a" &&
+        <div className="relative">
+          <div className="absolute justify-center w-full flex flex-col min-w-3 items-center bg-green-500/ 25">
+            <div className="w-fit h-fit" style={{height: treeLineHeight, paddingTop: topPadding}} >
+              <svg width="2" height="12" xmlns="http://www.w3.org/2000/svg">
+                <line className="dark:stroke-primary stroke-black" x1="1" y1="0" x2="1" y2={treeLineHeight} strokeWidth="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      }
       
       <div className={"tree-" + classification}>
         {unit.type === "org" && classification !== "c" && 
@@ -46,6 +80,7 @@ function TreeView(p : TreeViewProps) {
               leftDisplayDepth={p.leftDisplayDepth - 1}
               key={unitId + p.path + i}
               stack={stacking ? entry.count : 1} dp={getDP(p.path, entry.flatIndex, stacking ? entry.count : 1)}
+              parentClassification={classification}
             />
           ))}
       </div>
@@ -55,6 +90,7 @@ function TreeView(p : TreeViewProps) {
 
 export default TreeView;
 
+// A = proper tree, B = vertical list, C = properly folded
 // memoize? Normaly i would do it, but not sure how will it react with (haha) react
 export function GetFoldingClassification(
   path: number[], depthLeft: number, minEchelonLvl: number, unitMap: UnitMap, trueRootId: string, foldingMap: FoldingMap, actingRootPath: number[], isTreeStacking: boolean
@@ -71,20 +107,16 @@ export function GetFoldingClassification(
     return "c"
   }
 
-  const overrideDesigner = (
-    foldingMap[getPathAsString(path)] === "Fold" &&
-    getPathAsString(actingRootPath) !== getPathAsString(path)
-  )
-  if (overrideDesigner) {
+  const myPathAsStr = getPathAsString(path)
+  const overrideUserSettings = foldingMap[myPathAsStr]
+  
+  const isActingRoot = getPathAsString(actingRootPath) === myPathAsStr
+  if (overrideUserSettings === "Fold" && !isActingRoot) {
     return "c"
   }
-
-  // if (overrideDesigner === "Unfold") {
-  //   return "a"
-  // }
   
-  const cCusDesignerChoice = depthLeft <= 0 || unit.echelonLevel <= minEchelonLvl
-  if (cCusDesignerChoice && !overrideDesigner) {
+  const cCusUserSettingsChoice = depthLeft <= 0 || unit.echelonLevel <= minEchelonLvl
+  if (cCusUserSettingsChoice && overrideUserSettings !== "Unfold") {
     return "c"
   }
 

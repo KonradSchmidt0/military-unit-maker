@@ -28,7 +28,7 @@ export default function CountInParent() {
 
   return (
     <SafeNumberInput
-      key="count-in-parent"
+      id="count-in-parent"
       count={selfCountInParent}
       onCountChange={ (newCount: number) => {
         if (newCount <= 0) {
