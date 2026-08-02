@@ -19,7 +19,8 @@ export default function TreeLineRefPoint(p: p) {
 
   return <div
     ref={pair?.setEl}  // callback ref instead of object ref
+    className="TREE_LINE_REF_POINT" // For easier debug, no acctual class named like this
   >
-    <div className="absolute w-1 h-1 bg-pink-500/0"/>
+    <div className="absolute w-0 h-0 bg-pink-500/0"/>
   </div>
 }

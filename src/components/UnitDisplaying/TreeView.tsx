@@ -37,19 +37,38 @@ function TreeView(p : TreeViewProps) {
   const bottomPadding = 16
   const topPadding = 6
   
+  const UNIT_WIDHT = 54
+  const treeLineLenght = 8
+  const rightPadding = 4
+  
   return (
-    <div className={"relative flex flex-col"}>
+    <div className={p.parentClassification === "b" ? "relative flex flex-row" : "relative flex flex-col"}>
 
       {p.parentClassification === "a" &&
         <div className="flex flex-col min-w-3 items-center bg-blue-500/ 25">
           <div style={{height: topPadding + treeLineHeight}}/>
           <TreeLineRefPoint path={p.path}/>
           <div className="w-fit" style={{height: treeLineHeight + bottomPadding, paddingBottom: bottomPadding}}>
-            <svg width="4" height="12" xmlns="http://www.w3.org/2000/svg">
+            <svg width="4" height={treeLineHeight} xmlns="http://www.w3.org/2000/svg">
               <line 
-                className="dark:stroke-primary stroke-black" 
-                x1="2" y1="-2" x2="2" y2={treeLineHeight} 
-                strokeWidth="1"
+                className="ln-tree" 
+                x1="2" y1="-2" x2="2" y2={treeLineHeight+2} 
+                strokeWidth="1.5"
+              />
+            </svg>
+          </div>
+        </div>
+      }
+
+      {p.parentClassification === "b" &&
+        <div className=" bg-blue-500/ 25 items-center flex flex-row">
+          <TreeLineRefPoint path={p.path}/>
+          <div className="w-fit" style={{paddingRight: rightPadding}}>
+            <svg width={treeLineLenght} height="4" xmlns="http://www.w3.org/2000/svg">
+              <line 
+                className="ln-tree" 
+                x1="-2" y1="2" x2={treeLineLenght+2} y2="2"
+                strokeWidth="1.5"
               />
             </svg>
           </div>
@@ -65,9 +84,26 @@ function TreeView(p : TreeViewProps) {
           <div className="absolute justify-center w-full flex flex-col min-w-3 items-center bg-green-500/ 25">
             <div className="w-fit h-fit" style={{height: treeLineHeight, paddingTop: topPadding}} >
               <svg width="2" height="12" xmlns="http://www.w3.org/2000/svg">
-                <line className="dark:stroke-primary stroke-black" x1="1" y1="0" x2="1" y2={treeLineHeight} strokeWidth="1"/>
+                <line className="ln-tree" x1="1" y1="0" x2="1" y2={treeLineHeight} strokeWidth="1.5"/>
               </svg>
             </div>
+          </div>
+        </div>
+      }
+
+      {classification === "b" &&
+        <div className="relative items-end w-full bg-green-500/25">
+          <div 
+            className="w-fit absolute top-2"
+            style={{right: rightPadding + UNIT_WIDHT + treeLineLenght}}
+          >
+            <svg width={4} height={36} xmlns="http://www.w3.org/2000/svg">
+              <line 
+                className="ln-tree" 
+                x1="2" y1="-2" x2="2" y2="37"
+                strokeWidth="1.5"
+              />
+            </svg>
           </div>
         </div>
       }

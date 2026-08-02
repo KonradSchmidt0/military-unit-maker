@@ -19,6 +19,8 @@ import { GenerateInitialUnits } from '../logic/Units/myUnits';
 import { HoverInspector } from '../components/HoverInspector';
 import TreeLineDrawing from '../components/UnitDisplaying/UnitTree/TreeLineDrawing';
 import { useTreeLineStore } from '../hooks/useTreeLineStore';
+import { useEffect } from 'react';
+import { useThemeStore } from '../hooks/useThemeStore';
 
 const ini = GenerateInitialUnits()
 
@@ -31,12 +33,22 @@ function App() {
   const { actingRootPath } = useUnitStore()
   const displayDepth = useGlobalStore(s => s.foldingDepth)
   const { rootRef } = useTreeLineStore()
+  const {isDark} = useThemeStore();
 
   // Problem: User can hold shift to interact with units, but browser by default interprets shift as sign that you want to select text
   // Solution: We disable it, but only when shift is held, so user can still select text on page
   const disableSelection = useShortcutStore((s) => s.shift) ? "select-none" : ""
-  
+
   const isMobile = "ontouchstart" in window
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }, [isDark]);
 
   return (
     <div className={`flex dark:bg-bg dark:text-primary text-bg bg-primary ${disableSelection} transition-colors`}>

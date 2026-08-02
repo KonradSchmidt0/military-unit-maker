@@ -19,6 +19,15 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Tree lines! (2026 8 02)</b><br/>
+           - Added "Tree Lines", lines that connect subordinate units to. Added since they look cool and are great visual aid.<br/>
+           - Removed parent box since it was a temporary replacement for the same function<br/>
+           - Arrow navigation now adjust depending on if unit list is horizontal or vertical. This should make navigating more intuitive<br/>
+           - Lightmode/Darkmode is now localy stored<br/>
+           - Minor UI renames<br/>
+           - Fixed bug where unit would not unfold even if forced to<br/>
+          <br/>
+
           <b className='text-base'>Equipment group managing improvements (2026 7 10)</b><br/>
            - Creating and duplicating units should no longer change their names to allow for more smooth UX<br/>
            - You can now change eq group's name<br/>

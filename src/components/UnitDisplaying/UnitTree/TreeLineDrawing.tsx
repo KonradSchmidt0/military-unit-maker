@@ -36,8 +36,6 @@ export default function TreeLineDrawing() {
   //   in the root, root will apply all of the transformations during it's update
   const rootRect = rootRef.current?.getBoundingClientRect()
 
-  const lineThicknessOffset = .5
-
   if (!rootRect)
     return <>useTreeLineStore.rootRef is undefined!</>
 
@@ -49,18 +47,18 @@ export default function TreeLineDrawing() {
         if (!aRect || !bRect) return null;
 
         // Problem: Using the root solution doesn't fully solve the problem
-        // Solution: Divide by scale
-        const x1 = (aRect.left + aRect.width / 2 - rootRect.left) / scale - lineThicknessOffset
+        // Solution: We divide by scale at the moment that update takes place, and this fixes the issue
+        const x1 = (aRect.left + aRect.width / 2 - rootRect.left) / scale
         const y1 = (aRect.top + aRect.height / 2 - rootRect.top) / scale
-        const x2 = (bRect.left + bRect.width / 2 - rootRect.left) / scale + lineThicknessOffset
+        const x2 = (bRect.left + bRect.width / 2 - rootRect.left) / scale
         const y2 = (bRect.top + bRect.height / 2 - rootRect.top) / scale
 
-        // if (i === 0) {
+        // if (i === 2) {
         //   const qqq = [x1, y1, x2, y2]
         //   console.log(qqq.map(n => Math.round(n * 10)/10).join("_"))
         // }
 
-        return <line className="dark:stroke-primary stroke-black" key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={1} />;
+        return <line className="ln-tree" key={i} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth="1.5" />;
       })}
     </svg>
   );

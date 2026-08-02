@@ -71,11 +71,11 @@ a {
 }
 
 .tree-a {
-  @apply tree flex-row gap-14 mx-2
+  @apply tree flex-row gap-8 mx-2
 }
 
 .tree-b {
-  @apply tree flex-col my-10 gap-6
+  @apply tree flex-col mt-6 gap-6 min-w-[84px] items-end
 }
 
 .tree-c {
@@ -83,5 +83,5 @@ a {
 }
 
 .ln-tree {
-  @apply dark:border-white border-black border-l-[2px] border-t-[2px]
+  @apply dark:stroke-primary stroke-black
 }
