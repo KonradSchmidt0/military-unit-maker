@@ -1,6 +1,7 @@
+import { ColorMap } from "../../hooks/useColorPalletStore"
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { UnitMap } from "../../hooks/useUnitStore"
-import { GetTrueColor } from "../../logic/Units/childManaging"
+import { GetTrueColor } from "../../logic/Units/unitColorManaging"
 
 export function calculateUnitShadow(
   mySignature: number[] | string,
@@ -8,7 +9,8 @@ export function calculateUnitShadow(
   unitMap: UnitMap,
   rootId: string,
   hoveredId: string | undefined,
-  isDarkMode: boolean
+  isDarkMode: boolean,
+  colorMap: ColorMap,
 ) {
   const isAnythingSelected = selectedSignature !== undefined
   const isAnythingHovered = hoveredId !== undefined
@@ -27,7 +29,7 @@ export function calculateUnitShadow(
     return undefined
   }
   
-  const color = GetTrueColor(mySignature, rootId, unitMap)
+  const color = GetTrueColor(mySignature, rootId, unitMap, colorMap)
 
   // Problem: If we're in lightmode the background is white, which if unit is white makes the shadow almost imposible to see
   // Solution: If the color is too bright we turn it gray

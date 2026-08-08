@@ -5,9 +5,10 @@
 // Create a new special node just for it. You can play around with Complex Node to allow it to not take the parent but 
 // i judge it as too much time, since everything that Complex is made of is already very modular
 
+import { useColorPalletStore } from "../../hooks/useColorPalletStore"
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../hooks/useUnitStore"
-import { GetTrueColor } from "../../logic/Units/childManaging"
+import { GetTrueColor } from "../../logic/Units/unitColorManaging"
 import { UnitClickableIdSwapRoot } from "./UnitClickable/UnitClickableIdSwapRoot"
 import { UnitDisplay } from "./UnitDisplay"
 import { UnitHoverable } from "./UnitHoverable"
@@ -17,8 +18,8 @@ interface props {
 }
 
 export function RootSwapIdNode(p: props) {
-
   const { unitMap, trueRootId } = useUnitStore(s => s)
+  const { colorMap } = useColorPalletStore()
 
   const unitId = processSignature(p.unitSignature, unitMap, trueRootId)
   if (!unitId) {
@@ -28,7 +29,7 @@ export function RootSwapIdNode(p: props) {
 
   return <UnitClickableIdSwapRoot>
     <UnitHoverable signature={p.unitSignature} >
-      <UnitDisplay unitId={unitId} color={GetTrueColor(p.unitSignature, trueRootId, unitMap)}/>
+      <UnitDisplay unitId={unitId} color={GetTrueColor(p.unitSignature, trueRootId, unitMap, colorMap)}/>
     </UnitHoverable> 
   </UnitClickableIdSwapRoot>
 }

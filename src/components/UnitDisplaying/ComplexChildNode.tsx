@@ -1,8 +1,9 @@
+import { useColorPalletStore } from "../../hooks/useColorPalletStore";
 import { useHoverStore } from "../../hooks/useHoverStore";
 import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
-import { GetTrueColor } from "../../logic/Units/childManaging";
+import { GetTrueColor } from "../../logic/Units/unitColorManaging";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
 import { UnitClickableIdSwap } from "./UnitClickable/UnitClickableIdSwap";
 import { UnitDisplay } from "./UnitDisplay";
@@ -20,6 +21,7 @@ export function ComplexChildNode(p: props) {
   const isDarkmode = useThemeStore(s => s.isDark)
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId} = useHoverStore(s => s)
+  const { colorMap } = useColorPalletStore()
   
   const childId = processSignature(p.childSignature, unitMap, trueRootId)
   if (!childId) {
@@ -27,8 +29,8 @@ export function ComplexChildNode(p: props) {
     return null
   }
     
-  const color = GetTrueColor(p.childSignature, trueRootId, unitMap)
-  const boxShadow = calculateUnitShadow(p.childSignature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode)
+  const color = GetTrueColor(p.childSignature, trueRootId, unitMap, colorMap)
+  const boxShadow = calculateUnitShadow(p.childSignature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap)
 
   return (
     <UnitClickableIdSwap parentSignature={p.parentSignature} childSignature={p.childSignature} whoSelectOnSelectClick={p.whoSelectOnSelectClick}>

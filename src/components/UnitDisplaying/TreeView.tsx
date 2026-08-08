@@ -100,7 +100,7 @@ function TreeView(p : TreeViewProps) {
             <svg width={4} height={36} xmlns="http://www.w3.org/2000/svg">
               <line 
                 className="ln-tree" 
-                x1="2" y1="-2" x2="2" y2="37"
+                x1="1.5" y1="-2" x2="1.5" y2="35.5"
                 strokeWidth="1.5"
               />
             </svg>

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { UnitDisplay } from "./UnitDisplaying/UnitDisplay";
-import { defaultUnitColor } from "../logic/Units/logic";
 import { useUnitDropdownStore } from "../hooks/useUnitDropdownStore";
+import { useColorPalletStore } from "../hooks/useColorPalletStore";
+import { getColorInVoid } from "../logic/Units/unitColorManaging";
 
 export default function UnitDropdown() {
+  const { colorMap } = useColorPalletStore()
+
   const options = Object.entries(useUnitDropdownStore(s => s.options) ?? {}).map(entry => ({unit: entry[1], id: entry[0]}))
   const {onChosen, pos, callDropDown} = useUnitDropdownStore(s => s)
   
@@ -49,7 +52,7 @@ export default function UnitDropdown() {
             <div className="w-20 flex justify-center">
               <UnitDisplay 
                 unitId={entry.id} 
-                color={entry.unit.smartColor !== "inheret" ? entry.unit.smartColor : defaultUnitColor}
+                color={getColorInVoid(entry.unit.smartColor, colorMap)}
                 className="!w-8 !mt-1"
               />
             </div>
@@ -58,7 +61,7 @@ export default function UnitDropdown() {
         ))}
 
         {filtered.length === 0 &&
-          <div className="text-white/90 text-xs m-1">
+          <div className="dark:text-white/90 text-black/90 text-xs m-1">
             <p className="font-semibold m-1 text-center">No safe units in palet!</p>
             <ul className="list-disc list-inside space-y-1 text-left">
               <li>Some Units are not shown since they could cause infinite loop.</li>

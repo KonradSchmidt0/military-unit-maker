@@ -2,12 +2,13 @@ import { useHoverStore } from "../../hooks/useHoverStore";
 import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
-import { GetTrueColor } from "../../logic/Units/childManaging";
+import { GetTrueColor } from "../../logic/Units/unitColorManaging";
 import { DesignationPack } from "../../logic/Designations/designationPack";
 import { calculateUnitShadow } from "./CalculateUnitShadow";
 import { UnitClickableSelect } from "./UnitClickable/UnitClickableSelect";
 import { UnitDisplay } from "./UnitDisplay"
 import { UnitHoverable } from "./UnitHoverable";
+import { useColorPalletStore } from "../../hooks/useColorPalletStore";
 
 interface TreeNodeProps {
   signature: number[] | string
@@ -24,6 +25,7 @@ function TreeNode(p: TreeNodeProps) {
   const isDarkmode = useThemeStore(s => s.isDark)
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId } = useHoverStore(s => s)
+  const {colorMap} = useColorPalletStore()
   
   const myId = processSignature(p.signature, unitMap, trueRootId)
 
@@ -32,8 +34,8 @@ function TreeNode(p: TreeNodeProps) {
     return <>Something went wrong with signature :(</>
   }
 
-  const color = GetTrueColor(p.signature, trueRootId, unitMap)
-  const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode)
+  const color = GetTrueColor(p.signature, trueRootId, unitMap, colorMap)
+  const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap)
  
   return (
     <UnitHoverable signature={p.signature}>

@@ -1,5 +1,5 @@
 import { UnitMap } from "../../hooks/useUnitStore";
-import { OrgUnit, ChildrenList, defaultUnitColor } from "./logic";
+import { OrgUnit, ChildrenList } from "./logic";
 
 export function addChild(
   parent: OrgUnit,
@@ -159,31 +159,6 @@ export function GetChildIdFromPath(rootId: string, path: number[], unitMap: Unit
   }
   const np = path.slice(1)
   return GetChildIdFromPath(nextId, np, unitMap)
-}
-
-function GetTrueColorRecursively(rootId: string, path: number[], unitMap: UnitMap): `#${string}` {
-  if (path.length <= 0) {
-    const root = unitMap[rootId] 
-    return (root.smartColor !== "inheret" ? root.smartColor : defaultUnitColor)
-  }
-  const unitId = GetChildIdFromPath(rootId, path, unitMap)
-  if (!unitId) {
-    return defaultUnitColor
-  }
-  const unit = unitMap[unitId]
-  if (unit.smartColor !== "inheret") {
-    return unit.smartColor
-  }
-  return GetTrueColorRecursively(rootId, path.slice(0, -1), unitMap)
-}
-
-export function GetTrueColor(signature: number[] | string, rootId: string, unitMap: UnitMap): `#${string}` {
-  if (!Array.isArray(signature)) {
-    const unit = unitMap[signature]
-    return unit.smartColor !== "inheret" ? unit.smartColor : defaultUnitColor
-  }
-
-  return GetTrueColorRecursively(rootId, signature, unitMap)
 }
 
 // Complex as in combines both standard child list (id: count) and flat list (flatten array)

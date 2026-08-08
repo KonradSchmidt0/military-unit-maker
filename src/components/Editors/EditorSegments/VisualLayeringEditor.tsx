@@ -1,8 +1,9 @@
+import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 import { useIconsStore } from "../../../hooks/useIcons";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { GetTrueColor } from "../../../logic/Units/childManaging";
+import { GetTrueColor } from "../../../logic/Units/unitColorManaging";
 import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay";
 
 export function VisualLayeringEditor() {
@@ -13,6 +14,7 @@ export function VisualLayeringEditor() {
   const unit = unitMap[unitId];
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const { callSimpleI, callOff } = useHoverStore(s => s)
+  const { colorMap } = useColorPalletStore()
 
   const setDropdown_onChosen = useIconsStore(s => s.callDropDown)
 
@@ -58,7 +60,7 @@ export function VisualLayeringEditor() {
       <div className="flex flex-row gap-2 mb-2 relative">
         <UnitDisplay 
           unitId={unitId} 
-          color={GetTrueColor(unitSignature, trueRootId, unitMap)}
+          color={GetTrueColor(unitSignature, trueRootId, unitMap, colorMap)}
           className="!w-28 translate-y-4"
           onClick={handleClickOnDisp}
           showLeftText={false} showRightText={false}

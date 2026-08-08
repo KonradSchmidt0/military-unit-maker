@@ -29,13 +29,15 @@ export default function ArrowNavigation() {
 
       if (isTyping) return;
 
+      e?.preventDefault()
+
       const path = (slctd as number[])
       const selectedId  = processSelect(path, unitMap, trueRootId)
       const unit = unitMap[selectedId ?? ""]
       const parentId = processSelect(path.slice(0, -1), unitMap, trueRootId)
       const parentsFoldingClass = GetFoldingClassification(
         path.slice(0, -1), 
-        foldingDepth - path.length - 2, 
+        foldingDepth, 
         echelonFoldingLevel,
         unitMap, trueRootId, foldingUnfoldingMap, actingRootPath, treeStacking
       )
@@ -62,13 +64,13 @@ export default function ArrowNavigation() {
         }
 
         const flatChildrenLenght = GetFlatIds((unitMap[parentId] as OrgUnit).children).length 
-        let o = path[path.length - 1] + d
-        o = (flatChildrenLenght * 2 + o) % flatChildrenLenght
-        selectSibling(o)
+        const o = path[path.length - 1] + d
+        selectSibling( (o + flatChildrenLenght * 2) % flatChildrenLenght )
       }
 
       const bindings: Record<string, () => void> = 
-        parentsFoldingClass !== "b" ? {
+        //parentsFoldingClass !== "b" ? {
+        true ? {
           ArrowUp: () => handleSelectParent(),
           ArrowDown: () => handleSelectChild(),
           ArrowLeft: () => handleSelectSibling(-1),

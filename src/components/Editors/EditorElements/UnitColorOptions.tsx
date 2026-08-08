@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor, SmartColor } from "../../../logic/Units/logic";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { GetTrueColor } from "../../../logic/Units/childManaging";
+import { GetTrueColor } from "../../../logic/Units/unitColorManaging";
 import { useHoverStore } from "../../../hooks/useHoverStore";
+import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
 
 
 export function UnitColorOptions() {
@@ -12,11 +13,12 @@ export function UnitColorOptions() {
   const selectSignature = useUnitInteractionStore(s => s.selectSignature)
   const updateUnit = useUnitStore(s => s.updateUnit)
   const { callSimpleI, callOff } = useHoverStore(s => s)
+  const { colorMap } = useColorPalletStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[selectedId];
   
-  const [color, setColor] = useState<SmartColor>(unit?.smartColor === "inheret" ? defaultUnitColor : unit?.smartColor)
+  const [color, setColor] = useState<SmartColor>(defaultUnitColor)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -24,7 +26,7 @@ export function UnitColorOptions() {
     }, 120);
 
     return () => clearTimeout(timeout);
-    }, [color]); // If you add more things to dependencies it will break the ctrl z 
+  }, [color]); // If you add more things to dependencies it will break the ctrl z 
 
   useEffect(() =>  {
     setColor(unit.smartColor)
@@ -34,40 +36,60 @@ export function UnitColorOptions() {
     return null
   }
 
+  const unitSC = unit.smartColor
+  const unitColorType = 
+    unitSC === "inheret" ? "inheret" :
+    typeof unitSC === "number" ? "pallet" :
+    "manual"
+
+  const colorOptions = [
+    {
+      text: "🕊️🖌️",
+      value: "manual",
+      onclick: () => { 
+        let c = GetTrueColor(selectSignature, trueRootId, unitMap, colorMap)
+        updateUnit(selectedId, { ...unit, smartColor: c})
+      }
+    },
+    {
+      text: "⬆️🖌️",
+      value: "inheret",
+      onclick: () => { updateUnit(selectedId, { ...unit, smartColor: "inheret"}) }
+    },
+    {
+      text: "🎨🖌️",
+      value: "pallet",
+      onclick: () => { updateUnit(selectedId, { ...unit, smartColor: 0}) }
+    },
+  ]
+
+  const onUserChangingType = (value: string) => {
+    const selected = colorOptions.find((opt) => opt.value === value);
+    selected?.onclick?.();
+  };
+
   const colorPicker = 
     (<input
       id="ColorPickerInputId"
       type="color"
       value={color}
       onChange={(e) => {
-        setColor(e.target.value as SmartColor);
+        setColor(e.target.value as `#${string}`);
       }}
       className="editor-element !p-0 !h-8"
       onMouseEnter={() => { callSimpleI("Selects color of the unit") }}
       onMouseLeave={() => callOff()}
     />)
-  const inheretColor = (
-    <button 
-      className="btn-emoji" 
-      onClick={() => { updateUnit(selectedId, { ...unit, smartColor: "inheret"}) }}
-      onMouseEnter={() => { callSimpleI("Inherits color from parent") }}
-      onMouseLeave={() => callOff()}
-    >⬆️🖌️</button>
-  )
-  const uninheretColor = (
-    <button 
-      className="btn-emoji" 
-      onClick={() => { 
-        let c = GetTrueColor(selectSignature, trueRootId, unitMap)
-        updateUnit(selectedId, { ...unit, smartColor: c}) }
-      }
-      onMouseEnter={() => { callSimpleI("Allows to manually set color of the unit") }}
-      onMouseLeave={() => callOff()}
-    >🕊️🖌️</button>
-  )
 
   return <>
-    {unit.smartColor !== "inheret" ? colorPicker : null}
-    {unit.smartColor === "inheret" ? uninheretColor : inheretColor}
+    {typeof unit.smartColor === "string" && unit.smartColor[0] === "#" ? colorPicker : null}
+    {typeof unit.smartColor === "number" ? null : null} 
+    <select className="editor-element" value={unitColorType} onChange={e => onUserChangingType(e.target.value)}>
+      {colorOptions.map(e => (
+        <option value={e.value} key={e.value}>
+          {e.text}
+        </option>
+      ))}
+    </select>
   </>
 }
