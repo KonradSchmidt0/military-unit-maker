@@ -47,7 +47,7 @@ export function UnitColorOptions() {
       text: "🕊️🖌️",
       value: "manual",
       onclick: () => { 
-        let c = GetTrueColor(selectSignature, trueRootId, unitMap, colorMap)
+        const c = GetTrueColor(selectSignature, trueRootId, unitMap, colorMap)
         updateUnit(selectedId, { ...unit, smartColor: c})
       }
     },

@@ -1,10 +1,11 @@
+import { ColorMap, defaultColorMap, useColorPalletStore } from "../../hooks/useColorPalletStore";
 import { EquipGroup, useEquipGroupingStore } from "../../hooks/useEquipGroupingStore";
 import { usePaletStore } from "../../hooks/usePaletStore";
 import { StaffText, useStaffTextStore } from "../../hooks/useStaffTextStore";
 import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-export const SAVE_SYSTEM_VERSION = 8;
+export const SAVE_SYSTEM_VERSION = 9;
 
 interface SaveFile {
   version: number;
@@ -14,6 +15,7 @@ interface SaveFile {
   staffComments: StaffText[];
   staffNames: StaffText[];
   equipGroups: EquipGroup[];
+  colorMap: ColorMap;
 }
 
 export function getSaveFileJson(): string {
@@ -23,6 +25,7 @@ export function getSaveFileJson(): string {
   const staffComments = useStaffTextStore.getState().staffComments;
   const staffNames = useStaffTextStore.getState().staffNames;
   const equipGroups = useEquipGroupingStore.getState().groups;
+  const colorMap = useColorPalletStore.getState().colorMap
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -31,20 +34,21 @@ export function getSaveFileJson(): string {
     rootUnitId,
     staffComments,
     staffNames,
-    equipGroups
+    equipGroups,
+    colorMap
   };
 
   return JSON.stringify(saveData, null, 2);
 }
 
-export function saveToFile(filename: string = "mysave.json") {
+export function saveToFile(filename: string = "MyUnit") {
   const jsonString = getSaveFileJson();
   const blob = new Blob([jsonString], { type: "application/json" });
 
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = filename;
+  a.download = filename + ".json";
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -74,6 +78,7 @@ export function loadSaveFile(
     useUnitStore.setState({unitMap: unitMap, trueRootId: json.rootUnitId})
     useStaffTextStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
     useEquipGroupingStore.setState({groups: json.equipGroups ?? []})
+    useColorPalletStore.setState({colorMap: json.colorMap ?? defaultColorMap})
   } catch (err) {
     alert("Failed to load file: " + (err as Error).message);
   }

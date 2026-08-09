@@ -1,81 +1,22 @@
-import { useState } from "react";
-import { usePaletStore } from "../../hooks/usePaletStore";
-import { useUnitStore } from "../../hooks/useUnitStore";
-import TreeNode from "../UnitDisplaying/TreeNode";
-import { Unit } from "../../logic/Units/logic";
 import { useGlobalStore } from "../../hooks/useGlobalStore";
+import ColorPalletSegment from "./EditorSegments/PalletSegments/ColorPalletSegment";
+import UnitPalletSegment from "./EditorSegments/PalletSegments/UnitPalletSegment";
 
 export default function PalletEditorSegment() {
-  const rootUnitId = useUnitStore((s) => s.trueRootId)
-  
-  const [showHidden, setShowHidden] = useState<boolean>(false);
-
-  const unitMap = useUnitStore((state) => state.unitMap);
-  const setUnitMap = useUnitStore((state) => state.setUnitMap);
-  
-  const unitPalet = usePaletStore((state) => state.unitPalet);
-  const addUnitToPalet = usePaletStore((state) => state.addUnitToPalet);
-  const removeUnitFromPalet = usePaletStore((state) => state.removeUnitFromPalet);
-
   const setPalletMini = useGlobalStore(s => s.setIsPalletMini)
-
-  const handleRemovingFromMemory = (unitId: string) => {
-    if (rootUnitId === unitId) { window.alert("Can't delete root unit"); return; }
-    if (!window.confirm(`Are you sure you want to remove ${unitMap[unitId].name} from memory? It can't be undone`)) { return; }
-    
-    // Create a new copy of unitMap without the unitId
-    const { [unitId]: _, ...newUnitMap } = unitMap;
-
-    if (unitPalet.includes(unitId))
-      removeUnitFromPalet(unitId)
-
-    setUnitMap(newUnitMap);
-  };
-
-  const isInPalet = (unitId: string) => unitPalet.includes(unitId);
-
-  const displayedList = showHidden
-    ? Object.entries(unitMap) // show everything when "showHidden" is true
-    : Object.entries(unitMap).filter(([id, unit]) => isInPalet(id))
-    
-
-  const addToPalletButton = (unitId: string, inPalet: boolean) => 
-    showHidden && !inPalet && (<button className="btn-emoji" onClick={() => addUnitToPalet(unitId)}> ➕🎨 </button> )
-  const removeFromPalletButton = (unitId: string, inPalet: boolean) =>
-    inPalet && (<button className="btn-emoji" onClick={() => removeUnitFromPalet(unitId)}> 🎨🚮 </button> )
-  const buttonToRemoveUnitFromMemory = (unitId: string) =>
-    showHidden && (<button className="btn-emoji" onClick={() => handleRemovingFromMemory(unitId)}> ➡️🗑️ </button> )
 
   return (
     <div className="editor-box">
       <div className="editor-segment-header">
         <div className="absolute left-1/2 -translate-x-1/2">
-          PALLET
-          <button
-            onClick={() => setShowHidden(!showHidden)}
-            className="btn-emoji !ml-2 !py-0"
-          >
-            {showHidden ? "🪖💾" : "🪖🎨"}
-          </button>
+          PALLETS 🎨
         </div>
         <button className="btn-emoji !p-0 ml-auto" onClick={() => setPalletMini(true)}>❌</button>
       </div>
 
       <div className="overflow-auto">
-        <div className="editor-segment flex flex-col gap-4 mt-2.5">
-          {displayedList.length === 0 && <div className="text-primary/50">No units to display</div>}
-          {displayedList.map(([unitId, unit]) => {
-            const inPalet = isInPalet(unitId);
-            return (
-              <div key={unitId} className="editor-segment-row">
-                {<TreeNode signature={unitId}/>}
-                {addToPalletButton(unitId, inPalet)}
-                {removeFromPalletButton(unitId, inPalet)}
-                {buttonToRemoveUnitFromMemory(unitId)}
-              </div>
-            );
-          })}
-        </div>
+        <UnitPalletSegment/>
+        <ColorPalletSegment/>
       </div>
     </div>
   );

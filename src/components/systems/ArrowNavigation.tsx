@@ -6,6 +6,7 @@ import { OrgUnit } from '../../logic/Units/logic';
 import { GetFoldingClassification } from '../UnitDisplaying/TreeView';
 import { useGlobalStore } from '../../hooks/useGlobalStore';
 import { useForceFoldingStore } from '../../hooks/useForceFoldingStore';
+import { useShortcutStore } from '../../hooks/shortcutStore';
 
 export default function ArrowNavigation() {
   const { selectParent, selectSibling, selectChild } = useUnitInteractionStore()
@@ -14,6 +15,8 @@ export default function ArrowNavigation() {
   const {unitMap, trueRootId, actingRootPath} = useUnitStore()
   const { foldingDepth, echelonFoldingLevel, stacking: treeStacking } = useGlobalStore()
   const { foldingUnfoldingMap } = useForceFoldingStore()
+
+  const { alt } = useShortcutStore()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -28,6 +31,8 @@ export default function ArrowNavigation() {
         );
 
       if (isTyping) return;
+
+      if (alt) return;
 
       e?.preventDefault()
 
@@ -88,7 +93,7 @@ export default function ArrowNavigation() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [slctd, trueRootId, unitMap, actingRootPath, echelonFoldingLevel, foldingDepth, foldingUnfoldingMap, treeStacking,
-    selectChild, selectParent, selectSibling]);
+    selectChild, selectParent, selectSibling, alt]);
 
   return null; // no UI
 }

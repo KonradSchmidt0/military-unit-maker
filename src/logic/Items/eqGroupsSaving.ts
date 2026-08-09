@@ -35,14 +35,14 @@ function loadJSONObject(jsonString: string) {
   }
 }
 
-export function saveToFile(filename: string = "mysave.json") {
+export function saveToFile(filename: string = "MyEqGroups") {
   const jsonString = getSaveJSON()
   const blob = new Blob([jsonString], { type: "application/json" });
 
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = filename;
+  a.download = filename + ".json";
   a.click();
   URL.revokeObjectURL(url);
 }

@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.editor-element {
+.editor-element-static {
   @apply py-1 px-3 border dark:border-primary dark:bg-bg_alt border-bg bg-primary;
+}
+
+.editor-element {
+  @apply editor-element-static;
   @apply hover:rounded-md;
   @apply cursor-pointer transition-all duration-200 ease-in-out;
 }
@@ -27,7 +31,7 @@
 }
 
 .editor-segment {
-  @apply dark:border-bg_alt border-primary_alt border-b-2 border-dashed p-2 text-center items-center;
+  @apply dark:border-bg_alt border-primary_alt border-b-2 border-dashed p-2 text-center items-center min-h-10;
 }
 
 .editor-segment-flex {

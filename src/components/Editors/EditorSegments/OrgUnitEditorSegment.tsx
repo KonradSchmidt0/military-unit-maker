@@ -63,6 +63,7 @@ export default function OrgUnitEditorSegment() {
     </div>
   </>)
 
+  // TODO: Make draggable 
   const childEdittingList = getComplexChildList(unit, false).map((entry, i) =>  {
     const childSignature = Array.isArray(select) ? [...select, entry.flatIndex] : entry.childId
     return <ChildRow key={i + "childEdittingList"}
