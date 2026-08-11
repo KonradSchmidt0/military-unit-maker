@@ -1,56 +1,38 @@
-import { useEffect, useRef, useState } from "react";
 import { useIconsStore } from "../../hooks/useIcons";
+import MouseDropdown from "./MouseDropdowns/MouseDropdown";
+import { DropdownTagFilteredList } from "./MouseDropdowns/DropdownTagFilteredList";
 
 export default function IconDropdown() {
-  const icons = useIconsStore(s => s.icons)
-  const onChosen = useIconsStore(s => s.dropDown_onChosen)
-  const pos = useIconsStore(s => s.dropdown_pos)
-  const setOnChosen = useIconsStore(s => s.callDropDown)
-  
-  const [search, setSearch] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (onChosen && inputRef.current && !('ontouchstart' in window)) {
-      inputRef.current.focus();
-    }
-  }, [onChosen]);
-   
+  const { icons, dropDown_onChosen: onChosen, dropdown_pos: pos, callDropDown} = useIconsStore()
 
   if (!onChosen)
     return null
   
-  const restart = () => { setSearch(""); setOnChosen(undefined) }
-  
-  const filtered = icons.filter(entry =>
-    entry.tags.toLowerCase().includes(search.toLowerCase()) //TODO split the search along the spaces, and loop for each word
-  );
+  const OnOptionChoosenOrExited = () => { callDropDown(undefined) }
 
   return (
-    <div className="editor-box !absolute !z-10  dark:!bg-bg !bg-white !border-r-2 rounded-lg transition-colors" style={{ top: pos.top, left: pos.left }}>
-      <div className="flex flex-row px-2 gap-2">
-        <input
-          type="text"
-          className="editor-element !w-full"
-          placeholder="Search by tag..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          ref={inputRef}
-        />
-        <button className="btn-emoji" onClick={restart}>❌</button>
-      </div>
-
-      <div className="max-h-60 overflow-y-auto">
-        {filtered.map((entry, index) => (
+    <MouseDropdown pos={pos}>
+      <DropdownTagFilteredList
+        list={icons}
+        placeholder="Search icons by tags..."
+        OnExit={OnOptionChoosenOrExited}
+        GetEntrysTags={(entry) => entry.filename}
+        Entry2OptionNode={(entry, _) => (
           <div 
-            key={index} 
-            className="flex items-center gap-2 p-1 dark:hover:bg-bg_alt hover:bg-primary_alt cursor-pointer h-10"
-            onClick={() => {onChosen(entry.filename); restart()}}
+            key={entry.filename} 
+            className="dropdown-option"
+            onClick={() => {onChosen(entry.filename); OnOptionChoosenOrExited()}}
           >
-            <img src={`${process.env.PUBLIC_URL}/icons/${entry.filename}`} alt={entry.tags} className="w-8 unit object-contain bg-white" />
+            <img 
+              src={`${process.env.PUBLIC_URL}/icons/${entry.filename}`} 
+              alt={entry.tags} 
+              className="w-8 unit object-contain bg-white" 
+            />
             <span className="text-sm">{entry.tags}</span>
           </div>
-        ))}
-      </div>
-    </div>
+        )}
+      />
+    </MouseDropdown>
   );
 }
+          

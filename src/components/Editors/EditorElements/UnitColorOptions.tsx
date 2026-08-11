@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { defaultUnitColor, SmartColor } from "../../../logic/Units/logic";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { GetTrueColor } from "../../../logic/Units/unitColorManaging";
-import { useHoverStore } from "../../../hooks/useHoverStore";
 import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
+import { useColorPalletDropdownStore } from "../../../hooks/useColorPalletDropdownStore";
 
 
 export function UnitColorOptions() {
@@ -12,13 +12,15 @@ export function UnitColorOptions() {
   const trueRootId = useUnitStore(s => s.trueRootId)
   const selectSignature = useUnitInteractionStore(s => s.selectSignature)
   const updateUnit = useUnitStore(s => s.updateUnit)
-  const { callSimpleI, callOff } = useHoverStore(s => s)
   const { colorMap } = useColorPalletStore()
+  const { CallColorDropdown, onChosen } = useColorPalletDropdownStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[selectedId];
   
   const [color, setColor] = useState<SmartColor>(defaultUnitColor)
+
+  const mousePos = useRef({x: 0, y: 0})
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -59,7 +61,12 @@ export function UnitColorOptions() {
     {
       text: "🎨🖌️",
       value: "pallet",
-      onclick: () => { updateUnit(selectedId, { ...unit, smartColor: 0}) }
+      onclick: () => { 
+        CallColorDropdown( 
+          (userChosenIndex) => updateUnit(selectedId, { ...unit, smartColor: userChosenIndex}),
+          {top: mousePos.current.y, left: mousePos.current.x}
+        ) 
+      }
     },
   ]
 
@@ -77,19 +84,37 @@ export function UnitColorOptions() {
         setColor(e.target.value as `#${string}`);
       }}
       className="editor-element !p-0 !h-8"
-      onMouseEnter={() => { callSimpleI("Selects color of the unit") }}
-      onMouseLeave={() => callOff()}
     />)
+  const colorPalletCaller = (
+    <button 
+      className="btn-emoji" 
+      onClick={ (e) =>{
+        onChosen === undefined ? 
+          CallColorDropdown(
+            (chosenIndex) => updateUnit(selectedId, {...unit, smartColor: chosenIndex}),
+            {top: e.clientY, left: e.clientX}
+          ) : 
+          CallColorDropdown(undefined)
+      }}
+    >🎨 </button>
+  )
 
   return <>
     {typeof unit.smartColor === "string" && unit.smartColor[0] === "#" ? colorPicker : null}
-    {typeof unit.smartColor === "number" ? null : null} 
-    <select className="editor-element" value={unitColorType} onChange={e => onUserChangingType(e.target.value)}>
+    <select
+      className="editor-element"
+      value={unitColorType}
+      onMouseDown={(e) => {
+        mousePos.current = { x: e.clientX, y: e.clientY }
+      }}
+      onChange={e => onUserChangingType(e.target.value)}
+      >
       {colorOptions.map(e => (
         <option value={e.value} key={e.value}>
           {e.text}
         </option>
       ))}
     </select>
+    {typeof unit.smartColor === "number" ? colorPalletCaller : null} 
   </>
 }

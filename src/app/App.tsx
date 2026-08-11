@@ -21,6 +21,7 @@ import { useThemeStore } from '../hooks/useThemeStore';
 import ChangelogOverlay from '../components/Overlays/ChangeLog';
 import { DialogBox } from '../components/Overlays/DialogBox';
 import ShortcutBox from '../components/Overlays/ShortcutBox';
+import ColorPalletDropdown from '../components/Overlays/MouseDropdowns/ColorPalletDropdown';
 
 const ini = GenerateInitialUnits()
 
@@ -63,9 +64,10 @@ function App() {
       {!isMobile && <HoverInspector/>}
       {!isMobile && <ShortcutBox/>}
       <ChangelogOverlay/>
-      <IconDropdown/>
       <DialogBox/>
+      <IconDropdown/>
       <UnitDropdown/>
+      <ColorPalletDropdown/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

@@ -18,6 +18,17 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Color pallet (2026 8 11)</b><br/>
+           - Added 3rd mode to colors the unit can be, Pallet<br/>
+           - Color pallets can be managed under the 🎨 emoji in top right<br/>
+           - Took oporunity to tidy up unit pallet manager on ocasion<br/>
+           - All dropdowns now appear on the top of screen when in touchmode, hopefully making it so keyboard won't be covering it<br/>
+           - Temporarlly removed adaptive arrow navigation since it was buggy and questionably improved UX<br/>
+           - Fixed arrow navigation not preventing default browser behaviour<br/>
+           - Fixed bug where top of b type tree line would be a bit off centered<br/>
+           - Fixed: All save files now end with .json, even if user doesn't specify<br/>
+          <br/>
+
           <b className='text-base'>Tree lines! (2026 8 02)</b><br/>
            - Added "Tree Lines", lines that connect subordinate units to. Added since they look cool and are great visual aid.<br/>
            - Removed parent box since it was a temporary replacement for the same function<br/>
