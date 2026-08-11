@@ -4,15 +4,12 @@ import { usePaletStore } from '../hooks/usePaletStore';
 import { useShortcutStore } from '../hooks/shortcutStore';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { useGlobalStore } from '../hooks/useGlobalStore';
-import ChangelogOverlay from '../components/ChangeLog';
-import ShortcutBox from '../components/ShortcutBox';
 import { EditorPanel } from '../components/Editors/EditorPanel';
 import IconDropdown from '../components/Overlays/IconDropdown';
 import { AutoSave } from '../components/systems/AutoSave';
 import ArrowNavigation from '../components/systems/ArrowNavigation';
 import { KeyboardWatcher } from '../components/systems/KeyboardWatcher';
 import { LoadIconsCsv } from '../components/systems/LoadIconsCsv';
-import { DialogBox } from '../components/DialogBox';
 import { EmptyUnitsInTreeSystem } from '../components/systems/EmptyUnitsInTreeSystem';
 import UnitDropdown from '../components/Overlays/UnitDropdown';
 import { GenerateInitialUnits } from '../logic/Units/myUnits';
@@ -21,6 +18,9 @@ import TreeLineDrawing from '../components/UnitDisplaying/UnitTree/TreeLineDrawi
 import { useTreeLineStore } from '../hooks/useTreeLineStore';
 import { useEffect } from 'react';
 import { useThemeStore } from '../hooks/useThemeStore';
+import ChangelogOverlay from '../components/Overlays/ChangeLog';
+import { DialogBox } from '../components/Overlays/DialogBox';
+import ShortcutBox from '../components/Overlays/ShortcutBox';
 
 const ini = GenerateInitialUnits()
 
