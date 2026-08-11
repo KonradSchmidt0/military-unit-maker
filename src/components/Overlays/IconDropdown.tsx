@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useIconsStore } from "../hooks/useIcons";
+import { useIconsStore } from "../../hooks/useIcons";
 
 export default function IconDropdown() {
   const icons = useIconsStore(s => s.icons)

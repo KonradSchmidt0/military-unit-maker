@@ -1,7 +1,7 @@
-import { useShortcutStore } from "../hooks/shortcutStore";
+import { useShortcutStore } from "../../hooks/shortcutStore";
 
 export default function ShortcutBox() {
-  const { shift, ctrl, alt } = useShortcutStore(s => s);
+  const { shift, ctrl, alt } = useShortcutStore();
 
   const text = (
     <>

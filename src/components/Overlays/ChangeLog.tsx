@@ -1,9 +1,8 @@
-import { useGlobalStore } from '../hooks/useGlobalStore';
-import { ExtrnlLink } from './ExtrnlLink';
+import { useGlobalStore } from "../../hooks/useGlobalStore";
+import { ExtrnlLink } from "../ExtrnlLink";
 
 export default function ChangelogOverlay() {
-  const isMini = useGlobalStore(s => s.isChangeLogMini)
-  const setMini = useGlobalStore(s => s.setIsChangeLogMini)
+  const { isGlobalMini: isMini, setIsGlobalMini: setMini } = useGlobalStore()
 
   if (isMini) return null;
 

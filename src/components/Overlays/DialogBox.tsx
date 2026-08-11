@@ -1,10 +1,6 @@
-import { useDialogBoxStorage } from "../hooks/useDialogBoxStore";
+import { useDialogBoxStorage } from "../../hooks/useDialogBoxStore";
 
-interface props {
-
-}
-
-export function DialogBox(p: props) {
+export function DialogBox() {
   const { isOpen, header, longText, options, close } = useDialogBoxStorage()
   
   if (!isOpen)

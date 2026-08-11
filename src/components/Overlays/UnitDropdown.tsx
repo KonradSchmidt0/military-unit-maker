@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { UnitDisplay } from "./UnitDisplaying/UnitDisplay";
-import { useUnitDropdownStore } from "../hooks/useUnitDropdownStore";
-import { useColorPalletStore } from "../hooks/useColorPalletStore";
-import { getColorInVoid } from "../logic/Units/unitColorManaging";
+import { UnitDisplay } from "../UnitDisplaying/UnitDisplay";
+import { useUnitDropdownStore } from "../../hooks/useUnitDropdownStore";
+import { useColorPalletStore } from "../../hooks/useColorPalletStore";
+import { getColorInVoid } from "../../logic/Units/unitColorManaging";
 
 export default function UnitDropdown() {
   const { colorMap } = useColorPalletStore()
