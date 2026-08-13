@@ -5,7 +5,7 @@ import { useUnitStore } from "../../../hooks/useUnitStore"
 import { OrgUnit } from "../../../logic/Units/logic"
 import { ComplexChildNode } from "../../UnitDisplaying/ComplexChildNode"
 import { RemoveChildButton } from "../EditorElements/RemoveChildButton"
-import { SafeNumberInput } from "../EditorElements/SafeNumberInput"
+import { SafeNumberInput } from "../EditorElements/SafeInputs/SafeNumberInput"
 
 interface ChildRowProps {
   parentSignature: string | number[]

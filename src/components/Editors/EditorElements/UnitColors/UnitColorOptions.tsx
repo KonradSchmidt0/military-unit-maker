@@ -1,38 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import { useUnitStore } from "../../../hooks/useUnitStore";
-import { defaultUnitColor, SmartColor } from "../../../logic/Units/logic";
-import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { GetTrueColor } from "../../../logic/Units/unitColorManaging";
-import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
-import { useColorPalletDropdownStore } from "../../../hooks/useColorPalletDropdownStore";
-
+import { useRef } from "react"
+import { useColorPalletDropdownStore } from "../../../../hooks/useColorPalletDropdownStore"
+import { useColorPalletStore } from "../../../../hooks/useColorPalletStore"
+import { useUnitInteractionStore, processSelect } from "../../../../hooks/useUnitInteractionsStore"
+import { useUnitStore } from "../../../../hooks/useUnitStore"
+import { GetTrueColor } from "../../../../logic/Units/unitColorManaging"
+import SafeColorInput from "../SafeInputs/SafeColorInput"
 
 export function UnitColorOptions() {
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectSignature = useUnitInteractionStore(s => s.selectSignature)
-  const updateUnit = useUnitStore(s => s.updateUnit)
+  const { unitMap, trueRootId, updateUnit } = useUnitStore()
+  const { selectSignature } = useUnitInteractionStore()
   const { colorMap } = useColorPalletStore()
   const { CallColorDropdown, onChosen } = useColorPalletDropdownStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
   const unit = unitMap[selectedId];
-  
-  const [color, setColor] = useState<SmartColor>(defaultUnitColor)
 
   const mousePos = useRef({x: 0, y: 0})
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      updateUnit(selectedId, { ...unit, smartColor: color});
-    }, 120);
-
-    return () => clearTimeout(timeout);
-  }, [color]); // If you add more things to dependencies it will break the ctrl z 
-
-  useEffect(() =>  {
-    setColor(unit.smartColor)
-  }, [unit.smartColor])
 
   if (!selectSignature) {
     return null
@@ -75,16 +58,13 @@ export function UnitColorOptions() {
     selected?.onclick?.();
   };
 
-  const colorPicker = 
-    (<input
-      id="ColorPickerInputId"
-      type="color"
-      value={color}
-      onChange={(e) => {
-        setColor(e.target.value as `#${string}`);
-      }}
-      className="editor-element !p-0 !h-8"
-    />)
+  const colorPicker = (
+    <SafeColorInput
+      color={unit.smartColor as `#${string}`}
+      update={(color) => updateUnit(selectedId, {...unit, smartColor: color})}
+    />
+  )
+
   const colorPalletCaller = (
     <button 
       className="btn-emoji" 
@@ -96,7 +76,7 @@ export function UnitColorOptions() {
           ) : 
           CallColorDropdown(undefined)
       }}
-    >🎨 </button>
+    >🎨</button>
   )
 
   return <>

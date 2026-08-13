@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LabledInput } from "../EditorElements/LabledInput";
+import { LabledInput } from "../EditorElements/TextInputs/LabledInput";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { renameItemInUnitMap, renameItemInEqGroups } from "../../../logic/Items/itemRenaming";

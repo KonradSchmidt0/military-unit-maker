@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
+import { simpleHover, useHoverStore } from "../../../../hooks/useHoverStore";
 
 interface props {
   count: number
@@ -19,7 +19,7 @@ export function SafeNumberInput(p: props) {
     }
   }, [p.count]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setTempCount(val);
 
@@ -34,7 +34,7 @@ export function SafeNumberInput(p: props) {
         type="number"
         className={"editor-element !w-16 " + p.className}
         value={tempCount}
-        onChange={handleChange}
+        onChange={handleUserInput}
         onMouseEnter={() => { if (p.hover) callSimpleI(p.hover) }}
         onMouseLeave={() => callOff()}
       />

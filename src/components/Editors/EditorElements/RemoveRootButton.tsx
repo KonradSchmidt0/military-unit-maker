@@ -8,10 +8,10 @@ interface props {
 }
 
 export function RemoveRootButton(p: props) {
-  const { unitMap, trueRootId, getCurrentRootId, actingRootPath, setTrueRootId, setActingRootPath } = useUnitStore(s => s)
-  const { selectSignature, setSelect } = useUnitInteractionStore(s => s)
-  const { callSimple, callOff } = useHoverStore(s => s)
-  const { addUnitToPalet  } = usePaletStore(s => s)
+  const { unitMap, trueRootId, getCurrentRootId, actingRootPath, setTrueRootId, setActingRootPath } = useUnitStore()
+  const { selectSignature, setSelect } = useUnitInteractionStore()
+  const { callSimple, callOff } = useHoverStore()
+  const { addUnitToPalet  } = usePaletStore()
   
   const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
   const selectedId = processSelect(selectSignature, unitMap, trueRootId)

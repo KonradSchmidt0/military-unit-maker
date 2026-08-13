@@ -3,8 +3,8 @@ import { useUnitStore } from "../../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
 import { changeTextInParent } from "../../../logic/Designations/designationPack"
 import { OrgUnit } from "../../../logic/Units/logic"
-import { LabledInput } from "../EditorElements/LabledInput"
-import { LargeTextInput } from "../EditorElements/LargeTextInput"
+import { LabledInput } from "../EditorElements/TextInputs/LabledInput"
+import { LargeTextInput } from "../EditorElements/TextInputs/LargeTextInput"
 
 interface props {
 

@@ -5,7 +5,7 @@ interface props {
 }
 
 export function EchelonSettingChanger(p: props) {
-  const {setIcons, setSymbols, intToSymbol} = useEchelonStore(s => s)
+  const {setIcons, setSymbols, intToSymbol} = useEchelonStore()
 
   const setDeltaStandart = () => {
     setIcons([[10, "e-D.svg"], [11, "e-DD.svg"], [12, "e-DDD.svg"]])

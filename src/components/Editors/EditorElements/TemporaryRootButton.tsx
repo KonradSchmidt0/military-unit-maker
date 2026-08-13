@@ -35,11 +35,11 @@ export function TemporaryRootButton(p: props) {
           onMouseEnter={() => callSimple("'Pins' this unit as a temporary root", "Meaning it still has a parent, but visually it appears as the unit on the top, making it easier to focus on its children")}
           onMouseLeave={() => callOff()}
         >📌🦒</button>}
-      {temporaryRootId === selectedId && trueRootId !== selectedId &&
+      {trueRootId !== temporaryRootId &&
         <button 
           className="btn-emoji" 
           onClick={() => handleSelectingUnselectingActingRoot(false)}
-          onMouseEnter={() => callSimple("'Unpins' this unit", "Giving back the original unit on top")}
+          onMouseEnter={() => callSimple("'Unpins' the current temporary root", "Giving back the original unit on top")}
           onMouseLeave={() => callOff()}
         >❌📌</button>}
   </>)

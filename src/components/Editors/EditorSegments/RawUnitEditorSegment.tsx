@@ -5,7 +5,7 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { getGroupFromSingleItem } from "../../../logic/Items/itemListing";
 import { EquipmentTable, RawUnit } from "../../../logic/Units/logic";
-import { SafeNumberInput } from "../EditorElements/SafeNumberInput";
+import { SafeNumberInput } from "../EditorElements/SafeInputs/SafeNumberInput";
 
 export default function RawUnitEditorSegment() {
   const { unitMap, trueRootId } = useUnitStore(s => s)

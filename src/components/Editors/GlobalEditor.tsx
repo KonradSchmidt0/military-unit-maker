@@ -9,7 +9,7 @@ import { ResetAllForceFoldingButton } from "./EditorElements/ResetAllForceFoldin
 import { ResetRemporaryRootButton } from "./EditorElements/ResetRemporaryRootButton";
 import { QuickSaveButtons } from "./EditorElements/QuickSaveButtons";
 import { SaveButtons } from "./EditorElements/SaveButtons";
-import { SafeNumberInput } from "./EditorElements/SafeNumberInput";
+import { SafeNumberInput } from "./EditorElements/SafeInputs/SafeNumberInput";
 import { NewProjectButton } from "./EditorElements/NewProjectButton";
 
 export default function GlobalEditor() {

@@ -5,7 +5,7 @@ interface props {
 }
 
 export function ResetAllForceFoldingButton(p: props) {
-  const { foldingUnfoldingMap, resetMap } = useForceFoldingStore(s => s)
+  const { foldingUnfoldingMap, resetMap } = useForceFoldingStore()
 
   const disable = Object.keys(foldingUnfoldingMap).length === 0
 

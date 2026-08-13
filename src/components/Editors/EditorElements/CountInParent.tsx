@@ -3,20 +3,15 @@ import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitIn
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { removeAllOfAChild } from "../../../logic/Units/childManaging";
 import { OrgUnit } from "../../../logic/Units/logic";
-import { SafeNumberInput } from "./SafeNumberInput";
+import { SafeNumberInput } from "./SafeInputs/SafeNumberInput";
 
 export default function CountInParent() {
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
-  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
-  
-  const selectParent = useUnitInteractionStore(s => s.selectParent)
+  const { unitMap, trueRootId, updateUnit  } = useUnitStore()
+  const { selectSignature, getSelectedParent, selectParent  } = useUnitInteractionStore()
+  const {ctrl} = useShortcutStore()
 
-  const updateUnit = useUnitStore(s => s.updateUnit)
-
-  const {ctrl} = useShortcutStore(s => s)
-
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
+  const parentId = getSelectedParent(unitMap, trueRootId)
   
   if (!parentId || !selectedId)
     return null

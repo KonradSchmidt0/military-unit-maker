@@ -1,5 +1,5 @@
 import { useEquipGroupingStore, toggleGroup, bumpGroup } from "../../../../hooks/useEquipGroupingStore";
-import DraggableList from "../../EditorElements/DraggableLists/DraggableList";
+import DraggableList from "../../../BehaviouralElements/DraggableLists/DraggableList";
 import EquipGroupElement from "./EquipGroupElement";
 
 //

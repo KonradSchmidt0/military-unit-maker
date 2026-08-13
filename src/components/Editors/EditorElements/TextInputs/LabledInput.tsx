@@ -1,4 +1,4 @@
-import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore"
+import { simpleHover, useHoverStore } from "../../../../hooks/useHoverStore"
 
 interface props {
   label: string

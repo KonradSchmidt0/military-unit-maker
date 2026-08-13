@@ -17,7 +17,6 @@ export function addChild(
   };
 }
 
-
 export function removeChild(
   parent: OrgUnit,
   childId: string,

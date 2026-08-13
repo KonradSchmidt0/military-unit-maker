@@ -2,8 +2,8 @@ import { useStaffTextStore } from "../../../hooks/useStaffTextStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
-import { LabledInput } from "../EditorElements/LabledInput";
-import { LargeTextInput } from "../EditorElements/LargeTextInput";
+import { LabledInput } from "../EditorElements/TextInputs/LabledInput";
+import { LargeTextInput } from "../EditorElements/TextInputs/LargeTextInput";
 
 interface CommentsEditorSegmentProps {
   

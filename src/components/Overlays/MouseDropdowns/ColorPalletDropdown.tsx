@@ -1,5 +1,6 @@
 import { useColorPalletDropdownStore } from "../../../hooks/useColorPalletDropdownStore";
 import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
+import SafeColorInput from "../../Editors/EditorElements/SafeInputs/SafeColorInput";
 import { DropdownTagFilteredList } from "./DropdownTagFilteredList";
 import MouseDropdown from "./MouseDropdown";
 
@@ -23,18 +24,17 @@ export default function ColorPalletDropdown() {
           <div
             key={entry.uId}
             className="dropdown-option"
-            onClick={(e) => { onChosen(index); OnExit(); }}
           >
-            <input
-              type="color"
-              value={entry.color}
-              onChange={(e) => {
-                const c = e.target.value as `#${string}`
-                changeAtIndex(index, (prev) => ({...prev, color: c}));
-              }}
-              className="editor-element !p-0 !h-8 !w-6"
+            <SafeColorInput
+              color={colorMap[index].color}
+              update={(c) => changeAtIndex(index, (prev) => ({...prev, color: c}))}
             />
-            <span className="text-sm max-w-44">{entry.name}</span>
+            <div 
+              className="text-sm w-full h-full text-left content-center"
+              onClick={() => { onChosen(index); OnExit(); }}
+            >
+              <span>{entry.name}</span>
+            </div>
           </div>
         )}
       />

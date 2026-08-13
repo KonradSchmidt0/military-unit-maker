@@ -1,14 +1,14 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { ChildRow } from "./ChildRow";
-import { UnitColorOptions } from "../EditorElements/UnitColorOptions";
 import { EchelonEditor } from "../EditorElements/EchelonEditor";
 import { VisualLayeringEditor } from "./VisualLayeringEditor";
 import { ForceFoldingSegment } from "./ForceFoldingSegment";
-import { LabledInput } from "../EditorElements/LabledInput";
+import { LabledInput } from "../EditorElements/TextInputs/LabledInput";
 import { CommonEditorAlphaRow } from "./CommonEditorAlphaRow";
 import { OrgUnit } from "../../../logic/Units/logic";
 import { RootSwapIdNode } from "../../UnitDisplaying/RootSwapIdNode";
+import { UnitColorOptions } from "../EditorElements/UnitColors/UnitColorOptions";
 
 export default function CommonUnitEditorSegment() {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
