@@ -1,8 +1,8 @@
-import { useColorPalletDropdownStore } from "../../../hooks/useColorPalletDropdownStore";
-import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
-import SafeColorInput from "../../Editors/EditorElements/SafeInputs/SafeColorInput";
-import { DropdownTagFilteredList } from "./DropdownTagFilteredList";
-import MouseDropdown from "./MouseDropdown";
+import { useColorPalletDropdownStore } from "../../../../hooks/useColorPalletDropdownStore";
+import { useColorPalletStore } from "../../../../hooks/useColorPalletStore";
+import SafeColorInput from "../../../Editors/EditorElements/SafeInputs/SafeColorInput";
+import { DropdownTagFilteredList } from "../DropdownTagFilteredList";
+import MouseDropdown from "../MouseDropdown";
 
 export default function ColorPalletDropdown() {
   const { colorMap, changeAtIndex } = useColorPalletStore()

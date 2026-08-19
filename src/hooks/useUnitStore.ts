@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, SmartColor, Unit } from '../logic/Units/logic';
+import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, Unit } from '../logic/Units/logic';
+import { SmartColor } from "../logic/Units/unitColorManaging";
 import { addChild, GetChildIdFromPath, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/Units/childManaging';
 import { temporal } from 'zundo'
 import { createRawUnitWithFractionOfEquipment } from '../logic/Units/unitConversion';

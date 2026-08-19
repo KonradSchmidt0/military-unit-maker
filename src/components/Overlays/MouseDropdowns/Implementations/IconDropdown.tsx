@@ -1,6 +1,6 @@
-import { useIconsStore } from "../../hooks/useIcons";
-import MouseDropdown from "./MouseDropdowns/MouseDropdown";
-import { DropdownTagFilteredList } from "./MouseDropdowns/DropdownTagFilteredList";
+import { useIconsStore } from "../../../../hooks/useIcons";
+import MouseDropdown from "../MouseDropdown";
+import { DropdownTagFilteredList } from "../DropdownTagFilteredList";
 
 export default function IconDropdown() {
   const { icons, dropDown_onChosen: onChosen, dropdown_pos: pos, callDropDown} = useIconsStore()
@@ -16,7 +16,7 @@ export default function IconDropdown() {
         list={icons}
         placeholder="Search icons by tags..."
         OnExit={OnOptionChoosenOrExited}
-        GetEntrysTags={(entry) => entry.filename}
+        GetEntrysTags={(entry) => entry.tags}
         Entry2OptionNode={(entry, _) => (
           <div 
             key={entry.filename} 

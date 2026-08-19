@@ -1,7 +1,9 @@
 import { ColorMap, getColorFromColorMap } from "../../hooks/useColorPalletStore"
 import { UnitMap } from "../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "./childManaging"
-import { SmartColor, defaultUnitColor } from "./logic"
+
+export type SmartColor = "inheret" | `#${string}` | number;
+export const defaultUnitColor: `#${string}` = "#6ad8e2";
 
 export function getColorInVoid(sc: SmartColor, colorMap: ColorMap): `#${string}` {
   if (sc === "inheret") {
@@ -37,4 +39,3 @@ export function GetTrueColor(signature: number[] | string, rootId: string, unitM
 
   return GetTrueColorRecursively(rootId, signature, unitMap, colorMap);
 }
-

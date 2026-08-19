@@ -1,11 +1,9 @@
 import { UnitMap } from "../../hooks/useUnitStore";
-
-export const defaultUnitColor: `#${string}` = "#6ad8e2"
+import { SmartColor } from "./unitColorManaging";
 
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
 export type ChildrenList = Record<string, number>
-export type SmartColor = "inheret" | `#${string}` | number;
 
 export interface RawUnit {
   type: "raw";

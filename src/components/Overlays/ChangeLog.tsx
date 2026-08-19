@@ -18,6 +18,10 @@ export default function ChangelogOverlay() {
 
         <h2 className="text-2xl font-bold mb-4">Changelog 📣🛠️</h2>
         <div className="space-y-4 text-sm">
+          <b className='text-base'>Bug fix (2026 8 20)</b><br/>
+           - Icon Dropdown search now works again<br/>
+          <br/>
+
           <b className='text-base'>Color pallet (2026 8 11)</b><br/>
            - Added 3rd mode to colors the unit can be, Pallet<br/>
            - Color pallets can be managed under the 🎨 emoji in top right<br/>

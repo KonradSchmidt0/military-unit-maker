@@ -5,13 +5,13 @@ import { useShortcutStore } from '../hooks/shortcutStore';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import { useGlobalStore } from '../hooks/useGlobalStore';
 import { EditorPanel } from '../components/Editors/EditorPanel';
-import IconDropdown from '../components/Overlays/IconDropdown';
+import IconDropdown from '../components/Overlays/MouseDropdowns/Implementations/IconDropdown';
 import { AutoSave } from '../components/systems/AutoSave';
 import ArrowNavigation from '../components/systems/ArrowNavigation';
 import { KeyboardWatcher } from '../components/systems/KeyboardWatcher';
 import { LoadIconsCsv } from '../components/systems/LoadIconsCsv';
 import { EmptyUnitsInTreeSystem } from '../components/systems/EmptyUnitsInTreeSystem';
-import UnitDropdown from '../components/Overlays/UnitDropdown';
+import UnitDropdown from '../components/Overlays/MouseDropdowns/Implementations/UnitDropdown';
 import { GenerateInitialUnits } from '../logic/Units/myUnits';
 import { HoverInspector } from '../components/Overlays/HoverInspector';
 import TreeLineDrawing from '../components/UnitDisplaying/UnitTree/TreeLineDrawing';
@@ -21,7 +21,7 @@ import { useThemeStore } from '../hooks/useThemeStore';
 import ChangelogOverlay from '../components/Overlays/ChangeLog';
 import { DialogBox } from '../components/Overlays/DialogBox';
 import ShortcutBox from '../components/Overlays/ShortcutBox';
-import ColorPalletDropdown from '../components/Overlays/MouseDropdowns/ColorPalletDropdown';
+import ColorPalletDropdown from '../components/Overlays/MouseDropdowns/Implementations/ColorPalletDropdown';
 
 const ini = GenerateInitialUnits()
 

@@ -1,9 +1,9 @@
-import { UnitDisplay } from "../UnitDisplaying/UnitDisplay";
-import { useUnitDropdownStore } from "../../hooks/useUnitDropdownStore";
-import { useColorPalletStore } from "../../hooks/useColorPalletStore";
-import { getColorInVoid } from "../../logic/Units/unitColorManaging";
-import MouseDropdown from "./MouseDropdowns/MouseDropdown";
-import { DropdownTagFilteredList } from "./MouseDropdowns/DropdownTagFilteredList";
+import { UnitDisplay } from "../../../UnitDisplaying/UnitDisplay";
+import { useUnitDropdownStore } from "../../../../hooks/useUnitDropdownStore";
+import { useColorPalletStore } from "../../../../hooks/useColorPalletStore";
+import { getColorInVoid } from "../../../../logic/Units/unitColorManaging";
+import MouseDropdown from "../MouseDropdown";
+import { DropdownTagFilteredList } from "../DropdownTagFilteredList";
 
 export default function UnitDropdown() {
   const { colorMap } = useColorPalletStore()

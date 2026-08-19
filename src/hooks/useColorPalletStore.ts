@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { defaultUnitColor } from "../logic/Units/logic"
+import { defaultUnitColor } from "../logic/Units/unitColorManaging"
 
 export interface ColorProfile {
   uId: string
