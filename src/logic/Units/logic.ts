@@ -108,34 +108,3 @@ export function HowManyOfThisTypeInParent(
 
   return total;
 }
-
-// TODO: move to child managing
-export function removeEquipmentTypeRecursively(
-  unit: Unit,
-  equipmentTypeToRemove: EquipmentType,
-  unitMap: UnitMap
-): Unit {
-  if (unit.type === "raw") {
-    let newEquipment = { ...unit.equipment };
-    delete newEquipment[equipmentTypeToRemove];
-    return { ...unit, equipment: newEquipment };
-  }
-
-  // If it's an OrgUnit, recursively process its children
-  const newChildren: ChildrenList = {};
-
-  for (const [childId, count] of Object.entries(unit.children)) {
-    const childUnit = unitMap[childId];
-
-    const updatedChild = removeEquipmentTypeRecursively(
-      childUnit,
-      equipmentTypeToRemove,
-      unitMap
-    );
-
-    unitMap[childId] = updatedChild; // Update in place
-    newChildren[childId] = count; // Preserve count
-  }
-
-  return { ...unit, children: newChildren };
-}

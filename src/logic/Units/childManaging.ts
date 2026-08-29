@@ -1,5 +1,5 @@
 import { UnitMap } from "../../hooks/useUnitStore";
-import { OrgUnit, ChildrenList } from "./logic";
+import { OrgUnit, ChildrenList, EquipmentType, Unit } from "./logic";
 
 export function addChild(
   parent: OrgUnit,
@@ -176,3 +176,31 @@ export function getComplexChildList(u: OrgUnit, shouldFlatten: boolean) {
     });
     return filtered
   }
+
+export function removeEquipmentTypeRecursively_returnUnitMapOverride(
+  rootUnitFromWhichChildrenRemove: Unit,
+  rootUnitFromWhichChildrenRemoveId: string,
+  equipmentTypeToRemove: EquipmentType,
+  unitMap: UnitMap
+): UnitMap {
+  function recurFunc(unit: Unit, id: string) {
+    if (unit.type === "raw") {
+      const newEquipment = { ...unit.equipment };
+      delete newEquipment[equipmentTypeToRemove];
+      return { [id]: {...unit, equipment: newEquipment } };
+    }
+  
+    // If it's an OrgUnit, recursively process its children
+    let o: UnitMap = {};
+  
+    for (const [childId, _] of Object.entries(unit.children)) {
+      const childUnit = unitMap[childId]
+      const updatedChildEntry = recurFunc(childUnit, childId)
+      o = {...o, ...updatedChildEntry}
+    }
+  
+    return o
+  }
+
+  return recurFunc(rootUnitFromWhichChildrenRemove, rootUnitFromWhichChildrenRemoveId)
+}

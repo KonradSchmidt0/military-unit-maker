@@ -1,6 +1,6 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/Units/logic";
+import { removeEquipmentTypeRecursively_returnUnitMapOverride } from "../../../logic/Units/childManaging";
 import { EquipGroup, toggleGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 import { getGroupedEquipmentTable } from "../../../logic/Items/itemListing";
@@ -20,10 +20,11 @@ export function EQListAndRemover() {
     );
     if (!confirmed) return;
 
-    const newSelectedUnit = removeEquipmentTypeRecursively(unit, eqType, unitMap) as OrgUnit;
+    const override = removeEquipmentTypeRecursively_returnUnitMapOverride(
+      unit, selectedId, eqType, unitMap);
     setUnitMap({
       ...unitMap,
-      [selectedId]: newSelectedUnit,
+      ...override,
     });
   };
 
