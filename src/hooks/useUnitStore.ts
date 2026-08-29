@@ -210,7 +210,7 @@ export const useUnitStore = create<UnitStore>()(
         smartColor: parent.smartColor,
         echelonLevel: parent.echelonLevel,
         layers: [...parent.layers],
-        children: { [babyId]: childCount },
+        childList: { [babyId]: childCount },
         flatCallSigns: {},
         flatDescriptions: {}
       };
@@ -232,11 +232,11 @@ export const useUnitStore = create<UnitStore>()(
 
     addNewChild: (parentId, childId) => {
       const parent = get().unitMap[parentId] as OrgUnit
-      const newChildren = {...parent.children, [childId]: 1}
+      const newChildren = {...parent.childList, [childId]: 1}
       set((state) => ({
         unitMap: {
           ...state.unitMap,
-          [parentId]: {...parent, children: newChildren},
+          [parentId]: {...parent, childList: newChildren},
         },
       }))
     },
@@ -286,7 +286,7 @@ export const useUnitStore = create<UnitStore>()(
       const newRoot: OrgUnit = { 
         ...oldRoot,
         type: "org", name: "", echelonLevel: oldRoot.echelonLevel + 1,
-        children: c,
+        childList: c,
         flatCallSigns: {},
         flatDescriptions: {},
         desc: ""

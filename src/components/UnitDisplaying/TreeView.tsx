@@ -139,7 +139,7 @@ export function GetFoldingClassification(
     return "c"
   }
   // Reached base value
-  if (unit.type === "raw" || Object.entries(unit.children).length === 0) {
+  if (unit.type === "raw" || Object.entries(unit.childList).length === 0) {
     return "c"
   }
 

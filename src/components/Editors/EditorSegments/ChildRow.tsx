@@ -67,7 +67,7 @@ export function ChildRow(p: ChildRowProps) {
       </div>
 
       <SafeNumberInput 
-        count={parent.children[childId]}
+        count={parent.childList[childId]}
         onCountChange={(n) => { changeChildCount(parentId, childId, n); if (alt) { setSelect(p.whoSelectOnSelectClick) } }} 
         id={"sni" + p.key}
         hover={"Count of shown unit in parent"}

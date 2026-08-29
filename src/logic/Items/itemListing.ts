@@ -14,7 +14,7 @@ export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTa
   } else {
     const combined: EquipmentTable = {};
 
-    for (const [childId, count] of Object.entries(unit.children)) {
+    for (const [childId, count] of Object.entries(unit.childList)) {
       const childEq = getEquipmentTable(childId, unitMap);
 
       for (const [type, qty] of Object.entries(childEq)) {

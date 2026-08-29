@@ -72,7 +72,7 @@ export function findEmptyUnitsInTree(unitId: string, unitMap: UnitMap): string |
     return undefined
   }
 
-  const childrenAsList = Object.entries(unit.children)
+  const childrenAsList = Object.entries(unit.childList)
   let potentialEmptyChild = undefined
   for (const [childId, count] of childrenAsList) {
     const r = findEmptyUnitsInTree(childId, unitMap)

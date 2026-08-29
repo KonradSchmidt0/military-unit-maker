@@ -3,7 +3,13 @@ import { SmartColor } from "./unitColorManaging";
 
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
-export type ChildrenList = Record<string, number>
+
+export interface ChildEntry {
+  id: string
+  count: number
+}
+export type Phase2ChildEntry = ChildEntry[]
+export type ChildrenList = Phase2ChildEntry[]
 
 export interface RawUnit {
   type: "raw";
@@ -24,7 +30,7 @@ export interface OrgUnit {
   echelonLevel: number;
   layers: string[];
 
-  children: ChildrenList // First is UnitId, second is count of how many
+  childList: ChildrenList // First is UnitId, second is count of how many
 
   desc?: string;
   flatCallSigns: Record<number, string>
@@ -64,7 +70,7 @@ export function createNewOrgUnit({
   layers = [],
   echelonLevel = 0,
   smartColor = "inheret",
-  children = {},
+  children = [],
 }: {
   name?: string;
   layers?: string[];
@@ -78,7 +84,7 @@ export function createNewOrgUnit({
     layers,
     smartColor,
     echelonLevel,
-    children,
+    childList: children,
     flatCallSigns: {},
     flatDescriptions: {}
   };
@@ -88,23 +94,26 @@ export function createNewOrgUnit({
 export function HowManyOfThisTypeInParent(
   parentId: string,
   searchedId: string,
-  unitMap: UnitMap
+  unitMap: UnitMap,
+  phase: number
 ): number {
   const parent = unitMap[parentId]
   if (parent.type === "raw") return 0;
 
   let total = 0
 
-  for (const [childId, count] of Object.entries(parent.children)) {
-    if (childId === searchedId) {
+  parent.childList.forEach( (phase2Entry) => {
+    const {id, count} = phase2Entry[phase]
+
+    if (id === searchedId) {
       total += count;
     }
 
-    const nested = unitMap[childId];
+    const nested = unitMap[id];
     if (nested && nested.type === "org") {
-      total += HowManyOfThisTypeInParent(childId, searchedId, unitMap) * count;
+      total += HowManyOfThisTypeInParent(id, searchedId, unitMap, phase) * count;
     }
-  }
+  } )
 
   return total;
 }
@@ -113,7 +122,8 @@ export function HowManyOfThisTypeInParent(
 export function removeEquipmentTypeRecursively(
   unit: Unit,
   equipmentTypeToRemove: EquipmentType,
-  unitMap: UnitMap
+  unitMap: UnitMap,
+  phase: number
 ): Unit {
   if (unit.type === "raw") {
     let newEquipment = { ...unit.equipment };
@@ -122,20 +132,20 @@ export function removeEquipmentTypeRecursively(
   }
 
   // If it's an OrgUnit, recursively process its children
-  const newChildren: ChildrenList = {};
-
-  for (const [childId, count] of Object.entries(unit.children)) {
-    const childUnit = unitMap[childId];
+  const newChildren = unit.childList.map( (phase2Entry) => {
+    const entry = phase2Entry[phase]
+    const child = unitMap[entry.id]
 
     const updatedChild = removeEquipmentTypeRecursively(
-      childUnit,
+      child,
       equipmentTypeToRemove,
-      unitMap
+      unitMap,
+      phase
     );
 
-    unitMap[childId] = updatedChild; // Update in place
-    newChildren[childId] = count; // Preserve count
-  }
+    unitMap[entry.id] = updatedChild; // Update in place
+    return {...entry, id: }
+  } )
 
-  return { ...unit, children: newChildren };
+  return { ...unit, childList: newChildren };
 }

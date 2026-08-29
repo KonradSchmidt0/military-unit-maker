@@ -6,14 +6,14 @@ export function addChild(
   childId: string,
   count: number = 1
 ): OrgUnit {
-  const curCount = parent.children[childId]
+  const curCount = parent.childList[childId]
 
   // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
   let aaa: ChildrenList = {}
   aaa[childId] = curCount ? curCount + count : count
   return {
     ...parent,
-    children: {...parent.children, ...aaa}
+    childList: {...parent.childList, ...aaa}
   };
 }
 
@@ -22,7 +22,7 @@ export function removeChild(
   childId: string,
   count: number = 1
 ): OrgUnit {
-  const curCount = parent.children[childId]
+  const curCount = parent.childList[childId]
 
   if (!curCount) return parent; // no child to remove
 
@@ -35,7 +35,7 @@ export function removeChild(
 
     return {
       ...parent,
-      children: {...parent.children, ...aaa}
+      childList: {...parent.childList, ...aaa}
     };
   }
 }
@@ -44,10 +44,10 @@ export function removeAllOfAChild(
   parent: OrgUnit,
   childId: string,
 ): OrgUnit {
-  const { [childId]: _, ...rest } = parent.children;
+  const { [childId]: _, ...rest } = parent.childList;
   return {
     ...parent,
-    children: rest
+    childList: rest
   };
 }
 
@@ -56,7 +56,7 @@ export function setChildCount(
   childId: string,
   newCount: number
 ): OrgUnit {
-  const curCount = parent.children[childId]
+  const curCount = parent.childList[childId]
 
   if (!curCount) return parent; // no child to edit
 
@@ -68,7 +68,7 @@ export function setChildCount(
     aaa[childId] = newCount
     return {
       ...parent,
-      children: {...parent.children, ...aaa}
+      childList: {...parent.childList, ...aaa}
     };
   }
 }
@@ -78,14 +78,14 @@ export function setChildId(
   oldId: string,
   newId: string
 ): OrgUnit {
-  const oldIdCount = parent.children[oldId]
+  const oldIdCount = parent.childList[oldId]
   if (!oldIdCount)
     return parent
 
-  let updatedChildren = parent.children
+  let updatedChildren = parent.childList
   delete updatedChildren[oldId]
   updatedChildren[newId] = oldIdCount
-  return { ...parent, children: updatedChildren }
+  return { ...parent, childList: updatedChildren }
 }
 
 export function moveChild(
@@ -93,20 +93,20 @@ export function moveChild(
   childId: string,
   destination: "top" | "bottom"
 ): OrgUnit {
-  const exist = parent.children[childId]
+  const exist = parent.childList[childId]
   if (!exist) {
     return parent
   }
 
   let newChildren = {}
   if (destination === "top")
-    newChildren = { [childId]: exist, ...parent.children }
+    newChildren = { [childId]: exist, ...parent.childList }
   else {
-    const { [childId]: myCount, ...rest } = parent.children;
+    const { [childId]: myCount, ...rest } = parent.childList;
     newChildren = {...rest, [childId]: exist}
   }
 
-  return {...parent, children: newChildren}
+  return {...parent, childList: newChildren}
 }
 
 
@@ -149,7 +149,7 @@ export function GetChildIdFromPath(rootId: string, path: number[], unitMap: Unit
   if (parent.type !== "org") {
     return undefined
   }
-  const nextId = GetIdFromFlatIndex(parent.children, path[0])
+  const nextId = GetIdFromFlatIndex(parent.childList, path[0])
   if (!nextId) {
     return undefined
   }
@@ -162,7 +162,7 @@ export function GetChildIdFromPath(rootId: string, path: number[], unitMap: Unit
 
 // Complex as in combines both standard child list (id: count) and flat list (flatten array)
 export function getComplexChildList(u: OrgUnit, shouldFlatten: boolean) {
-    const flat = GetFlatIds(u.children).map((cid, i) => ({flatIndex: i, childId: cid, count: u.children[cid]}));
+    const flat = GetFlatIds(u.childList).map((cid, i) => ({flatIndex: i, childId: cid, count: u.childList[cid]}));
   
     if (shouldFlatten) {
       return flat;

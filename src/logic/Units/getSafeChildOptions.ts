@@ -14,7 +14,7 @@ export function getSafeChildOptions(
     const candidate = unitMap[candidateId];
     if (!candidate || candidate.type !== "org") return false;
 
-    for (const [childId] of Object.entries(candidate.children)) {
+    for (const [childId] of Object.entries(candidate.childList)) {
       if (createsCycle(childId)) return true;
     }
 

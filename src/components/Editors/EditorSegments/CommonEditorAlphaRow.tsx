@@ -34,7 +34,7 @@ export function CommonEditorAlphaRow(p:props) {
     addOrSubtractChild(parentId, newId, 1)
 
     if (!alt)
-      setSelect([...selectPath.slice(0, -1), GetFlatIds(parent.children).length - 1])
+      setSelect([...selectPath.slice(0, -1), GetFlatIds(parent.childList).length - 1])
   }
 
   return (

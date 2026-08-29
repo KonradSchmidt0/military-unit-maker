@@ -26,7 +26,7 @@ export default function OrgUnitEditorSegment() {
 
   // Problem: If given all units as a option its possible to choose yourself or other dangerous unit, and thus creating infinite loop
   // Solution: We filter them
-  const safeChildrenOptions = getSafeChildOptions(selectedId, unitMap, usePaletStore(state => state.unitPalet), unit.children)
+  const safeChildrenOptions = getSafeChildOptions(selectedId, unitMap, usePaletStore(state => state.unitPalet), unit.childList)
 
   const handleAddingChild = (type: "org" | "raw" | "existing", e?: MouseEvent<HTMLButtonElement, globalThis.MouseEvent> | undefined) => {
     if (type === "existing") {

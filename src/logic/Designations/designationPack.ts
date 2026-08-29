@@ -68,7 +68,7 @@ export function mergeDesignationPacks(packs: DesignationPack[]): DesignationPack
 
 export function getMergedDPFromChildren(parentPath: number[], startingFlatIndex: number, count: number, unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
   const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap) as string] as OrgUnit
-  const filteredChildrenIndexes = GetFlatIds(parent.children).filter(
+  const filteredChildrenIndexes = GetFlatIds(parent.childList).filter(
     (_, i) => i >= startingFlatIndex && i < startingFlatIndex + count
   );
 

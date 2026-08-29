@@ -56,7 +56,7 @@ export default function CommonUnitEditorSegment() {
         whoSelectOnSelectClick={selectSignature.slice(0, -1)}
         key="top child row"
         disableShadow={true}
-        onMoveMade={(d) => changeSelectedChild(d, (unitMap[parentId] as OrgUnit).children)}
+        onMoveMade={(d) => changeSelectedChild(d, (unitMap[parentId] as OrgUnit).childList)}
       /> : 
       <RootSwapIdNode unitSignature={selectSignature}/>
       }

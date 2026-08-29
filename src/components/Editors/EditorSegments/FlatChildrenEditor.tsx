@@ -18,7 +18,7 @@ export function FlatChildrenEditor(p: props) {
 
   const parent = unitMap[parentId] as OrgUnit
 
-  const flatChildren = GetFlatIds(parent.children)
+  const flatChildren = GetFlatIds(parent.childList)
 
   const childEdittingList = flatChildren.map((childId, index) =>  {
     return <ChildTextElement key={childId + "" + index} parentSignature={select} childFlatIndex={index}/>; 

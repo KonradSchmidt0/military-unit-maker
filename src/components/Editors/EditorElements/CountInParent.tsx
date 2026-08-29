@@ -18,7 +18,7 @@ export default function CountInParent() {
   
   const parent = unitMap[parentId] as OrgUnit // By definition parent is org
 
-  const selfInParent = parent.children[selectedId]
+  const selfInParent = parent.childList[selectedId]
   const selfCountInParent = selfInParent ? selfInParent : 0
 
   return (
@@ -31,12 +31,12 @@ export default function CountInParent() {
           return
         }
 
-        let updatedChildren = parent.children
+        let updatedChildren = parent.childList
         updatedChildren[selectedId] = newCount
 
         updateUnit(parentId, {
           ...parent,
-          children: updatedChildren,
+          childList: updatedChildren,
         });
 
         if (ctrl) {

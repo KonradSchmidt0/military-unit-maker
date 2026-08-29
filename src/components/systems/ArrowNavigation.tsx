@@ -56,7 +56,7 @@ export default function ArrowNavigation() {
       function handleSelectChild() {
         if (unit.type !== "org")
           return
-        if (Object.entries(unit.children).length === 0)
+        if (Object.entries(unit.childList).length === 0)
           return
         //const flatChildrenLenght = GetFlatIds(unit.children).length
         //const i = Math.floor((flatChildrenLenght - 1) / 2)
@@ -68,7 +68,7 @@ export default function ArrowNavigation() {
           return
         }
 
-        const flatChildrenLenght = GetFlatIds((unitMap[parentId] as OrgUnit).children).length 
+        const flatChildrenLenght = GetFlatIds((unitMap[parentId] as OrgUnit).childList).length 
         const o = path[path.length - 1] + d
         selectSibling( (o + flatChildrenLenght * 2) % flatChildrenLenght )
       }

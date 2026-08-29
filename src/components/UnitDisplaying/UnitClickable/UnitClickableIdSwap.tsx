@@ -35,7 +35,7 @@ export function UnitClickableIdSwap(p: React.PropsWithChildren<props>) {
   const parent = unitMap[parentId] as OrgUnit
   // Problem: If given all units as a option its possible to choose yourself or other dangerous unit, and thus creating infinite loop
   // Solution: We filter them
-  const childrenChoices = getSafeChildOptions(parentId, unitMap, unitPalet, parent.children)
+  const childrenChoices = getSafeChildOptions(parentId, unitMap, unitPalet, parent.childList)
 
   const handleClick = (e: any) => {
     if (alt) {

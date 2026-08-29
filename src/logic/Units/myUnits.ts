@@ -25,7 +25,7 @@ export function GenerateInitialUnits() {
     smartColor: "inheret",
     layers: infVisual,
     echelonLevel: 1,
-    children: {[rifle_e_id]: 2},
+    childList: {[rifle_e_id]: 2},
     flatCallSigns: {},
     flatDescriptions: {}
   }
@@ -58,7 +58,7 @@ export function GenerateInitialUnits() {
     smartColor: defaultUnitColor,
     layers: infVisual,
     echelonLevel: 2,
-    children: {
+    childList: {
       [leadWithRadio_e_id]: 1,
       [rifle_o_id]: 2,
       [mg_o_id]: 1,
