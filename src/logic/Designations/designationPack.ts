@@ -1,6 +1,6 @@
 import { StaffText } from "../../hooks/useStaffTextStore";
 import { UnitMap } from "../../hooks/useUnitStore";
-import { GetChildIdFromPath, GetFlatIds } from "../Units/childManaging";
+import { GetChildIdFromPath, GetFlatIds } from "../Units/childGetting";
 import { OrgUnit } from "../Units/logic";
 
 export interface DesignationPack {
@@ -9,7 +9,10 @@ export interface DesignationPack {
   staffComment?: string;
 }
 
-export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
+export function getDesignationPack(
+  path: number[], unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], 
+  staffComments: StaffText[], phase: number
+) : DesignationPack {
   let comment = undefined
   for (const sc of staffComments) {
     if (sc.path.toString() === path.toString()) {
@@ -28,7 +31,7 @@ export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId:
   let cs = undefined
   let desc = undefined
   if (path.length > 0) {
-    const parentId = GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap)
+    const parentId = GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap, phase)
     const parent = unitMap[parentId as string] as OrgUnit
 
     cs = parent.flatCallSigns[path[path.length - 1]]
@@ -38,8 +41,10 @@ export function getDesignationPack(path: number[], unitMap: UnitMap, trueRootId:
   return {name: staffName ?? cs, descFromParent: desc, staffComment: comment}
 }
 
-export function changeTextInParent(path: number[], unitMap: UnitMap, trueRootId: string, callSign?: string, desc?: string): OrgUnit {
-  const parent =  unitMap[GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap) as string] as OrgUnit
+export function changeTextInParent(
+  path: number[], unitMap: UnitMap, phase: number, trueRootId: string, callSign?: string, desc?: string
+): OrgUnit {
+  const parent =  unitMap[GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap, phase) as string] as OrgUnit
   const childFlatIndex = path[path.length - 1]
 
   return {...parent, 
@@ -66,9 +71,12 @@ export function mergeDesignationPacks(packs: DesignationPack[]): DesignationPack
   };
 }
 
-export function getMergedDPFromChildren(parentPath: number[], startingFlatIndex: number, count: number, unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], staffComments: StaffText[]) : DesignationPack {
-  const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap) as string] as OrgUnit
-  const filteredChildrenIndexes = GetFlatIds(parent.childList).filter(
+export function getMergedDPFromChildren(
+  parentPath: number[], startingFlatIndex: number, count: number, unitMap: UnitMap, 
+  trueRootId: string, staffNames: StaffText[], staffComments: StaffText[], phase: number
+) : DesignationPack {
+  const parent = unitMap[GetChildIdFromPath(trueRootId, parentPath, unitMap, phase) as string] as OrgUnit
+  const filteredChildrenIndexes = GetFlatIds(parent, phase).filter(
     (_, i) => i >= startingFlatIndex && i < startingFlatIndex + count
   );
 
@@ -78,7 +86,8 @@ export function getMergedDPFromChildren(parentPath: number[], startingFlatIndex:
     unitMap, 
     trueRootId, 
     staffNames, 
-    staffComments
+    staffComments,
+    phase
   )) })
 
   return mergeDesignationPacks(a)

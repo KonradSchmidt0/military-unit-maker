@@ -1,6 +1,7 @@
 import { useColorPalletStore } from "../../../hooks/useColorPalletStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 import { useIconsStore } from "../../../hooks/useIcons";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { GetTrueColor } from "../../../logic/Units/unitColorManaging";
@@ -10,12 +11,14 @@ export function VisualLayeringEditor() {
   const unitMap = useUnitStore(s => s.unitMap)
   const trueRootId = useUnitStore(s => s.trueRootId)
   const unitSignature = useUnitInteractionStore(s => s.selectSignature)
-  const unitId = processSelect(unitSignature, unitMap, trueRootId) as string
-  const unit = unitMap[unitId];
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const { callSimpleI, callOff } = useHoverStore(s => s)
   const { colorMap } = useColorPalletStore()
-
+  const { phase } = usePhaseStore()
+  
+  const unitId = processSelect(unitSignature, unitMap, trueRootId, phase) as string
+  const unit = unitMap[unitId];
+  
   const setDropdown_onChosen = useIconsStore(s => s.callDropDown)
 
   if (!unitSignature) {
@@ -60,7 +63,7 @@ export function VisualLayeringEditor() {
       <div className="flex flex-row gap-2 mb-2 relative">
         <UnitDisplay 
           unitId={unitId} 
-          color={GetTrueColor(unitSignature, trueRootId, unitMap, colorMap)}
+          color={GetTrueColor(unitSignature, trueRootId, unitMap, colorMap, phase)}
           className="!w-28 translate-y-4"
           onClick={handleClickOnDisp}
           showLeftText={false} showRightText={false}

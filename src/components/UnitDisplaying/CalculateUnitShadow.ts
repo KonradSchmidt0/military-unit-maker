@@ -11,12 +11,13 @@ export function calculateUnitShadow(
   hoveredId: string | undefined,
   isDarkMode: boolean,
   colorMap: ColorMap,
+  phase: number
 ) {
   const isAnythingSelected = selectedSignature !== undefined
   const isAnythingHovered = hoveredId !== undefined
 
-  const myId = processSignature(mySignature, unitMap, rootId)
-  const selectedId = isAnythingSelected ? processSignature(selectedSignature, unitMap, rootId) : undefined
+  const myId = processSignature(mySignature, unitMap, rootId, phase)
+  const selectedId = isAnythingSelected ? processSignature(selectedSignature, unitMap, rootId, phase) : undefined
 
   const isSelectedInstance = 
                           isAnythingSelected && 
@@ -29,7 +30,7 @@ export function calculateUnitShadow(
     return undefined
   }
   
-  const color = GetTrueColor(mySignature, rootId, unitMap, colorMap)
+  const color = GetTrueColor(mySignature, rootId, unitMap, colorMap, phase)
 
   // Problem: If we're in lightmode the background is white, which if unit is white makes the shadow almost imposible to see
   // Solution: If the color is too bright we turn it gray

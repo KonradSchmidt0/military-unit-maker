@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import { ChildrenList, createNewOrgUnit, createNewRawUnit, OrgUnit, Unit } from '../logic/Units/logic';
+import { createNewOrgUnit, createNewRawUnit, OrgUnit, Unit } from '../logic/Units/logic';
 import { SmartColor } from "../logic/Units/unitColorManaging";
-import { addChild, GetChildIdFromPath, moveChild, removeAllOfAChild, removeChild, setChildCount, setChildId } from '../logic/Units/childManaging';
+import { addChild, moveChild, removeChildEntry, subtractChild, setChildCount, setChildEntryId } from '../logic/Units/childManaging';
 import { temporal } from 'zundo'
 import { createRawUnitWithFractionOfEquipment } from '../logic/Units/unitConversion';
 import { getEquipmentTable } from '../logic/Items/itemListing';
+import { GetChildIdFromPath } from '../logic/Units/childGetting';
 
 export interface UnitMap {
   [id: string]: Unit;
@@ -26,7 +27,7 @@ interface UnitStore {
   consolidateOrgUnit: (id: string) => void,
   setInnerTexts: (id: string, shortName?: string, desc?: string) => void,
 
-  getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap) => string | undefined;
+  getCurrentRootId: (trueId: string, actingPath: number[], map: UnitMap, phase: number) => string | undefined;
   trueRootId: string;
   setTrueRootId: (newRootId: string) => void;
   actingRootPath: number[];
@@ -80,7 +81,7 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`Count = 0. Are you sure everything ok?`); return;
       }
 
-      const func = count > 0 ? addChild : removeChild;
+      const func = count > 0 ? addChild : subtractChild;
       const parentUpdated = func(parent, childId, Math.abs(count))
 
       set((state) => ({
@@ -121,7 +122,7 @@ export const useUnitStore = create<UnitStore>()(
       if (parent.type === "raw") {
         console.warn(`Cant add child to rawUnit ${parentId}`); return;
       }
-      const parentUpdated = removeAllOfAChild(parent, childId)
+      const parentUpdated = removeChildEntry(parent, childId)
       set((state) => ({
         unitMap: {
           ...state.unitMap,
@@ -158,7 +159,7 @@ export const useUnitStore = create<UnitStore>()(
         console.warn(`Cant change child in rawUnit ${parentId}`); return;
       }
 
-      const parentUpdated = setChildId(parent, oldId, newId)
+      const parentUpdated = setChildEntryId(parent, oldId, newId)
       set((state) => ({
         unitMap: {
           ...state.unitMap,
@@ -210,7 +211,8 @@ export const useUnitStore = create<UnitStore>()(
         smartColor: parent.smartColor,
         echelonLevel: parent.echelonLevel,
         layers: [...parent.layers],
-        childList: { [babyId]: childCount },
+        children: [{id: babyId, count: childCount}],
+        childrenMods: [],
         flatCallSigns: {},
         flatDescriptions: {}
       };
@@ -231,12 +233,13 @@ export const useUnitStore = create<UnitStore>()(
 
 
     addNewChild: (parentId, childId) => {
-      const parent = get().unitMap[parentId] as OrgUnit
-      const newChildren = {...parent.childList, [childId]: 1}
+      const parent = get().unitMap[parentId]
+      if (parent.type !== "org")
+        return
       set((state) => ({
         unitMap: {
           ...state.unitMap,
-          [parentId]: {...parent, childList: newChildren},
+          [parentId]: addChild(parent, childId, 1)
         },
       }))
     },
@@ -245,7 +248,7 @@ export const useUnitStore = create<UnitStore>()(
     consolidateOrgUnit: (id: string) => {
       const um = get().unitMap
       const unit = um[id] as OrgUnit
-      const eq = getEquipmentTable(id, um)
+      const eq = getEquipmentTable(id, um, 0)
       set((state) => ({
         unitMap: {
           ...state.unitMap,
@@ -270,8 +273,8 @@ export const useUnitStore = create<UnitStore>()(
     trueRootId: "infatry_oo",
     actingRootPath: [],
   
-    getCurrentRootId(trueId, actingPath, map) {
-      return GetChildIdFromPath(trueId, actingPath, map);
+    getCurrentRootId(trueId, actingPath, map, phase) {
+      return GetChildIdFromPath(trueId, actingPath, map, phase);
     },
   
     setTrueRootId: (n) => {set({ trueRootId: n });},
@@ -281,12 +284,12 @@ export const useUnitStore = create<UnitStore>()(
       const oldRootId = get().trueRootId
       const oldRoot = get().unitMap[oldRootId]
       const newRootId = crypto.randomUUID()
-      // No idea why, but when i do it as children: {rootUnitId : 1} it reads rootUnitId as a string of value "rootUnitId"
-      let c: ChildrenList = { }; c[oldRootId] = 1;
+
       const newRoot: OrgUnit = { 
         ...oldRoot,
         type: "org", name: "", echelonLevel: oldRoot.echelonLevel + 1,
-        childList: c,
+        children: [{id: oldRootId, count: 1}],
+        childrenMods: [],
         flatCallSigns: {},
         flatDescriptions: {},
         desc: ""

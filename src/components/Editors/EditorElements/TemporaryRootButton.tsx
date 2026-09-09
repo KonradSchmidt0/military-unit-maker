@@ -1,4 +1,5 @@
 import { useHoverStore } from "../../../hooks/useHoverStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 
@@ -10,9 +11,10 @@ export function TemporaryRootButton(p: props) {
   const { unitMap, trueRootId, setActingRootPath, getCurrentRootId, actingRootPath } = useUnitStore(s => s)
   const { selectSignature } = useUnitInteractionStore(s => s)
   const { callSimple, callOff } = useHoverStore(s => s)
+  const { phase } = usePhaseStore()
   
-  const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
+  const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap, phase)
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   const isChild = Array.isArray(selectSignature) && selectSignature.length > 0
 
   function handleSelectingUnselectingActingRoot(b: boolean) {

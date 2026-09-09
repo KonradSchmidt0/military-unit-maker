@@ -8,12 +8,14 @@ import OrgUnitEditorSegment from "./EditorSegments/OrgUnitEditorSegment";
 import RawUnitEditorSegment from "./EditorSegments/RawUnitEditorSegment";
 import { SelectParent } from "./EditorElements/SelectParent";
 import { UnselectUnitButton } from "./EditorElements/UnselectUnitButton";
+import { usePhaseStore } from "../../hooks/usePhaseStore";
 
 export default function IndividualEditor() {
   const {unitMap, trueRootId} = useUnitStore(s => s)
   const { selectSignature } = useUnitInteractionStore(s => s)
+  const { phase } = usePhaseStore()
   
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   if (!selectedId)
     return null
 
@@ -22,7 +24,7 @@ export default function IndividualEditor() {
     return null
 
   const currentlySelectedCount = trueRootId !== selectedId 
-    ? HowManyOfThisTypeInParent(trueRootId, selectedId, unitMap)
+    ? HowManyOfThisTypeInParent(trueRootId, selectedId, unitMap, phase)
     : 1
   const currentlySelectedDisplay = ( <>
       (cur. selected:{" "}

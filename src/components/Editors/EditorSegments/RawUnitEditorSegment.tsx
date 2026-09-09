@@ -1,6 +1,7 @@
 import { EquipGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore";
 import { usePaletStore } from "../../../hooks/usePaletStore";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { getGroupFromSingleItem } from "../../../logic/Items/itemListing";
@@ -9,13 +10,14 @@ import { SafeNumberInput } from "../EditorElements/SafeInputs/SafeNumberInput";
 
 export default function RawUnitEditorSegment() {
   const { unitMap, trueRootId } = useUnitStore(s => s)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const splitUnit = useUnitStore(s => s.splitRawUnit)
   const { addUnitToPalet } = usePaletStore(s => s)
   const { groups: eqGroups } = useEquipGroupingStore(s => s)
   const { callSimpleI, callOff } = useHoverStore(s => s)
-
+  const { phase } = usePhaseStore()
+  
+  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId, phase) as string
   const unit = unitMap[selectedId] as RawUnit
 
   if (!unit || unit.type !== "raw") {

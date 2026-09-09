@@ -1,5 +1,6 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { useUnitDropdownStore } from "../../../hooks/useUnitDropdownStore"
 import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
@@ -13,20 +14,21 @@ interface props {
 }
 
 export function UnitClickableIdSwap(p: React.PropsWithChildren<props>) {
-  const { unitMap, trueRootId } = useUnitStore(s => s)
-  const { unitPalet } = usePaletStore(s => s)
-  const { alt, shift, ctrl} = useShortcutStore(s => s)
+  const { unitMap, trueRootId } = useUnitStore()
+  const { unitPalet } = usePaletStore()
+  const { alt, shift, ctrl} = useShortcutStore()
+  const { phase } = usePhaseStore()
 
   const callDropDown = useUnitDropdownStore(s => s.callDropDown)
-  const { changeChildId, duplicateUnit, addOrSubtractChild } = useUnitStore(s => s)
-  const { setSelect } = useUnitInteractionStore(s => s)
+  const { changeChildId, duplicateUnit, addOrSubtractChild } = useUnitStore()
+  const { setSelect } = useUnitInteractionStore()
   
-  const childId = processSignature(p.childSignature, unitMap, trueRootId)
+  const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
   if (!childId) {
     console.warn("Unit (child) with id: " + childId + " processed from signature: " + p.childSignature + " is undefined")
     return null
   }
-  const parentId = processSignature(p.parentSignature, unitMap, trueRootId)
+  const parentId = processSignature(p.parentSignature, unitMap, trueRootId, phase)
   if (!parentId) {
     console.warn("Unit (parent) with id: " + parentId + " processed from signature: " + p.parentSignature + " is undefined")
     return null
@@ -35,7 +37,7 @@ export function UnitClickableIdSwap(p: React.PropsWithChildren<props>) {
   const parent = unitMap[parentId] as OrgUnit
   // Problem: If given all units as a option its possible to choose yourself or other dangerous unit, and thus creating infinite loop
   // Solution: We filter them
-  const childrenChoices = getSafeChildOptions(parentId, unitMap, unitPalet, parent.childList)
+  const childrenChoices = getSafeChildOptions(parentId, unitMap, unitPalet, parent.children)
 
   const handleClick = (e: any) => {
     if (alt) {

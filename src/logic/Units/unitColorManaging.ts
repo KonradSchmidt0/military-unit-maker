@@ -1,6 +1,6 @@
 import { ColorMap, getColorFromColorMap } from "../../hooks/useColorPalletStore"
 import { UnitMap } from "../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "./childManaging"
+import { GetChildIdFromPath } from "./childGetting";
 
 export type SmartColor = "inheret" | `#${string}` | number;
 export const defaultUnitColor: `#${string}` = "#6ad8e2";
@@ -15,12 +15,14 @@ export function getColorInVoid(sc: SmartColor, colorMap: ColorMap): `#${string}`
   return getColorFromColorMap(sc, colorMap)
 }
 
-export function GetTrueColorRecursively(rootId: string, path: number[], unitMap: UnitMap, colorMap: ColorMap): `#${string}` {
+export function GetTrueColorRecursively(
+  rootId: string, path: number[], unitMap: UnitMap, colorMap: ColorMap, phase: number
+): `#${string}` {
   if (path.length <= 0) {
     const root = unitMap[rootId];
     return getColorInVoid(root.smartColor, colorMap);
   }
-  const unitId = GetChildIdFromPath(rootId, path, unitMap);
+  const unitId = GetChildIdFromPath(rootId, path, unitMap, phase);
   if (!unitId) {
     return defaultUnitColor;
   }
@@ -28,14 +30,16 @@ export function GetTrueColorRecursively(rootId: string, path: number[], unitMap:
   if (unit.smartColor !== "inheret") {
     return getColorInVoid(unit.smartColor, colorMap);
   }
-  return GetTrueColorRecursively(rootId, path.slice(0, -1), unitMap, colorMap);
+  return GetTrueColorRecursively(rootId, path.slice(0, -1), unitMap, colorMap, phase);
 }
 
-export function GetTrueColor(signature: number[] | string, rootId: string, unitMap: UnitMap, colorMap: ColorMap): `#${string}` {
+export function GetTrueColor(
+  signature: number[] | string, rootId: string, unitMap: UnitMap, colorMap: ColorMap, phase: number
+): `#${string}` {
   if (!Array.isArray(signature)) {
     const unit = unitMap[signature];
     return getColorInVoid(unit.smartColor, colorMap);
   }
 
-  return GetTrueColorRecursively(rootId, signature, unitMap, colorMap);
+  return GetTrueColorRecursively(rootId, signature, unitMap, colorMap, phase);
 }

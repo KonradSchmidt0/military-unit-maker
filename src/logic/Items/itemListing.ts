@@ -1,8 +1,8 @@
 import { EquipGroup } from "../../hooks/useEquipGroupingStore";
 import { UnitMap } from "../../hooks/useUnitStore";
-import { EquipmentTable } from "../Units/logic";
+import { EquipmentTable, GetChildren } from "../Units/logic";
 
-export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTable {
+export function getEquipmentTable(unitId: string, unitMap: UnitMap, phase: number): EquipmentTable {
   const unit = unitMap[unitId];
 
   if (!unit) {
@@ -14,11 +14,11 @@ export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTa
   } else {
     const combined: EquipmentTable = {};
 
-    for (const [childId, count] of Object.entries(unit.childList)) {
-      const childEq = getEquipmentTable(childId, unitMap);
+    for (const e of GetChildren(unit, phase)) {
+      const childEq = getEquipmentTable(e.id, unitMap, phase);
 
       for (const [type, qty] of Object.entries(childEq)) {
-        combined[type] = (combined[type] || 0) + qty * count;
+        combined[type] = (combined[type] || 0) + qty * e.count;
       }
     }
 
@@ -29,9 +29,10 @@ export function getEquipmentTable(unitId: string, unitMap: UnitMap): EquipmentTa
 export function getGroupedEquipmentTable(
   unitId: string,
   unitMap: UnitMap,
-  groups: EquipGroup[]
+  groups: EquipGroup[],
+  phase: number
 ): { name: string; count: number, type: 'individual' | 'group', group: EquipGroup | undefined }[] {
-  const et = getEquipmentTable(unitId, unitMap);
+  const et = getEquipmentTable(unitId, unitMap, phase);
 
   // Build item → group lookup
   const itemToGroup = new Map<string, EquipGroup>();

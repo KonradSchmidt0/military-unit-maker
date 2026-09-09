@@ -6,6 +6,7 @@
 // i judge it as too much time, since everything that Complex is made of is already very modular
 
 import { useColorPalletStore } from "../../hooks/useColorPalletStore"
+import { usePhaseStore } from "../../hooks/usePhaseStore"
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../hooks/useUnitStore"
 import { GetTrueColor } from "../../logic/Units/unitColorManaging"
@@ -20,8 +21,9 @@ interface props {
 export function RootSwapIdNode(p: props) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const { colorMap } = useColorPalletStore()
+  const { phase } = usePhaseStore()
 
-  const unitId = processSignature(p.unitSignature, unitMap, trueRootId)
+  const unitId = processSignature(p.unitSignature, unitMap, trueRootId, phase)
   if (!unitId) {
     console.warn("Unit with id: " + unitId + " processed from signature: " + p.unitSignature + " is undefined")
     return null
@@ -29,7 +31,7 @@ export function RootSwapIdNode(p: props) {
 
   return <UnitClickableIdSwapRoot>
     <UnitHoverable signature={p.unitSignature} >
-      <UnitDisplay unitId={unitId} color={GetTrueColor(p.unitSignature, trueRootId, unitMap, colorMap)}/>
+      <UnitDisplay unitId={unitId} color={GetTrueColor(p.unitSignature, trueRootId, unitMap, colorMap, phase)}/>
     </UnitHoverable> 
   </UnitClickableIdSwapRoot>
 }

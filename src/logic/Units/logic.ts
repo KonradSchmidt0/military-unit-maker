@@ -8,8 +8,11 @@ export interface ChildEntry {
   id: string
   count: number
 }
-export type Phase2ChildEntry = ChildEntry[]
-export type ChildrenList = Phase2ChildEntry[]
+export interface ChildMod {
+  phase: number
+  childId: string
+  mod: number
+}
 
 export interface RawUnit {
   type: "raw";
@@ -30,7 +33,8 @@ export interface OrgUnit {
   echelonLevel: number;
   layers: string[];
 
-  childList: ChildrenList // First is UnitId, second is count of how many
+  children: ChildEntry[]
+  childrenMods: ChildMod[]
 
   desc?: string;
   flatCallSigns: Record<number, string>
@@ -76,7 +80,7 @@ export function createNewOrgUnit({
   layers?: string[];
   echelonLevel?: number;
   smartColor?: SmartColor;
-  children?: ChildrenList;
+  children?: ChildEntry[];
 } = {}): OrgUnit {
   return {
     type: "org",
@@ -84,12 +88,35 @@ export function createNewOrgUnit({
     layers,
     smartColor,
     echelonLevel,
-    childList: children,
+    children: children,
+    childrenMods: [],
     flatCallSigns: {},
     flatDescriptions: {}
   };
 }
 
+export function GetChildren(unit: Unit, phase: number): ChildEntry[] {
+  if (unit.type === "raw")
+    return []
+
+  const getModdedEntry = (childEntry: ChildEntry) => {
+    let childCount = childEntry.count
+    unit.childrenMods
+      .filter((mod) => mod.childId === childEntry.id && mod.phase === phase)
+      .forEach((mod) => childCount += mod.mod)
+
+    return {...childEntry, count: childCount}
+  }
+  
+  return unit.children.map((childEntry) => getModdedEntry(childEntry))
+}
+
+export function GetChildEntry(unit: Unit, phase: number, childId: string) {
+  const children = GetChildren(unit, phase)
+  const o = children.find((entry) => entry.id === childId)
+
+  return o
+}
 
 export function HowManyOfThisTypeInParent(
   parentId: string,
@@ -101,9 +128,10 @@ export function HowManyOfThisTypeInParent(
   if (parent.type === "raw") return 0;
 
   let total = 0
+  const children = GetChildren(parent, phase)
 
-  parent.childList.forEach( (phase2Entry) => {
-    const {id, count} = phase2Entry[phase]
+  children.forEach( (childEntry) => {
+    const {id, count} = childEntry
 
     if (id === searchedId) {
       total += count;
@@ -116,36 +144,4 @@ export function HowManyOfThisTypeInParent(
   } )
 
   return total;
-}
-
-// TODO: move to child managing
-export function removeEquipmentTypeRecursively(
-  unit: Unit,
-  equipmentTypeToRemove: EquipmentType,
-  unitMap: UnitMap,
-  phase: number
-): Unit {
-  if (unit.type === "raw") {
-    let newEquipment = { ...unit.equipment };
-    delete newEquipment[equipmentTypeToRemove];
-    return { ...unit, equipment: newEquipment };
-  }
-
-  // If it's an OrgUnit, recursively process its children
-  const newChildren = unit.childList.map( (phase2Entry) => {
-    const entry = phase2Entry[phase]
-    const child = unitMap[entry.id]
-
-    const updatedChild = removeEquipmentTypeRecursively(
-      child,
-      equipmentTypeToRemove,
-      unitMap,
-      phase
-    );
-
-    unitMap[entry.id] = updatedChild; // Update in place
-    return {...entry, id: }
-  } )
-
-  return { ...unit, childList: newChildren };
 }

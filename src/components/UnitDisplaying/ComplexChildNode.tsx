@@ -1,5 +1,6 @@
 import { useColorPalletStore } from "../../hooks/useColorPalletStore";
 import { useHoverStore } from "../../hooks/useHoverStore";
+import { usePhaseStore } from "../../hooks/usePhaseStore";
 import { useThemeStore } from "../../hooks/useThemeStore";
 import { processSignature, useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../hooks/useUnitStore";
@@ -22,15 +23,26 @@ export function ComplexChildNode(p: props) {
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId} = useHoverStore(s => s)
   const { colorMap } = useColorPalletStore()
+  const { phase } = usePhaseStore()
   
-  const childId = processSignature(p.childSignature, unitMap, trueRootId)
-  if (!childId) {
+  const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
+  const child = unitMap[childId ?? ""]
+  if (!childId || !child) {
     console.warn("Unit with id: " + childId + " processed from signature: " + p.childSignature + " is undefined")
     return null
   }
-    
-  const color = GetTrueColor(p.childSignature, trueRootId, unitMap, colorMap)
-  const boxShadow = calculateUnitShadow(p.childSignature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap)
+  
+  /// Problem: When parent has 0 of said child due to phase/attachments, the child has no flat index therefore
+  // it's id has to be a string. But if child inherets the color from its parent it causes GetTrueColor function to return the
+  // default color
+  /// Solution: Give parents signature as a last attempt hoping it is path or does not ihenrets color
+  const colorGiver = typeof p.childSignature === "string" && child.smartColor === "inheret" ? 
+    p.parentSignature : p.childSignature
+  const color = GetTrueColor(colorGiver, trueRootId, unitMap, colorMap, phase)
+
+  const boxShadow = calculateUnitShadow(
+    p.childSignature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap, phase
+  )
 
   return (
     <UnitClickableIdSwap parentSignature={p.parentSignature} childSignature={p.childSignature} whoSelectOnSelectClick={p.whoSelectOnSelectClick}>

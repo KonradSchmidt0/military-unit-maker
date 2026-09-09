@@ -1,17 +1,18 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { processSignature, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
+import { GetChildIdFromPath } from "../../../logic/Units/childGetting"
 
 interface props {
   signature: string | number[]
 }
 
 export function UnitClickableSelect(p: React.PropsWithChildren<props>) {
-  const {unitMap, trueRootId} = useUnitStore(s => s)
-
-  const {shift, ctrl} = useShortcutStore(s => s)
+  const {unitMap, trueRootId} = useUnitStore()
+  const {shift, ctrl} = useShortcutStore()
+  const { phase } = usePhaseStore()
   
   const addToUnitPalet = usePaletStore(s => s.addUnitToPalet)
   const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)
@@ -22,8 +23,13 @@ export function UnitClickableSelect(p: React.PropsWithChildren<props>) {
   const setSelected = useUnitInteractionStore((s) => s.setSelect)
 
 
-  const id = processSignature(p.signature, unitMap, trueRootId)
-  const myParentId = Array.isArray(p.signature) && p.signature.length > 0 ? GetChildIdFromPath(trueRootId, p.signature.slice(0, -1), unitMap) : undefined
+  const id = processSignature(p.signature, unitMap, trueRootId, phase)
+  const myParentId = 
+    Array.isArray(p.signature) && p.signature.length > 0 
+    ? 
+    GetChildIdFromPath(trueRootId, p.signature.slice(0, -1), unitMap, phase) 
+    : 
+    undefined
 
 
   const handleClick = () => {

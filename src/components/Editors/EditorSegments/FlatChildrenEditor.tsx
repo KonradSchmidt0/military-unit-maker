@@ -1,24 +1,23 @@
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { GetFlatIds } from "../../../logic/Units/childManaging";
+import { getComplexChildList } from "../../../logic/Units/childGetting";
 import { OrgUnit } from "../../../logic/Units/logic";
 import { ChildTextElement } from "./ChildTextElement";
 
-interface props {
-
-}
-
-export function FlatChildrenEditor(p: props) {
+export function FlatChildrenEditor() {
   const { trueRootId, unitMap } = useUnitStore(s => s)
   const select = useUnitInteractionStore(s => s.selectSignature)
-  const parentId = processSelect(select, unitMap, trueRootId)
+  const { phase } = usePhaseStore()
+
+  const parentId = processSelect(select, unitMap, trueRootId, phase)
 
   if (!parentId || !select)
     return null
 
   const parent = unitMap[parentId] as OrgUnit
 
-  const flatChildren = GetFlatIds(parent.childList)
+  const flatChildren = getComplexChildList(parent, true, phase)
 
   const childEdittingList = flatChildren.map((childId, index) =>  {
     return <ChildTextElement key={childId + "" + index} parentSignature={select} childFlatIndex={index}/>; 

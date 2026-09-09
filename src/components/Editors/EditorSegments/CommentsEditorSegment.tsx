@@ -4,6 +4,7 @@ import { useUnitStore } from "../../../hooks/useUnitStore";
 import { CommentsFromParentEditorSegment } from "./CommentsFromParentEditorSegment";
 import { LabledInput } from "../EditorElements/TextInputs/LabledInput";
 import { LargeTextInput } from "../EditorElements/TextInputs/LargeTextInput";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 
 interface CommentsEditorSegmentProps {
   
@@ -13,9 +14,10 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
   const { setStaffComment, removeStaffComment, getStaffComment } = useStaffTextStore(s => s)
   const { setStaffName, removeStaffName, getStaffName } = useStaffTextStore(s => s)
   const { unitMap, trueRootId, setInnerTexts } = useUnitStore(s => s)
-
   const selectSignature = useUnitInteractionStore(s => s.selectSignature)
-  const unitId = processSelect(selectSignature, unitMap, trueRootId) as string
+  const { phase } = usePhaseStore()
+
+  const unitId = processSelect(selectSignature, unitMap, trueRootId, phase) as string
   const unit = unitMap[unitId]
   
   function handleStaffComment(path: number[], comment: string) {

@@ -1,4 +1,5 @@
 import { useHoverStore } from "../../hooks/useHoverStore"
+import { usePhaseStore } from "../../hooks/usePhaseStore"
 import { processSignature } from "../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../hooks/useUnitStore"
 
@@ -7,10 +8,11 @@ interface props {
 }
 
 export function UnitHoverable(p: React.PropsWithChildren<props>) {
-  const { unitMap, trueRootId } = useUnitStore(s => s)
-  const { callId, callOff } = useHoverStore(s => s)
+  const { unitMap, trueRootId } = useUnitStore()
+  const { callId, callOff } = useHoverStore()
+  const { phase } = usePhaseStore()
 
-  const myId = processSignature(p.signature, unitMap, trueRootId)
+  const myId = processSignature(p.signature, unitMap, trueRootId, phase)
 
   if (!myId) {
     console.warn("Incorect path or id assigned to TreeNode! ", p.signature)

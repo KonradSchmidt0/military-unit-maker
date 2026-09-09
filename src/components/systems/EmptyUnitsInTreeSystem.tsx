@@ -3,13 +3,16 @@ import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 import { useDialogBoxStorage } from "../../hooks/useDialogBoxStore";
 import { useUnitInteractionStore } from "../../hooks/useUnitInteractionsStore";
 import { getEquipmentTable } from "../../logic/Items/itemListing";
+import { GetChildren } from "../../logic/Units/logic";
+import { usePhaseStore } from "../../hooks/usePhaseStore";
 
 const REMINDER_TIME_MINUTES = 8.5
 
 export function EmptyUnitsInTreeSystem() {
-  const { trueRootId, unitMap } = useUnitStore(s => s)
-  const { setSelect } = useUnitInteractionStore(s => s)
-  const { open } = useDialogBoxStorage(s => s)
+  const { trueRootId, unitMap } = useUnitStore()
+  const { setSelect } = useUnitInteractionStore()
+  const { open } = useDialogBoxStorage()
+  const { phase } = usePhaseStore()
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -33,7 +36,7 @@ export function EmptyUnitsInTreeSystem() {
 
     if (!active) return
 
-    const result = findEmptyUnitsInTree(trueRootId, unitMap)
+    const result = findEmptyUnitInTree(trueRootId, unitMap, phase)
 
     if (result) {
       if (!timerRef.current) {
@@ -54,13 +57,13 @@ export function EmptyUnitsInTreeSystem() {
         timerRef.current = null
       }
     }
-  }, [trueRootId, unitMap, active])
+  }, [trueRootId, unitMap, active, phase])
 
   return null
 }
 
-export function findEmptyUnitsInTree(unitId: string, unitMap: UnitMap): string | undefined {
-  const eq = getEquipmentTable(unitId, unitMap)
+export function findEmptyUnitInTree(unitId: string, unitMap: UnitMap, phase: number): string | undefined {
+  const eq = getEquipmentTable(unitId, unitMap, phase)
 
   if (Object.entries(eq).length === 0) {
     return unitId
@@ -72,10 +75,10 @@ export function findEmptyUnitsInTree(unitId: string, unitMap: UnitMap): string |
     return undefined
   }
 
-  const childrenAsList = Object.entries(unit.childList)
+  const children = GetChildren(unit, phase)
   let potentialEmptyChild = undefined
-  for (const [childId, count] of childrenAsList) {
-    const r = findEmptyUnitsInTree(childId, unitMap)
+  for (const {id: childId} of children) {
+    const r = findEmptyUnitInTree(childId, unitMap, phase)
     if (r) {
       potentialEmptyChild = r
       break;

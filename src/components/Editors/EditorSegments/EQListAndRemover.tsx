@@ -1,31 +1,39 @@
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit, removeEquipmentTypeRecursively } from "../../../logic/Units/logic";
 import { EquipGroup, toggleGroup, useEquipGroupingStore } from "../../../hooks/useEquipGroupingStore";
 import { useHoverStore } from "../../../hooks/useHoverStore";
 import { getGroupedEquipmentTable } from "../../../logic/Items/itemListing";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 
 export function EQListAndRemover() {
-  const {unitMap, trueRootId, setUnitMap} = useUnitStore(s => s)
+  const {unitMap, trueRootId} = useUnitStore(s => s)
   const { groups, setGroups } = useEquipGroupingStore(s => s)
-  const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId) as string
   const { callSimpleI, callOff } = useHoverStore(s => s)
-
-  const equipmentEntries = getGroupedEquipmentTable(selectedId, unitMap, groups)
+  const { phase } = usePhaseStore()
+  const { selectSignature } = useUnitInteractionStore()
+  
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
+  if (!selectedId) 
+    return null
+  
   const unit = unitMap[selectedId]
+  if (!unit) 
+    return null
+  
+  const equipmentEntries = getGroupedEquipmentTable(selectedId, unitMap, groups, phase)
 
-  const deleteEquipmentTypeFromAllChildren = (eqType: string) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to remove all "${eqType}" equipment from this unit and its children?`
-    );
-    if (!confirmed) return;
+  // const deleteEquipmentTypeFromAllChildren = (eqType: string) => {
+  //   const confirmed = window.confirm(
+  //     `Are you sure you want to remove all "${eqType}" equipment from this unit and its children?`
+  //   );
+  //   if (!confirmed) return;
 
-    const newSelectedUnit = removeEquipmentTypeRecursively(unit, eqType, unitMap) as OrgUnit;
-    setUnitMap({
-      ...unitMap,
-      [selectedId]: newSelectedUnit,
-    });
-  };
+  //   const newSelectedUnit = removeEquipmentTypeRecursively(unit, eqType, unitMap) as OrgUnit;
+  //   setUnitMap({
+  //     ...unitMap,
+  //     [selectedId]: newSelectedUnit,
+  //   });
+  // };
 
   const toggleTheGroup = (groupName: string) => setGroups(toggleGroup(groups, groupName))
 
@@ -64,7 +72,6 @@ export function EQListAndRemover() {
             {name}
           </b>
           <b className="w-24 p-1 h-8">{count}</b>
-          {type === "individual" && <button onClick={() => deleteEquipmentTypeFromAllChildren(name)} className="btn-emoji !p-0">❌</button>}
           {type === "group" && <button onClick={() => toggleTheGroup(name)} className="btn-emoji !p-0">↔️</button>}
         </div>
       )

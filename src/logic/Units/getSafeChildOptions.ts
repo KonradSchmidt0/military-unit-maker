@@ -1,11 +1,11 @@
 import { UnitMap } from "../../hooks/useUnitStore";
-import { ChildrenList } from "./logic";
+import { ChildEntry } from "./logic";
 
 export function getSafeChildOptions(
   parentId: string,
   unitMap: UnitMap,
   palet: string[],
-  alreadyChosenChildren: ChildrenList): UnitMap {
+  alreadyChosenChildren: ChildEntry[]): UnitMap {
   const existingIds = new Set(Object.entries(alreadyChosenChildren).map((c) => c[0]));
 
   function createsCycle(candidateId: string): boolean {
@@ -14,8 +14,8 @@ export function getSafeChildOptions(
     const candidate = unitMap[candidateId];
     if (!candidate || candidate.type !== "org") return false;
 
-    for (const [childId] of Object.entries(candidate.childList)) {
-      if (createsCycle(childId)) return true;
+    for (const e of candidate.children) {
+      if (createsCycle(e.id)) return true;
     }
 
     return false;

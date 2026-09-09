@@ -1,4 +1,5 @@
 import { simpleHover, useHoverStore } from "../../../hooks/useHoverStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { processSignature } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 
@@ -12,9 +13,10 @@ export function RemoveChildButton(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const removeChildFully = useUnitStore(s => s.removeChildType)
   const { callSimpleI, callOff } = useHoverStore(s => s)
+  const { phase } = usePhaseStore()
 
-  const parentId = processSignature(p.parentSignature, unitMap, trueRootId)
-  const childId = processSignature(p.childSignature, unitMap, trueRootId)
+  const parentId = processSignature(p.parentSignature, unitMap, trueRootId, phase)
+  const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
 
   if (!parentId || !childId) {
     return null

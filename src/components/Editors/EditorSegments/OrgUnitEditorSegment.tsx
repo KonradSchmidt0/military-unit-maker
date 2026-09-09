@@ -1,32 +1,33 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
-import { useUnitStore } from "../../../hooks/useUnitStore";
-import { OrgUnit } from "../../../logic/Units/logic";
 import { ChildRow } from "./ChildRow";
 import { getSafeChildOptions } from "../../../logic/Units/getSafeChildOptions";
-import { getComplexChildList } from "../../../logic/Units/childManaging";
 import { FlatChildrenEditor } from "./FlatChildrenEditor";
 import { useUnitDropdownStore } from "../../../hooks/useUnitDropdownStore";
 import { MouseEvent } from "react";
+import { useUnitStore } from "../../../hooks/useUnitStore";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
+import { getComplexChildList } from "../../../logic/Units/childGetting";
 
 export default function OrgUnitEditorSegment() {
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
-  const select = useUnitInteractionStore(s => s.selectSignature) as string | number[]
-  const selectedId = processSelect(select, unitMap, trueRootId) as string
-  const { addUnitToPalet } = usePaletStore(s => s)
-  
-  const createChild = useUnitStore(s => s.creatNewChild)
-  const addChild = useUnitStore(s => s.addNewChild)
-  const consolidateUnit = useUnitStore(s => s.consolidateOrgUnit)
-  
-  const unit = unitMap[selectedId] as OrgUnit
+  const { unitMap, trueRootId, creatNewChild, addNewChild, consolidateOrgUnit} = useUnitStore()
+  const { addUnitToPalet } = usePaletStore()
+  const { phase } = usePhaseStore()
+  const { callDropDown } = useUnitDropdownStore()
+  const { unitPalet } = usePaletStore()
+  const select = useUnitInteractionStore(s => s.selectSignature)
 
-  const { callDropDown } = useUnitDropdownStore(s => s)
+  if (!select) return null
+  
+  const selectedId = processSelect(select, unitMap, trueRootId, phase)
+  if (!selectedId) return null
+
+  const unit = unitMap[selectedId]
+  if (!unit || unit.type !== "org") return null
 
   // Problem: If given all units as a option its possible to choose yourself or other dangerous unit, and thus creating infinite loop
   // Solution: We filter them
-  const safeChildrenOptions = getSafeChildOptions(selectedId, unitMap, usePaletStore(state => state.unitPalet), unit.childList)
+  const safeChildrenOptions = getSafeChildOptions(selectedId, unitMap, unitPalet, unit.children)
 
   const handleAddingChild = (type: "org" | "raw" | "existing", e?: MouseEvent<HTMLButtonElement, globalThis.MouseEvent> | undefined) => {
     if (type === "existing") {
@@ -36,12 +37,12 @@ export default function OrgUnitEditorSegment() {
       }
 
       callDropDown(
-        (choosenId: string) => addChild(selectedId, choosenId),
+        (choosenId: string) => addNewChild(selectedId, choosenId),
         {top: e.clientY + 10, left: e?.clientX},
         safeChildrenOptions
       )
     } else {
-      createChild(selectedId, type, addUnitToPalet); 
+      creatNewChild(selectedId, type, addUnitToPalet); 
     }
   }
 
@@ -59,14 +60,19 @@ export default function OrgUnitEditorSegment() {
       </button>
     </div>
     <div className="editor-segment-row">
-      <button onClick={() => consolidateUnit(selectedId)} className="btn-emoji">🤝Combine</button>
+      <button onClick={() => consolidateOrgUnit(selectedId)} className="btn-emoji">🤝Combine</button>
     </div>
   </>)
 
   // TODO: Make draggable 
-  const childEdittingList = getComplexChildList(unit, false).map((entry, i) =>  {
-    const childSignature = Array.isArray(select) ? [...select, entry.flatIndex] : entry.childId
-    return <ChildRow key={i + "childEdittingList"}
+  const unmodedChildrenEntry = unit.children
+  const moddedChildrenEntry = getComplexChildList(unit, false, phase)
+
+  const childEdittingList = unmodedChildrenEntry.map((entry, _) =>  {
+    const myFlatIndex = moddedChildrenEntry.find((e) => e.childId === entry.id)?.flatIndex
+    const childSignature = Array.isArray(select) && myFlatIndex !== undefined ? [...select, myFlatIndex] : entry.id
+    
+    return <ChildRow key={entry.id + "childEdittingList"}
         parentSignature={select}
         childSignature={childSignature}
         whoSelectOnSelectClick={childSignature}

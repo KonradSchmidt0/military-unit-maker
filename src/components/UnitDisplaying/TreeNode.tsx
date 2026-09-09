@@ -9,6 +9,7 @@ import { UnitClickableSelect } from "./UnitClickable/UnitClickableSelect";
 import { UnitDisplay } from "./UnitDisplay"
 import { UnitHoverable } from "./UnitHoverable";
 import { useColorPalletStore } from "../../hooks/useColorPalletStore";
+import { usePhaseStore } from "../../hooks/usePhaseStore";
 
 interface TreeNodeProps {
   signature: number[] | string
@@ -20,22 +21,24 @@ interface TreeNodeProps {
 }
 
 function TreeNode(p: TreeNodeProps) {  
-  const unitMap = useUnitStore(s => s.unitMap)
-  const trueRootId = useUnitStore(s => s.trueRootId)
+  const {unitMap, trueRootId} = useUnitStore()
   const isDarkmode = useThemeStore(s => s.isDark)
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId } = useHoverStore(s => s)
   const {colorMap} = useColorPalletStore()
+  const { phase } = usePhaseStore()
   
-  const myId = processSignature(p.signature, unitMap, trueRootId)
+  const myId = processSignature(p.signature, unitMap, trueRootId, phase)
 
   if (!myId) {
     console.warn("Incorect path or id assigned to TreeNode! ", p.signature)
     return <>Something went wrong with signature :(</>
   }
 
-  const color = GetTrueColor(p.signature, trueRootId, unitMap, colorMap)
-  const boxShadow = calculateUnitShadow(p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap)
+  const color = GetTrueColor(p.signature, trueRootId, unitMap, colorMap, phase)
+  const boxShadow = calculateUnitShadow(
+    p.signature, selectedSignature, unitMap, trueRootId, curHoveredId, isDarkmode, colorMap, phase
+  )
  
   return (
     <UnitHoverable signature={p.signature}>

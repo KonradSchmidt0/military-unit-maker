@@ -1,9 +1,10 @@
 import { useStaffTextStore } from "../../../hooks/useStaffTextStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildIdFromPath } from "../../../logic/Units/childManaging"
 import { getDesignationPack } from "../../../logic/Designations/designationPack"
 import { OrgUnit } from "../../../logic/Units/logic"
 import TreeNode from "../../UnitDisplaying/TreeNode"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
+import { GetChildIdFromPath } from "../../../logic/Units/childGetting"
 
 interface props {
   parentSignature: number[] | string
@@ -12,14 +13,18 @@ interface props {
 
 export function ChildTextElement(p: props) {
   const {unitMap, updateUnit, trueRootId} = useUnitStore(s=>s)
-  const parentId = (Array.isArray(p.parentSignature) ? GetChildIdFromPath(trueRootId, p.parentSignature, unitMap) : p.parentSignature) as string
-  const childId = GetChildIdFromPath(parentId, [p.childFlatIndex], unitMap) as string
+  const { staffNames, staffComments } = useStaffTextStore(s => s)
+  const { phase } = usePhaseStore()
+  
+  const parentId = (Array.isArray(p.parentSignature) ? GetChildIdFromPath(trueRootId, p.parentSignature, unitMap, phase) : p.parentSignature) as string
+  const childId = GetChildIdFromPath(parentId, [p.childFlatIndex], unitMap, phase) as string
+
+  const mySignature = Array.isArray(p.parentSignature) ? [...p.parentSignature, p.childFlatIndex] : childId
   const parent = unitMap[parentId] as OrgUnit
+
   const callSign = parent.flatCallSigns[p.childFlatIndex]
   const desc = parent.flatDescriptions[p.childFlatIndex]
-  const mySignature = Array.isArray(p.parentSignature) ? [...p.parentSignature, p.childFlatIndex] : childId
-  const { staffNames, staffComments } = useStaffTextStore(s => s)
-
+  
   function handleCallSign(n: string) {
     updateUnit(parentId, {...parent, flatCallSigns: {...parent.flatCallSigns, [p.childFlatIndex]: n}})
   }
@@ -28,7 +33,7 @@ export function ChildTextElement(p: props) {
     updateUnit(parentId, {...parent, flatDescriptions: {...parent.flatDescriptions, [p.childFlatIndex]: n}})
   }
 
-  const dp = Array.isArray(mySignature) ? getDesignationPack(mySignature, unitMap, trueRootId, staffNames, staffComments) : {}
+  const dp = Array.isArray(mySignature) ? getDesignationPack(mySignature, unitMap, trueRootId, staffNames, staffComments, phase) : {}
 
   return <div className="flex flex-row gap-2 h-[4.75rem]">
     <div className="flex flex-col items-center justify-center h-full">

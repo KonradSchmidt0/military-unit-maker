@@ -1,54 +1,20 @@
-import { UnitMap } from "../../hooks/useUnitStore";
-import { OrgUnit, ChildrenList } from "./logic";
+import { ChildEntry, GetChildEntry, OrgUnit } from "./logic";
 
-export function addChild(
+export function setChildEntry(
   parent: OrgUnit,
   childId: string,
-  count: number = 1
-): OrgUnit {
-  const curCount = parent.childList[childId]
+  func: (entry: ChildEntry | undefined) => ChildEntry
+): OrgUnit { 
+  const curEntry = GetChildEntry(parent, 0, childId)
 
-  // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-  let aaa: ChildrenList = {}
-  aaa[childId] = curCount ? curCount + count : count
-  return {
-    ...parent,
-    childList: {...parent.childList, ...aaa}
-  };
-}
+  let o = curEntry ?
+    {...parent, children: parent.children.map( (e) => 
+      e.id === childId ? func(e) : e
+    )} 
+    :
+    {...parent, children: parent.children.concat(func(undefined))}
 
-export function removeChild(
-  parent: OrgUnit,
-  childId: string,
-  count: number = 1
-): OrgUnit {
-  const curCount = parent.childList[childId]
-
-  if (!curCount) return parent; // no child to remove
-
-  if (curCount <= count) {
-    return removeAllOfAChild(parent, childId)
-  } else {
-    // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-    let aaa: ChildrenList = {}
-    aaa[childId] =  curCount - count
-
-    return {
-      ...parent,
-      childList: {...parent.childList, ...aaa}
-    };
-  }
-}
-
-export function removeAllOfAChild(
-  parent: OrgUnit,
-  childId: string,
-): OrgUnit {
-  const { [childId]: _, ...rest } = parent.childList;
-  return {
-    ...parent,
-    childList: rest
-  };
+  return o
 }
 
 export function setChildCount(
@@ -56,36 +22,44 @@ export function setChildCount(
   childId: string,
   newCount: number
 ): OrgUnit {
-  const curCount = parent.childList[childId]
-
-  if (!curCount) return parent; // no child to edit
-
-  if (newCount === 0) {
-    return removeAllOfAChild(parent, childId)
-  } else {
-    // When i do { newId: 1 } it reads new id as a freaking string of value "newId"
-    let aaa: ChildrenList = {}
-    aaa[childId] = newCount
-    return {
-      ...parent,
-      childList: {...parent.childList, ...aaa}
-    };
-  }
+  return setChildEntry(parent, childId, 
+    (_) => ({id: childId, count: newCount})
+  )
 }
 
-export function setChildId(
+export function setChildEntryId(
   parent: OrgUnit,
   oldId: string,
   newId: string
 ): OrgUnit {
-  const oldIdCount = parent.childList[oldId]
-  if (!oldIdCount)
-    return parent
+  return setChildEntry(parent, oldId, 
+    (e) => ({id: newId, count: e ? e.count : 0})
+  )
+}
 
-  let updatedChildren = parent.childList
-  delete updatedChildren[oldId]
-  updatedChildren[newId] = oldIdCount
-  return { ...parent, childList: updatedChildren }
+export function addChild(
+  parent: OrgUnit,
+  childId: string,
+  count: number = 1
+): OrgUnit {
+  return setChildEntry(parent, childId, 
+    (e) => ({id: childId, count: e ? Math.max(e.count + count, 0) : count})
+  )
+}
+
+export function subtractChild(
+  parent: OrgUnit,
+  childId: string,
+  count: number = 1
+): OrgUnit {
+  return addChild(parent, childId, -count)
+}
+
+export function removeChildEntry(
+  parent: OrgUnit,
+  childId: string,
+): OrgUnit {
+  return {...parent, children: parent.children.filter((e) => e.id !== childId)}
 }
 
 export function moveChild(
@@ -93,86 +67,15 @@ export function moveChild(
   childId: string,
   destination: "top" | "bottom"
 ): OrgUnit {
-  const exist = parent.childList[childId]
-  if (!exist) {
+  const childEntry = parent.children.find((e) => (e.id === childId))
+  if (!childEntry) {
     return parent
   }
 
-  let newChildren = {}
-  if (destination === "top")
-    newChildren = { [childId]: exist, ...parent.childList }
-  else {
-    const { [childId]: myCount, ...rest } = parent.childList;
-    newChildren = {...rest, [childId]: exist}
-  }
-
-  return {...parent, childList: newChildren}
+  const childrenMinusTheChild = parent.children.filter((e) => e.id !== childId)
+  const newChildren = destination === "bottom" ?
+    childrenMinusTheChild.concat(childEntry) :
+    [childEntry].concat(childrenMinusTheChild)
+    
+  return {...parent, children: newChildren}
 }
-
-
-// "Flat" as in flatten the children
-// Example: Parent has children: 1 HQ, 3 Infantry, 1 Artillery. Flattening it gives us array: [HQ, inf, inf, inf, art]
-export function GetFlatIds(children: ChildrenList) {
-  const o: string[] = [];
-
-  for (const [childTypeId, count] of Object.entries(children)) {
-    for (let i = 0; i < count; i++) {
-      o.push(childTypeId);
-    }
-  }
-
-  return o;
-}
-
-export function GetIdFromFlatIndex(children: ChildrenList, index: number) : string | undefined {
-  return GetFlatIds(children)[index]
-}
-
-export function GetFlatIndexFromId(children: ChildrenList, id: string) {
-  let o = 0;
-
-  for (const [childId, count] of Object.entries(children)) {
-    if (childId === id) {
-      return o
-    }
-    o += count
-  }
-
-  return o;
-}
-
-export function GetChildIdFromPath(rootId: string, path: number[], unitMap: UnitMap): string | undefined {
-  if (path.length === 0) {
-    return rootId
-  }
-  const parent = unitMap[rootId]
-  if (parent.type !== "org") {
-    return undefined
-  }
-  const nextId = GetIdFromFlatIndex(parent.childList, path[0])
-  if (!nextId) {
-    return undefined
-  }
-  if (path.length === 1) {
-    return nextId
-  }
-  const np = path.slice(1)
-  return GetChildIdFromPath(nextId, np, unitMap)
-}
-
-// Complex as in combines both standard child list (id: count) and flat list (flatten array)
-export function getComplexChildList(u: OrgUnit, shouldFlatten: boolean) {
-    const flat = GetFlatIds(u.childList).map((cid, i) => ({flatIndex: i, childId: cid, count: u.childList[cid]}));
-  
-    if (shouldFlatten) {
-      return flat;
-    }
-  
-    const seen = new Set();
-    const filtered = flat.filter(entry => {
-      if (seen.has(entry.childId)) return false;
-      seen.add(entry.childId);
-      return true;
-    });
-    return filtered
-  }

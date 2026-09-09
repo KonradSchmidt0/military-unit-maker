@@ -1,9 +1,9 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { useHoverStore } from "../../../hooks/useHoverStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetFlatIds } from "../../../logic/Units/childManaging"
 import { OrgUnit } from "../../../logic/Units/logic"
 import { RemoveRootButton } from "../EditorElements/RemoveRootButton"
 import { TemporaryRootButton } from "../EditorElements/TemporaryRootButton"
@@ -16,12 +16,13 @@ export function CommonEditorAlphaRow(p:props) {
   const { unitMap, trueRootId, popNewTrueRoot } = useUnitStore(s => s)
   const { selectSignature, setSelect, offsetSelect } = useUnitInteractionStore(s => s)
   const { duplicateUnit, addOrSubtractChild } = useUnitStore(s => s)
-  const {ctrl, alt} = useShortcutStore(s => s)
+  const { ctrl } = useShortcutStore(s => s)
   const { callSimple, callOff } = useHoverStore(s => s)
   const { addUnitToPalet, unitPalet, removeUnitFromPalet } = usePaletStore(s => s)
+  const { phase } = usePhaseStore()
 
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
-  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
+  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId, phase))
   
   if (!selectSignature || !selectedId)
     return null
@@ -32,9 +33,6 @@ export function CommonEditorAlphaRow(p:props) {
     const newId = duplicateUnit(id);
     addOrSubtractChild(parentId, selectedId as string, -1)
     addOrSubtractChild(parentId, newId, 1)
-
-    if (!alt)
-      setSelect([...selectPath.slice(0, -1), GetFlatIds(parent.childList).length - 1])
   }
 
   return (

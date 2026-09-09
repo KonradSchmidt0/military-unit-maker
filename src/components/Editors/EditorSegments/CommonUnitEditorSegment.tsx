@@ -9,13 +9,15 @@ import { CommonEditorAlphaRow } from "./CommonEditorAlphaRow";
 import { OrgUnit } from "../../../logic/Units/logic";
 import { RootSwapIdNode } from "../../UnitDisplaying/RootSwapIdNode";
 import { UnitColorOptions } from "../EditorElements/UnitColors/UnitColorOptions";
+import { usePhaseStore } from "../../../hooks/usePhaseStore";
 
 export default function CommonUnitEditorSegment() {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
   const { selectSignature, changeSelectedChild} = useUnitInteractionStore(s => s)
-  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId))
+  const { phase } = usePhaseStore()
+  const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId, phase))
   
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
 
   if (!selectSignature || !selectedId)
     return null
@@ -56,7 +58,7 @@ export default function CommonUnitEditorSegment() {
         whoSelectOnSelectClick={selectSignature.slice(0, -1)}
         key="top child row"
         disableShadow={true}
-        onMoveMade={(d) => changeSelectedChild(d, (unitMap[parentId] as OrgUnit).childList)}
+        onMoveMade={(d) => changeSelectedChild(d, (unitMap[parentId] as OrgUnit), phase)}
       /> : 
       <RootSwapIdNode unitSignature={selectSignature}/>
       }

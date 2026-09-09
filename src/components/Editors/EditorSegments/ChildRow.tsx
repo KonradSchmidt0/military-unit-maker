@@ -1,8 +1,9 @@
 import { useShortcutStore } from "../../../hooks/shortcutStore"
 import { useHoverStore } from "../../../hooks/useHoverStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { useUnitInteractionStore, processSignature } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { OrgUnit } from "../../../logic/Units/logic"
+import { GetChildEntry, OrgUnit } from "../../../logic/Units/logic"
 import { ComplexChildNode } from "../../UnitDisplaying/ComplexChildNode"
 import { RemoveChildButton } from "../EditorElements/RemoveChildButton"
 import { SafeNumberInput } from "../EditorElements/SafeInputs/SafeNumberInput"
@@ -22,13 +23,14 @@ export function ChildRow(p: ChildRowProps) {
   const { setSelect } = useUnitInteractionStore(s => s)
   const { changeChildCount, moveChildPos } = useUnitStore(s => s)
   const { callSimpleI, callOff } = useHoverStore(s => s)
+  const {phase} = usePhaseStore()
   
-  const childId = processSignature(p.childSignature, unitMap, trueRootId)
+  const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
   if (!childId) {
     console.warn("Unit (child) with id: " + childId + " processed from signature: " + p.childSignature + " is undefined")
     return null
   }
-  const parentId = processSignature(p.parentSignature, unitMap, trueRootId)
+  const parentId = processSignature(p.parentSignature, unitMap, trueRootId, phase)
   if (!parentId) {
     console.warn("Unit (parent) with id: " + parentId + " processed from signature: " + p.parentSignature + " is undefined")
     return null
@@ -67,7 +69,7 @@ export function ChildRow(p: ChildRowProps) {
       </div>
 
       <SafeNumberInput 
-        count={parent.childList[childId]}
+        count={GetChildEntry(parent, phase, childId)?.count ?? 0}
         onCountChange={(n) => { changeChildCount(parentId, childId, n); if (alt) { setSelect(p.whoSelectOnSelectClick) } }} 
         id={"sni" + p.key}
         hover={"Count of shown unit in parent"}

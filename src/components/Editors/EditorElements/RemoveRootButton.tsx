@@ -1,5 +1,6 @@
 import { useHoverStore } from "../../../hooks/useHoverStore"
 import { usePaletStore } from "../../../hooks/usePaletStore"
+import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { processSelect, useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 
@@ -12,9 +13,10 @@ export function RemoveRootButton(p: props) {
   const { selectSignature, setSelect } = useUnitInteractionStore()
   const { callSimple, callOff } = useHoverStore()
   const { addUnitToPalet  } = usePaletStore()
+  const { phase } = usePhaseStore()
   
-  const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap)
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId)
+  const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap, phase)
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   const isChild = Array.isArray(selectSignature) && selectSignature.length > 0
 
   function handleUserCallToRemoveTrueRoot() {

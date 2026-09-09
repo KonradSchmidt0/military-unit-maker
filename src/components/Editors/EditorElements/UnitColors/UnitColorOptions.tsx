@@ -5,14 +5,16 @@ import { useUnitInteractionStore, processSelect } from "../../../../hooks/useUni
 import { useUnitStore } from "../../../../hooks/useUnitStore"
 import { GetTrueColor } from "../../../../logic/Units/unitColorManaging"
 import SafeColorInput from "../SafeInputs/SafeColorInput"
+import { usePhaseStore } from "../../../../hooks/usePhaseStore"
 
 export function UnitColorOptions() {
   const { unitMap, trueRootId, updateUnit } = useUnitStore()
   const { selectSignature } = useUnitInteractionStore()
   const { colorMap } = useColorPalletStore()
   const { CallColorDropdown, onChosen } = useColorPalletDropdownStore()
+  const { phase } = usePhaseStore()
   
-  const selectedId = processSelect(selectSignature, unitMap, trueRootId) as string
+  const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase) as string
   const unit = unitMap[selectedId];
 
   const mousePos = useRef({x: 0, y: 0})
@@ -32,7 +34,7 @@ export function UnitColorOptions() {
       text: "🕊️🖌️",
       value: "manual",
       onclick: () => { 
-        const c = GetTrueColor(selectSignature, trueRootId, unitMap, colorMap)
+        const c = GetTrueColor(selectSignature, trueRootId, unitMap, colorMap, phase)
         updateUnit(selectedId, { ...unit, smartColor: c})
       }
     },

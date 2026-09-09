@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useUnitInteractionStore, processSelect } from '../../hooks/useUnitInteractionsStore';
 import { useUnitStore } from '../../hooks/useUnitStore';
-import { GetFlatIds } from '../../logic/Units/childManaging';
-import { OrgUnit } from '../../logic/Units/logic';
-import { GetFoldingClassification } from '../UnitDisplaying/TreeView';
+import { GetChildren, OrgUnit } from '../../logic/Units/logic';
 import { useGlobalStore } from '../../hooks/useGlobalStore';
 import { useForceFoldingStore } from '../../hooks/useForceFoldingStore';
 import { useShortcutStore } from '../../hooks/shortcutStore';
+import { usePhaseStore } from '../../hooks/usePhaseStore';
+import { getComplexChildList } from '../../logic/Units/childGetting';
 
 export default function ArrowNavigation() {
   const { selectParent, selectSibling, selectChild } = useUnitInteractionStore()
@@ -17,6 +17,8 @@ export default function ArrowNavigation() {
   const { foldingUnfoldingMap } = useForceFoldingStore()
 
   const { alt } = useShortcutStore()
+
+  const { phase } = usePhaseStore()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,15 +39,10 @@ export default function ArrowNavigation() {
       e?.preventDefault()
 
       const path = (slctd as number[])
-      const selectedId  = processSelect(path, unitMap, trueRootId)
+      const selectedId  = processSelect(path, unitMap, trueRootId, phase)
       const unit = unitMap[selectedId ?? ""]
-      const parentId = processSelect(path.slice(0, -1), unitMap, trueRootId)
-      const parentsFoldingClass = GetFoldingClassification(
-        path.slice(0, -1), 
-        foldingDepth, 
-        echelonFoldingLevel,
-        unitMap, trueRootId, foldingUnfoldingMap, actingRootPath, treeStacking
-      )
+      const parentId = processSelect(path.slice(0, -1), unitMap, trueRootId, phase)
+      const parent = unitMap[parentId ?? ""] as OrgUnit
 
 
       function handleSelectParent() {
@@ -56,10 +53,8 @@ export default function ArrowNavigation() {
       function handleSelectChild() {
         if (unit.type !== "org")
           return
-        if (Object.entries(unit.childList).length === 0)
+        if (GetChildren(unit, phase).length === 0)
           return
-        //const flatChildrenLenght = GetFlatIds(unit.children).length
-        //const i = Math.floor((flatChildrenLenght - 1) / 2)
         selectChild(0)
       }
       function handleSelectSibling(d: 1 | -1) {
@@ -68,7 +63,7 @@ export default function ArrowNavigation() {
           return
         }
 
-        const flatChildrenLenght = GetFlatIds((unitMap[parentId] as OrgUnit).childList).length 
+        const flatChildrenLenght = getComplexChildList(parent, true, phase).length
         const o = path[path.length - 1] + d
         selectSibling( (o + flatChildrenLenght * 2) % flatChildrenLenght )
       }
