@@ -14,7 +14,7 @@ interface props {
 export function ChildTextElement(p: props) {
   const {unitMap, updateUnit, trueRootId} = useUnitStore(s=>s)
   const { staffNames, staffComments } = useStaffTextStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const parentId = (Array.isArray(p.parentSignature) ? GetChildIdFromPath(trueRootId, p.parentSignature, unitMap, phase) : p.parentSignature) as string
   const childId = GetChildIdFromPath(parentId, [p.childFlatIndex], unitMap, phase) as string

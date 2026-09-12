@@ -7,12 +7,14 @@ b-rotary.svg,rotary helicopter aviation gunship air
 b-aa.svg,anti air aa air to air
 b-air-warning.svg,air warning detection
 b-at.svg,anti tank at air to ground td tank destroyer
-k-at.svg,anti tank at air to ground gun konrad niehorster td tank destroyer
-k-aa-missile.svg,anti air aa air to air missile konrad
-k-at-missile.svg,anti tank at air to ground missile konrad td tank destroyer
+k-at.svg,anti tank at air to ground gun niehorster td tank destroyer
+k-aa-missile.svg,anti air aa air to air missile
+k-at-missile.svg,anti tank at air to ground missile td tank destroyer
+b-bridging.svg,bridging engineers river
 b-cbrn.svg,chemical biological radiological nuclear cbrn recon
 b-combinedarms.svg,combinde arms mix tank infantry
 b-engi.svg,engineers support
+b-engi-alt.svg,engineers support alternative armored
 b-firefighters.svg,firefighting firefighters
 b-flame.svg,flamethrower engineers
 b-gendarmerie.svg,gendarmerie military police
@@ -32,6 +34,7 @@ b-signal.svg,signal communication comms support radio
 b-search-light.svg,search light spotting aa air detection
 b-sniper.svg,sniper sharp shooters sharpshooters
 b-supply.svg,supply logistics support storage
+b-tank-alt.svg,tank armor armored vehicle apc ifv fighting assult gun afv alt
 b-food.svg,supply logistics support food yummy kitchen
 b-armored.svg,armor armored vehicle apc ifv fighting protected
 b-air-assault.svg, air assault

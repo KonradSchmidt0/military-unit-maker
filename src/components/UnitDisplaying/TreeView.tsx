@@ -22,7 +22,7 @@ function TreeView(p : TreeViewProps) {
   const {echelonFoldingLevel, stacking} = useGlobalStore(s => s)
   const { staffNames, staffComments } = useStaffTextStore(s => s)
   const foldingUnfoldingMap = useForceFoldingStore(s => s.foldingUnfoldingMap)
-  const {phase} = usePhaseStore()
+  const {currentPhase: phase} = usePhaseStore()
 
   const unitId = GetChildIdFromPath(trueRootId, p.path, unitMap, phase) as string
   const unit = unitMap[unitId]

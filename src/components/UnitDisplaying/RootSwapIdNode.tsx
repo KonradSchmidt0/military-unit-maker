@@ -21,7 +21,7 @@ interface props {
 export function RootSwapIdNode(p: props) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const { colorMap } = useColorPalletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const unitId = processSignature(p.unitSignature, unitMap, trueRootId, phase)
   if (!unitId) {

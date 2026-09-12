@@ -14,7 +14,7 @@ import { usePhaseStore } from "../../../hooks/usePhaseStore";
 export default function CommonUnitEditorSegment() {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
   const { selectSignature, changeSelectedChild} = useUnitInteractionStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId, phase))
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)

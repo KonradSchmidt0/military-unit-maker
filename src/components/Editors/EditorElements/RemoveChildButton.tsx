@@ -13,7 +13,7 @@ export function RemoveChildButton(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore(s => s)
   const removeChildFully = useUnitStore(s => s.removeChildType)
   const { callSimpleI, callOff } = useHoverStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const parentId = processSignature(p.parentSignature, unitMap, trueRootId, phase)
   const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)

@@ -19,7 +19,7 @@ export function CommonEditorAlphaRow(p:props) {
   const { ctrl } = useShortcutStore(s => s)
   const { callSimple, callOff } = useHoverStore(s => s)
   const { addUnitToPalet, unitPalet, removeUnitFromPalet } = usePaletStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   const parentId = useUnitInteractionStore(s => s.getSelectedParent(unitMap, trueRootId, phase))

@@ -15,7 +15,7 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
   const { setStaffName, removeStaffName, getStaffName } = useStaffTextStore(s => s)
   const { unitMap, trueRootId, setInnerTexts } = useUnitStore(s => s)
   const selectSignature = useUnitInteractionStore(s => s.selectSignature)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const unitId = processSelect(selectSignature, unitMap, trueRootId, phase) as string
   const unit = unitMap[unitId]

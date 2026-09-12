@@ -23,7 +23,7 @@ export function ComplexChildNode(p: props) {
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId} = useHoverStore(s => s)
   const { colorMap } = useColorPalletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
   const child = unitMap[childId ?? ""]

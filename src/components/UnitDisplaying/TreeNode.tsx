@@ -26,7 +26,7 @@ function TreeNode(p: TreeNodeProps) {
   const selectedSignature = useUnitInteractionStore(s => s.selectSignature)
   const {id: curHoveredId } = useHoverStore(s => s)
   const {colorMap} = useColorPalletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const myId = processSignature(p.signature, unitMap, trueRootId, phase)
 

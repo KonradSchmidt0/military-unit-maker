@@ -14,7 +14,7 @@ export function VisualLayeringEditor() {
   const updateUnit = useUnitStore((s) => s.updateUnit);
   const { callSimpleI, callOff } = useHoverStore(s => s)
   const { colorMap } = useColorPalletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const unitId = processSelect(unitSignature, unitMap, trueRootId, phase) as string
   const unit = unitMap[unitId];

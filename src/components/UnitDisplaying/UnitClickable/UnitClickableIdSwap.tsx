@@ -17,7 +17,7 @@ export function UnitClickableIdSwap(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore()
   const { unitPalet } = usePaletStore()
   const { alt, shift, ctrl} = useShortcutStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const callDropDown = useUnitDropdownStore(s => s.callDropDown)
   const { changeChildId, duplicateUnit, addOrSubtractChild } = useUnitStore()

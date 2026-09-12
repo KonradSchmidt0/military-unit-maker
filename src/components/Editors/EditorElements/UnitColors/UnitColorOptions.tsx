@@ -12,7 +12,7 @@ export function UnitColorOptions() {
   const { selectSignature } = useUnitInteractionStore()
   const { colorMap } = useColorPalletStore()
   const { CallColorDropdown, onChosen } = useColorPalletDropdownStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase) as string
   const unit = unitMap[selectedId];

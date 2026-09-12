@@ -11,6 +11,7 @@ import { QuickSaveButtons } from "./EditorElements/QuickSaveButtons";
 import { SaveButtons } from "./EditorElements/SaveButtons";
 import { SafeNumberInput } from "./EditorElements/SafeInputs/SafeNumberInput";
 import { NewProjectButton } from "./EditorElements/NewProjectButton";
+import PhaseEditorSegment from "./EditorSegments/PhaseSegments/PhaseEditorSegment";
 
 export default function GlobalEditor() {
   const { echelonFoldingLevel, setEchelonFoldingLevel } = useGlobalStore(s => s)
@@ -28,6 +29,8 @@ export default function GlobalEditor() {
         </div>
         <button className="btn-emoji !p-0 ml-auto" onClick={() => setGlobalMini(true)}>❌</button>
       </div>
+
+      <div className="overflow-y-auto max-h-fit">
 
       <div className="editor-segment-flex">
         <div className="editor-segment-row">
@@ -48,6 +51,10 @@ export default function GlobalEditor() {
         <div className="editor-segment-row">
           <UnitTextsDisplaySwitches/>
         </div>
+      </div>
+
+      <div className="editor-segment-flex">
+        <PhaseEditorSegment/>
       </div>
 
       <div className="editor-segment-flex">
@@ -77,7 +84,9 @@ export default function GlobalEditor() {
         </div>
       </div>
 
-      <DebugSegment></DebugSegment>
+      <DebugSegment/>
+
+      </div>
     </div>
   )
 }

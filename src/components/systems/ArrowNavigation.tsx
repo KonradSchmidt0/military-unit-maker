@@ -18,7 +18,7 @@ export default function ArrowNavigation() {
 
   const { alt } = useShortcutStore()
 
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

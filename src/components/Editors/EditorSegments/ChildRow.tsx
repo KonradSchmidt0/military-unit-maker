@@ -23,7 +23,7 @@ export function ChildRow(p: ChildRowProps) {
   const { setSelect } = useUnitInteractionStore(s => s)
   const { changeChildCount, moveChildPos } = useUnitStore(s => s)
   const { callSimpleI, callOff } = useHoverStore(s => s)
-  const {phase} = usePhaseStore()
+  const {currentPhase: phase} = usePhaseStore()
   
   const childId = processSignature(p.childSignature, unitMap, trueRootId, phase)
   if (!childId) {

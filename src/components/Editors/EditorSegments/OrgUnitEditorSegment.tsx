@@ -12,7 +12,7 @@ import { getComplexChildList } from "../../../logic/Units/childGetting";
 export default function OrgUnitEditorSegment() {
   const { unitMap, trueRootId, creatNewChild, addNewChild, consolidateOrgUnit} = useUnitStore()
   const { addUnitToPalet } = usePaletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   const { callDropDown } = useUnitDropdownStore()
   const { unitPalet } = usePaletStore()
   const select = useUnitInteractionStore(s => s.selectSignature)

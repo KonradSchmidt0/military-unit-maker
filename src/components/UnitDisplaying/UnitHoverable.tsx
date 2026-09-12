@@ -10,7 +10,7 @@ interface props {
 export function UnitHoverable(p: React.PropsWithChildren<props>) {
   const { unitMap, trueRootId } = useUnitStore()
   const { callId, callOff } = useHoverStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const myId = processSignature(p.signature, unitMap, trueRootId, phase)
 

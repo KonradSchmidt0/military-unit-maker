@@ -8,11 +8,11 @@ import { usePhaseStore } from "../../hooks/usePhaseStore";
 export function HoverInspector() {
   const unitMap = useUnitStore((s) => s.unitMap);
   const eqGroups = useEquipGroupingStore((s) => s.groups)
-  const { id, pos, simple, setPos } = useHoverStore((s) => s);
+  const { id, pos, simple, setPos } = useHoverStore();
   const [show, setShow] = useState(false);
   const [delayTimer, setDelayTimer] = useState<NodeJS.Timeout | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   // Tooltip delay handling
   useEffect(() => {
@@ -84,7 +84,7 @@ export function HoverInspector() {
         {desc && <h2>{desc}</h2>}
         <ul className="grid grid-cols-3 gap-x-2 gap-y-1">
           {id &&
-            getGroupedEquipmentTable(id, unitMap, eqGroups, phase).map(({name, count, type, group}) => {
+            getGroupedEquipmentTable(id, unitMap, eqGroups, phase).map(({name, count, type: _, group}) => {
               const style = group ? {color: group.color} : undefined;
               return (
                 <li 

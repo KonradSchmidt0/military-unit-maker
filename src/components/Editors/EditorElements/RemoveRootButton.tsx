@@ -13,7 +13,7 @@ export function RemoveRootButton(p: props) {
   const { selectSignature, setSelect } = useUnitInteractionStore()
   const { callSimple, callOff } = useHoverStore()
   const { addUnitToPalet  } = usePaletStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const temporaryRootId = getCurrentRootId(trueRootId, actingRootPath, unitMap, phase)
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)

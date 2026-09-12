@@ -13,7 +13,7 @@ import { usePhaseStore } from "../../hooks/usePhaseStore";
 export default function IndividualEditor() {
   const {unitMap, trueRootId} = useUnitStore(s => s)
   const { selectSignature } = useUnitInteractionStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   if (!selectedId)

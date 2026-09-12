@@ -8,7 +8,7 @@ import { ChildTextElement } from "./ChildTextElement";
 export function FlatChildrenEditor() {
   const { trueRootId, unitMap } = useUnitStore(s => s)
   const select = useUnitInteractionStore(s => s.selectSignature)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const parentId = processSelect(select, unitMap, trueRootId, phase)
 

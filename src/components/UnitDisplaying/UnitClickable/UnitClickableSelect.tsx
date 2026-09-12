@@ -12,7 +12,7 @@ interface props {
 export function UnitClickableSelect(p: React.PropsWithChildren<props>) {
   const {unitMap, trueRootId} = useUnitStore()
   const {shift, ctrl} = useShortcutStore()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const addToUnitPalet = usePaletStore(s => s.addUnitToPalet)
   const removeFromUnitPalet = usePaletStore(s => s.removeUnitFromPalet)

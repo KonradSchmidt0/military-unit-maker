@@ -15,7 +15,7 @@ export default function RawUnitEditorSegment() {
   const { addUnitToPalet } = usePaletStore(s => s)
   const { groups: eqGroups } = useEquipGroupingStore(s => s)
   const { callSimpleI, callOff } = useHoverStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   
   const selectedId = processSelect(useUnitInteractionStore(s => s.selectSignature), unitMap, trueRootId, phase) as string
   const unit = unitMap[selectedId] as RawUnit

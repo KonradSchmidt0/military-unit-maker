@@ -12,7 +12,7 @@ export function EmptyUnitsInTreeSystem() {
   const { trueRootId, unitMap } = useUnitStore()
   const { setSelect } = useUnitInteractionStore()
   const { open } = useDialogBoxStorage()
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 

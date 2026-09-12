@@ -11,7 +11,7 @@ export default function CountInParent() {
   const { unitMap, trueRootId, updateUnit  } = useUnitStore()
   const { selectSignature, getSelectedParent, selectParent  } = useUnitInteractionStore()
   const {ctrl} = useShortcutStore()
-  const {phase} = usePhaseStore()
+  const {currentPhase: phase} = usePhaseStore()
 
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
   const parentId = getSelectedParent(unitMap, trueRootId, phase)

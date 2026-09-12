@@ -14,7 +14,7 @@ interface props {
 export function CommentsFromParentEditorSegment(p: props) {
   const { unitMap, trueRootId, updateUnit } = useUnitStore(s => s)
   const slct = useUnitInteractionStore(s => s.selectSignature)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
 
   if (!Array.isArray(slct))
     return null

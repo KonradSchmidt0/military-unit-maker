@@ -9,7 +9,7 @@ export function EQListAndRemover() {
   const {unitMap, trueRootId} = useUnitStore(s => s)
   const { groups, setGroups } = useEquipGroupingStore(s => s)
   const { callSimpleI, callOff } = useHoverStore(s => s)
-  const { phase } = usePhaseStore()
+  const { currentPhase: phase } = usePhaseStore()
   const { selectSignature } = useUnitInteractionStore()
   
   const selectedId = processSelect(selectSignature, unitMap, trueRootId, phase)
