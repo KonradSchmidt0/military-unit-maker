@@ -1,4 +1,5 @@
 import { usePaletStore } from "../../../hooks/usePaletStore";
+import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore";
 import { useUnitStore } from "../../../hooks/useUnitStore";
 import { createNewOrgUnit } from "../../../logic/Units/logic";
 
@@ -16,8 +17,10 @@ export function NewProjectButton(p: props) {
     const newRootId = crypto.randomUUID()
 
     useUnitStore.getState().setTrueRootId(newRootId);
+    useUnitStore.getState().setActingRootPath([]);
     usePaletStore.getState().setUnitPalet([])
     useUnitStore.getState().setUnitMap({[newRootId]: newRoot});
+    useUnitInteractionStore.getState().setSelect([])
     // New project doesn't set eq groups on purpose, to make UX flow better
   }
 

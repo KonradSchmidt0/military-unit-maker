@@ -7,7 +7,7 @@ export function setChildEntry(
 ): OrgUnit { 
   const curEntry = GetChildEntry(parent, 0, childId)
 
-  let o = curEntry ?
+  const o = curEntry ?
     {...parent, children: parent.children.map( (e) => 
       e.id === childId ? func(e) : e
     )} 
@@ -23,7 +23,7 @@ export function setChildCount(
   newCount: number
 ): OrgUnit {
   return setChildEntry(parent, childId, 
-    (_) => ({id: childId, count: newCount})
+    (_) => ({id: childId, count: Math.max(newCount, 0)})
   )
 }
 

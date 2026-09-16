@@ -3,9 +3,11 @@ import { UnitMap } from './useUnitStore';
 import { OrgUnit } from '../logic/Units/logic';
 import { GetChildIdFromPath, GetFlatIds } from '../logic/Units/childGetting';
 
+export type SelectionSignature = string | number[]
+
 export interface UnitInteractionStore {
-  selectSignature: string | number[] | undefined
-  setSelect: (newSelect: string | number[] | undefined) => void;
+  selectSignature: SelectionSignature | undefined
+  setSelect: (newSelect: SelectionSignature | undefined) => void;
   getSelectedParent: (map: UnitMap, trueRootId: string, phase: number) => string | undefined
   selectChild: (newElement: number) => void
   selectParent: () => void
@@ -88,13 +90,13 @@ export const useUnitInteractionStore = create<UnitInteractionStore>((set, get) =
   resetSelected: () => set({ selectSignature: undefined}),
 }));
 
-export function processSelect(select: string | number[] | undefined, map: UnitMap, trueRootId: string, phase: number) {
+export function processSelect(select: SelectionSignature | undefined, map: UnitMap, trueRootId: string, phase: number) {
   if (!select)
     return undefined
   return processSignature(select, map, trueRootId, phase)
 }
 
-export function processSignature(signature: string | number[], map: UnitMap, trueRootId: string, phase: number) {
+export function processSignature(signature: SelectionSignature, map: UnitMap, trueRootId: string, phase: number) {
   if (Array.isArray(signature)) {
     return GetChildIdFromPath(trueRootId, signature, map, phase)
   }

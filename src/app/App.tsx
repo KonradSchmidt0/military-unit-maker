@@ -22,6 +22,7 @@ import ChangelogOverlay from '../components/Overlays/ChangeLog';
 import { DialogBox } from '../components/Overlays/DialogBox';
 import ShortcutBox from '../components/Overlays/ShortcutBox';
 import ColorPalletDropdown from '../components/Overlays/MouseDropdowns/Implementations/ColorPalletDropdown';
+import AdvanceChildEditor from '../components/Overlays/AdvanceChildEditor/AdvanceChildEditor';
 
 const ini = GenerateInitialUnits()
 
@@ -68,6 +69,7 @@ function App() {
       <IconDropdown/>
       <UnitDropdown/>
       <ColorPalletDropdown/>
+      <AdvanceChildEditor/>
 
       {/* Left */}
       <TransformWrapper minScale={0.1}>

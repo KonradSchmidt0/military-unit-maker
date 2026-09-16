@@ -74,7 +74,7 @@ export function HoverInspector() {
   return (
     <div
       ref={tooltipRef}
-      className={`editor-box pointer-events-none !max-w-2xl !w-fit !absolute !z-10 dark:!bg-bg !bg-white !border-r-2 rounded-lg ${
+      className={`editor-box pointer-events-none !max-w-2xl !w-fit !absolute !z-50 dark:!bg-bg !bg-white !border-r-2 rounded-lg ${
         show ? " transition-opacity opacity-100 duration-300" : "opacity-0"
       }`}
       style={{ top: pos.top, left: pos.left }}

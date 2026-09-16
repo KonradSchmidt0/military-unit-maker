@@ -66,11 +66,12 @@ b-heavy.svg,heavy niehorster
 k-super-heavy.svg,super heavy niehorster
 b-mountain.svg,mountain alpine
 b-hq-ooo.svg,headquarters hq command leader platoon ooo
-b-hq-I.svg,headquarters hq command leader company I
+b-hq-I.svg,headquarters hq command leader company I coy
 b-hq-II.svg,headquarters hq command leader battalion II
 b-hq-III.svg,headquarters hq command leader regiment III
 b-hq-x.svg,headquarters hq command leader brigade X
-b-supports-I.svg,supports auxiliary company I
+b-hq-xx.svg,headquarters hq command leader division XX
+b-supports-I.svg,supports auxiliary company I coy
 b-supports-II.svg,supports auxiliary battalion II
 b-supports-III.svg,supports auxiliary regiment III
 b-supports-x.svg,supports auxiliary brigade X

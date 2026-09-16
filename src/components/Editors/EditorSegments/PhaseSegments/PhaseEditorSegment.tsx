@@ -9,7 +9,7 @@ export default function PhaseEditorSegment() {
   
   return (<>
     <div className="editor-segmant-row">
-      Current Attachments Phase: {allPhases[currentPhase]?.name}
+      Current Attachments: {allPhases[currentPhase]?.name}
     </div>
 
     {allPhases.map((entry, i) => (
