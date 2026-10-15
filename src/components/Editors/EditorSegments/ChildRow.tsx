@@ -3,7 +3,7 @@ import { useHoverStore } from "../../../hooks/useHoverStore"
 import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { useUnitInteractionStore, processSignature } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { GetChildEntry, OrgUnit } from "../../../logic/Units/logic"
+import { OrgUnit } from "../../../logic/Units/logic"
 import { ComplexChildNode } from "../../UnitDisplaying/ComplexChildNode"
 import { RemoveChildButton } from "../EditorElements/RemoveChildButton"
 import { SafeNumberInput } from "../EditorElements/SafeInputs/SafeNumberInput"
@@ -12,7 +12,6 @@ interface ChildRowProps {
   parentSignature: string | number[]
   childSignature: string | number[]
   whoSelectOnSelectClick: string | number[]
-  key: string
   disableShadow?: boolean
   onMoveMade?: (dir: "top" | "bottom") => void
 }
@@ -51,8 +50,10 @@ export function ChildRow(p: ChildRowProps) {
     p.onMoveMade(d)
   }
 
+  const key = p.parentSignature.toString() + p.childSignature.toString()
+
   return (
-    <div className="editor-segment-row">
+    <div className="editor-segment-row" key={key}>
       <button className="btn-emoji !p-0" onClick={() => handleMove("top")}
         onMouseEnter={() => callSimpleI("Moves shown unit to the top of children list")} onMouseLeave={callOff}
         >⬆️</button>
@@ -71,7 +72,7 @@ export function ChildRow(p: ChildRowProps) {
       <SafeNumberInput 
         count={parent.children.find(e => e.id === childId)?.count ?? 0}
         onCountChange={(n) => { changeChildCount(parentId, childId, n); if (alt) { setSelect(p.whoSelectOnSelectClick) } }} 
-        id={"sni" + p.key}
+        id={"sni" + key}
         hover={"Count of shown unit in parent"}
       />
 

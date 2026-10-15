@@ -4,9 +4,16 @@ import { SmartColor } from "./unitColorManaging";
 export type EquipmentType = string;
 export type EquipmentTable = Record<EquipmentType, number>;
 
+export interface InsideIndex2ComplexName {
+  index: number
+  callSign: string
+  desc: string
+}
+
 export interface ChildEntry {
   id: string
   count: number
+  insideIndexs2ComplexNames?: InsideIndex2ComplexName[]
 }
 export interface ChildMod {
   phase: number
@@ -37,8 +44,6 @@ export interface OrgUnit {
   childrenMods: ChildMod[]
 
   desc?: string;
-  flatCallSigns: Record<number, string>
-  flatDescriptions: Record<number, string>
 }
 
 
@@ -90,8 +95,6 @@ export function createNewOrgUnit({
     echelonLevel,
     children: children,
     childrenMods: [],
-    flatCallSigns: {},
-    flatDescriptions: {}
   };
 }
 

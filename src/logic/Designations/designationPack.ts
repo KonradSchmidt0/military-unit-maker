@@ -1,7 +1,7 @@
 import { StaffText } from "../../hooks/useStaffTextStore";
 import { UnitMap } from "../../hooks/useUnitStore";
-import { GetChildIdFromPath, GetFlatIds } from "../Units/childGetting";
-import { OrgUnit } from "../Units/logic";
+import { FlatIndex2InsideIndex, GetChildIdFromPath, GetFlatIds } from "../Units/childGetting";
+import { ChildEntry, InsideIndex2ComplexName, OrgUnit } from "../Units/logic";
 
 export interface DesignationPack {
   name?: string;
@@ -10,46 +10,70 @@ export interface DesignationPack {
 }
 
 export function getDesignationPack(
-  path: number[], unitMap: UnitMap, trueRootId: string, staffNames: StaffText[], 
+  path: number[], rootId: string, unitMap: UnitMap, staffNames: StaffText[], 
   staffComments: StaffText[], phase: number
 ) : DesignationPack {
-  let comment = undefined
-  for (const sc of staffComments) {
-    if (sc.path.toString() === path.toString()) {
-      comment = sc.comment
-      break
-    }
-  }
-  let staffName = undefined
-  for (const sn of staffNames) {
-    if (sn.path.toString() === path.toString()) {
-      staffName = sn.comment
-      break
-    }
-  }
+  const comment = staffComments.find(e => e.path.toString() === path.toString())?.comment
+  const staffName = staffNames.find(e => e.path.toString() === path.toString())?.comment
 
-  let cs = undefined
-  let desc = undefined
-  if (path.length > 0) {
-    const parentId = GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap, phase)
-    const parent = unitMap[parentId as string] as OrgUnit
-
-    cs = parent.flatCallSigns[path[path.length - 1]]
-    desc = parent.flatDescriptions[path[path.length - 1]]
-  }
-
-  return {name: staffName ?? cs, descFromParent: desc, staffComment: comment}
+  const textsFromParent = getTextsInParent(path, rootId, unitMap, phase)
+  
+  return {name: staffName ?? textsFromParent?.callSign, descFromParent: textsFromParent?.desc, staffComment: comment}
 }
 
-export function changeTextInParent(
-  path: number[], unitMap: UnitMap, phase: number, trueRootId: string, callSign?: string, desc?: string
+export function getTextsInParent(
+  path: number[], rootId: string, unitMap: UnitMap, phase: number
+) : {callSign: string | undefined, desc: string | undefined} | undefined {
+  if (path.length === 0) return undefined
+  
+  const parentId = GetChildIdFromPath(rootId, path.slice(0, -1), unitMap, phase)
+  if (!parentId) return undefined
+  
+  const aaa = FlatIndex2InsideIndex(path, rootId, unitMap, phase)
+  if (!aaa) return undefined
+  
+  const parent = unitMap[parentId] as OrgUnit
+  const { childId, insideIndex } = aaa
+  const descName = parent
+    .children.find(entry => entry.id === childId)
+    ?.insideIndexs2ComplexNames?.find(i2cn => i2cn.index === insideIndex)
+    
+  return { callSign: descName?.callSign, desc: descName?.desc }
+}
+
+export function SetTextsInParent(
+  parent: OrgUnit, childPath: number[], rootId: string, 
+  setFunc: (prev: Omit<InsideIndex2ComplexName, 'index'> | undefined) => Omit<InsideIndex2ComplexName, 'index'>,
+  unitMap: UnitMap, phase: number,
 ): OrgUnit {
-  const parent =  unitMap[GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap, phase) as string] as OrgUnit
-  const childFlatIndex = path[path.length - 1]
+  const childInsideEntry = FlatIndex2InsideIndex(childPath, rootId, unitMap, phase, true)
+  if (!childInsideEntry)
+    return parent
+  const { childId, insideIndex } = childInsideEntry
+
+  function addNewNameEntry(insideIndexs2ComplexNames: InsideIndex2ComplexName[] | undefined): InsideIndex2ComplexName[] {
+    const o = {index: insideIndex, ...setFunc(undefined)}
+    if (!insideIndexs2ComplexNames)
+      return [o]
+    return [...insideIndexs2ComplexNames, o]
+  }
+
+  function modifyChildEntry(e: ChildEntry) : ChildEntry {
+    return { ...e, 
+      insideIndexs2ComplexNames: 
+        e.insideIndexs2ComplexNames?.find(index2name => index2name.index === insideIndex) 
+        ?
+        e.insideIndexs2ComplexNames.map(index2name => index2name.index !== insideIndex ? index2name :
+          {...index2name, ...setFunc(index2name) }) 
+        :
+        addNewNameEntry(e.insideIndexs2ComplexNames)
+    }
+  }
+
+  
 
   return {...parent, 
-    flatCallSigns: callSign !== undefined ? {...parent.flatCallSigns, [childFlatIndex]: callSign} : parent.flatCallSigns,
-    flatDescriptions: desc !== undefined ? {...parent.flatDescriptions, [childFlatIndex]: desc} : parent.flatDescriptions,
+    children: parent.children.map(e => e.id === childId ? modifyChildEntry(e) : e)
   }
 }
 
@@ -83,8 +107,8 @@ export function getMergedDPFromChildren(
   const a: DesignationPack[] = []
   filteredChildrenIndexes.forEach((_, notOffsetedIndex) => { a.push(getDesignationPack(
     [...parentPath, startingFlatIndex + notOffsetedIndex], 
-    unitMap, 
     trueRootId, 
+    unitMap, 
     staffNames, 
     staffComments,
     phase

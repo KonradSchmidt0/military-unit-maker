@@ -38,14 +38,6 @@ export function GetFlatIds(orgUnit: OrgUnit, phase: number) {
   return complex.map(e => e.childId)
 }
 
-// export function GetIdFromFlatIndex(orgUnit: OrgUnit, index: number, phase: number) : string | undefined {
-//   return GetFlatIds(children)[index]
-// }
-
-// export function GetFlatIndexFromId(orgUnit, id: string) {
-//   const complex = getComplexChildList(orgUnit, true, phase)
-// }
-
 export function GetChildIdFromPath(rootId: string, path: number[], unitMap: UnitMap, phase: number): string | undefined {
   if (path.length === 0) {
     return rootId
@@ -63,4 +55,23 @@ export function GetChildIdFromPath(rootId: string, path: number[], unitMap: Unit
   }
   const np = path.slice(1)
   return GetChildIdFromPath(nextId, np, unitMap, phase)
+}
+
+export function FlatIndex2InsideIndex
+  (path: number[], rootId: string, unitMap: UnitMap, phase: number, aaa?: boolean) : 
+  {childId: string, insideIndex: number} | undefined 
+{
+  const childId = GetChildIdFromPath(rootId, path, unitMap, phase)
+  const parentId = GetChildIdFromPath(rootId, path.slice(0, -1), unitMap, phase)
+  
+  if (!childId || !parentId) return undefined
+
+  const parent = unitMap[parentId] as OrgUnit
+  const flatIndexOfChildEntry = getComplexChildList(parent, false, phase).find(e => e.childId === childId)?.flatIndex
+  
+  if (flatIndexOfChildEntry === undefined) return undefined
+  
+  const insideIndex = (path.at(-1) ?? flatIndexOfChildEntry) - flatIndexOfChildEntry
+
+  return {childId: childId, insideIndex: insideIndex}
 }

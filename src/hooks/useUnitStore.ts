@@ -213,8 +213,6 @@ export const useUnitStore = create<UnitStore>()(
         layers: [...parent.layers],
         children: [{id: babyId, count: childCount}],
         childrenMods: [],
-        flatCallSigns: {},
-        flatDescriptions: {}
       };
       set((state) => ({
         unitMap: {
@@ -290,8 +288,6 @@ export const useUnitStore = create<UnitStore>()(
         type: "org", name: "", echelonLevel: oldRoot.echelonLevel + 1,
         children: [{id: oldRootId, count: 1}],
         childrenMods: [],
-        flatCallSigns: {},
-        flatDescriptions: {},
         desc: ""
       }
       

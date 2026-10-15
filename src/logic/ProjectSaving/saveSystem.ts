@@ -1,11 +1,12 @@
 import { ColorMap, defaultColorMap, useColorPalletStore } from "../../hooks/useColorPalletStore";
 import { EquipGroup, useEquipGroupingStore } from "../../hooks/useEquipGroupingStore";
 import { usePaletStore } from "../../hooks/usePaletStore";
+import { Phase, usePhaseStore } from "../../hooks/usePhaseStore";
 import { StaffText, useStaffTextStore } from "../../hooks/useStaffTextStore";
 import { UnitMap, useUnitStore } from "../../hooks/useUnitStore";
 
 // saveSystemVersion can help with future migrations
-export const SAVE_SYSTEM_VERSION = 9;
+export const SAVE_SYSTEM_VERSION = 10;
 
 interface SaveFile {
   version: number;
@@ -16,6 +17,7 @@ interface SaveFile {
   staffNames: StaffText[];
   equipGroups: EquipGroup[];
   colorMap: ColorMap;
+  allPhases: Phase[]
 }
 
 export function getSaveFileJson(): string {
@@ -26,6 +28,7 @@ export function getSaveFileJson(): string {
   const staffNames = useStaffTextStore.getState().staffNames;
   const equipGroups = useEquipGroupingStore.getState().groups;
   const colorMap = useColorPalletStore.getState().colorMap
+  const allPhases = usePhaseStore.getState().allPhases
 
   const saveData: SaveFile = {
     version: SAVE_SYSTEM_VERSION,
@@ -35,7 +38,8 @@ export function getSaveFileJson(): string {
     staffComments,
     staffNames,
     equipGroups,
-    colorMap
+    colorMap,
+    allPhases
   };
 
   return JSON.stringify(saveData, null, 2);
@@ -79,6 +83,7 @@ export function loadSaveFile(
     useStaffTextStore.setState({staffComments: json.staffComments ?? [], staffNames: json.staffNames ?? []})
     useEquipGroupingStore.setState({groups: json.equipGroups ?? []})
     useColorPalletStore.setState({colorMap: json.colorMap ?? defaultColorMap})
+    usePhaseStore.setState({allPhases: json.allPhases ?? [{name: "Organic", uuid: crypto.randomUUID()}]})
   } catch (err) {
     alert("Failed to load file: " + (err as Error).message);
   }

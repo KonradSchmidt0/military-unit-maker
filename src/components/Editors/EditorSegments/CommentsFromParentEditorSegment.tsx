@@ -1,6 +1,6 @@
 import { useUnitInteractionStore } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
-import { changeTextInParent } from "../../../logic/Designations/designationPack"
+import { SetTextsInParent, getTextsInParent } from "../../../logic/Designations/designationPack"
 import { OrgUnit } from "../../../logic/Units/logic"
 import { LabledInput } from "../EditorElements/TextInputs/LabledInput"
 import { LargeTextInput } from "../EditorElements/TextInputs/LargeTextInput"
@@ -18,31 +18,45 @@ export function CommentsFromParentEditorSegment(p: props) {
 
   if (!Array.isArray(slct))
     return null
+
+  const path = slct
   
-  const parentId = GetChildIdFromPath(trueRootId, slct.slice(0, -1), unitMap, phase) as string
+  const parentId = GetChildIdFromPath(trueRootId, path.slice(0, -1), unitMap, phase) as string
   const parent = unitMap[parentId] as OrgUnit
 
-  function handleTextsInParent(cs: string | undefined, desc: string | undefined) {
-    const nParent = changeTextInParent(slct as number[], unitMap, phase, trueRootId, cs, desc)
+  function ChangeCS(cs: string) {
+    const nParent = SetTextsInParent(
+      parent, path, trueRootId,
+      (prev) => prev !== undefined ? {...prev, callSign: cs} : {callSign: cs, desc: ""},
+      unitMap, phase)
+    updateUnit(parentId, nParent)
+  }
+  function ChangeDesc(desc: string) {
+    const nParent = SetTextsInParent(
+      parent, path, trueRootId,
+      (prev) => prev !== undefined ? {...prev, desc: desc} : {callSign: "", desc: desc},
+      unitMap, phase)
     updateUnit(parentId, nParent)
   }
 
-  if (slct.length === 0) {
+  if (path.length === 0) {
     return null
   }
+
+  const textsInParent = getTextsInParent(path, trueRootId, unitMap, phase)
 
   return <>
     <LabledInput
       label="CS:"
       id="CallSignInputId"
-      value={parent.flatCallSigns[slct[slct.length - 1]] ?? ""}
-      onChange={(e) => handleTextsInParent(e.target.value, undefined)}
+      value={textsInParent?.callSign}
+      onChange={(e) => ChangeCS(e.target.value)}
     />
     <LargeTextInput
       label="DfP:"
       id="DescFromParentInputId"
-      value={parent.flatDescriptions[slct[slct.length - 1]] ?? ""}
-      onChange={(e) => handleTextsInParent(undefined, e.target.value)}
+      value={textsInParent?.desc}
+      onChange={(e) => ChangeDesc(e.target.value)}
     />
   </>
 }

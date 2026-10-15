@@ -12,7 +12,7 @@ export function setChildEntry(
       e.id === childId ? func(e) : e
     )} 
     :
-    {...parent, children: parent.children.concat(func(undefined))}
+    {...parent, children: [...parent.children, func(undefined)]}
 
   return o
 }
@@ -23,7 +23,7 @@ export function setChildCount(
   newCount: number
 ): OrgUnit {
   return setChildEntry(parent, childId, 
-    (_) => ({id: childId, count: Math.max(newCount, 0)})
+    (e) => ({...e, id: childId, count: Math.max(newCount, 0)})
   )
 }
 
@@ -33,7 +33,7 @@ export function setChildEntryId(
   newId: string
 ): OrgUnit {
   return setChildEntry(parent, oldId, 
-    (e) => ({id: newId, count: e ? e.count : 0})
+    (e) => ({...e, id: newId, count: e ? e.count : 0})
   )
 }
 
@@ -43,7 +43,7 @@ export function addChild(
   count: number = 1
 ): OrgUnit {
   return setChildEntry(parent, childId, 
-    (e) => ({id: childId, count: e ? Math.max(e.count + count, 0) : count})
+    (e) => ({...e, id: childId, count: e ? Math.max(e.count + count, 0) : count})
   )
 }
 

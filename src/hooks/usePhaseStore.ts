@@ -8,7 +8,7 @@ interface PhaseStore {
   removePhaseAtIndex: (index: number) => void
 }
 
-interface Phase {
+export interface Phase {
   name: string
   uuid: string
 }

@@ -4,7 +4,7 @@ b-art.svg,artillery indirect howitzer HE gun
 b-tank.svg,tank armor armored vehicle apc ifv fighting assult gun afv
 b-fixed-wing.svg,aviation fixed wing plane aircraft airship air
 b-rotary.svg,rotary helicopter aviation gunship air
-b-aa.svg,anti air aa air to air
+b-aa.svg,anti air aa air to air defence
 b-air-warning.svg,air warning detection
 b-at.svg,anti tank at air to ground td tank destroyer
 k-at.svg,anti tank at air to ground gun niehorster td tank destroyer
@@ -49,6 +49,7 @@ b-motorized.svg,motorized truck transport
 b-unmanned.svg,unmanned drone uav robot autonomus
 b-robotic.svg,unmanned drone robot usv autonomus
 b-robot-alt.svg,unmanned drone robot usv autonomus alternative
+b-rocket.svg,rocket missile artillery mlrs
 b-amph.svg,amphibious sea water marine naval
 b-amph-alt.svg,amphibious sea water marine naval alternative
 b-horse.svg,horse cavalery animal mounted hussars
