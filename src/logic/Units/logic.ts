@@ -14,6 +14,7 @@ export interface ChildEntry {
   id: string
   count: number
   insideIndexs2ComplexNames?: InsideIndex2ComplexName[]
+  entryUuid: string
 }
 export interface ChildMod {
   phase: number

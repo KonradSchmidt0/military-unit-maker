@@ -51,12 +51,14 @@ export function CommentsFromParentEditorSegment(p: props) {
       id="CallSignInputId"
       value={textsInParent?.callSign}
       onChange={(e) => ChangeCS(e.target.value)}
+      hover="Callsign given to this subunit from it's parent"
     />
     <LargeTextInput
       label="DfP:"
       id="DescFromParentInputId"
       value={textsInParent?.desc}
       onChange={(e) => ChangeDesc(e.target.value)}
+      hover="Description given to this subunit from it's parent"
     />
   </>
 }

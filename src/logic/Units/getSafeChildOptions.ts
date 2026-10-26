@@ -5,8 +5,9 @@ export function getSafeChildOptions(
   parentId: string,
   unitMap: UnitMap,
   palet: string[],
-  alreadyChosenChildren: ChildEntry[]): UnitMap {
-  const existingIds = new Set(Object.entries(alreadyChosenChildren).map((c) => c[0]));
+  alreadyChosenChildren: ChildEntry[]
+): UnitMap {  
+  const existingIds = new Set(alreadyChosenChildren.map((c) => c.id));
 
   function createsCycle(candidateId: string): boolean {
     if (candidateId === parentId) return true;

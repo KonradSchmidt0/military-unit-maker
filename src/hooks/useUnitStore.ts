@@ -211,7 +211,7 @@ export const useUnitStore = create<UnitStore>()(
         smartColor: parent.smartColor,
         echelonLevel: parent.echelonLevel,
         layers: [...parent.layers],
-        children: [{id: babyId, count: childCount}],
+        children: [{id: babyId, count: childCount, entryUuid: crypto.randomUUID()}],
         childrenMods: [],
       };
       set((state) => ({
@@ -286,7 +286,7 @@ export const useUnitStore = create<UnitStore>()(
       const newRoot: OrgUnit = { 
         ...oldRoot,
         type: "org", name: "", echelonLevel: oldRoot.echelonLevel + 1,
-        children: [{id: oldRootId, count: 1}],
+        children: [{id: oldRootId, count: 1, entryUuid: crypto.randomUUID()}],
         childrenMods: [],
         desc: ""
       }

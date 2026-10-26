@@ -15,7 +15,7 @@ export default function MouseDropdown(p:props) {
 
   return (
     <div 
-      className="editor-box !absolute !z-10  dark:!bg-bg !bg-white !border-r-2 rounded-lg transition-colors" 
+      className="editor-box !absolute !z-50  dark:!bg-bg !bg-white !border-r-2 rounded-lg transition-colors" 
       style={{ top: pos.top, left: pos.left  }}
     >
       {p.children}

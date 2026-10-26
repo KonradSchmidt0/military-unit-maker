@@ -50,12 +50,14 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
       id="LowerNameInputId"
       value={unit.name}
       onChange={(e) => handleInnerTexts(unitId, e.target.value, undefined)}
+      hover="Name given to this type of unit"
     />
     <LargeTextInput
       label="Desc.:"
       id={"descInputId"}
       value={unit.desc ?? ""}
       onChange={(e) => handleInnerTexts(unitId, undefined, e.target.value)}
+      hover="Description given to this type of unit"
     />
     <CommentsFromParentEditorSegment></CommentsFromParentEditorSegment>
     {Array.isArray(selectSignature) && 
@@ -65,12 +67,14 @@ export function CommentsEditorSegment(p: CommentsEditorSegmentProps) {
           id="StaffNameInputId"
           value={getStaffName(selectSignature)}
           onChange={(e) => handleStaffName(selectSignature, e.target.value)}
+          hover="Staff Name, meaning the name given to this instance of the unit"
         />
         <LargeTextInput
           label="SC:"
           id="StaffCommentInputId"
           value={getStaffComment(selectSignature)}
           onChange={(e) => handleStaffComment(selectSignature, e.target.value)}
+          hover="Staff Comment, meaning the description given to this instance of the unit"
         />
       </>
     }

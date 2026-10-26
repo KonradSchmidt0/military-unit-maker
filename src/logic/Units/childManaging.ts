@@ -23,7 +23,7 @@ export function setChildCount(
   newCount: number
 ): OrgUnit {
   return setChildEntry(parent, childId, 
-    (e) => ({...e, id: childId, count: Math.max(newCount, 0)})
+    (e) => ({...e, id: childId, count: Math.max(newCount, 0), entryUuid: e ? e.entryUuid : crypto.randomUUID()})
   )
 }
 
@@ -33,7 +33,7 @@ export function setChildEntryId(
   newId: string
 ): OrgUnit {
   return setChildEntry(parent, oldId, 
-    (e) => ({...e, id: newId, count: e ? e.count : 0})
+    (e) => ({...e, id: newId, count: e ? e.count : 0, entryUuid: e ? e.entryUuid : crypto.randomUUID()})
   )
 }
 
@@ -43,7 +43,7 @@ export function addChild(
   count: number = 1
 ): OrgUnit {
   return setChildEntry(parent, childId, 
-    (e) => ({...e, id: childId, count: e ? Math.max(e.count + count, 0) : count})
+    (e) => ({...e, id: childId, count: e ? Math.max(e.count + count, 0) : count, entryUuid: e ? e.entryUuid : crypto.randomUUID()})
   )
 }
 

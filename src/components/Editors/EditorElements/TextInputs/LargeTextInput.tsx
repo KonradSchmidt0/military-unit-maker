@@ -1,14 +1,23 @@
+import { simpleHover, useHoverStore } from "../../../../hooks/useHoverStore"
+
 interface props {
   label: string
   value: string | number | readonly string[] | undefined
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
   id?: string
   rows?: number
+  hover?: simpleHover
 }
 
 export function LargeTextInput(p : props) {
+  const { callSimpleI, callOff } = useHoverStore(s => s)
+  
   return (
-  <label className="flex flex-row items-center gap-2 w-full">
+  <label 
+    className="flex flex-row items-center gap-2 w-full"
+    onMouseEnter={() => { if (p.hover) callSimpleI(p.hover) }}
+    onMouseLeave={() => callOff()}
+  >
     <span className="font-bold whitespace-nowrap">{p.label}</span>
     <textarea
       id={p.id}

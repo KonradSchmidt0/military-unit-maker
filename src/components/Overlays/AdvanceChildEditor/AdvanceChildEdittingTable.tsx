@@ -1,9 +1,12 @@
+import { useColorPalletStore } from "../../../hooks/useColorPalletStore"
 import { usePhaseStore } from "../../../hooks/usePhaseStore"
 import { SelectionSignature } from "../../../hooks/useUnitInteractionsStore"
 import { useUnitStore } from "../../../hooks/useUnitStore"
 import { ChildEntry, OrgUnit } from "../../../logic/Units/logic"
-import { defaultUnitColor } from "../../../logic/Units/unitColorManaging"
+import { GetChildsColor } from "../../../logic/Units/unitColorManaging"
+import { UnitClickableIdSwap } from "../../UnitDisplaying/UnitClickable/UnitClickableIdSwap"
 import { UnitDisplay } from "../../UnitDisplaying/UnitDisplay"
+import { UnitHoverable } from "../../UnitDisplaying/UnitHoverable"
 
 interface props {
   parentSignature: SelectionSignature
@@ -12,8 +15,10 @@ interface props {
 }
 
 export default function AdvanceChildEdittingTable(p:props) {
-  const { allPhases } = usePhaseStore()
+  const { allPhases, currentPhase, setCurrentPhase } = usePhaseStore()
   const { updateUnit } = useUnitStore()
+  const { unitMap, trueRootId } = useUnitStore()
+  const { colorMap } = useColorPalletStore()
 
   function changeCount(phaseIndex: number, childId: string, change: number) {
     if (phaseIndex === 0) {
@@ -46,7 +51,7 @@ export default function AdvanceChildEdittingTable(p:props) {
     )
   }
 
-  function phase2td(phaseIndex: number, childId: string) {
+  function phase2Td(phaseIndex: number, childId: string) {
     const value = phaseIndex === 0 ?
       p.parent.children.find(e => e.id === childId)?.count ?? 0
       :
@@ -71,23 +76,53 @@ export default function AdvanceChildEdittingTable(p:props) {
     )
   }
 
+  function child2Row(entry: ChildEntry, i: number, color: `#${string}`, childSignature: SelectionSignature) {
+    return (<>
+      <td className="ace-tb">
+        <div className="py-3 px-8">
+          <UnitClickableIdSwap 
+            parentSignature={p.parentSignature} childSignature={entry.id} 
+            whoSelectOnSelectClick={childSignature}
+          >
+            <UnitHoverable signature={childSignature}>
+              <UnitDisplay unitId={entry.id} color={color}/>
+            </UnitHoverable>
+          </UnitClickableIdSwap>
+        </div>
+      </td>
+      {allPhases.map((_, phaseIndex) => phase2Td(phaseIndex, entry.id))}
+      <td className="ace-tb">
+        <div className="py-3 px-2">
+          <button className="btn-emoji">❌</button>
+        </div>
+      </td>
+    </>)
+  }
+
   const topRowHeader = (
     <tr>
       <td className="ace-tb"></td>
-      {allPhases.map((phase) => <td className="ace-tb px-3 text-center">{phase.name}</td>)}
+      {allPhases.map((phase, i) => 
+        <td className="ace-tb px-1 py-1 text-center">
+          <button 
+            className="btn-emoji !px-2 !py-1"
+            onClick={() => setCurrentPhase(i)}
+          >
+            {currentPhase === i ? "👑" : ""}{phase.name}
+          </button>
+        </td>
+      )}
+      <td className="ace-tb"></td>
     </tr>
   )
+
   const bodyRows = p.parent.children.map((entry, i) => {
-    const color = defaultUnitColor // WIP
+    const color = GetChildsColor(p.parentSignature, entry.id, trueRootId, unitMap, colorMap, currentPhase)
+    const childSignature = Array.isArray(p.parentSignature) ? [...p.parentSignature, i] : entry.id
 
     return (
     <tr key={entry.id}>
-      <td className="ace-tb">
-        <div className="py-3 px-8">
-          <UnitDisplay unitId={entry.id} color={color}/>
-        </div>
-      </td>
-      {allPhases.map((_, phaseIndex) => phase2td(phaseIndex, entry.id))}
+      {child2Row(entry, i, color, childSignature)}
     </tr>)
   })
 

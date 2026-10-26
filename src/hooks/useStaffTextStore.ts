@@ -42,7 +42,7 @@ export const useStaffTextStore = create<StaffTextStore>((set, get) => ({
     get().staffComments.find((entry) => entry.path.toString() === path.toString())?.comment ?? '',
     
 
-  staffNames: [{path: [1], comment: "Test"}],
+  staffNames: [],
 
   setStaffNames: (n) =>
     set({ staffNames: n }),

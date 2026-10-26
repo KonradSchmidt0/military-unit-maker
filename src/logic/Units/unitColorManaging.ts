@@ -1,13 +1,17 @@
 import { ColorMap, getColorFromColorMap } from "../../hooks/useColorPalletStore"
+import { SelectionSignature } from "../../hooks/useUnitInteractionsStore";
 import { UnitMap } from "../../hooks/useUnitStore"
 import { GetChildIdFromPath } from "./childGetting";
 
 export type SmartColor = "inheret" | `#${string}` | number;
 export const defaultUnitColor: `#${string}` = "#6ad8e2";
 
-export function getColorInVoid(sc: SmartColor, colorMap: ColorMap): `#${string}` {
+export function getColorInVoid(sc: SmartColor, colorMap: ColorMap, onInheret?: () => `#${string}`): `#${string}` {
   if (sc === "inheret") {
-    return defaultUnitColor
+    if (!onInheret)
+      return defaultUnitColor
+    else
+      return onInheret()
   }
   if (typeof sc === "string") {
     return sc
@@ -42,4 +46,18 @@ export function GetTrueColor(
   }
 
   return GetTrueColorRecursively(rootId, signature, unitMap, colorMap, phase);
+}
+
+export function GetChildsColor(
+  parentSignature: SelectionSignature, childId: string, rootId: string, unitMap: UnitMap, colorMap: ColorMap, phase: number
+): `#${string}` {
+  const child = unitMap[childId]
+  if (!child)
+    return defaultUnitColor
+
+  return getColorInVoid(
+    child.smartColor, colorMap, 
+    // On Inheret
+    () => GetTrueColor(parentSignature, rootId, unitMap, colorMap, phase)
+  )
 }

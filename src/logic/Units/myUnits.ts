@@ -25,7 +25,7 @@ export function GenerateInitialUnits() {
     smartColor: "inheret",
     layers: infVisual,
     echelonLevel: 1,
-    children: [{id: rifle_e_id, count: 2, insideIndexs2ComplexNames: []}],
+    children: [{id: rifle_e_id, count: 2, insideIndexs2ComplexNames: [], entryUuid: crypto.randomUUID()}],
     childrenMods: [],
   }
   const rifle_o_id = crypto.randomUUID()
@@ -58,17 +58,17 @@ export function GenerateInitialUnits() {
     layers: infVisual,
     echelonLevel: 2,
     children: [
-      {id: leadWithRadio_e_id, count: 1, insideIndexs2ComplexNames: [
+      {id: leadWithRadio_e_id, count: 1, entryUuid: crypto.randomUUID(), insideIndexs2ComplexNames: [
         { index: 0, callSign: "H", desc: "" }
       ]},
-      {id: rifle_o_id, count: 2, insideIndexs2ComplexNames: [
+      {id: rifle_o_id, count: 2, entryUuid: crypto.randomUUID(), insideIndexs2ComplexNames: [
         { index: 0, callSign: "a", desc: "1st maneuver element" },
         { index: 1, callSign: "b", desc: "2nd maneuver element" },
       ]},
-      {id: mg_o_id, count: 1, insideIndexs2ComplexNames: [
+      {id: mg_o_id, count: 1, entryUuid: crypto.randomUUID(), insideIndexs2ComplexNames: [
         { index: 0, callSign: "c", desc: "fire support element" }
       ]},
-      {id: rifle_e_id, count: 1, insideIndexs2ComplexNames: [
+      {id: rifle_e_id, count: 1, entryUuid: crypto.randomUUID(), insideIndexs2ComplexNames: [
         { index: 0, callSign: "z", desc: "reserve / runners" }
       ]},
     ],
